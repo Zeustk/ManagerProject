@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/Page/Registrarse.dart';
 import 'package:manager_proyect/constante/constantes.dart';
-import 'package:manager_proyect/models/Crearproyecto.dart';
+import 'package:manager_proyect/Page/Proyectos/crearProyecto.dart';
 
 class Login extends StatelessWidget {
   @override

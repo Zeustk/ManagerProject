@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:manager_proyect/constante/constantes.dart';
-import 'package:manager_proyect/models/Crearproyecto.dart';
+import 'package:manager_proyect/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/widgets/BottonNavigator.dart';
 import 'package:manager_proyect/widgets/Drawer.dart';
 import 'package:manager_proyect/widgets/PaddingProyecto.dart';
