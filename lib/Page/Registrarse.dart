@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login/Page/LoginScreen.dart';
-import 'package:login/Page/Principal.dart';
-import 'package:login/constante/constantes.dart';
+import 'package:manager_proyect/constante/constantes.dart';
 
 class Registro extends StatelessWidget {
   @override

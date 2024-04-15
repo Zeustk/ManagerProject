@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:login/Page/LoginScreen.dart';
+import 'package:manager_proyect/Page/LoginScreen.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
 class Principal extends StatelessWidget {
