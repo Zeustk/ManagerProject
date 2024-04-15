@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:login/constante/constantes.dart';
-import 'package:login/widgets/BottonNavigator.dart';
-import 'package:login/widgets/Drawer.dart';
-import 'package:login/widgets/PaddingProyecto.dart';
+import 'package:get/get.dart';
+
+import 'package:manager_proyect/constante/constantes.dart';
+import 'package:manager_proyect/models/Crearproyecto.dart';
+import 'package:manager_proyect/widgets/BottonNavigator.dart';
+import 'package:manager_proyect/widgets/Drawer.dart';
+import 'package:manager_proyect/widgets/PaddingProyecto.dart';
 
 import '../widgets/BotonProyecto.dart';
-
 
 class Proyectos extends StatelessWidget {
   const Proyectos({super.key});
@@ -25,7 +27,7 @@ class Proyectos extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.only(right: 20),
+            padding: const EdgeInsets.only(right: 10),
             width: 50,
             child: const Icon(
               Icons.add,
