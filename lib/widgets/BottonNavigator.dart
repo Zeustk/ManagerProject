@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login/constante/constantes.dart';
+import 'package:manager_proyect/constante/constantes.dart';
 
 class BotonNavi extends StatelessWidget {
   void _cargarArchivo(BuildContext context) {

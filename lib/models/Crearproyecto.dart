@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:login/constante/constantes.dart';
-import 'package:login/widgets/BottonNavigator.dart';
-import 'package:login/widgets/Drawer.dart';
-import 'package:login/widgets/labels.dart';
+import 'package:manager_proyect/constante/constantes.dart';
+import 'package:manager_proyect/widgets/BottonNavigator.dart';
+import 'package:manager_proyect/widgets/Drawer.dart';
+import 'package:manager_proyect/widgets/labels.dart';
 
 class Crear_proyectos extends StatefulWidget {
   @override

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:login/constante/constantes.dart';
-import 'package:login/models/Crearproyecto.dart';
 import 'package:login/widgets/BottonNavigator.dart';
 import 'package:login/widgets/Drawer.dart';
 import 'package:login/widgets/PaddingProyecto.dart';
 
 import '../widgets/BotonProyecto.dart';
+
 
 class Proyectos extends StatelessWidget {
   const Proyectos({super.key});

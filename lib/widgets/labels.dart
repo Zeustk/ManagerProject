@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:login/Page/LoginScreen.dart';
-import 'package:login/constante/constantes.dart';
-import 'package:login/models/Proyectos.dart';
+import 'package:manager_proyect/constante/constantes.dart';
+import 'package:manager_proyect/models/Proyectos.dart';
 
 class Labels extends StatefulWidget {
   @override

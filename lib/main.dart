@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:login/Page/Principal.dart';
+import 'package:manager_proyect/Page/Principal.dart';
 
-import 'package:login/constante/constantes.dart';
+import 'package:manager_proyect/constante/constantes.dart';
 
 void main() => runApp(const MyApp());
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimaryColor,
           brightness: Brightness.dark,
           scaffoldBackgroundColor: kSecondaryColor,
-          textTheme: TextTheme(
+          textTheme: const TextTheme(
               headlineSmall:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               labelSmall: TextStyle(color: Colors.white),
