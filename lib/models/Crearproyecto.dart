@@ -20,7 +20,7 @@ class _Crear_proyectosState extends State<Crear_proyectos> {
       backgroundColor: kSecondaryColor,
       appBar: AppBar(
         backgroundColor: kSecondaryColor,
-        title: Text('Crear Proyecto', style: TextStyle(color: Colors.blue)),
+        title: Text('Crear Proyecto', style: TextStyle(color: Colors.white)),
       ),
       drawer: SafeArea(
         child: Draweer(),
