@@ -1,13 +1,64 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
+import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
+import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/crearTarea.dart';
+import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
-import 'package:manager_proyect/src/domain/models/Proyectos.dart';
+
 
 class Draweer extends StatelessWidget {
-  const Draweer({super.key});
+
+  final List<Map<String, dynamic>> drawerItems = [
+    {
+      'title': 'Perfil',
+      'icon': Icons.account_box_rounded,
+      'onTap': () {},
+    },
+    {
+      'title': 'Mis Tareas',
+      'icon': Icons.account_balance_wallet_rounded,
+      'onTap': () {
+        // Lógica para navegar a la página de creación de tareas
+      },
+    },
+    {
+      'title': 'Ver Tareas',
+      'icon': Icons.arrow_forward_sharp,
+      'onTap': () {
+        Get.to(Ver_Proyectos(),arguments: 'Seleccione Un Proyecto');
+      },
+    },
+    {
+      'title': 'Crear Tareas',
+      'icon': Icons.arrow_forward_sharp,
+      'onTap': () {
+        Get.to(Crear_Tareas());
+      },
+    },
+    {
+      'title': 'Mis Proyectos',
+      'icon': Icons.account_balance_wallet_rounded,
+      'onTap': () {
+        // Lógica para ver los proyectos del usuario
+      },
+    },
+    {
+      'title': 'Crear Proyecto',
+      'icon': Icons.arrow_forward_sharp,
+      'onTap': () {
+        Get.to(Crear_proyectos());
+      },
+    },
+    {
+      'title': 'Ver Proyectos',
+      'icon': Icons.arrow_forward_sharp,
+      'onTap': () {
+        Get.to(Ver_Proyectos(),arguments: 'Mis Proyectos');
+      },
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -16,62 +67,34 @@ class Draweer extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: ListView(
-              children: [
-                ListTile(
+            child: ListView.builder(
+              itemCount: drawerItems.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
                   leading: Icon(
-                    Icons.account_box_rounded,
+                    drawerItems[index]['icon'],
                     color: Colors.blue,
                   ),
                   title: Text(
-                    'Perfil',
+                    drawerItems[index]['title'],
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {},
-                ),
-                ListTile(
-                  leading: Icon(Icons.arrow_forward_sharp,
-                      color: Colors.blue, size: 30),
-                  title: Text(
-                    'Mis Tareas',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onTap: () {
-                    Get.to(Crear_Tareas());
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.account_balance_wallet_rounded,
-                      color: Colors.blue),
-                  title: Text(
-                    'Mis Proyecto',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onTap: () {},
-                ),
-                ListTile(
-                  leading: Icon(Icons.arrow_forward_sharp,
-                      color: Colors.blue, size: 30),
-                  title: Text(
-                    'Crear Proyecto',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onTap: () {},
-                ),
-              ],
+                  onTap: drawerItems[index]['onTap'],
+                );
+              },
             ),
           ),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(kSecondaryColor)),
+                backgroundColor: MaterialStateProperty.all<Color>(kSecondaryColor),
+              ),
               onPressed: () {
                 Get.to(Principal());
               },
               child: const Text(
-                'Cerrar Sesion',
+                'Cerrar Sesión',
                 style: TextStyle(color: Colors.white),
               ),
             ),
@@ -81,3 +104,5 @@ class Draweer extends StatelessWidget {
     );
   }
 }
+
+

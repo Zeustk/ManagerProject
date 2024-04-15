@@ -6,6 +6,7 @@ import 'package:manager_proyect/src/widgets/Drawer.dart';
 
 
 
+
 class Crear_Tareas extends StatefulWidget {
   @override
   State<Crear_Tareas> createState() => _Crear_tareasState();
@@ -52,12 +53,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: TextField(
-                /*  onSubmitted: (value) {
-                    _focusNode.requestFocus();
-                  }, */
-                /*  focusNode: _focusNode,
-                  controller: _controller,
-                  autofocus: true, */
+              
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                     labelText: 'Nombre',
@@ -144,6 +140,26 @@ class _LabelsTareasState extends State<LabelsTareas> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: TextField(
+              
+                style: TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                    labelText: 'Nombre Del Proyecto',
+                    fillColor: Colors.white,
+                    filled: true,
+                    prefixIcon: Icon(
+                      Icons.account_balance_wallet_rounded,
+                      color: kSecondaryColor,
+                    ),
+                    labelStyle: TextStyle(color: Colors.black),
+                    border: UnderlineInputBorder(
+                      borderRadius: BorderRadius.circular(40),
+                    )),
+              ),
+            ),
+            
             SizedBox(height: 25),
             Divider(color: Colors.grey),
             Text(

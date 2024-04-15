@@ -157,7 +157,7 @@ class _LabelsState extends State<Labels> {
                   colorText: Colors.black,
                   onTap: (snack) {
                     Get.to(
-                      () => Proyectos(),
+                      () => Ver_Proyectos(),
                     );
                   },
                 );
