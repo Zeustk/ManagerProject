@@ -1,18 +1,48 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:manager_proyect/constante/constantes.dart';
-import 'package:manager_proyect/models/Proyectos.dart';
+import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
+import 'package:manager_proyect/src/widgets/Drawer.dart';
 
-class Labels extends StatefulWidget {
+
+
+class Crear_Tareas extends StatefulWidget {
   @override
-  State<Labels> createState() => _LabelsState();
+  State<Crear_Tareas> createState() => _Crear_tareasState();
 }
 
-class _LabelsState extends State<Labels> {
+class _Crear_tareasState extends State<Crear_Tareas> {
+  /* FocusNode _focusNode = FocusNode(); */
+//
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: BotonNavi(),
+      backgroundColor: kSecondaryColor,
+      appBar: AppBar(
+        backgroundColor: kSecondaryColor,
+        title: Text('Crear Tarea', style: TextStyle(color: Colors.white)),
+      ),
+      drawer: SafeArea(
+        child: Draweer(),
+      ),
+      body: SingleChildScrollView(
+        child: LabelsTareas(),
+      ),
+    );
+  }
+}
+
+class LabelsTareas extends StatefulWidget {
+  @override
+  State<LabelsTareas> createState() => _LabelsTareasState();
+}
+
+class _LabelsTareasState extends State<LabelsTareas> {
   TextEditingController _controller = TextEditingController();
   TextEditingController _controller2 = TextEditingController();
   TextStyle selecionarColor = TextStyle(color: Colors.black);
+  TextEditingController _controllerDescripcion = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -71,7 +101,7 @@ class _LabelsState extends State<Labels> {
                 style: TextStyle(color: Colors.black),
                 controller: _controller2,
                 decoration: InputDecoration(
-                    labelText: 'Fecha Fin',
+                    labelText: 'Fecha de Finalización',
                     filled: true,
                     labelStyle: selecionarColor,
                     fillColor: Colors.white,
@@ -85,6 +115,33 @@ class _LabelsState extends State<Labels> {
                 onTap: () {
                   _seleccionFecha2(context);
                 },
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 30, left: 30, right: 30),
+              child: GestureDetector(
+                onTap: () {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                },
+                child: TextField(
+                  style: TextStyle(color: Colors.black),
+                  controller: _controllerDescripcion,
+                  decoration: InputDecoration(
+                    labelText: 'Descripción',
+                    filled: true,
+                    labelStyle: selecionarColor,
+                    fillColor: Colors.white,
+                    prefixIcon: Icon(
+                      Icons.comment,
+                      color: kSecondaryColor,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                    ),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 25),
@@ -115,19 +172,7 @@ class _LabelsState extends State<Labels> {
                       ))),
             ),
             CupertinoButton(
-              onPressed: () {
-                Get.snackbar(
-                  'Proyecto Creado',
-                  'Proyecto Creado Satisfactoriamente',
-                  backgroundColor: Colors.white,
-                  colorText: Colors.black,
-                  onTap: (snack) {
-                    Get.to(
-                      () => Proyectos(),
-                    );
-                  },
-                );
-              },
+              onPressed: () {},
               alignment: Alignment.bottomCenter,
               color: Colors.white,
               borderRadius: BorderRadius.circular(40),

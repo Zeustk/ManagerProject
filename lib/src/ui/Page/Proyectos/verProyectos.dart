@@ -1,13 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:manager_proyect/src/constante/constantes.dart';
 
-import 'package:manager_proyect/constante/constantes.dart';
-import 'package:manager_proyect/Page/Proyectos/crearProyecto.dart';
-import 'package:manager_proyect/widgets/BottonNavigator.dart';
-import 'package:manager_proyect/widgets/Drawer.dart';
-import 'package:manager_proyect/widgets/PaddingProyecto.dart';
 
-import '../widgets/BotonProyecto.dart';
+import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
+import 'package:manager_proyect/src/widgets/BotonProyecto.dart';
+import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
+import 'package:manager_proyect/src/widgets/Drawer.dart';
+import 'package:manager_proyect/src/widgets/PaddingProyecto.dart';
+
+
 
 class Proyectos extends StatelessWidget {
   const Proyectos({super.key});
@@ -81,11 +84,25 @@ class Proyectos extends StatelessWidget {
                 color: Colors.red,
                 texto: 'No iniciado',
               ),
-              MaterialButton(
-                  child: Text('Crear Proyecto'),
-                  onPressed: () {
-                    Get.to(Crear_proyectos());
-                  })
+              SizedBox(
+                height: 40,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 200),
+                child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            Colors.white // Cambia esto al color que desees
+                        ),
+                    label: Text(
+                      'Atras',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    icon: Icon(Icons.arrow_back, color: Colors.black),
+                    onPressed: () {
+                      Get.to(Crear_proyectos());
+                    }),
+              )
             ],
           ),
         ),

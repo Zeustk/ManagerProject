@@ -1,16 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:manager_proyect/constante/constantes.dart';
-import 'package:manager_proyect/widgets/BottonNavigator.dart';
-import 'package:manager_proyect/widgets/Drawer.dart';
-import 'package:manager_proyect/widgets/labels.dart';
+import 'package:get/get.dart';
+import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart';
+import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
+import 'package:manager_proyect/src/widgets/Drawer.dart';
 
-class Crear_Tareas extends StatefulWidget {
+
+
+class Crear_proyectos extends StatefulWidget {
   @override
-  State<Crear_Tareas> createState() => _Crear_tareasState();
+  State<Crear_proyectos> createState() => _Crear_proyectosState();
 }
 
-class _Crear_tareasState extends State<Crear_Tareas> {
+class _Crear_proyectosState extends State<Crear_proyectos> {
   /* FocusNode _focusNode = FocusNode(); */
 //
   @override
@@ -26,18 +29,21 @@ class _Crear_tareasState extends State<Crear_Tareas> {
         child: Draweer(),
       ),
       body: SingleChildScrollView(
-        child: LabelsTareas(),
+        child: Labels(),
       ),
     );
   }
 }
 
-class LabelsTareas extends StatefulWidget {
+
+//Entradas de texto
+
+class Labels extends StatefulWidget {
   @override
-  State<LabelsTareas> createState() => _LabelsTareasState();
+  State<Labels> createState() => _LabelsState();
 }
 
-class _LabelsTareasState extends State<LabelsTareas> {
+class _LabelsState extends State<Labels> {
   TextEditingController _controller = TextEditingController();
   TextEditingController _controller2 = TextEditingController();
   TextStyle selecionarColor = TextStyle(color: Colors.black);
@@ -99,7 +105,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                 style: TextStyle(color: Colors.black),
                 controller: _controller2,
                 decoration: InputDecoration(
-                    labelText: 'Fecha de Finalización',
+                    labelText: 'Fecha Fin',
                     filled: true,
                     labelStyle: selecionarColor,
                     fillColor: Colors.white,
@@ -112,33 +118,6 @@ class _LabelsTareasState extends State<LabelsTareas> {
                 readOnly: true,
                 onTap: () {
                   _seleccionFecha2(context);
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 30, left: 30, right: 30),
-              child: TextField(
-                style: TextStyle(color: Colors.black),
-                controller: _controller2,
-                decoration: InputDecoration(
-                  labelText: 'Descripción',
-                  filled: true,
-                  labelStyle: selecionarColor,
-                  fillColor: Colors.white,
-                  prefixIcon: Icon(
-                    Icons.calendar_today,
-                    color: kSecondaryColor,
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(
-                      vertical: 20,
-                      horizontal: 20), // Ajusta aquí el tamaño del relleno
-                ),
-                readOnly: true,
-                onTap: () {
-                  // Agrega aquí el código que desees ejecutar cuando se toque el TextField
                 },
               ),
             ),
@@ -170,7 +149,19 @@ class _LabelsTareasState extends State<LabelsTareas> {
                       ))),
             ),
             CupertinoButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.snackbar(
+                  'Proyecto Creado',
+                  'Proyecto Creado Satisfactoriamente',
+                  backgroundColor: Colors.white,
+                  colorText: Colors.black,
+                  onTap: (snack) {
+                    Get.to(
+                      () => Proyectos(),
+                    );
+                  },
+                );
+              },
               alignment: Alignment.bottomCenter,
               color: Colors.white,
               borderRadius: BorderRadius.circular(40),
@@ -204,3 +195,4 @@ class _LabelsTareasState extends State<LabelsTareas> {
     }
   }
 }
+

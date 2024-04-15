@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:manager_proyect/widgets/Custom_progressbar.dart';
+import 'package:manager_proyect/src/widgets/Custom_progressbar.dart';
+
 
 class Progresos_Proyectos extends StatelessWidget {
   final double porcentaje;

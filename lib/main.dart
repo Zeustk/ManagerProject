@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:manager_proyect/Page/Principal.dart';
+import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
 
-import 'package:manager_proyect/constante/constantes.dart';
+import 'package:manager_proyect/src/constante/constantes.dart';
 
 void main() => runApp(const MyApp());
 

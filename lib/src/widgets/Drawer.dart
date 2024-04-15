@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:manager_proyect/Page/Principal.dart';
-import 'package:manager_proyect/constante/constantes.dart';
-import 'package:manager_proyect/models/Proyectos.dart';
+import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
+import 'package:manager_proyect/src/ui/Page/Tareas/crearTarea.dart';
+import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/domain/models/Proyectos.dart';
 
 class Draweer extends StatelessWidget {
   const Draweer({super.key});
@@ -19,8 +20,8 @@ class Draweer extends StatelessWidget {
               children: [
                 ListTile(
                   leading: Icon(
-                    Icons.create,
-                    color: Colors.amberAccent,
+                    Icons.account_box_rounded,
+                    color: Colors.blue,
                   ),
                   title: Text(
                     'Perfil',
@@ -29,29 +30,30 @@ class Draweer extends StatelessWidget {
                   onTap: () {},
                 ),
                 ListTile(
-                  leading: Icon(Icons.update, color: Colors.green),
+                  leading: Icon(Icons.arrow_forward_sharp,
+                      color: Colors.blue, size: 30),
                   title: Text(
-                    'Mis Proyectos',
+                    'Mis Tareas',
                     style: TextStyle(color: Colors.black),
                   ),
                   onTap: () {
-                    Get.to(Proyectos());
+                    Get.to(Crear_Tareas());
                   },
                 ),
                 ListTile(
-                  leading:
-                      Icon(Icons.delete_forever_outlined, color: Colors.red),
+                  leading: Icon(Icons.account_balance_wallet_rounded,
+                      color: Colors.blue),
                   title: Text(
-                    'Eliminar Proyecto',
+                    'Mis Proyecto',
                     style: TextStyle(color: Colors.black),
                   ),
                   onTap: () {},
                 ),
                 ListTile(
-                  leading: Icon(Icons.screen_search_desktop_outlined,
-                      color: Colors.pinkAccent),
+                  leading: Icon(Icons.arrow_forward_sharp,
+                      color: Colors.blue, size: 30),
                   title: Text(
-                    'Buscar Proyecto',
+                    'Crear Proyecto',
                     style: TextStyle(color: Colors.black),
                   ),
                   onTap: () {},
