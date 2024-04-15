@@ -5,7 +5,7 @@ import 'package:manager_proyect/widgets/Drawer.dart';
 import 'package:manager_proyect/widgets/PaddingProyecto.dart';
 
 import '../widgets/BotonProyecto.dart';
-import '../widgets/Custom_progressbar.dart';
+
 
 class Proyectos extends StatelessWidget {
   const Proyectos({super.key});

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:manager_proyect/Page/LoginScreen.dart';
 import 'package:manager_proyect/Page/Principal.dart';
 import 'package:manager_proyect/constante/constantes.dart';
 import 'package:manager_proyect/models/Proyectos.dart';
