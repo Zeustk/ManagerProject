@@ -27,7 +27,7 @@ class Progess_custom extends StatelessWidget {
               width: ancho * progress,
               height: alto,
               decoration: BoxDecoration(
-                  color: Colors.red, borderRadius: BorderRadius.circular(10)),
+                  color: color, borderRadius: BorderRadius.circular(10)),
             ),
             Align(
               alignment: Alignment.center,
