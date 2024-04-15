@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:login/Page/LoginScreen.dart';
+import 'package:login/Page/Principal.dart';
 import 'package:login/constante/constantes.dart';
+import 'package:login/models/Proyectos.dart';
 
 class Draweer extends StatelessWidget {
   const Draweer({super.key});
@@ -23,15 +27,17 @@ class Draweer extends StatelessWidget {
                     'Perfil',
                     style: TextStyle(color: Colors.black),
                   ),
-                  onLongPress: () {},
+                  onTap: () {},
                 ),
                 ListTile(
                   leading: Icon(Icons.update, color: Colors.green),
                   title: Text(
-                    'Mis Tareas',
+                    'Mis Proyectos',
                     style: TextStyle(color: Colors.black),
                   ),
-                  onLongPress: () {},
+                  onTap: () {
+                    Get.to(Proyectos());
+                  },
                 ),
                 ListTile(
                   leading:
@@ -40,7 +46,7 @@ class Draweer extends StatelessWidget {
                     'Eliminar Proyecto',
                     style: TextStyle(color: Colors.black),
                   ),
-                  onLongPress: () {},
+                  onTap: () {},
                 ),
                 ListTile(
                   leading: Icon(Icons.screen_search_desktop_outlined,
@@ -49,19 +55,21 @@ class Draweer extends StatelessWidget {
                     'Buscar Proyecto',
                     style: TextStyle(color: Colors.black),
                   ),
-                  onLongPress: () {},
+                  onTap: () {},
                 ),
               ],
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(vertical: 16.0),
+            margin: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all<Color>(kSecondaryColor)),
-              onPressed: () {},
-              child: Text(
+              onPressed: () {
+                Get.to(Principal());
+              },
+              child: const Text(
                 'Cerrar Sesion',
                 style: TextStyle(color: Colors.white),
               ),

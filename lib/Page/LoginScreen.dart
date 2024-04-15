@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:login/Page/Registrarse.dart';
 import 'package:login/constante/constantes.dart';
 import 'package:login/models/Crearproyecto.dart';
@@ -66,10 +67,7 @@ class Login extends StatelessWidget {
                           ),
                           MaterialButton(
                             onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return Registro();
-                              }));
+                              Get.to(Registro());
                             },
                             child: Text(
                               "\n\n\n\nRegistarse",
