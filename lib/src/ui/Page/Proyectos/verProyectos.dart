@@ -4,16 +4,22 @@ import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
 
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
+import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
 import 'package:manager_proyect/src/widgets/BotonProyecto.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
 import 'package:manager_proyect/src/widgets/PaddingProyecto.dart';
+
+import '../../../widgets/Drawer.dart';
 
 class Ver_Proyectos extends StatelessWidget {
   const Ver_Proyectos({super.key});
 
   @override
   Widget build(BuildContext context) {
-    String TextoDeApBard=Get.arguments;
+    String? textoDeApBard=Get.arguments;
+
+    textoDeApBard ??= 'Mis Proyectos';
+       
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
       appBar: AppBar(
@@ -38,11 +44,11 @@ class Ver_Proyectos extends StatelessWidget {
         ],
         backgroundColor: kSecondaryColor,
         title: Text(
-          TextoDeApBard,
+          textoDeApBard,
           style: TextStyle(color: Colors.white),
         ),
       ),
-      drawer: const SafeArea(child: Drawer()),
+      drawer: SafeArea(child: Draweer()),
       body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Container(
@@ -67,7 +73,7 @@ class Ver_Proyectos extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   // Aquí va la acción que desees realizar al presionar el primer proyecto
-                  Get.to(Crear_proyectos());
+                  Get.to(DetalleProyectoPage());
                 },
                 child: const Column(
                   children: [

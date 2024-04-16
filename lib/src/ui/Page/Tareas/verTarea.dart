@@ -8,8 +8,8 @@ import 'package:manager_proyect/src/widgets/BotonProyecto.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
 import 'package:manager_proyect/src/widgets/PaddingProyecto.dart';
 
-class Ver_Proyectos extends StatelessWidget {
-  const Ver_Proyectos({super.key});
+class Ver_Tareas extends StatelessWidget {
+  const Ver_Tareas({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class Ver_Proyectos extends StatelessWidget {
             child: Icon(
               Icons.search,
               size: 35,
-              color: Colors.white,
+              color: Colors.blue,
             ),
           ),
           Container(
@@ -32,7 +32,7 @@ class Ver_Proyectos extends StatelessWidget {
             child: const Icon(
               Icons.add,
               size: 35,
-              color: Colors.white,
+              color: Colors.blue,
             ),
           ),
         ],

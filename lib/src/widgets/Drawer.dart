@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
+import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/crearTarea.dart';
 import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
@@ -48,7 +49,7 @@ class Draweer extends StatelessWidget {
       'title': 'Crear Proyecto',
       'icon': Icons.arrow_forward_sharp,
       'onTap': () {
-        Get.to(Crear_proyectos());
+        Get.to(Ver_Proyectos());
       },
     },
     {
