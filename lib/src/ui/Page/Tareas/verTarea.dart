@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/ui/Page/Tareas/detalleTarea.dart';
 import 'package:manager_proyect/src/widgets/BotonProyecto.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
 import 'package:manager_proyect/src/widgets/ContainerMistareas.dart';
 import 'package:manager_proyect/src/widgets/Drawer.dart';
-
-
 
 class Ver_Tareas extends StatelessWidget {
   const Ver_Tareas({super.key});
@@ -16,7 +15,8 @@ class Ver_Tareas extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kSecondaryColor,
-        title: Text('Mis Tareas',
+        title: Text(
+          'Mis Tareas',
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -43,24 +43,33 @@ class Ver_Tareas extends StatelessWidget {
                 ),
               ],
             ),
-            
-            Container_Mistareas(
-              texto: 'Completado',
-              color: Colors.green[400],
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            Container_Mistareas(
-              texto: 'Pendiente',
-              color: Colors.red,
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            Container_Mistareas(
-              texto: 'Pendiente',
-              color: Colors.red,
+            GestureDetector(
+              onTap: () {
+                // Aquí va la acción que deseas realizar al tocar uno de los contenedores
+                Get.to(DetalleTarea());
+              },
+              child: Column(
+                children: [
+                  Container_Mistareas(
+                    texto: 'Completado',
+                    color: Colors.green[400],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Container_Mistareas(
+                    texto: 'Pendiente',
+                    color: Colors.red,
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Container_Mistareas(
+                    texto: 'Pendiente',
+                    color: Colors.red,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

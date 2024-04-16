@@ -5,6 +5,7 @@ import 'package:manager_proyect/src/constante/constantes.dart';
 
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
+import 'package:manager_proyect/src/ui/Page/Tareas/detalleTarea.dart';
 import 'package:manager_proyect/src/widgets/BotonProyecto.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
 import 'package:manager_proyect/src/widgets/PaddingProyecto.dart';
@@ -16,6 +17,7 @@ class Ver_Proyectos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String textoDeApBard = Get.arguments;
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
       appBar: AppBar(
@@ -68,8 +70,16 @@ class Ver_Proyectos extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  // Aquí va la acción que desees realizar al presionar el primer proyecto
-                  Get.to(DetalleProyectoPage());
+
+                   print(textoDeApBard[0]);
+                   
+                  if (textoDeApBard[0]=='M'){
+                     Get.to(DetalleProyectoPage());
+                  }
+                  else{
+                    Get.to(DetalleTarea());
+                  }
+                 
                 },
                 child: const Column(
                   children: [
