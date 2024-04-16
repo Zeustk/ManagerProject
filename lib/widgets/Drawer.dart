@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:manager_proyect/Page/Mistareas.dart';
 import 'package:manager_proyect/Page/Principal.dart';
 import 'package:manager_proyect/constante/constantes.dart';
 import 'package:manager_proyect/models/Proyectos.dart';
@@ -36,7 +37,7 @@ class Draweer extends StatelessWidget {
                     style: TextStyle(color: Colors.black),
                   ),
                   onTap: () {
-                    Get.to(Proyectos());
+                    Get.to(Mis_Tareas());
                   },
                 ),
                 ListTile(
