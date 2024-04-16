@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/crearTarea.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/verTarea.dart';
@@ -17,16 +16,11 @@ class Draweer extends StatelessWidget {
       'onTap': () {},
     },
     {
-      'title': 'Mis Tareas',
-      'icon': Icons.account_balance_wallet_rounded,
-      'onTap': () {
-        Get.to(Mis_Tareas(), arguments: 'Mis Tareas');
-      },
-    },
-    {
       'title': 'Ver Tareas',
       'icon': Icons.arrow_forward_sharp,
-      'onTap': () {},
+      'onTap': () {
+        Get.to(Ver_Tareas());
+      },
     },
     {
       'title': 'Crear Tareas',
@@ -39,14 +33,14 @@ class Draweer extends StatelessWidget {
       'title': 'Mis Proyectos',
       'icon': Icons.account_balance_wallet_rounded,
       'onTap': () {
-        Get.to(Ver_Proyectos(), arguments: 'Mis Proyectos');
+        // Lógica para ver los proyectos del usuario
       },
     },
     {
       'title': 'Crear Proyecto',
       'icon': Icons.arrow_forward_sharp,
       'onTap': () {
-        Get.to(Crear_proyectos());
+        Get.to(Ver_Proyectos());
       },
     },
     {

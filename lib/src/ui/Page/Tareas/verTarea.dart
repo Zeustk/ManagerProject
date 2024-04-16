@@ -6,19 +6,17 @@ import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
 import 'package:manager_proyect/src/widgets/ContainerMistareas.dart';
 import 'package:manager_proyect/src/widgets/Drawer.dart';
 
-import '../../../widgets/PaddingMistareas.dart';
 
-class Mis_Tareas extends StatelessWidget {
-  const Mis_Tareas({super.key});
+
+class Ver_Tareas extends StatelessWidget {
+  const Ver_Tareas({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final String textoDeApBard = Get.arguments;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kSecondaryColor,
-        title: Text(
-          textoDeApBard,
+        title: Text('Mis Tareas',
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -45,6 +43,7 @@ class Mis_Tareas extends StatelessWidget {
                 ),
               ],
             ),
+            
             Container_Mistareas(
               texto: 'Completado',
               color: Colors.green[400],
@@ -62,7 +61,7 @@ class Mis_Tareas extends StatelessWidget {
             Container_Mistareas(
               texto: 'Pendiente',
               color: Colors.red,
-            )
+            ),
           ],
         ),
       ),
