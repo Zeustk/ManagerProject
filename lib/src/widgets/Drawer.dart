@@ -7,10 +7,9 @@ import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/crearTarea.dart';
 import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
-
+import 'package:manager_proyect/src/ui/auth/Mistareas.dart';
 
 class Draweer extends StatelessWidget {
-
   final List<Map<String, dynamic>> drawerItems = [
     {
       'title': 'Perfil',
@@ -21,14 +20,14 @@ class Draweer extends StatelessWidget {
       'title': 'Mis Tareas',
       'icon': Icons.account_balance_wallet_rounded,
       'onTap': () {
-        // Lógica para navegar a la página de creación de tareas
+        Get.to(Mis_Tareas(), arguments: 'Mis Tareas');
       },
     },
     {
       'title': 'Ver Tareas',
       'icon': Icons.arrow_forward_sharp,
       'onTap': () {
-        Get.to(Ver_Proyectos(),arguments: 'Seleccione Un Proyecto');
+        Get.to(Mis_Tareas(), arguments: 'Seleccione Un Proyecto');
       },
     },
     {
@@ -56,7 +55,7 @@ class Draweer extends StatelessWidget {
       'title': 'Ver Proyectos',
       'icon': Icons.arrow_forward_sharp,
       'onTap': () {
-        Get.to(Ver_Proyectos(),arguments: 'Mis Proyectos');
+        Get.to(Ver_Proyectos(), arguments: 'Mis Proyectos');
       },
     },
   ];
@@ -89,7 +88,8 @@ class Draweer extends StatelessWidget {
             margin: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(kSecondaryColor),
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(kSecondaryColor),
               ),
               onPressed: () {
                 Get.to(Principal());
@@ -105,5 +105,3 @@ class Draweer extends StatelessWidget {
     );
   }
 }
-
-
