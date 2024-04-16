@@ -4,9 +4,10 @@ import 'package:get/get.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/crearTarea.dart';
+import 'package:manager_proyect/src/ui/Page/Tareas/verTarea.dart';
 import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
-import 'package:manager_proyect/src/ui/auth/Mistareas.dart';
+
 
 class Draweer extends StatelessWidget {
   final List<Map<String, dynamic>> drawerItems = [
@@ -25,9 +26,7 @@ class Draweer extends StatelessWidget {
     {
       'title': 'Ver Tareas',
       'icon': Icons.arrow_forward_sharp,
-      'onTap': () {
-        Get.to(Mis_Tareas(), arguments: 'Seleccione Un Proyecto');
-      },
+      'onTap': () {},
     },
     {
       'title': 'Crear Tareas',
@@ -40,7 +39,7 @@ class Draweer extends StatelessWidget {
       'title': 'Mis Proyectos',
       'icon': Icons.account_balance_wallet_rounded,
       'onTap': () {
-        // Lógica para ver los proyectos del usuario
+        Get.to(Ver_Proyectos(), arguments: 'Mis Proyectos');
       },
     },
     {
