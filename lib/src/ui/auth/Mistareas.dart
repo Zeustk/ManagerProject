@@ -1,31 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:manager_proyect/constante/constantes.dart';
-import 'package:manager_proyect/widgets/BotonProyecto.dart';
-import 'package:manager_proyect/widgets/BottonNavigator.dart';
-import 'package:manager_proyect/widgets/Drawer.dart';
+import 'package:get/get.dart';
+import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/widgets/BotonProyecto.dart';
+import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
+import 'package:manager_proyect/src/widgets/ContainerMistareas.dart';
+import 'package:manager_proyect/src/widgets/Drawer.dart';
+
+import '../../widgets/PaddingMistareas.dart';
 
 class Mis_Tareas extends StatelessWidget {
   const Mis_Tareas({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final String textoDeApBard = Get.arguments;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kSecondaryColor,
-        title: Column(
-          children: [
-            SizedBox(
-              height: 17,
-            ),
-            Text(
-              'Nombre del Proyecto',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              'Mis Tareas',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ],
+        title: Text(
+          textoDeApBard,
+          style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
       ),
@@ -33,60 +27,43 @@ class Mis_Tareas extends StatelessWidget {
       bottomNavigationBar: BotonNavi(),
       body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 40),
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 4, left: 2),
-                child: Boton_next(texto: 'Todos'),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 4),
-                child: Boton_next(texto: 'Proceso'),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 0),
-                child: Boton_next(texto: 'Completados'),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.red,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 4, left: 2),
+                  child: Boton_next(texto: 'Todos'),
                 ),
-                height: 100,
-                width: 100,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(),
-                      child: Text(
-                        'aaa',
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(),
-                      child: Text(
-                        'Nombre del Proyecto',
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(),
-                      child: Text(
-                        'Descripción',
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(right: 4),
+                  child: Boton_next(texto: 'Proceso'),
                 ),
-              )
-            ],
-          ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 0),
+                  child: Boton_next(texto: 'Completados'),
+                ),
+              ],
+            ),
+            Container_Mistareas(
+              texto: 'Completado',
+              color: Colors.green[400],
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Container_Mistareas(
+              texto: 'Pendiente',
+              color: Colors.red,
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Container_Mistareas(
+              texto: 'Pendiente',
+              color: Colors.red,
+            ),
+          ],
         ),
       ),
     );

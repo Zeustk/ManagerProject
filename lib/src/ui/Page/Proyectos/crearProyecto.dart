@@ -4,9 +4,8 @@ import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
-import 'package:manager_proyect/src/widgets/Drawer.dart';
 
-
+import '../../../widgets/Drawer.dart';
 
 class Crear_proyectos extends StatefulWidget {
   @override
@@ -34,7 +33,6 @@ class _Crear_proyectosState extends State<Crear_proyectos> {
     );
   }
 }
-
 
 //Entradas de texto
 
@@ -156,9 +154,7 @@ class _LabelsState extends State<Labels> {
                   backgroundColor: Colors.white,
                   colorText: Colors.black,
                   onTap: (snack) {
-                    Get.to(
-                      () => Ver_Proyectos(),
-                    );
+                    Get.to(Ver_Proyectos(), arguments: 'Mis Proyectos');
                   },
                 );
               },
@@ -195,4 +191,3 @@ class _LabelsState extends State<Labels> {
     }
   }
 }
-

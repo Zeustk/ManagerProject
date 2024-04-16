@@ -8,12 +8,14 @@ import 'package:manager_proyect/src/widgets/BotonProyecto.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
 import 'package:manager_proyect/src/widgets/PaddingProyecto.dart';
 
+import '../../../widgets/Drawer.dart';
+
 class Ver_Proyectos extends StatelessWidget {
   const Ver_Proyectos({super.key});
 
   @override
   Widget build(BuildContext context) {
-    String TextoDeApBard=Get.arguments;
+    final String textoDeApBard = Get.arguments;
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
       appBar: AppBar(
@@ -38,11 +40,11 @@ class Ver_Proyectos extends StatelessWidget {
         ],
         backgroundColor: kSecondaryColor,
         title: Text(
-          TextoDeApBard,
+          textoDeApBard,
           style: TextStyle(color: Colors.white),
         ),
       ),
-      drawer: const SafeArea(child: Drawer()),
+      drawer: SafeArea(child: Draweer()),
       body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Container(
@@ -75,7 +77,9 @@ class Ver_Proyectos extends StatelessWidget {
                       porcentaje: 1.0,
                       color: Colors.green,
                       texto: 'Completado',
+                      
                     ),
+                  
                     Progresos_Proyectos(
                       porcentaje: 0.10,
                       color: Colors.orange,
