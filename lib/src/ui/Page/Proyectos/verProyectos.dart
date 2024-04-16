@@ -5,7 +5,7 @@ import 'package:manager_proyect/src/constante/constantes.dart';
 
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
-import 'package:manager_proyect/src/ui/Page/Tareas/detalleTarea.dart';
+import 'package:manager_proyect/src/ui/Page/Tareas/verTarea.dart';
 import 'package:manager_proyect/src/widgets/BotonProyecto.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
 import 'package:manager_proyect/src/widgets/PaddingProyecto.dart';
@@ -18,6 +18,10 @@ class Ver_Proyectos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textoDeApBard = Get.arguments;
+
+    if (textoDeApBard==null){
+      textoDeApBard='Mis Proyectos';
+    }
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
       appBar: AppBar(
@@ -70,12 +74,14 @@ class Ver_Proyectos extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  print(textoDeApBard[0]);
 
-                  if (textoDeApBard[0] == 'M') {
-                    Get.to(DetalleProyectoPage());
-                  } else {
-                    Get.to(DetalleTarea());
+                   print(textoDeApBard[0]);
+                   
+                  if (textoDeApBard[0]=='M'){
+                     Get.to(DetalleProyectoPage());
+                  }
+                  else{
+                    Get.to(Ver_Tareas());
                   }
                 },
                 child: const Column(

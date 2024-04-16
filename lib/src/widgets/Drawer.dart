@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/crearTarea.dart';
+import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
 import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
 
@@ -13,7 +14,16 @@ class Draweer extends StatelessWidget {
     {
       'title': 'Perfil',
       'icon': Icons.account_box_rounded,
-      'onTap': () {},
+      'onTap': () {
+        Get.to(Perfil_Usuario());
+      },
+    },
+    {
+      'title': 'Tareas',
+      'icon': Icons.account_balance_wallet_rounded,
+      'onTap': () {
+        
+      },
     },
     {
       'title': 'Ver Tareas',
@@ -31,7 +41,7 @@ class Draweer extends StatelessWidget {
       },
     },
     {
-      'title': 'Mis Proyectos',
+      'title': 'Proyectos',
       'icon': Icons.account_balance_wallet_rounded,
       'onTap': () {
         
