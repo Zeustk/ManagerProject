@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/subirTarea.dart';
 
+import '../../../constante/constantes.dart';
+
 class DetalleTarea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: kSecondaryColor,
         title: Text('Nombre de Tarea'),
         centerTitle: true,
       ),
