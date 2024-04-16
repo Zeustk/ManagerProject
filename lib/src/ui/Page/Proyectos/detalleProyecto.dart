@@ -76,6 +76,7 @@ class _DetalleProyecto extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
+        
             SizedBox(height: 8),
             Text(
               '- Integrante 1',
