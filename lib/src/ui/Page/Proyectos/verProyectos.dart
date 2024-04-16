@@ -17,7 +17,7 @@ class Ver_Proyectos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String textoDeApBard = Get.arguments;
+    var textoDeApBard = Get.arguments;
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
       appBar: AppBar(
@@ -70,16 +70,13 @@ class Ver_Proyectos extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
+                  print(textoDeApBard[0]);
 
-                   print(textoDeApBard[0]);
-                   
-                  if (textoDeApBard[0]=='M'){
-                     Get.to(DetalleProyectoPage());
-                  }
-                  else{
+                  if (textoDeApBard[0] == 'M') {
+                    Get.to(DetalleProyectoPage());
+                  } else {
                     Get.to(DetalleTarea());
                   }
-                 
                 },
                 child: const Column(
                   children: [
