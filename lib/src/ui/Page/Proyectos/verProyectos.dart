@@ -16,7 +16,6 @@ class Ver_Proyectos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String textoDeApBard = Get.arguments;
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
       appBar: AppBar(
@@ -41,7 +40,7 @@ class Ver_Proyectos extends StatelessWidget {
         ],
         backgroundColor: kSecondaryColor,
         title: Text(
-          textoDeApBard,
+          'Mis Proyectos',
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -78,9 +77,8 @@ class Ver_Proyectos extends StatelessWidget {
                       porcentaje: 1.0,
                       color: Colors.green,
                       texto: 'Completado',
-                      
                     ),
-                  
+
                     Progresos_Proyectos(
                       porcentaje: 0.10,
                       color: Colors.orange,

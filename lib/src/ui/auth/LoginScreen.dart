@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
+import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
 import 'package:manager_proyect/src/ui/auth/Registrarse.dart';
-
 
 class Login extends StatelessWidget {
   @override
@@ -19,7 +19,7 @@ class Login extends StatelessWidget {
             ),
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return Crear_proyectos();
+                return Perfil_Usuario();
               }));
             }),
       ),

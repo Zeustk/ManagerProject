@@ -33,7 +33,7 @@ class Draweer extends StatelessWidget {
       'title': 'Mis Proyectos',
       'icon': Icons.account_balance_wallet_rounded,
       'onTap': () {
-        // Lógica para ver los proyectos del usuario
+        
       },
     },
     {
