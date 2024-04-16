@@ -1,10 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
-import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/crearTarea.dart';
+import 'package:manager_proyect/src/ui/Page/Tareas/verTarea.dart';
 import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/ui/auth/Mistareas.dart';
@@ -17,17 +16,10 @@ class Draweer extends StatelessWidget {
       'onTap': () {},
     },
     {
-      'title': 'Mis Tareas',
-      'icon': Icons.account_balance_wallet_rounded,
-      'onTap': () {
-        Get.to(Mis_Tareas(), arguments: 'Mis Tareas');
-      },
-    },
-    {
       'title': 'Ver Tareas',
       'icon': Icons.arrow_forward_sharp,
       'onTap': () {
-        Get.to(Mis_Tareas(), arguments: 'Seleccione Un Proyecto');
+        Get.to(Ver_Tareas());
       },
     },
     {

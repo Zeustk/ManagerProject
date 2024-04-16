@@ -1,117 +1,68 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
-
-import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/widgets/BotonProyecto.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
-import 'package:manager_proyect/src/widgets/PaddingProyecto.dart';
+import 'package:manager_proyect/src/widgets/ContainerMistareas.dart';
+import 'package:manager_proyect/src/widgets/Drawer.dart';
+
+
 
 class Ver_Tareas extends StatelessWidget {
   const Ver_Tareas({super.key});
 
   @override
   Widget build(BuildContext context) {
-    String TextoDeApBard=Get.arguments;
     return Scaffold(
-      bottomNavigationBar: BotonNavi(),
       appBar: AppBar(
-        actions: [
-          const SizedBox(
-            width: 50,
-            child: Icon(
-              Icons.search,
-              size: 35,
-              color: Colors.blue,
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(right: 10),
-            width: 50,
-            child: const Icon(
-              Icons.add,
-              size: 35,
-              color: Colors.blue,
-            ),
-          ),
-        ],
         backgroundColor: kSecondaryColor,
-        title: Text(
-          TextoDeApBard,
+        title: Text('Mis Tareas',
           style: TextStyle(color: Colors.white),
         ),
+        centerTitle: true,
       ),
-      drawer: const SafeArea(child: Drawer()),
+      drawer: Draweer(),
+      bottomNavigationBar: BotonNavi(),
       body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: Container(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 4, left: 2),
-                    child: Boton_next(texto: 'Todos'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 4),
-                    child: Boton_next(texto: 'Proceso'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 0),
-                    child: Boton_next(texto: 'Completados'),
-                  ),
-                ],
-              ),
-              GestureDetector(
-                onTap: () {
-                  // Aquí va la acción que desees realizar al presionar el primer proyecto
-                  Get.to(Crear_proyectos());
-                },
-                child: const Column(
-                  children: [
-                    Progresos_Proyectos(
-                      porcentaje: 1.0,
-                      color: Colors.green,
-                      texto: 'Completado',
-                    ),
-                    Progresos_Proyectos(
-                      porcentaje: 0.10,
-                      color: Colors.orange,
-                      texto: 'En Proceso',
-                    ),
-                    Progresos_Proyectos(
-                      porcentaje: 0.0,
-                      color: Colors.red,
-                      texto: 'No iniciado',
-                    ),
-                    // Los demás proyectos
-                  ],
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 4, left: 2),
+                  child: Boton_next(texto: 'Todos'),
                 ),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 200),
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        Colors.white, // Cambia esto al color que desees
-                  ),
-                  label: Text(
-                    'Atras',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  icon: Icon(Icons.arrow_back, color: Colors.black),
-                  onPressed: () {
-                    Get.to(Crear_proyectos());
-                  },
+                Padding(
+                  padding: const EdgeInsets.only(right: 4),
+                  child: Boton_next(texto: 'Proceso'),
                 ),
-              )
-            ],
-          ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 0),
+                  child: Boton_next(texto: 'Completados'),
+                ),
+              ],
+            ),
+            
+            Container_Mistareas(
+              texto: 'Completado',
+              color: Colors.green[400],
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Container_Mistareas(
+              texto: 'Pendiente',
+              color: Colors.red,
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Container_Mistareas(
+              texto: 'Pendiente',
+              color: Colors.red,
+            ),
+          ],
         ),
       ),
     );
