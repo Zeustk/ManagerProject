@@ -1,27 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:manager_proyect/Page/Registrarse.dart';
-import 'package:manager_proyect/constante/constantes.dart';
-import 'package:manager_proyect/models/Crearproyecto.dart';
+import 'package:manager_proyect/src/constante/constantes.dart';
 
-class Login extends StatelessWidget {
+
+class Registro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 20),
-        child: FloatingActionButton(
-            backgroundColor: Colors.white,
-            child: Icon(
-              Icons.arrow_forward,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return Crear_proyectos();
-              }));
-            }),
-      ),
       appBar: AppBar(
         backgroundColor: kSecondaryColor,
         actions: [
@@ -52,32 +36,25 @@ class Login extends StatelessWidget {
                 ),
               )),
           Expanded(
-              flex: 1,
+              flex: 2,
               child: SingleChildScrollView(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "\n\nSing Up",
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "\n\nInicar Sesion",
-                            style: Theme.of(context).textTheme.headlineMedium,
-                          ),
-                          MaterialButton(
-                            onPressed: () {
-                              Get.to(Registro());
-                            },
-                            child: Text(
-                              "\n\n\n\nRegistarse",
-                              style: Theme.of(context).textTheme.labelLarge,
-                            ),
-                          )
-                        ],
+                        children: [],
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
+                        padding: const EdgeInsets.only(bottom: 11, top: 11),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -99,7 +76,8 @@ class Login extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(right: 16),
+                            padding:
+                                const EdgeInsets.only(bottom: 10, right: 16),
                             child: Icon(
                               Icons.lock,
                             ),
@@ -109,9 +87,37 @@ class Login extends StatelessWidget {
                             decoration: InputDecoration(
                               hintText: "Contraseña",
                             ),
-                          ))
+                          )),
                         ],
                       ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsets.only(right: 16, bottom: 20, top: 20),
+                            child: Icon(
+                              Icons.password,
+                            ),
+                          ),
+                          Expanded(
+                              child: TextField(
+                            decoration: const InputDecoration(
+                              hintText: "Confirmar Contraseña",
+                            ),
+                          )),
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 280, top: 20),
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                        child: Icon(
+                          Icons.arrow_forward,
+                          color: Colors.black,
+                        ),
+                      )
                     ],
                   ),
                 ),
