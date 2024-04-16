@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:manager_proyect/src/constante/constantes.dart';
 
 class SubirTareas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: kSecondaryColor,
         title: Text('Subir Tareas'),
         centerTitle: true,
       ),
@@ -36,14 +38,15 @@ class SubirTareas extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10.0),
-           TextField(
+
+            TextField(
               maxLines: 5,
               decoration: InputDecoration(
                 hintText: 'Informe de la tarea',
                 border: OutlineInputBorder(),
-                
               ),
             ),
+
             SizedBox(height: 30.0),
             Text(
               'Documento',
