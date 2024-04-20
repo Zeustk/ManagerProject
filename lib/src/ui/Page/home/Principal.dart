@@ -112,7 +112,7 @@ class Principal extends StatelessWidget {
                   text: TextSpan(children: [
                     TextSpan(
                       text: 'Bienvenido a Gestor De Proyecto',
-                      style: Theme.of(context).textTheme.headline6,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ]),
                 ),

@@ -9,20 +9,6 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 20),
-        child: FloatingActionButton(
-            backgroundColor: Colors.white,
-            child: Icon(
-              Icons.arrow_forward,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return Perfil_Usuario();
-              }));
-            }),
-      ),
       appBar: AppBar(
         backgroundColor: kSecondaryColor,
         actions: [
@@ -37,87 +23,197 @@ class Login extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-              flex: 1,
-              child: Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/Login.png"),
-                    fit: BoxFit.contain,
-                    alignment: Alignment.bottomLeft,
+      body: AnimatedSize(
+        duration: Duration(seconds: 1),
+        curve: Curves.easeOut,
+        child: Container(
+          height: double.infinity,
+          child: Column(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/Login.png"),
+                      fit: BoxFit.contain,
+                      alignment: Alignment.bottomLeft,
+                    ),
                   ),
                 ),
-              )),
-          Expanded(
-              flex: 1,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "\n\nInicar Sesion",
-                            style: Theme.of(context).textTheme.headlineMedium,
-                          ),
-                          MaterialButton(
-                            onPressed: () {
-                              Get.to(Registro());
-                            },
-                            child: Text(
-                              "\n\n\n\nRegistarse",
-                              style: Theme.of(context).textTheme.labelLarge,
-                            ),
-                          )
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+              ),
+              Expanded(
+                flex: 1,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Padding(
-                              padding: EdgeInsets.only(right: 16),
-                              child: Icon(
-                                Icons.alternate_email,
-                              ),
+                            Text(
+                              "\n\nIniciar Sesión",
+                              style: Theme.of(context).textTheme.headlineMedium,
                             ),
-                            Expanded(
-                                child: TextField(
-                              decoration: InputDecoration(
-                                  hintText: "Correo Electronico"),
-                            ))
+                            MaterialButton(
+                              onPressed: () {
+                                Get.to(Registro());
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(left: 70, top: 70),
+                                padding: EdgeInsets.only(left: 6, top: 3),
+                                height: 42,
+                                width: 90,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.white,
+                                      width: 1), // Borde blanco delgado
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Container(
+                                  color:
+                                      Colors.transparent, // Fondo transparente
+                                  child: const Center(
+                                    child: Text(
+                                      "Registrarse",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
                           ],
                         ),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(right: 16),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        _buildAnimatedIconJump(
+                          context,
+                          Icons.alternate_email,
+                          "Correo Electrónico",
+                        ),
+                        const SizedBox(height: 20),
+                        _buildAnimatedIconJump(
+                          context,
+                          Icons.lock,
+                          "Contraseña",
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 270, top: 50),
+                          child: FloatingActionButton(
+                            backgroundColor: Colors.white,
                             child: Icon(
-                              Icons.lock,
+                              Icons.arrow_forward,
+                              color: Colors.blue,
                             ),
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return Perfil_Usuario();
+                              }));
+                            },
                           ),
-                          Expanded(
-                              child: TextField(
-                            decoration: InputDecoration(
-                              hintText: "Contraseña",
-                            ),
-                          ))
-                        ],
-                      ),
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ))
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAnimatedIconJump(
+      BuildContext context, IconData icon, String hintText) {
+    return Padding(
+      padding: const EdgeInsets.only(),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(right: 14),
+            child: AnimatedIconJump(
+              icon: icon,
+            ),
+          ),
+          Expanded(
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: hintText,
+              ),
+            ),
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class AnimatedIconJump extends StatefulWidget {
+  final IconData icon;
+
+  const AnimatedIconJump({Key? key, required this.icon}) : super(key: key);
+
+  @override
+  _AnimatedIconJumpState createState() => _AnimatedIconJumpState();
+}
+
+class _AnimatedIconJumpState extends State<AnimatedIconJump>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    );
+
+    _animation = Tween<double>(
+      begin: 0.0,
+      end: 10.0,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ),
+    )..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _controller.reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          _controller.forward();
+        }
+      });
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _animation,
+      builder: (context, child) {
+        return Transform.translate(
+          offset: Offset(0.0, -_animation.value),
+          child: child,
+        );
+      },
+      child: Icon(
+        widget.icon,
       ),
     );
   }

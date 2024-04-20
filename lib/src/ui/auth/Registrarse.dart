@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
 
-
 class Registro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -72,12 +71,12 @@ class Registro extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Row(
+                      const Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
                             padding:
-                                const EdgeInsets.only(bottom: 10, right: 16),
+                                EdgeInsets.only(bottom: 10, right: 16),
                             child: Icon(
                               Icons.lock,
                             ),
@@ -90,7 +89,7 @@ class Registro extends StatelessWidget {
                           )),
                         ],
                       ),
-                      Row(
+                      const Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
@@ -102,7 +101,7 @@ class Registro extends StatelessWidget {
                           ),
                           Expanded(
                               child: TextField(
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               hintText: "Confirmar Contraseña",
                             ),
                           )),
