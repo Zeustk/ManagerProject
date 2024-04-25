@@ -150,8 +150,10 @@ class Login extends StatelessWidget {
                                 onTap: () async {
                                  bool esCorrecta=await _controllerAuth.signInWithGoogle();
 
+                                 print(esCorrecta);
+
                                  if (esCorrecta){
-                                  Get.put(Perfil_Usuario());
+                                  Get.to(Perfil_Usuario());
                                  }
                                  else{
                                   Get.back();
@@ -160,7 +162,7 @@ class Login extends StatelessWidget {
                                 child: Container(
                                   height: 40,
                                   width: 40, // O cualquier otro tamaño deseado
-                                  child: Icon(
+                                  child: Icon( 
                                     FontAwesomeIcons.google,
                                     color: Colors.white, // Color del icono
                                   ),

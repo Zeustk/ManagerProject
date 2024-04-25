@@ -24,5 +24,6 @@ class AuthService {
       print("Error al iniciar sesión con Google: $error");
       return null;
     }
+    return null;
   }
 }

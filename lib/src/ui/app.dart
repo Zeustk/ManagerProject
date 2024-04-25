@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
 import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
 
 import 'package:manager_proyect/src/constante/constantes.dart';
@@ -14,6 +16,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Login Page',
       home: Principal(),
+      getPages: [
+  
+        GetPage(name: '/profile', page: () => Perfil_Usuario()),
+      ],
       theme: ThemeData(
           primaryColor: kPrimaryColor,
           brightness: Brightness.dark,
