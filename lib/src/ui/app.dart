@@ -3,7 +3,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
 
 import 'package:manager_proyect/src/constante/constantes.dart';
-import 'package:manager_proyect/src/ui/auth/LoginScreen.dart';
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
