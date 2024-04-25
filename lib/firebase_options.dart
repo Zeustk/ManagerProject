@@ -41,50 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAKxYUVCQ8dRRl0yHJ6swBEsWiOZs5uTzU',
-    appId: '1:304624250459:web:8386cfb6f8dd28af20997e',
-    messagingSenderId: '304624250459',
-    projectId: 'projectmanager-dd4d0',
-    authDomain: 'projectmanager-dd4d0.firebaseapp.com',
-    storageBucket: 'projectmanager-dd4d0.appspot.com',
-    measurementId: 'G-WFTMF781MD',
+    apiKey: 'AIzaSyBidGE6St_k7x_o0n_GbvpRzyVvlZzUFgA',
+    appId: '1:979147010184:web:b9390ffdf043a23b55af3d',
+    messagingSenderId: '979147010184',
+    projectId: 'projecmanajer',
+    authDomain: 'projecmanajer.firebaseapp.com',
+    storageBucket: 'projecmanajer.appspot.com',
+    measurementId: 'G-QNKJ7E6BHN',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBKCL7qSSB-M8ZmGQ-ITfv6de66yAHjaEM',
-    appId: '1:304624250459:android:8b419ec0469e40ab20997e',
-    messagingSenderId: '304624250459',
-    projectId: 'projectmanager-dd4d0',
-    storageBucket: 'projectmanager-dd4d0.appspot.com',
+    apiKey: 'AIzaSyC7z1fMJOyCyXuzz_kMzuoKqwcWsnYQz3U',
+    appId: '1:979147010184:android:55f8b03ae256c86255af3d',
+    messagingSenderId: '979147010184',
+    projectId: 'projecmanajer',
+    storageBucket: 'projecmanajer.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAFSafYeu9E7SoL8AQShUtkPnmPXziEoso',
-    appId: '1:304624250459:ios:7ae4d0b56c4efa0320997e',
-    messagingSenderId: '304624250459',
-    projectId: 'projectmanager-dd4d0',
-    storageBucket: 'projectmanager-dd4d0.appspot.com',
-    iosClientId: '304624250459-h9m7te1m5sa5i2ug3tvq15vsnk2akv7q.apps.googleusercontent.com',
+    apiKey: 'AIzaSyC4EOTtFDNleTr2P6pVJnLHH7ZUdXELMY4',
+    appId: '1:979147010184:ios:a4a25cd7d0c9b9aa55af3d',
+    messagingSenderId: '979147010184',
+    projectId: 'projecmanajer',
+    storageBucket: 'projecmanajer.appspot.com',
     iosBundleId: 'com.example.login',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAFSafYeu9E7SoL8AQShUtkPnmPXziEoso',
-    appId: '1:304624250459:ios:7ae4d0b56c4efa0320997e',
-    messagingSenderId: '304624250459',
-    projectId: 'projectmanager-dd4d0',
-    storageBucket: 'projectmanager-dd4d0.appspot.com',
-    iosClientId: '304624250459-h9m7te1m5sa5i2ug3tvq15vsnk2akv7q.apps.googleusercontent.com',
+    apiKey: 'AIzaSyC4EOTtFDNleTr2P6pVJnLHH7ZUdXELMY4',
+    appId: '1:979147010184:ios:a4a25cd7d0c9b9aa55af3d',
+    messagingSenderId: '979147010184',
+    projectId: 'projecmanajer',
+    storageBucket: 'projecmanajer.appspot.com',
     iosBundleId: 'com.example.login',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAKxYUVCQ8dRRl0yHJ6swBEsWiOZs5uTzU',
-    appId: '1:304624250459:web:47de123eb4fd898420997e',
-    messagingSenderId: '304624250459',
-    projectId: 'projectmanager-dd4d0',
-    authDomain: 'projectmanager-dd4d0.firebaseapp.com',
-    storageBucket: 'projectmanager-dd4d0.appspot.com',
-    measurementId: 'G-PZHL9FT7SC',
+    apiKey: 'AIzaSyBidGE6St_k7x_o0n_GbvpRzyVvlZzUFgA',
+    appId: '1:979147010184:web:be9bb1a8771e8fc555af3d',
+    messagingSenderId: '979147010184',
+    projectId: 'projecmanajer',
+    authDomain: 'projecmanajer.firebaseapp.com',
+    storageBucket: 'projecmanajer.appspot.com',
+    measurementId: 'G-XMTL5K1X6Q',
   );
+
 }

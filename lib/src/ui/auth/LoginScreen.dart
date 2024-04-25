@@ -43,7 +43,7 @@ class Login extends StatelessWidget {
                     image: DecorationImage(
                       image: AssetImage("assets/Login.png"),
                       fit: BoxFit.contain,
-                      alignment: Alignment.bottomLeft,
+                      alignment: Alignment.topCenter,
                     ),
                   ),
                 ),
@@ -106,49 +106,39 @@ class Login extends StatelessWidget {
                           "Contraseña",
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
                               width: 60, //
-                              child: MaterialButton(
-                                splashColor: Colors.transparent,
-                                height: 40,
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                              child: InkWell(
+                                onTap: () {
+                                  // Acción al presionar el botón
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 40, // O cualquier otro tamaño deseado
+                                  child: Icon(
+                                    FontAwesomeIcons.github,
+                                    color: Colors.white, // Color del icono
+                                  ),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      FontAwesomeIcons.github,
-                                      color: kSecondaryColor,
-                                    ),
-                                  ],
-                                ),
-                                onPressed: () {},
                               ),
                             ),
                             SizedBox(height: 70, width: 20),
                             SizedBox(
                               width: 60, //
-                              child: MaterialButton(
-                                splashColor: Colors.transparent,
-                                height: 40,
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                              child: InkWell(
+                                onTap: () {
+                                  // Acción al presionar el botón
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 40, // O cualquier otro tamaño deseado
+                                  child: Icon(
+                                    FontAwesomeIcons.facebook,
+                                    color: Colors.white, // Color del icono
+                                  ),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      FontAwesomeIcons.facebook,
-                                      color: kSecondaryColor,
-                                    ),
-                                  ],
-                                ),
-                                onPressed: () {},
                               ),
                             ),
                             SizedBox(
@@ -156,13 +146,19 @@ class Login extends StatelessWidget {
                             ),
                             SizedBox(
                               width: 60, //
-                              child: MaterialButton(
-                                splashColor: Colors.transparent,
-                                height: 40,
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                              child: InkWell(
+                                onTap: () {
+                                  // Acción al presionar el botón
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 40, // O cualquier otro tamaño deseado
+                                  child: Icon(
+                                    FontAwesomeIcons.google,
+                                    color: Colors.white, // Color del icono
+                                  ),
                                 ),
+<<<<<<< HEAD
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -173,6 +169,8 @@ class Login extends StatelessWidget {
                                 onPressed: () {
                                    _authController.signInWithGoogle();
                                 },
+=======
+>>>>>>> 2c1196bb56f391f26d6493af57eed0a65a394c9a
                               ),
                             )
                           ],
