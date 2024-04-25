@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
-import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
+
 import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
 import 'package:manager_proyect/src/ui/auth/Registrarse.dart';
 
@@ -40,7 +40,7 @@ class Login extends StatelessWidget {
                     image: DecorationImage(
                       image: AssetImage("assets/Login.png"),
                       fit: BoxFit.contain,
-                      alignment: Alignment.bottomLeft,
+                      alignment: Alignment.topCenter,
                     ),
                   ),
                 ),
@@ -103,49 +103,39 @@ class Login extends StatelessWidget {
                           "Contraseña",
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
                               width: 60, //
-                              child: MaterialButton(
-                                splashColor: Colors.transparent,
-                                height: 40,
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                              child: InkWell(
+                                onTap: () {
+                                  // Acción al presionar el botón
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 40, // O cualquier otro tamaño deseado
+                                  child: Icon(
+                                    FontAwesomeIcons.github,
+                                    color: Colors.white, // Color del icono
+                                  ),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      FontAwesomeIcons.github,
-                                      color: kSecondaryColor,
-                                    ),
-                                  ],
-                                ),
-                                onPressed: () {},
                               ),
                             ),
                             SizedBox(height: 70, width: 20),
                             SizedBox(
                               width: 60, //
-                              child: MaterialButton(
-                                splashColor: Colors.transparent,
-                                height: 40,
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                              child: InkWell(
+                                onTap: () {
+                                  // Acción al presionar el botón
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 40, // O cualquier otro tamaño deseado
+                                  child: Icon(
+                                    FontAwesomeIcons.facebook,
+                                    color: Colors.white, // Color del icono
+                                  ),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      FontAwesomeIcons.facebook,
-                                      color: kSecondaryColor,
-                                    ),
-                                  ],
-                                ),
-                                onPressed: () {},
                               ),
                             ),
                             SizedBox(
@@ -153,21 +143,18 @@ class Login extends StatelessWidget {
                             ),
                             SizedBox(
                               width: 60, //
-                              child: MaterialButton(
-                                splashColor: Colors.transparent,
-                                height: 40,
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                              child: InkWell(
+                                onTap: () {
+                                  // Acción al presionar el botón
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 40, // O cualquier otro tamaño deseado
+                                  child: Icon(
+                                    FontAwesomeIcons.google,
+                                    color: Colors.white, // Color del icono
+                                  ),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(FontAwesomeIcons.google,
-                                        color: kSecondaryColor),
-                                  ],
-                                ),
-                                onPressed: () {},
                               ),
                             )
                           ],
