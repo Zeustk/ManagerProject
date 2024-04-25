@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
@@ -95,14 +96,84 @@ class Login extends StatelessWidget {
                           Icons.alternate_email,
                           "Correo Electrónico",
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 10),
                         _buildAnimatedIconJump(
                           context,
                           Icons.lock,
                           "Contraseña",
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: 60, //
+                              child: MaterialButton(
+                                splashColor: Colors.transparent,
+                                height: 40,
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      FontAwesomeIcons.github,
+                                      color: kSecondaryColor,
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () {},
+                              ),
+                            ),
+                            SizedBox(height: 70, width: 20),
+                            SizedBox(
+                              width: 60, //
+                              child: MaterialButton(
+                                splashColor: Colors.transparent,
+                                height: 40,
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      FontAwesomeIcons.facebook,
+                                      color: kSecondaryColor,
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () {},
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            SizedBox(
+                              width: 60, //
+                              child: MaterialButton(
+                                splashColor: Colors.transparent,
+                                height: 40,
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(FontAwesomeIcons.google,
+                                        color: kSecondaryColor),
+                                  ],
+                                ),
+                                onPressed: () {},
+                              ),
+                            )
+                          ],
+                        ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 270, top: 50),
+                          padding: const EdgeInsets.only(left: 270),
                           child: FloatingActionButton(
                             backgroundColor: Colors.white,
                             child: Icon(
