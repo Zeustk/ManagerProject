@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
-import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
 import 'package:manager_proyect/src/ui/auth/Registrarse.dart';
 
 class Login extends StatelessWidget {
-  
-  final AuthController _authController = Get.find();
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,19 +154,6 @@ class Login extends StatelessWidget {
                                     color: Colors.white, // Color del icono
                                   ),
                                 ),
-<<<<<<< HEAD
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(FontAwesomeIcons.google,
-                                        color: kSecondaryColor),
-                                  ],
-                                ),
-                                onPressed: () {
-                                   _authController.signInWithGoogle();
-                                },
-=======
->>>>>>> 2c1196bb56f391f26d6493af57eed0a65a394c9a
                               ),
                             )
                           ],
