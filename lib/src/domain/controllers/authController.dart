@@ -17,7 +17,7 @@ class AuthController extends GetxController {
       }
     } catch (error) {
       // Manejar errores, como mostrar un mensaje al usuario.
-      print("Error al iniciar sesión con Google: $error");
+      print("Error al iniciar sesión con Googles: $error");
       return false;
     }
   }
