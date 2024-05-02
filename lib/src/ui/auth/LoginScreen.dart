@@ -7,7 +7,6 @@ import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
 import 'package:manager_proyect/src/ui/auth/Registrarse.dart';
 
 class Login extends StatelessWidget {
-
   final AuthController _controllerAuth = Get.find();
 
   @override
@@ -112,7 +111,7 @@ class Login extends StatelessWidget {
                               width: 60, //
                               child: InkWell(
                                 onTap: () {
-                                  // Acción al presionar el botón
+                                  Autenticar('GITHUB');
                                 },
                                 child: Container(
                                   height: 40,
@@ -147,24 +146,17 @@ class Login extends StatelessWidget {
                             SizedBox(
                               width: 60, //
                               child: InkWell(
-                                onTap: () async {
-                                 bool esCorrecta=await _controllerAuth.signInWithGoogle();
+                                onTap: () {
+                                  Autenticar('GOOGLE');
 
-                                 print(esCorrecta);
-
-                                 if (esCorrecta){
-                                 Get.to(Perfil_Usuario());
-                                 }
-                               
                                 },
                                 child: Container(
                                   height: 40,
                                   width: 40, // O cualquier otro tamaño deseado
-                                  child: Icon( 
+                                  child: Icon(
                                     FontAwesomeIcons.google,
                                     color: Colors.white, // Color del icono
                                   ),
-                                  
                                 ),
                               ),
                             )
@@ -196,6 +188,23 @@ class Login extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void Autenticar(String auntenticacion) async {
+    bool esCorrecta = false;
+
+    switch (auntenticacion.toUpperCase()) {
+      case "GOOGLE":
+        esCorrecta = await _controllerAuth.signIn('GOOGLE');
+      case "GITHUB":
+        esCorrecta = await _controllerAuth.signIn('GITHUB');
+    }
+
+    print(esCorrecta);
+
+    if (esCorrecta) {
+      Get.to(Perfil_Usuario());
+    }
   }
 
   Widget _buildAnimatedIconJump(

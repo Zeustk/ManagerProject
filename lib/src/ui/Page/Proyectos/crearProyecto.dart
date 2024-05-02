@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
+import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
 
@@ -42,8 +44,12 @@ class Labels extends StatefulWidget {
 }
 
 class _LabelsState extends State<Labels> {
-  TextEditingController _controller = TextEditingController();
-  TextEditingController _controller2 = TextEditingController();
+  TextEditingController _controllerFechaInicio = TextEditingController();
+  TextEditingController __controllerFechaFinalizacion = TextEditingController();
+  TextEditingController __controllerNombre = TextEditingController();
+
+  ProyectoController gestionProyectos = ProyectoController();
+
   TextStyle selecionarColor = TextStyle(color: Colors.black);
   @override
   Widget build(BuildContext context) {
@@ -61,6 +67,7 @@ class _LabelsState extends State<Labels> {
                   controller: _controller,
                   autofocus: true, */
                 style: TextStyle(color: Colors.black),
+                controller: __controllerNombre,
                 decoration: InputDecoration(
                     labelText: 'Nombre',
                     fillColor: Colors.white,
@@ -79,7 +86,7 @@ class _LabelsState extends State<Labels> {
               padding: EdgeInsets.only(left: 30, right: 30),
               child: TextField(
                 style: TextStyle(color: Colors.black),
-                controller: _controller,
+                controller: _controllerFechaInicio,
                 decoration: InputDecoration(
                     labelText: 'Fecha De Inicio',
                     filled: true,
@@ -101,7 +108,7 @@ class _LabelsState extends State<Labels> {
               padding: EdgeInsets.only(top: 30, left: 30, right: 30),
               child: TextField(
                 style: TextStyle(color: Colors.black),
-                controller: _controller2,
+                controller: __controllerFechaFinalizacion,
                 decoration: InputDecoration(
                     labelText: 'Fecha Fin',
                     filled: true,
@@ -148,9 +155,20 @@ class _LabelsState extends State<Labels> {
             ),
             CupertinoButton(
               onPressed: () {
+                ProyectoModel proyecto = ProyectoModel(
+                    fechaFinalizacion:
+                        DateTime.parse(__controllerFechaFinalizacion.text),
+                    fechaInicio: DateTime.parse(_controllerFechaInicio.text),
+                    liderProyecto: "JESUS",
+                    nombre: __controllerNombre.text);
+                gestionProyectos.registrarProyecto(proyecto).then((resultado) {
+                  print('El resultado de registrar el proyecto es: $resultado');
+                }).catchError((error) {
+                  print('Ocurrió un error al registrar el proyecto: $error');
+                });
                 Get.snackbar(
                   'Proyecto Creado',
-                  'Proyecto Creado Satisfactoriamente',
+                  'Proyecto Creado Exitosamente',
                   backgroundColor: Colors.white,
                   colorText: Colors.black,
                   onTap: (snack) {
@@ -175,7 +193,7 @@ class _LabelsState extends State<Labels> {
 
     if (_fecha != null) {
       setState(() {
-        _controller.text = _fecha.toString().split(" ")[0];
+        _controllerFechaInicio.text = _fecha.toString().split(" ")[0];
       });
     }
   }
@@ -186,7 +204,7 @@ class _LabelsState extends State<Labels> {
 
     if (_fecha != null) {
       setState(() {
-        _controller2.text = _fecha.toString().split(" ")[0];
+        __controllerFechaFinalizacion.text = _fecha.toString().split(" ")[0];
       });
     }
   }

@@ -1,13 +1,21 @@
 import 'package:get/get.dart';
-import 'package:manager_proyect/src/data/services/authService.dart';
+import 'package:manager_proyect/src/data/providers/auth_Provider.dart';
 
 
 class AuthController extends GetxController {
   final AuthService _authService = AuthService();
 
-  Future<bool> signInWithGoogle() async {
+  Future<bool> signIn(String Autenticacion) async {
     try {
-      final user = await _authService.signInWithGoogle();
+
+      late final user;
+
+      switch(Autenticacion.toUpperCase()){
+        case "GOOGLE": user = await _authService.signInWithGoogle();break;
+        case "GITHUB": user= await _authService.signInWithGitHub();break;
+      
+      }
+
       if (user != null) {
         // El usuario ha iniciado sesión exitosamente, puedes redirigir a otra pantalla o realizar otras acciones necesarias.
         return true;
@@ -21,4 +29,10 @@ class AuthController extends GetxController {
       return false;
     }
   }
+
+
+  
+
+  // Método para manejar la autenticación con GitHub
+  
 }
