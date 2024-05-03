@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
+import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
@@ -12,16 +14,38 @@ import 'package:manager_proyect/src/widgets/PaddingProyecto.dart';
 
 import '../../../widgets/Drawer.dart';
 
-class Ver_Proyectos extends StatelessWidget {
-  const Ver_Proyectos({super.key});
+class Ver_Proyectos extends StatefulWidget {
+  Ver_Proyectos({Key? key}) : super(key: key);
+
+  @override
+  _Ver_ProyectosState createState() => _Ver_ProyectosState();
+}
+
+class _Ver_ProyectosState extends State<Ver_Proyectos> {
+  final ProyectoController gestionProyectos = ProyectoController();
+  List<ProyectoModel> proyectos = [];
+
+  @override
+  void initState() {
+    super.initState();
+    cargarProyectos();
+  }
+
+  Future<void> cargarProyectos() async {
+    try {
+      List<ProyectoModel> proyectosList =
+          await gestionProyectos.consultarProyectos();
+      setState(() {
+        proyectos = proyectosList;
+      });
+    } catch (error) {
+      // Manejar el error de la consulta de proyectos
+      print('Error al cargar proyectos: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    var textoDeApBard = Get.arguments;
-
-    if (textoDeApBard==null){
-      textoDeApBard='Mis Proyectos';
-    }
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
       appBar: AppBar(
@@ -52,81 +76,78 @@ class Ver_Proyectos extends StatelessWidget {
       ),
       drawer: SafeArea(child: Draweer()),
       body: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Container(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 4, left: 2),
-                    child: Boton_next(texto: 'Todos'),
+        child: Center(
+          child: Container(
+            width: 300, // Ancho fijo del contenedor
+            padding: const EdgeInsets.symmetric(vertical: 20), // Espacio vertical adicional
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // Aquí mostramos los proyectos dinámicamente
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 4, left: 2),
+                        child: Boton_next(texto: 'Todos'),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 4),
+                        child: Boton_next(texto: 'Proceso'),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 0),
+                        child: Boton_next(texto: 'Completados'),
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 4),
-                    child: Boton_next(texto: 'Proceso'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 0),
-                    child: Boton_next(texto: 'Completados'),
-                  ),
-                ],
-              ),
-              GestureDetector(
-                onTap: () {
-
-                   print(textoDeApBard[0]);
-                   
-                  if (textoDeApBard[0]=='M'){
-                     Get.to(DetalleProyectoPage());
-                  }
-                  else{
-                    Get.to(Ver_Tareas());
-                  }
-                },
-                child: const Column(
-                  children: [
-                    Progresos_Proyectos(
-                      porcentaje: 1.0,
-                      color: Colors.green,
-                      texto: 'Completado',
-                    ),
-
-                    Progresos_Proyectos(
-                      porcentaje: 0.10,
-                      color: Colors.orange,
-                      texto: 'En Proceso',
-                    ),
-                    Progresos_Proyectos(
-                      porcentaje: 0.0,
-                      color: Colors.red,
-                      texto: 'No iniciado',
-                    ),
-                    // Los demás proyectos
-                  ],
                 ),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 200),
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        Colors.white, // Cambia esto al color que desees
-                  ),
-                  label: Text(
-                    'Atras',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  icon: Icon(Icons.arrow_back, color: Colors.black),
-                  onPressed: () {
-                    Get.to(Crear_proyectos());
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: proyectos.length,
+                  itemBuilder: (context, index) {
+                    final proyecto = proyectos[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          print('Tapped on project: ${proyecto.nombre}');
+                        },
+                        child: Container(
+                          height: 150,
+                          child: Progresos_Proyectos(
+                            porcentaje: 0.50,
+                            color: Colors.blue,
+                            texto: 'En proceso',
+                            nombre_proyecto: proyecto.nombre,
+                            descripcion: proyecto.descripcion,
+                          ),
+                        ),
+                      ),
+                    );
                   },
                 ),
-              )
-            ],
+                SizedBox(height: 40),
+                Padding(
+                  padding: const EdgeInsets.only(right: 200),
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                    ),
+                    label: Text(
+                      'Atras',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    icon: Icon(Icons.arrow_back, color: Colors.black),
+                    onPressed: () {
+                      Get.to(Crear_proyectos());
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

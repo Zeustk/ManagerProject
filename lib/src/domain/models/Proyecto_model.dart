@@ -14,6 +14,7 @@ class ProyectoModel {
     String nombre;
     DateTime fechaInicio;
     DateTime fechaFinalizacion;
+    String descripcion;
 
     
 
@@ -23,6 +24,7 @@ class ProyectoModel {
         required this.nombre,
         required this.fechaInicio,
         required this.fechaFinalizacion,
+        required this.descripcion,
     });
 
     factory ProyectoModel.fromJson(Map<String, dynamic> json) => ProyectoModel(
@@ -31,6 +33,7 @@ class ProyectoModel {
         nombre: json["Nombre"],
         fechaInicio: DateTime.parse(json["Fecha_Inicio"]),
         fechaFinalizacion: DateTime.parse(json["Fecha_Finalizacion"]),
+        descripcion: json["Descripcion"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -39,11 +42,12 @@ class ProyectoModel {
         "Nombre": nombre,
         "Fecha_Inicio": "${fechaInicio.year.toString().padLeft(4, '0')}-${fechaInicio.month.toString().padLeft(2, '0')}-${fechaInicio.day.toString().padLeft(2, '0')}",
         "Fecha_Finalizacion": "${fechaFinalizacion.year.toString().padLeft(4, '0')}-${fechaFinalizacion.month.toString().padLeft(2, '0')}-${fechaFinalizacion.day.toString().padLeft(2, '0')}",
+        "Descripcion": descripcion,
     };
 
      @override
   String toString() {
-    return 'ProyectoModel{idProyecto: $idProyecto, liderProyecto: $liderProyecto, nombre: $nombre, fechaInicio: $fechaInicio, fechaFinalizacion: $fechaFinalizacion}';
+    return 'ProyectoModel{idProyecto: $idProyecto, liderProyecto: $liderProyecto, nombre: $nombre, fechaInicio: $fechaInicio, fechaFinalizacion: $fechaFinalizacion, descripcion: $descripcion}';
   }
 
 

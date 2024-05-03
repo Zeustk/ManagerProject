@@ -47,6 +47,7 @@ class _LabelsState extends State<Labels> {
   TextEditingController _controllerFechaInicio = TextEditingController();
   TextEditingController __controllerFechaFinalizacion = TextEditingController();
   TextEditingController __controllerNombre = TextEditingController();
+  TextEditingController __controllerDescripcion = TextEditingController();
 
   ProyectoController gestionProyectos = ProyectoController();
 
@@ -126,6 +127,26 @@ class _LabelsState extends State<Labels> {
                 },
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: TextField(
+                
+                style: TextStyle(color: Colors.black),
+                controller: __controllerDescripcion,
+                decoration: InputDecoration(
+                    labelText: 'Descripcion',
+                    fillColor: Colors.white,
+                    filled: true,
+                    prefixIcon: Icon(
+                      Icons.description,
+                      color: kSecondaryColor,
+                    ),
+                    labelStyle: TextStyle(color: Colors.black),
+                    border: UnderlineInputBorder(
+                      borderRadius: BorderRadius.circular(40),
+                    )),
+              ),
+            ),
             SizedBox(height: 25),
             Divider(color: Colors.grey),
             Text(
@@ -156,16 +177,25 @@ class _LabelsState extends State<Labels> {
             CupertinoButton(
               onPressed: () {
                 ProyectoModel proyecto = ProyectoModel(
-                    fechaFinalizacion:
-                        DateTime.parse(__controllerFechaFinalizacion.text),
+
+                    fechaFinalizacion: DateTime.parse(__controllerFechaFinalizacion.text),
                     fechaInicio: DateTime.parse(_controllerFechaInicio.text),
                     liderProyecto: "JESUS",
-                    nombre: __controllerNombre.text);
+                    nombre: __controllerNombre.text,
+                    descripcion: __controllerDescripcion.text,
+
+                    );
+
                 gestionProyectos.registrarProyecto(proyecto).then((resultado) {
+
                   print('El resultado de registrar el proyecto es: $resultado');
+
                 }).catchError((error) {
+
                   print('Ocurrió un error al registrar el proyecto: $error');
+
                 });
+
                 Get.snackbar(
                   'Proyecto Creado',
                   'Proyecto Creado Exitosamente',

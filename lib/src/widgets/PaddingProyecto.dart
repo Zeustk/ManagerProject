@@ -5,11 +5,17 @@ class Progresos_Proyectos extends StatelessWidget {
   final double porcentaje;
   final Color color;
   final String texto;
+  final String nombre_proyecto;
+  final String descripcion;
+
   const Progresos_Proyectos(
       {super.key,
       required this.porcentaje,
       required this.color,
-      required this.texto});
+      required this.texto,
+      required this.nombre_proyecto,
+      required this.descripcion,
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +47,7 @@ class Progresos_Proyectos extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 140),
                   child: Text(
-                    'Nombre del Proyecto',
+                    '${nombre_proyecto}',
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.w500),
                   ),
@@ -50,7 +56,7 @@ class Progresos_Proyectos extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 200),
                   child: Text(
-                    'Descripción',
+                    '$descripcion',
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.w500),
                   ),

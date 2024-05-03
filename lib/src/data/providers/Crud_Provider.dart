@@ -5,7 +5,7 @@ import 'package:manager_proyect/src/environment/environment.dart';
 class CrudProvider<T> {
   final String baseUrl = Environment.baseUrl;
 
-  Future<String> agregar(Map<String, dynamic> body, String endpoint) async {
+  Future<String> agregar(T body, String endpoint) async {
     try {
       final url = '$baseUrl/$endpoint';
 
@@ -25,12 +25,16 @@ class CrudProvider<T> {
     }
   }
 
-  Future<List<T>> consultar(String endpoint) async {
+  Future<List<Map<String,dynamic>>> consultar(String endpoint) async {
     final url = '$baseUrl/$endpoint';
     final response = await http.get(Uri.parse(url));
+
     if (response.statusCode == 200) {
-      Iterable jsonResponse = jsonDecode(response.body);
-      return jsonResponse.map((item) => item as T).toList();
+
+    final dynamic decodedData = jsonDecode(response.body);
+    List<Map<String, dynamic>> dataList = List<Map<String, dynamic>>.from(decodedData);
+
+     return dataList;
     } else {
       throw Exception('Error al consultar datos');
     }
