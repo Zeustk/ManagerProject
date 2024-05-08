@@ -11,7 +11,7 @@ class ProyectosProvider extends CrudProvider<ProyectoModel>{
 
   Future<String> registrarProyecto(ProyectoModel proyectoRecibido) async {
   try {
-    _proyectosMemoriaActualizado = false;
+    //_proyectosMemoriaActualizado = false;
     return await agregar(proyectoRecibido, 'addProyecto');
   } catch (error) {
     // Manejar el error al registrar el proyecto
