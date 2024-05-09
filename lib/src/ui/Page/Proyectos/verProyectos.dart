@@ -33,7 +33,8 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
 
   Future<void> cargarProyectos() async {
     try {
-      List<ProyectoModel> proyectosList =await gestionProyectos.consultarProyectos();
+      List<ProyectoModel> proyectosList =
+          await gestionProyectos.consultarProyectos();
       setState(() {
         proyectos = proyectosList;
       });
@@ -78,8 +79,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
         child: Center(
           child: Container(
             width: 300, // Ancho fijo del contenedor
-            padding: const EdgeInsets.symmetric(
-                vertical: 20), // Espacio vertical adicional
+            padding: const EdgeInsets.symmetric(vertical: 20), // Espacio vertical adicional
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [

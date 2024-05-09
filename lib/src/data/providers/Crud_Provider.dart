@@ -9,6 +9,8 @@ class CrudProvider<T> {
     try {
       final url = '$baseUrl/$endpoint';
 
+            print(url);
+            print(jsonEncode(body));
       final response = await http.post(
         Uri.parse(url),
         headers: {'Content-Type': 'application/json'}, 

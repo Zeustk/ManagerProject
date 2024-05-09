@@ -11,11 +11,11 @@ class ProyectosProvider extends CrudProvider<ProyectoModel>{
 
   Future<String> registrarProyecto(ProyectoModel proyectoRecibido) async {
   try {
-    _proyectosMemoriaActualizado = false;
+    //_proyectosMemoriaActualizado = false;
     return await agregar(proyectoRecibido, 'addProyecto');
   } catch (error) {
-    
-    
+    // Manejar el error al registrar el proyecto
+    print('Error al registrar el proyecto: $error');
     return 'Error al registrar el proyecto';
   }
 }
