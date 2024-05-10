@@ -109,20 +109,24 @@ class Registro extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 270),
-                        child: FloatingActionButton(
-                          
-                          backgroundColor: Colors.white,
-                          child: Icon(
-                            
-                            Icons.arrow_forward,
-                            color: Colors.blue,
-                          ),
-                          onPressed: () {
-                            Navigator.push(context,
+                        child: Tooltip(
+                          message:
+                              'Registrarse', // Texto que se mostrará al mantener presionado el botón
+                          child: FloatingActionButton(
+                            backgroundColor: Colors.white,
+                            child: Icon(
+                              Icons.arrow_forward,
+                              color: Colors.blue,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
                                 MaterialPageRoute(builder: (context) {
-                              return Perfil_Usuario();
-                            }));
-                          },
+                                  return Perfil_Usuario();
+                                }),
+                              );
+                            },
+                          ),
                         ),
                       )
                     ],
