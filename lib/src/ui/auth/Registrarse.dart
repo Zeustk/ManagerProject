@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
-import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
+import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
+import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 
 class Registro extends StatelessWidget {
+  UsuariosController GestionUsuarios = UsuariosController();
+
+  TextEditingController _controllerCorreo = TextEditingController();
+  TextEditingController __controllerClave = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,6 +74,7 @@ class Registro extends StatelessWidget {
                                 child: TextField(
                               decoration: InputDecoration(
                                   hintText: "Correo Electronico"),
+                              controller: _controllerCorreo,
                             ))
                           ],
                         ),
@@ -110,18 +117,27 @@ class Registro extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 270),
                         child: FloatingActionButton(
-                          
                           backgroundColor: Colors.white,
                           child: Icon(
-                            
                             Icons.arrow_forward,
                             color: Colors.blue,
                           ),
                           onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return Perfil_Usuario();
-                            }));
+                            UsuarioModel usuario = UsuarioModel(
+                                idUsuario: 0,
+                                email: _controllerCorreo.text,
+                                clave: __controllerClave.text,
+                                idRol: 0);
+
+                            GestionUsuarios
+                                .registrarUsuarios(usuario)
+                                .then((resultado) {
+                              print(
+                                  'El resultado de registrar el proyecto es: $resultado');
+                            }).catchError((error) {
+                              print(
+                                  'Ocurrió un error al registrar el proyecto: $error');
+                            });
                           },
                         ),
                       )
