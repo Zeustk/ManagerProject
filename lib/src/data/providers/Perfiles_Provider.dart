@@ -27,7 +27,7 @@ class PerfilesProvider extends CrudProvider<PerfilesModel>{
 
   Future<String> actualizarPerfiles(PerfilesModel perfilRecibido) async {
   try {
-    return await actualizar(perfilRecibido, 'UpdateUsuarios');
+    return await actualizar(perfilRecibido, 'UpdatePerfiles');
   } catch (error) {
     
     
@@ -41,7 +41,7 @@ Future<String> eliminarPerfiles(int id) async {
   } catch (error) {
     
     
-    return 'Error al eliminar los Usuarios';
+    return 'Error al eliminar los Perfiles';
   }
 }
 }

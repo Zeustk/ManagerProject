@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
 
 class Registro extends StatelessWidget {
   @override
@@ -75,8 +76,7 @@ class Registro extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
-                            padding:
-                                EdgeInsets.only(bottom: 10, right: 16),
+                            padding: EdgeInsets.only(bottom: 10, right: 16),
                             child: Icon(
                               Icons.lock,
                             ),
@@ -107,14 +107,22 @@ class Registro extends StatelessWidget {
                           )),
                         ],
                       ),
-                      Container(
-                        margin: EdgeInsets.only(left: 280, top: 20),
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.white),
-                        child: Icon(
-                          Icons.arrow_forward,
-                          color: Colors.black,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 270),
+                        child: FloatingActionButton(
+                          
+                          backgroundColor: Colors.white,
+                          child: Icon(
+                            
+                            Icons.arrow_forward,
+                            color: Colors.blue,
+                          ),
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return Perfil_Usuario();
+                            }));
+                          },
                         ),
                       )
                     ],
