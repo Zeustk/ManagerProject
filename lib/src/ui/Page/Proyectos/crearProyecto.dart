@@ -184,7 +184,7 @@ class _LabelsState extends State<Labels> {
                     nombre: __controllerNombre.text,
                     descripcion: __controllerDescripcion.text,
 
-                    );
+                  );
 
                 gestionProyectos.registrarProyecto(proyecto).then((resultado) {
 
