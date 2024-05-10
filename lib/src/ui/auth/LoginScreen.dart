@@ -34,7 +34,6 @@ class Login extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                flex: 1,
                 child: Container(
                   width: double.infinity,
                   height: double.infinity,
@@ -42,13 +41,13 @@ class Login extends StatelessWidget {
                     image: DecorationImage(
                       image: AssetImage("assets/Login.png"),
                       fit: BoxFit.contain,
-                      alignment: Alignment.topCenter,
+                      alignment: Alignment.center,
                     ),
                   ),
                 ),
               ),
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15),
@@ -66,7 +65,7 @@ class Login extends StatelessWidget {
                                 Get.to(Registro());
                               },
                               child: Container(
-                                margin: EdgeInsets.only(left: 70, top: 70),
+                                margin: EdgeInsets.only(left: 40, top: 160),
                                 padding: EdgeInsets.only(left: 3, top: 3),
                                 height: 42,
                                 width: 90,
@@ -148,7 +147,6 @@ class Login extends StatelessWidget {
                               child: InkWell(
                                 onTap: () {
                                   Autenticar('GOOGLE');
-
                                 },
                                 child: Container(
                                   height: 40,
@@ -163,13 +161,29 @@ class Login extends StatelessWidget {
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 270),
-                          child: FloatingActionButton(
-                            backgroundColor: Colors.white,
-                            child: Icon(
-                              Icons.arrow_forward,
-                              color: Colors.blue,
-                            ),
+                          padding: const EdgeInsets.only(
+                              left: 110, top: 20, right: 90),
+                          child: MaterialButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                            height: 40,
+                            color: Colors.white,
+                            child: Row(children: [
+                              Text(
+                                'Iniciar Sesion',
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: 15,
+                                    fontFamily: AutofillHints.addressCity),
+                              ),
+                              SizedBox(
+                                width: 6,
+                              ),
+                              Icon(
+                                Icons.arrow_forward,
+                                color: Colors.blue,
+                              ),
+                            ]),
                             onPressed: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {

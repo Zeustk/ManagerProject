@@ -78,8 +78,9 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            width: 300, // Ancho fijo del contenedor
-            padding: const EdgeInsets.symmetric(vertical: 20), // Espacio vertical adicional
+            width: double.infinity, // Ancho fijo del contenedor
+            padding: const EdgeInsets.symmetric(
+                vertical: 40), // Espacio vertical adicional
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -89,7 +90,9 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                   child: Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 4, left: 2),
+                        padding: const EdgeInsets.only(
+                          right: 4,
+                        ),
                         child: Boton_next(texto: 'Todos'),
                       ),
                       Padding(
@@ -129,7 +132,6 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                     );
                   },
                 ),
-                SizedBox(height: 40),
                 Padding(
                   padding: const EdgeInsets.only(right: 200),
                   child: ElevatedButton.icon(

@@ -115,13 +115,29 @@ class Registro extends StatelessWidget {
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 270),
-                        child: FloatingActionButton(
-                          backgroundColor: Colors.white,
-                          child: Icon(
-                            Icons.arrow_forward,
-                            color: Colors.blue,
-                          ),
+                        padding: const EdgeInsets.only(
+                            left: 100, top: 40, right: 110),
+                        child: MaterialButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                          height: 40,
+                          color: Colors.white,
+                          child: Row(children: [
+                            Text(
+                              'Registrarse',
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 15,
+                                  fontFamily: AutofillHints.addressCity),
+                            ),
+                            SizedBox(
+                              width: 6,
+                            ),
+                            Icon(
+                              Icons.arrow_forward,
+                              color: Colors.blue,
+                            ),
+                          ]),
                           onPressed: () {
                             UsuarioModel usuario = UsuarioModel(
                                 idUsuario: 0,
@@ -129,8 +145,7 @@ class Registro extends StatelessWidget {
                                 clave: __controllerClave.text,
                                 idRol: 0);
 
-                            GestionUsuarios
-                                .registrarUsuarios(usuario)
+                            GestionUsuarios.registrarUsuarios(usuario)
                                 .then((resultado) {
                               print(
                                   'El resultado de registrar el proyecto es: $resultado');
