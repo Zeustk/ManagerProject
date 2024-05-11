@@ -141,11 +141,11 @@ class Registro extends StatelessWidget {
                           ]),
                           onPressed: () {
                             UsuarioModel usuario = UsuarioModel(
-                              idUsuario: 2,
-                              email: _controllerCorreo.text,
-                              clave: __controllerClave.text,
-                              idRol: null,
-                            );
+                                idUsuario: 0,
+                                email: _controllerCorreo.text,
+                                clave: __controllerClave.text,
+                                idRol: null,
+                                );
 
                             gestionUsuarios
                                 .registrarUsuarios(usuario)
