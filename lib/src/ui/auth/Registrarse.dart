@@ -146,7 +146,8 @@ class Registro extends StatelessWidget {
                                 idUsuario: 0,
                                 email: _controllerCorreo.text,
                                 clave: __controllerClave.text,
-                                idRol: 0);
+                                idRol: null,
+                                );
 
                             GestionUsuarios.registrarUsuarios(usuario)
                                 .then((resultado) {

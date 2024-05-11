@@ -2,7 +2,6 @@
 //
 //     final mensajesresponse = mensajesresponseFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 UsuarioModel mensajesresponseFromJson(String str) =>
@@ -15,7 +14,7 @@ class UsuarioModel {
   int idUsuario;
   String email;
   String clave;
-  int idRol;
+  int?  idRol;
 
   UsuarioModel({
     required this.idUsuario,
