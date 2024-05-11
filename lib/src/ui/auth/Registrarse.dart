@@ -79,7 +79,7 @@ class Registro extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const Row(
+                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
@@ -93,7 +93,9 @@ class Registro extends StatelessWidget {
                             decoration: InputDecoration(
                               hintText: "Contraseña",
                             ),
-                          )),
+                            controller: __controllerClave,
+                          )
+                          ),
                         ],
                       ),
                        Row(
@@ -111,7 +113,7 @@ class Registro extends StatelessWidget {
                             decoration: InputDecoration(
                               hintText: "Confirmar Contraseña",
                             ),
-                            controller: __controllerClave,
+                            
                           )),
                         ],
                       ),
