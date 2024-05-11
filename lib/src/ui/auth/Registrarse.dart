@@ -4,7 +4,7 @@ import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 
 class Registro extends StatelessWidget {
-  UsuariosController GestionUsuarios = UsuariosController();
+  UsuariosController gestionUsuarios = UsuariosController();
 
   TextEditingController _controllerCorreo = TextEditingController();
   TextEditingController __controllerClave = TextEditingController();
@@ -79,7 +79,7 @@ class Registro extends StatelessWidget {
                           ],
                         ),
                       ),
-                       Row(
+                      Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
@@ -94,11 +94,10 @@ class Registro extends StatelessWidget {
                               hintText: "Contraseña",
                             ),
                             controller: __controllerClave,
-                          )
-                          ),
+                          )),
                         ],
                       ),
-                       Row(
+                      Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
@@ -113,7 +112,6 @@ class Registro extends StatelessWidget {
                             decoration: InputDecoration(
                               hintText: "Confirmar Contraseña",
                             ),
-                            
                           )),
                         ],
                       ),
@@ -143,18 +141,20 @@ class Registro extends StatelessWidget {
                           ]),
                           onPressed: () {
                             UsuarioModel usuario = UsuarioModel(
-                                idUsuario: 0,
-                                email: _controllerCorreo.text,
-                                clave: __controllerClave.text,
-                                idRol: 0);
+                              idUsuario: 2,
+                              email: _controllerCorreo.text,
+                              clave: __controllerClave.text,
+                              idRol: null,
+                            );
 
-                            GestionUsuarios.registrarUsuarios(usuario)
+                            gestionUsuarios
+                                .registrarUsuarios(usuario)
                                 .then((resultado) {
                               print(
-                                  'El resultado de registrar el proyecto es: $resultado');
+                                  'El resultado de registrar el usuario es: $resultado');
                             }).catchError((error) {
                               print(
-                                  'Ocurrió un error al registrar el proyecto: $error');
+                                  'Ocurrió un error al registrar el usuarios: $error');
                             });
                           },
                         ),

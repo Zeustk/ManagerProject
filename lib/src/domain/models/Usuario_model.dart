@@ -8,14 +8,13 @@ import 'dart:convert';
 UsuarioModel mensajesresponseFromJson(String str) =>
     UsuarioModel.fromJson(json.decode(str));
 
-String mensajesresponseToJson(UsuarioModel data) =>
-    json.encode(data.toJson());
+String mensajesresponseToJson(UsuarioModel data) => json.encode(data.toJson());
 
 class UsuarioModel {
   int idUsuario;
   String email;
   String clave;
-  int idRol;
+  int? idRol;
 
   UsuarioModel({
     required this.idUsuario,
@@ -24,8 +23,7 @@ class UsuarioModel {
     required this.idRol,
   });
 
-  factory UsuarioModel.fromJson(Map<String, dynamic> json) =>
-      UsuarioModel(
+  factory UsuarioModel.fromJson(Map<String, dynamic> json) => UsuarioModel(
         idUsuario: json["Id_Usuario"],
         email: json["Email"],
         clave: json["Clave"],
