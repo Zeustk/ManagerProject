@@ -24,17 +24,15 @@ class UsuarioProvider extends CrudProvider<UsuarioModel> {
     }
   }
 
-  Future<List<UsuarioModel>> verificarCorreo() async {
+  Future<bool> verificarCorreo(UsuarioModel usuarioRecibido) async {
     try {
-      List<Map<String, dynamic>> usuarioVeri =
-          await consultar('getUsuarioBase');
+      bool usuarioVeri =
+          await busquedaPersonalizada(usuarioRecibido, 'getUsuarioBase');
 
-      List<UsuarioModel> listaVeri =
-          usuarioVeri.map((map) => UsuarioModel.fromJson(map)).toList();
-
-      return listaVeri;
+      return usuarioVeri;
     } catch (e) {
-      return [];
+      print(' el error es  $e');
+      return false;
     }
   }
 

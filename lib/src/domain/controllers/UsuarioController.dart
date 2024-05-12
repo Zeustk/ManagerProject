@@ -23,11 +23,11 @@ class UsuariosController extends GetxController {
     }
   }
 
-  Future<List<UsuarioModel>> verificarUsuario(UsuarioModel usuarioDb) async {
+  Future<bool> verificarUsuario(UsuarioModel usuarioRecibido) async {
     try {
-      return await gestionUsuarios.verificarCorreo();
+      return await gestionUsuarios.verificarCorreo(usuarioRecibido);
     } catch (error) {
-      return [];
+      return false;
     }
   }
 

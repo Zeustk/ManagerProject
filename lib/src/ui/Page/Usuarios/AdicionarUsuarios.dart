@@ -34,9 +34,14 @@ class _AdicionarUsuariosPageState extends State<AdicionarUsuariosPage> {
       });
     } else {
       setState(() {
-        listaIntegrantesFiltrados = listaIntegrantes.where((usuario) {
-          return usuario.email.toLowerCase().startsWith(query.toLowerCase());
-        }).take(4).toList();
+        listaIntegrantesFiltrados = listaIntegrantes
+            .where((usuario) {
+              return usuario.email
+                  .toLowerCase()
+                  .startsWith(query.toLowerCase());
+            })
+            .take(4)
+            .toList();
       });
     }
   }
@@ -46,7 +51,8 @@ class _AdicionarUsuariosPageState extends State<AdicionarUsuariosPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kSecondaryColor,
-        title: Text('Adicionar Integrantes', style: TextStyle(color: Colors.white)),
+        title: Text('Adicionar Integrantes',
+            style: TextStyle(color: Colors.white)),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -64,7 +70,10 @@ class _AdicionarUsuariosPageState extends State<AdicionarUsuariosPage> {
               },
               decoration: InputDecoration(
                 hintText: 'Buscar integrantes...',
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
@@ -75,9 +84,14 @@ class _AdicionarUsuariosPageState extends State<AdicionarUsuariosPage> {
                 final usuario = listaIntegrantesFiltrados[index];
                 final isSelected = integrantesSeleccionados.contains(usuario);
                 return ListTile(
-                  title: Text(usuario.email),
-                  subtitle: Text(usuario.email),
+                  
+                  leading: CircleAvatar(backgroundColor: Colors.white),
+                  title: Text(usuario.email,
+                      style: TextStyle(color: Colors.white)),
+                  subtitle: Text(usuario.email,
+                      style: TextStyle(color: Colors.white)),
                   trailing: Checkbox(
+                    activeColor: Colors.white,
                     value: isSelected,
                     onChanged: (value) {
                       setState(() {
@@ -96,13 +110,18 @@ class _AdicionarUsuariosPageState extends State<AdicionarUsuariosPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
         onPressed: () {
           // Aquí puedes utilizar integrantesSeleccionados como desees
           print('Integrantes seleccionados: $integrantesSeleccionados');
 
-          Get.back(result:integrantesSeleccionados);
+          Get.back(result: integrantesSeleccionados);
         },
-        child: Icon(Icons.check),
+        child: Icon(
+          Icons.check,
+          color: Colors.blue,
+          size: 30,
+        ),
       ),
     );
   }

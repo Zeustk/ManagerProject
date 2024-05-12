@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:manager_proyect/src/environment/environment.dart';
+import 'dart:async';
 
 class CrudProvider<T> {
   final String baseUrl = Environment.baseUrl;
@@ -9,15 +10,14 @@ class CrudProvider<T> {
     try {
       final url = '$baseUrl/$endpoint';
 
-            print(url);
-            print(jsonEncode(body));
+      print(url);
+      print(jsonEncode(body));
       final response = await http.post(
         Uri.parse(url),
-        headers: {'Content-Type': 'application/json'}, 
+        headers: {'Content-Type': 'application/json'},
         body: jsonEncode(body),
-        );
+      );
 
-        
       return response.body;
     } catch (e) {
       // Manejar el error
@@ -25,16 +25,16 @@ class CrudProvider<T> {
     }
   }
 
-  Future<List<Map<String,dynamic>>> consultar(String endpoint) async {
+  Future<List<Map<String, dynamic>>> consultar(String endpoint) async {
     final url = '$baseUrl/$endpoint';
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
+      final dynamic decodedData = jsonDecode(response.body);
+      List<Map<String, dynamic>> dataList =
+          List<Map<String, dynamic>>.from(decodedData);
 
-    final dynamic decodedData = jsonDecode(response.body);
-    List<Map<String, dynamic>> dataList = List<Map<String, dynamic>>.from(decodedData);
-
-     return dataList;
+      return dataList;
     } else {
       throw Exception('Error al consultar datos');
     }
@@ -50,5 +50,20 @@ class CrudProvider<T> {
     final url = '$baseUrl/$endpoint/$id';
     final response = await http.delete(Uri.parse(url));
     return response.body;
+  }
+
+  Future<bool> busquedaPersonalizada(T body, String endpoint) async {
+    final url = '$baseUrl/$endpoint';
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(body),
+      );
+
+      return jsonDecode(response.body);
+    } catch (e) {
+      throw Exception('Error de conexión: $e');
+    }
   }
 }

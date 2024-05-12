@@ -6,12 +6,14 @@ import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
 import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
+import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
 import 'package:manager_proyect/src/ui/auth/Registrarse.dart';
 
 class Login extends StatelessWidget {
   final AuthController _controllerAuth = Get.find();
   UsuariosController _gestionUsuarioDb = UsuariosController();
-  TextEditingController _controllerClave = TextEditingController();
+  TextEditingController controllerEmail = TextEditingController();
+  TextEditingController controllerClave = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +104,7 @@ class Login extends StatelessWidget {
                           "Correo Electrónico",
                         ),
                         const SizedBox(height: 10),
-                        _buildAnimatedIconJump(
+                        _buildAnimatedIconJumpp(
                           context,
                           Icons.lock,
                           "Contraseña",
@@ -191,15 +193,34 @@ class Login extends StatelessWidget {
                             onPressed: () {
                               UsuarioModel usuarioVeri = UsuarioModel(
                                   idUsuario: 0,
-                                  email: 'julioasd',
-                                  clave: '12345',
+                                  email: controllerEmail.text,
+                                  clave: controllerClave.text,
                                   idRol: null);
 
                               _gestionUsuarioDb
                                   .verificarUsuario(usuarioVeri)
                                   .then((resultado) {
-                                print(
-                                    'El resultado de consultar el usuario es: $resultado');
+                                (resultado)
+                                    ? Get.to(Perfil_Usuario())
+                                    : Get.snackbar(
+                                        "Verifice su correo y contraseña",
+                                        "Datos incorrectos",
+                                        snackPosition: SnackPosition
+                                            .TOP, // Posición del Snackbar en la pantalla
+                                        duration: Duration(
+                                            seconds:
+                                                3), // Duración del Snackbar
+                                        backgroundColor: Colors
+                                            .white, // Color de fondo del Snackbar
+                                        colorText: Colors
+                                            .blue, // Color del texto del Snackbar
+                                        borderRadius:
+                                            10.0, // Radio de borde del Snackbar
+                                        margin: EdgeInsets.symmetric(
+                                            vertical:
+                                                200.0), // Margen vertical del Snackbar
+                                      );
+                                ;
                               }).catchError((error) {
                                 print(
                                     'Ocurrió un error de consultar el usuario: $error');
@@ -254,6 +275,33 @@ class Login extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: hintText,
               ),
+              controller: controllerEmail,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAnimatedIconJumpp(
+      BuildContext context, IconData icon, String hintText) {
+    return Padding(
+      padding: const EdgeInsets.only(),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(right: 14),
+            child: AnimatedIconJump(
+              icon: icon,
+            ),
+          ),
+          Expanded(
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: hintText,
+              ),
+              controller: controllerClave,
             ),
           ),
         ],

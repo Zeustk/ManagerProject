@@ -13,7 +13,7 @@ class UsuarioModel {
   int idUsuario;
   String email;
   String clave;
-  int?  idRol;
+  int? idRol;
 
   UsuarioModel({
     required this.idUsuario,
