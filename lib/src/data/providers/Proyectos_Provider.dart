@@ -1,17 +1,24 @@
 
 import 'package:manager_proyect/src/data/providers/Crud_Provider.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
-import 'package:http/http.dart' as http;
+
 
 class ProyectosProvider extends CrudProvider<ProyectoModel>{
 
+   static ProyectosProvider? _instance;
+   List<ProyectoModel> _proyectosMemoria = [];
+  bool _proyectosMemoriaActualizado=false;
 
-   Future<List<ProyectoModel>> _proyectosMemoria = Future.value([]);
-   bool _proyectosMemoriaActualizado=true;
+  ProyectosProvider._(); // Constructor privado para evitar la creación directa de instancias
+
+  static ProyectosProvider get instance {
+    _instance ??= ProyectosProvider._(); // Si la instancia es nula, crea una nueva instancia
+    return _instance!;
+  }
 
   Future<String> registrarProyecto(ProyectoModel proyectoRecibido) async {
   try {
-    //_proyectosMemoriaActualizado = false;
+    _proyectosMemoriaActualizado = false;
     return await agregar(proyectoRecibido, 'addProyecto');
   } catch (error) {
     // Manejar el error al registrar el proyecto
@@ -21,14 +28,25 @@ class ProyectosProvider extends CrudProvider<ProyectoModel>{
 }
 
 Future<List<ProyectoModel>> consultarProyecto() async {
+
   try {
 
-     List<Map<String, dynamic>> listaMapas = await consultar('getProyecto');
+    print(_proyectosMemoriaActualizado);
+
+    if (!_proyectosMemoriaActualizado){
+
+      _proyectosMemoriaActualizado=true;
+
+      List<Map<String, dynamic>> listaMapas = await consultar('getProyecto');
+
+      _proyectosMemoria = listaMapas.map((map) => ProyectoModel.fromJson(map)).toList();
+
+      
+    }     
     
     // Convertir cada mapa a un objeto ProyectoModel usando el método fromJson
-    List<ProyectoModel> listaProyectos = listaMapas.map((map) => ProyectoModel.fromJson(map)).toList();
 
-    return listaProyectos;
+    return _proyectosMemoria;
 
 
   } catch (error) {

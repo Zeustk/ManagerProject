@@ -16,7 +16,7 @@ class DetallesModel {
   int idDetalle;
   int idUsuario;
   int idProyecto;
-  Double porcentajeProyecto;
+  double porcentajeProyecto;
 
   DetallesModel({
     required this.idDetalle,

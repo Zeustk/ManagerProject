@@ -7,7 +7,7 @@ import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 class DetallesProvider extends CrudProvider<DetallesModel>{
  Future<String> registrarDetalle(DetallesModel detalleRecibido) async {
     try {
-      return await agregar(detalleRecibido, 'addDetalles');
+      return await agregar(detalleRecibido, 'addDetalleproyecto');
     } catch (e) {
       return "Error al Registrar Detalles del proyecto";
     }
