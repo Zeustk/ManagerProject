@@ -23,6 +23,14 @@ class UsuariosController extends GetxController {
     }
   }
 
+  Future<List<UsuarioModel>> verificarUsuario(UsuarioModel usuarioDb) async {
+    try {
+      return await gestionUsuarios.verificarCorreo();
+    } catch (error) {
+      return [];
+    }
+  }
+
   Future<String> actualizarUsuarios(UsuarioModel usuarioRecibido) async {
     try {
       return await gestionUsuarios.actualizarUsuarios(usuarioRecibido);

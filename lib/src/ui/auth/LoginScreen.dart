@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
 import 'package:manager_proyect/src/domain/controllers/authController.dart';
+import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
 import 'package:manager_proyect/src/ui/auth/Registrarse.dart';
 
 class Login extends StatelessWidget {
   final AuthController _controllerAuth = Get.find();
+  UsuariosController _gestionUsuarioDb = UsuariosController();
+  TextEditingController _controllerClave = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -185,10 +189,21 @@ class Login extends StatelessWidget {
                               ),
                             ]),
                             onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return Perfil_Usuario();
-                              }));
+                              UsuarioModel usuarioVeri = UsuarioModel(
+                                  idUsuario: 0,
+                                  email: 'julioasd',
+                                  clave: '12345',
+                                  idRol: null);
+
+                              _gestionUsuarioDb
+                                  .verificarUsuario(usuarioVeri)
+                                  .then((resultado) {
+                                print(
+                                    'El resultado de consultar el usuario es: $resultado');
+                              }).catchError((error) {
+                                print(
+                                    'Ocurrió un error de consultar el usuario: $error');
+                              });
                             },
                           ),
                         )

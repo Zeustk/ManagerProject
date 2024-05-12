@@ -4,7 +4,7 @@ import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 class UsuarioProvider extends CrudProvider<UsuarioModel> {
   Future<String> registrarUsuarios(UsuarioModel usuarioRecibido) async {
     try {
-      return await agregar(usuarioRecibido, 'addUsuarios');
+      return await agregar(usuarioRecibido, 'addUsuario');
     } catch (e) {
       return "Error al Registrar el Usuario";
     }
@@ -20,6 +20,20 @@ class UsuarioProvider extends CrudProvider<UsuarioModel> {
       return listaUsuario;
     } catch (e) {
       print('Error alconsultar los usuarios');
+      return [];
+    }
+  }
+
+  Future<List<UsuarioModel>> verificarCorreo() async {
+    try {
+      List<Map<String, dynamic>> usuarioVeri =
+          await consultar('getUsuarioBase');
+
+      List<UsuarioModel> listaVeri =
+          usuarioVeri.map((map) => UsuarioModel.fromJson(map)).toList();
+
+      return listaVeri;
+    } catch (e) {
       return [];
     }
   }
