@@ -3,7 +3,7 @@ import 'package:manager_proyect/src/data/providers/Proyectos_Provider.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 
 class ProyectoController extends GetxController {
-  ProyectosProvider gestionProyectos = ProyectosProvider();
+  ProyectosProvider gestionProyectos = ProyectosProvider.instance;
 
   Future<String> registrarProyecto(ProyectoModel proyecto) async {
     try {

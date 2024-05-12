@@ -21,7 +21,7 @@ class UsuarioProvider extends CrudProvider<UsuarioModel>{
 
       return listaUsuario;
     } catch (e) {
-      print('Error alconsultar los usuarios');
+      print('Error al consultar los usuarios $e');
       return [];
     }
   }

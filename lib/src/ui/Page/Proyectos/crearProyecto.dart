@@ -2,9 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/domain/controllers/DetallesController.dart';
 import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
+import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
+import 'package:manager_proyect/src/domain/models/DetalleProyecto_model.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
+import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
+import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart';
+import 'package:manager_proyect/src/ui/Page/Usuarios/AdicionarUsuarios.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
 
 import '../../../widgets/Drawer.dart';
@@ -17,6 +23,9 @@ class Crear_proyectos extends StatefulWidget {
 class _Crear_proyectosState extends State<Crear_proyectos> {
   /* FocusNode _focusNode = FocusNode(); */
 //
+
+  ProyectoController gestionProyectos = ProyectoController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,163 +57,140 @@ class _LabelsState extends State<Labels> {
   TextEditingController __controllerFechaFinalizacion = TextEditingController();
   TextEditingController __controllerNombre = TextEditingController();
   TextEditingController __controllerDescripcion = TextEditingController();
+  List<UsuarioModel> usuariosSeleccionados=[];
 
   ProyectoController gestionProyectos = ProyectoController();
+  UsuariosController gestionUsuarios = UsuariosController();
+  DetallesController gestionProyectoUsuarios = DetallesController();
 
   TextStyle selecionarColor = TextStyle(color: Colors.black);
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: SafeArea(
         child: Column(
           children: [
+            // Text fields for project details...
+
             Padding(
-              padding: const EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(40.0),
               child: TextField(
-                /*  onSubmitted: (value) {
-                    _focusNode.requestFocus();
-                  }, */
-                /*  focusNode: _focusNode,
-                  controller: _controller,
-                  autofocus: true, */
-                style: TextStyle(color: Colors.black),
                 controller: __controllerNombre,
+                style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
-                    labelText: 'Nombre',
-                    fillColor: Colors.white,
-                    filled: true,
-                    prefixIcon: Icon(
-                      Icons.account_circle,
-                      color: kSecondaryColor,
-                    ),
-                    labelStyle: TextStyle(color: Colors.black),
-                    border: UnderlineInputBorder(
-                      borderRadius: BorderRadius.circular(40),
-                    )),
+                  labelText: 'Nombre',
+                  fillColor: Colors.white,
+                  filled: true,
+                  prefixIcon: Icon(
+                    Icons.account_circle,
+                    color: kSecondaryColor,
+                  ),
+                  labelStyle: TextStyle(color: Colors.black),
+                  border: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                ),
               ),
             ),
+
             Padding(
               padding: EdgeInsets.only(left: 30, right: 30),
               child: TextField(
                 style: TextStyle(color: Colors.black),
                 controller: _controllerFechaInicio,
                 decoration: InputDecoration(
-                    labelText: 'Fecha De Inicio',
-                    filled: true,
-                    fillColor: Colors.white,
-                    labelStyle: selecionarColor,
-                    prefixIcon: Icon(
-                      Icons.calendar_today,
-                      color: kSecondaryColor,
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue))),
+                  labelText: 'Fecha De Inicio',
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelStyle: selecionarColor,
+                  prefixIcon: Icon(
+                    Icons.calendar_today,
+                    color: kSecondaryColor,
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                  ),
+                ),
                 readOnly: true,
                 onTap: () {
                   _seleccionFecha(context);
                 },
               ),
             ),
+
             Padding(
               padding: EdgeInsets.only(top: 30, left: 30, right: 30),
               child: TextField(
                 style: TextStyle(color: Colors.black),
                 controller: __controllerFechaFinalizacion,
                 decoration: InputDecoration(
-                    labelText: 'Fecha Fin',
-                    filled: true,
-                    labelStyle: selecionarColor,
-                    fillColor: Colors.white,
-                    prefixIcon: Icon(
-                      Icons.calendar_today,
-                      color: kSecondaryColor,
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue))),
+                  labelText: 'Fecha Fin',
+                  filled: true,
+                  labelStyle: selecionarColor,
+                  fillColor: Colors.white,
+                  prefixIcon: Icon(
+                    Icons.calendar_today,
+                    color: kSecondaryColor,
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                  ),
+                ),
                 readOnly: true,
                 onTap: () {
                   _seleccionFecha2(context);
                 },
               ),
             ),
+
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: TextField(
-                
                 style: TextStyle(color: Colors.black),
                 controller: __controllerDescripcion,
                 decoration: InputDecoration(
-                    labelText: 'Descripcion',
-                    fillColor: Colors.white,
-                    filled: true,
-                    prefixIcon: Icon(
-                      Icons.description,
-                      color: kSecondaryColor,
-                    ),
-                    labelStyle: TextStyle(color: Colors.black),
-                    border: UnderlineInputBorder(
-                      borderRadius: BorderRadius.circular(40),
-                    )),
+                  labelText: 'Descripcion',
+                  fillColor: Colors.white,
+                  filled: true,
+                  prefixIcon: Icon(
+                    Icons.description,
+                    color: kSecondaryColor,
+                  ),
+                  labelStyle: TextStyle(color: Colors.black),
+                  border: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                ),
               ),
             ),
+
             SizedBox(height: 25),
             Divider(color: Colors.grey),
-            Text(
-              'Integrantes : ',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontFamily: AutofillHints.addressCity),
+
+            ElevatedButton(
+              onPressed: () async {
+              usuariosSeleccionados = (await Get.to<List<UsuarioModel>?>(AdicionarUsuariosPage())) ?? [];
+              },
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40),
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                child: Text('Adicionar Integrantes'),
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(40.0),
-              child: TextField(
-                  style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                      hintText: 'Buscar...',
-                      labelText: 'Buscar...',
-                      fillColor: Colors.white,
-                      filled: true,
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: kSecondaryColor,
-                      ),
-                      labelStyle: TextStyle(color: Colors.black),
-                      border: UnderlineInputBorder(
-                        borderRadius: BorderRadius.circular(40),
-                      ))),
-            ),
+            SizedBox(height: 30),
             CupertinoButton(
               onPressed: () {
-                ProyectoModel proyecto = ProyectoModel(
-
-                    fechaFinalizacion: DateTime.parse(__controllerFechaFinalizacion.text),
-                    fechaInicio: DateTime.parse(_controllerFechaInicio.text),
-                    liderProyecto: "JESUS",
-                    nombre: __controllerNombre.text,
-                    descripcion: __controllerDescripcion.text,
-
-                  );
-
-                gestionProyectos.registrarProyecto(proyecto).then((resultado) {
-
-                  print('El resultado de registrar el proyecto es: $resultado');
-
-                }).catchError((error) {
-
-                  print('Ocurrió un error al registrar el proyecto: $error');
-
-                });
-
-                Get.snackbar(
-                  'Proyecto Creado',
-                  'Proyecto Creado Exitosamente',
-                  backgroundColor: Colors.white,
-                  colorText: Colors.black,
-                  onTap: (snack) {
-                    Get.to(Ver_Proyectos(), arguments: 'Mis Proyectos');
-                  },
-                );
+                RegistrarProyecto();
               },
               alignment: Alignment.bottomCenter,
               color: Colors.white,
@@ -217,9 +203,65 @@ class _LabelsState extends State<Labels> {
     );
   }
 
+  void RegistrarProyecto() {
+
+    ProyectoModel proyecto = ProyectoModel(
+      fechaFinalizacion: DateTime.parse(__controllerFechaFinalizacion.text),
+      fechaInicio: DateTime.parse(_controllerFechaInicio.text),
+      liderProyecto: "JESUS",
+      nombre: __controllerNombre.text,
+      descripcion: __controllerDescripcion.text,
+    );
+
+   
+
+   if (usuariosSeleccionados.isEmpty){
+    return;
+   }
+
+    
+
+    gestionProyectos.registrarProyecto(proyecto).then((resultado) {
+      print('El resultado de registrar el proyecto es: $resultado');
+    }).catchError((error) {
+      print('Ocurrió un error al registrar el proyecto: $error');
+      return;
+    });
+
+    for (var usuario in usuariosSeleccionados) {
+
+      DetallesModel DetallesProyectoUsuario = DetallesModel(
+        idDetalle: 0,
+        idUsuario:usuario.idUsuario,
+        idProyecto: 0,
+        porcentajeProyecto:0.0
+        );
+      
+      gestionProyectoUsuarios.registrarDetalles(DetallesProyectoUsuario).then((resultado) {
+        print('El resultado de registrar los integrantes es: $resultado');
+      }).catchError((error) {
+        print('Ocurrió un error al registrar los integrantes: $error');
+        return;
+      });
+    }
+
+    Get.snackbar(
+      'Proyecto Creado',
+      'Proyecto Creado Exitosamente',
+      backgroundColor: Colors.white,
+      colorText: Colors.black,
+      onTap: (snack) {
+        Get.to(Ver_Proyectos(), arguments: 'Mis Proyectos');
+      },
+    );
+  }
+
   Future<void> _seleccionFecha(BuildContext context) async {
     DateTime? _fecha = await showDatePicker(
-        firstDate: DateTime(1000), lastDate: DateTime(3000), context: context);
+      firstDate: DateTime(1000),
+      lastDate: DateTime(3000),
+      context: context,
+    );
 
     if (_fecha != null) {
       setState(() {
@@ -230,7 +272,10 @@ class _LabelsState extends State<Labels> {
 
   Future<void> _seleccionFecha2(BuildContext context) async {
     DateTime? _fecha = await showDatePicker(
-        firstDate: DateTime(1000), lastDate: DateTime(3000), context: context);
+      firstDate: DateTime(1000),
+      lastDate: DateTime(3000),
+      context: context,
+    );
 
     if (_fecha != null) {
       setState(() {
