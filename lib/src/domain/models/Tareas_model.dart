@@ -9,15 +9,15 @@ String mensajesresponseToJson(TareasModel data) => json.encode(data.toJson());
 class TareasModel {
   int idTarea;
   String nombre;
-  String fechaInicio;
-  String fechaFinalizacion;
+  DateTime fechaInicio;
+  DateTime fechaFinalizacion;
   String descripcion;
-  Double porcentajeTarea;
-  int idProyecto;
-  int idUsuario;
+  double porcentajeTarea;
+  int? idProyecto;
+  int? idUsuario;
 
   TareasModel({
-    required this.idTarea,
+    this.idTarea=1,
     required this.nombre,
     required this.fechaInicio,
     required this.fechaFinalizacion,
@@ -30,10 +30,10 @@ class TareasModel {
   factory TareasModel.fromJson(Map<String, dynamic> json) => TareasModel(
         idTarea: json["Id_Tarea"],
         nombre: json["Nombre"],
-        fechaInicio: json["Fecha_inicio"],
-        fechaFinalizacion: json["Fecha_finalizacion"],
+        fechaInicio: DateTime.parse(json["Fecha_Inicio"]),
+        fechaFinalizacion: DateTime.parse(json["Fecha_Finalizacion"]),
         descripcion: json["Descripcion"],
-        porcentajeTarea: json["PorcentajeTarea"],
+        porcentajeTarea: json["PorcentajeTarea"]?.toDouble(),
         idProyecto: json["Id_Proyecto"],
         idUsuario: json["Id_Usuario"],
       );
@@ -41,8 +41,8 @@ class TareasModel {
   Map<String, dynamic> toJson() => {
         "Id_Tarea": idTarea,
         "Nombre": nombre,
-        "Fecha_inicio": fechaInicio,
-        "Fecha_finalizacion": fechaFinalizacion,
+        "Fecha_Inicio": "${fechaInicio.year.toString().padLeft(4, '0')}-${fechaInicio.month.toString().padLeft(2, '0')}-${fechaInicio.day.toString().padLeft(2, '0')}",
+        "Fecha_Finalizacion": "${fechaFinalizacion.year.toString().padLeft(4, '0')}-${fechaFinalizacion.month.toString().padLeft(2, '0')}-${fechaFinalizacion.day.toString().padLeft(2, '0')}",
         "Descripcion": descripcion,
         "PorcentajeTarea": porcentajeTarea,
         "Id_Proyecto": idProyecto,

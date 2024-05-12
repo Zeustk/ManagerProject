@@ -1,7 +1,6 @@
 import 'package:manager_proyect/src/data/providers/Crud_Provider.dart';
 import 'package:manager_proyect/src/domain/models/Roles_model.dart';
-import 'package:manager_proyect/src/domain/models/Tareas_model.dart';
-import 'package:http/http.dart' as http;
+
 
 class RolesProvider extends CrudProvider<RolesModel> {
   Future<String> registrarRol(RolesModel rolRecibido) async {
