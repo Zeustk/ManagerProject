@@ -11,7 +11,7 @@ import 'package:manager_proyect/src/ui/auth/Registrarse.dart';
 
 class Login extends StatelessWidget {
   final AuthController _controllerAuth = Get.find();
-  UsuariosController _gestionUsuarioDb = UsuariosController();
+  final UsuariosController _gestionUsuarioDb = UsuariosController();
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerClave = TextEditingController();
 
@@ -193,13 +193,14 @@ class Login extends StatelessWidget {
                             onPressed: () {
                               UsuarioModel usuarioVeri = UsuarioModel(
                                   idUsuario: 0,
-                                  email: controllerEmail.text,
-                                  clave: controllerClave.text,
+                                  email: "julioasd",
+                                  clave: "12345",
                                   idRol: null);
 
                               _gestionUsuarioDb
                                   .verificarUsuario(usuarioVeri)
                                   .then((resultado) {
+                                print('El valor del resultado es : $resultado');
                                 (resultado)
                                     ? Get.to(Perfil_Usuario())
                                     : Get.snackbar(

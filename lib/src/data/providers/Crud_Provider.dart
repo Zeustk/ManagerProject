@@ -55,11 +55,9 @@ class CrudProvider<T> {
   Future<bool> busquedaPersonalizada(T body, String endpoint) async {
     final url = '$baseUrl/$endpoint';
     try {
-      final response = await http.post(
-        Uri.parse(url),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(body),
-      );
+      final response = await http.post(Uri.parse(url),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode(body));
 
       return jsonDecode(response.body);
     } catch (e) {
