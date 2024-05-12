@@ -2,7 +2,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:manager_proyect/src/data/providers/RolesProvider.dart';
 import 'package:manager_proyect/src/domain/models/Roles_model.dart';
 
-class TareasController extends GetxController {
+class RolController extends GetxController {
   RolesProvider gestionRoles = RolesProvider();
 
   Future<String> registrarRol(RolesModel rol) async {

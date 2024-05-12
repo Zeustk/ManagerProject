@@ -1,6 +1,6 @@
 import 'package:manager_proyect/src/data/providers/Crud_Provider.dart';
 import 'package:manager_proyect/src/domain/models/Tareas_model.dart';
-import 'package:http/http.dart' as http;
+
 
 class TareasProvider extends CrudProvider<TareasModel> {
   Future<String> registrarTarea(TareasModel tareaRecibida) async {
@@ -20,7 +20,7 @@ class TareasProvider extends CrudProvider<TareasModel> {
 
       return listaTareas;
     } catch (e) {
-      print('Error alconsultar las tareas');
+      print('Error al sconsultar las tareas');
       return [];
     }
   }

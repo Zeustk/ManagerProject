@@ -2,7 +2,6 @@
 
 import 'package:manager_proyect/src/data/providers/Crud_Provider.dart';
 import 'package:manager_proyect/src/domain/models/DetalleProyecto_model.dart';
-import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 
 class DetallesProvider extends CrudProvider<DetallesModel>{
  Future<String> registrarDetalle(DetallesModel detalleRecibido) async {

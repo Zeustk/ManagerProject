@@ -209,11 +209,10 @@ class _LabelsState extends State<Labels> {
       fechaFinalizacion: DateTime.parse(__controllerFechaFinalizacion.text),
       fechaInicio: DateTime.parse(_controllerFechaInicio.text),
       liderProyecto: "JESUS",
-      nombre: __controllerNombre.text,
-      descripcion: __controllerDescripcion.text,
+      nombre: __controllerNombre.text.trim(),
+      descripcion: __controllerDescripcion.text.trim(),
     );
 
-   
 
    if (usuariosSeleccionados.isEmpty){
     return;
