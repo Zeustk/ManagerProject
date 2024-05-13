@@ -364,7 +364,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
           fechaInicio: DateTime.parse(_controllerFechaInicio.text),
           fechaFinalizacion: DateTime.parse(_controllerFechaFinalizacion.text),
           descripcion: _controllerDescripcion.text,
-          porcentajeTarea: 0.0,
+          porcentajeTarea: 6.7,
           idProyecto: idProyecto,
           idUsuario: idUsuario,
         );

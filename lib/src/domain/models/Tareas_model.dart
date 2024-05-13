@@ -33,7 +33,9 @@ class TareasModel {
         fechaInicio: DateTime.parse(json["Fecha_Inicio"]),
         fechaFinalizacion: DateTime.parse(json["Fecha_Finalizacion"]),
         descripcion: json["Descripcion"],
-        porcentajeTarea: json["PorcentajeTarea"]?.toDouble(),
+        porcentajeTarea: json["PorcentajeTarea"] != null
+            ? double.tryParse(json["PorcentajeTarea"].toString()) ?? 0.0
+            : 0.0,
         idProyecto: json["Id_Proyecto"],
         idUsuario: json["Id_Usuario"],
       );

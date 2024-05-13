@@ -6,7 +6,6 @@ import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
-import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/verTarea.dart';
 import 'package:manager_proyect/src/widgets/BotonProyecto.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
@@ -116,6 +115,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: GestureDetector(
                         onTap: () {
+                          Get.to(Ver_Tareas());
                           print('Tapped on project: ${proyecto.nombre}');
                         },
                         child: Container(

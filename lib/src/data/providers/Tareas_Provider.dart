@@ -13,14 +13,14 @@ class TareasProvider extends CrudProvider<TareasModel> {
 
   Future<List<TareasModel>> consultaTareas() async {
     try {
-      List<Map<String, dynamic>> tareasMapa = await consultar('getTareas');
+      List<Map<String, dynamic>> tareasMapa = await consultar('getTarea');
 
       List<TareasModel> listaTareas =
           tareasMapa.map((map) => TareasModel.fromJson(map)).toList();
 
       return listaTareas;
     } catch (e) {
-      print('Error al sconsultar las tareas');
+      print('Error al sconsultar las tareas $e');
       return [];
     }
   }

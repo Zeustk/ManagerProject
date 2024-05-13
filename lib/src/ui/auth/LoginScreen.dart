@@ -193,8 +193,8 @@ class Login extends StatelessWidget {
                             onPressed: () {
                               UsuarioModel usuarioVeri = UsuarioModel(
                                   idUsuario: 0,
-                                  email: "julioasd",
-                                  clave: "12345",
+                                  email: controllerEmail.text,
+                                  clave: controllerClave.text,
                                   idRol: null);
 
                               _gestionUsuarioDb
