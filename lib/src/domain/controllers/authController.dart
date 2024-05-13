@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/data/providers/auth_Provider.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
+import 'package:manager_proyect/src/ui/auth/LoginScreen.dart';
 
 class AuthController extends GetxController {
   final AuthService _authService = AuthService();
@@ -31,5 +34,39 @@ class AuthController extends GetxController {
     }
   }
 
-  // Método para manejar la autenticación con GitHub
+  void guardarInfoSesionStorage(String email, String clave){
+
+    try{
+
+      _authService.guardarInformacionUsuarioStorage(email, clave);
+      
+    }catch(error){
+
+      print('Error de guardar sesion $error');
+    }
+
+  }
+
+  Future<bool> verificarSesionStorage() async {
+
+    try{
+
+      return _authService.verificarSesionUsuarioStorage();
+
+    }catch(error){
+      print('error de verificar sesion: $error');
+      return false;
+    }
+
+  }
+
+  void CerrarSesionStorage(){
+    
+    _authService.CerrarSesionUsuarioStorage();
+
+  }
+
+  
+
+
 }

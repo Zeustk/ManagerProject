@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/domain/models/Tareas_model.dart';
 
 class SubirTareas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    TareasModel tarea = Get.arguments as TareasModel;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kSecondaryColor,
@@ -16,7 +20,7 @@ class SubirTareas extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Nombre de la tarea',
+              '${tarea.nombre}',
               style: TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
@@ -24,7 +28,7 @@ class SubirTareas extends StatelessWidget {
             ),
             SizedBox(height: 40.0),
             Text(
-              'Descripción De la Tarea',
+              '${tarea.descripcion}',
               style: TextStyle(
                 fontSize: 16.0,
               ),
@@ -58,16 +62,20 @@ class SubirTareas extends StatelessWidget {
             SizedBox(height: 10.0),
             // Aquí puedes agregar el widget para seleccionar un documento
             ElevatedButton(
-              onPressed: () {
-                // Aquí va la lógica para subir el documento
-              },
+              onPressed: () {},
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              ),
               child: Text('Adjuntar Documento'),
             ),
             SizedBox(height: 50.0),
             ElevatedButton(
-              onPressed: () {
-                // Aquí va la lógica para entregar la tarea
-              },
+              onPressed: () {},
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              ),
               child: Text('Entregar'),
             ),
           ],

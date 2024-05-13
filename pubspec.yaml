@@ -41,13 +41,13 @@ dependencies:
   eva_icons_flutter: ^3.1.0
   get: ^4.6.6
   font_awesome_flutter: ^10.7.0
+  flutter_secure_storage: ^9.1.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   http: ^0.13.3
   url_launcher: ^6.0.6
-  flutter_secure_storage: ^4.2.0
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
