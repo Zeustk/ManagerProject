@@ -57,13 +57,11 @@ class _LabelsState extends State<Labels> {
   TextEditingController __controllerFechaFinalizacion = TextEditingController();
   TextEditingController __controllerNombre = TextEditingController();
   TextEditingController __controllerDescripcion = TextEditingController();
-  List<UsuarioModel> usuariosSeleccionados=[];
+  List<UsuarioModel> usuariosSeleccionados = [];
 
   ProyectoController gestionProyectos = ProyectoController();
   UsuariosController gestionUsuarios = UsuariosController();
   DetallesController gestionProyectoUsuarios = DetallesController();
-
-  TextStyle selecionarColor = TextStyle(color: Colors.black);
 
   @override
   void initState() {
@@ -91,7 +89,7 @@ class _LabelsState extends State<Labels> {
                     Icons.account_circle,
                     color: kSecondaryColor,
                   ),
-                  labelStyle: TextStyle(color: Colors.black),
+                  labelStyle: TextStyle(color: Colors.blue),
                   border: UnderlineInputBorder(
                     borderRadius: BorderRadius.circular(40),
                   ),
@@ -102,13 +100,13 @@ class _LabelsState extends State<Labels> {
             Padding(
               padding: EdgeInsets.only(left: 30, right: 30),
               child: TextField(
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.blue),
                 controller: _controllerFechaInicio,
                 decoration: InputDecoration(
                   labelText: 'Fecha De Inicio',
                   filled: true,
                   fillColor: Colors.white,
-                  labelStyle: selecionarColor,
+                  labelStyle: TextStyle(color: Colors.blue),
                   prefixIcon: Icon(
                     Icons.calendar_today,
                     color: kSecondaryColor,
@@ -127,12 +125,12 @@ class _LabelsState extends State<Labels> {
             Padding(
               padding: EdgeInsets.only(top: 30, left: 30, right: 30),
               child: TextField(
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.blue),
                 controller: __controllerFechaFinalizacion,
                 decoration: InputDecoration(
                   labelText: 'Fecha Fin',
                   filled: true,
-                  labelStyle: selecionarColor,
+                  labelStyle: TextStyle(color: Colors.blue),
                   fillColor: Colors.white,
                   prefixIcon: Icon(
                     Icons.calendar_today,
@@ -152,7 +150,7 @@ class _LabelsState extends State<Labels> {
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: TextField(
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.blue),
                 controller: __controllerDescripcion,
                 decoration: InputDecoration(
                   labelText: 'Descripcion',
@@ -162,7 +160,7 @@ class _LabelsState extends State<Labels> {
                     Icons.description,
                     color: kSecondaryColor,
                   ),
-                  labelStyle: TextStyle(color: Colors.black),
+                  labelStyle: TextStyle(color: Colors.blue),
                   border: UnderlineInputBorder(
                     borderRadius: BorderRadius.circular(40),
                   ),
@@ -171,20 +169,26 @@ class _LabelsState extends State<Labels> {
             ),
 
             SizedBox(height: 25),
-            Divider(color: Colors.grey),
+            Divider(color: Colors.white),
 
             ElevatedButton(
               onPressed: () async {
-              usuariosSeleccionados = (await Get.to<List<UsuarioModel>?>(AdicionarUsuariosPage())) ?? [];
+                usuariosSeleccionados = (await Get.to<List<UsuarioModel>?>(
+                        AdicionarUsuariosPage())) ??
+                    [];
               },
               style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(40),
                 ),
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                child: Text('Adicionar Integrantes'),
+                child: Text(
+                  'Adicionar Integrantes',
+                  style: TextStyle(color: Colors.blue),
+                ),
               ),
             ),
             SizedBox(height: 30),
@@ -195,7 +199,7 @@ class _LabelsState extends State<Labels> {
               alignment: Alignment.bottomCenter,
               color: Colors.white,
               borderRadius: BorderRadius.circular(40),
-              child: const Text('Crear'),
+              child: const Text('Crear', style: TextStyle(color: Colors.blue)),
             )
           ],
         ),
@@ -204,7 +208,6 @@ class _LabelsState extends State<Labels> {
   }
 
   void RegistrarProyecto() {
-
     ProyectoModel proyecto = ProyectoModel(
       fechaFinalizacion: DateTime.parse(__controllerFechaFinalizacion.text),
       fechaInicio: DateTime.parse(_controllerFechaInicio.text),
@@ -213,12 +216,9 @@ class _LabelsState extends State<Labels> {
       descripcion: __controllerDescripcion.text.trim(),
     );
 
-
-   if (usuariosSeleccionados.isEmpty){
-    return;
-   }
-
-    
+    if (usuariosSeleccionados.isEmpty) {
+      return;
+    }
 
     gestionProyectos.registrarProyecto(proyecto).then((resultado) {
       print('El resultado de registrar el proyecto es: $resultado');
@@ -228,15 +228,15 @@ class _LabelsState extends State<Labels> {
     });
 
     for (var usuario in usuariosSeleccionados) {
-
       DetallesModel DetallesProyectoUsuario = DetallesModel(
-        idDetalle: 0,
-        idUsuario:usuario.idUsuario,
-        idProyecto: 0,
-        porcentajeProyecto:0.0
-        );
-      
-      gestionProyectoUsuarios.registrarDetalles(DetallesProyectoUsuario).then((resultado) {
+          idDetalle: 0,
+          idUsuario: usuario.idUsuario,
+          idProyecto: 0,
+          porcentajeProyecto: 0.0);
+
+      gestionProyectoUsuarios
+          .registrarDetalles(DetallesProyectoUsuario)
+          .then((resultado) {
         print('El resultado de registrar los integrantes es: $resultado');
       }).catchError((error) {
         print('Ocurrió un error al registrar los integrantes: $error');

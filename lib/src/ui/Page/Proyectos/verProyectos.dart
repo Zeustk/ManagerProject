@@ -75,13 +75,14 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
       ),
       drawer: SafeArea(child: Draweer()),
       body: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
         child: Center(
           child: Container(
-            width: double.infinity, // Ancho fijo del contenedor
-            padding: const EdgeInsets.symmetric(
-                vertical: 40), // Espacio vertical adicional
+            width: 400,
+            // Ancho fijo del contenedor
+            padding: const EdgeInsets.symmetric(vertical: 40),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Aquí mostramos los proyectos dinámicamente
                 SingleChildScrollView(
@@ -119,7 +120,8 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                           print('Tapped on project: ${proyecto.nombre}');
                         },
                         child: Container(
-                          height: 150,
+                          alignment: Alignment.topCenter,
+                          height: 170,
                           child: Progresos_Proyectos(
                             porcentaje: 0.50,
                             color: Colors.blue,
