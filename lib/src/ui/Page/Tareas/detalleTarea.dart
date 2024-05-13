@@ -6,11 +6,8 @@ import 'package:manager_proyect/src/ui/Page/Tareas/subirTarea.dart';
 import '../../../constante/constantes.dart';
 
 class DetalleTarea extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
-
     TareasModel tarea = Get.arguments as TareasModel;
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +43,7 @@ class DetalleTarea extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Icon(
-                Icons.file_present,
+                Icons.file_open_rounded,
                 size: 60.0,
                 color: Colors.grey[600],
               ),
@@ -81,8 +78,12 @@ class DetalleTarea extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              ),
               onPressed: () {
-                Get.to(SubirTareas(),arguments: tarea);
+                Get.to(SubirTareas(), arguments: tarea);
               },
               child: Text('Subir Tarea'),
             ),

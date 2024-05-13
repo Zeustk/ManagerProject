@@ -6,8 +6,7 @@ import 'package:manager_proyect/src/domain/models/Tareas_model.dart';
 class SubirTareas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-    TareasModel tarea= Get.arguments as TareasModel;
+    TareasModel tarea = Get.arguments as TareasModel;
 
     return Scaffold(
       appBar: AppBar(
@@ -63,16 +62,20 @@ class SubirTareas extends StatelessWidget {
             SizedBox(height: 10.0),
             // Aquí puedes agregar el widget para seleccionar un documento
             ElevatedButton(
-              onPressed: () {
-                // Aquí va la lógica para subir el documento
-              },
+              onPressed: () {},
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              ),
               child: Text('Adjuntar Documento'),
             ),
             SizedBox(height: 50.0),
             ElevatedButton(
-              onPressed: () {
-                // Aquí va la lógica para entregar la tarea
-              },
+              onPressed: () {},
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              ),
               child: Text('Entregar'),
             ),
           ],

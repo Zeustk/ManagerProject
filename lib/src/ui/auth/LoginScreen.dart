@@ -201,32 +201,29 @@ class Login extends StatelessWidget {
                                   .verificarUsuario(usuarioVeri)
                                   .then((resultado) {
                                 print('El valor del resultado es : $resultado');
-                                if (resultado){
+                                if (resultado) {
                                   Get.to(Perfil_Usuario());
                                   _controllerAuth.guardarInfoSesionStorage(_controllerEmail.text, _controllerClave.text);
                                 }
                                 else{
                                   Get.snackbar(
-                                        "Verifice su correo y contraseña",
-                                        "Datos incorrectos",
-                                        snackPosition: SnackPosition
-                                            .TOP, // Posición del Snackbar en la pantalla
-                                        duration: Duration(
-                                            seconds:
-                                                3), // Duración del Snackbar
-                                        backgroundColor: Colors
-                                            .white, // Color de fondo del Snackbar
-                                        colorText: Colors
-                                            .blue, // Color del texto del Snackbar
-                                        borderRadius:
-                                            10.0, // Radio de borde del Snackbar
-                                        margin: EdgeInsets.symmetric(
-                                            vertical:
-                                                200.0), // Margen vertical del Snackbar
-                                      );
-
+                                    "Verifice su correo y contraseña",
+                                    "Datos incorrectos",
+                                    snackPosition: SnackPosition
+                                        .TOP, // Posición del Snackbar en la pantalla
+                                    duration: Duration(
+                                        seconds: 3), // Duración del Snackbar
+                                    backgroundColor: Colors
+                                        .white, // Color de fondo del Snackbar
+                                    colorText: Colors
+                                        .blue, // Color del texto del Snackbar
+                                    borderRadius:
+                                        10.0, // Radio de borde del Snackbar
+                                    margin: EdgeInsets.symmetric(
+                                        vertical:
+                                            200.0), // Margen vertical del Snackbar
+                                  );
                                 }
-                                
                               }).catchError((error) {
                                 print(
                                     'Ocurrió un error de consultar el usuario: $error');
