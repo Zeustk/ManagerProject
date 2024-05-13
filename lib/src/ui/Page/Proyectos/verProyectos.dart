@@ -75,7 +75,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
       ),
       drawer: SafeArea(child: Draweer()),
       body: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
+        scrollDirection: Axis.vertical,
         child: Center(
           child: Container(
             width: 400,
