@@ -5,6 +5,7 @@ import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/controllers/DetallesController.dart';
 import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
+import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/DetalleProyecto_model.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
@@ -62,6 +63,7 @@ class _LabelsState extends State<Labels> {
   ProyectoController gestionProyectos = ProyectoController();
   UsuariosController gestionUsuarios = UsuariosController();
   DetallesController gestionProyectoUsuarios = DetallesController();
+  AuthController gestionAuth =AuthController();
 
   @override
   void initState() {
@@ -207,7 +209,7 @@ class _LabelsState extends State<Labels> {
     );
   }
 
-  void RegistrarProyecto() {
+  void RegistrarProyecto() async {
     ProyectoModel proyecto = ProyectoModel(
       fechaFinalizacion: DateTime.parse(__controllerFechaFinalizacion.text),
       fechaInicio: DateTime.parse(_controllerFechaInicio.text),
@@ -226,6 +228,10 @@ class _LabelsState extends State<Labels> {
       print('Ocurrió un error al registrar el proyecto: $error');
       return;
     });
+
+    UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
+
+    usuariosSeleccionados.add(usuarioActual);
 
     for (var usuario in usuariosSeleccionados) {
       DetallesModel DetallesProyectoUsuario = DetallesModel(

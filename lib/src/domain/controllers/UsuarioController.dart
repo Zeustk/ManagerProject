@@ -31,6 +31,18 @@ class UsuariosController extends GetxController {
     }
   }
 
+
+  Future<UsuarioModel> getUsuarioPorId(UsuarioModel usuarioRecibido) async {
+    try {
+
+      return gestionUsuarios.getUsuarioId(usuarioRecibido);
+      
+    } catch (e) {
+      print(' el error es  $e');
+      return UsuarioModel(idUsuario: 0, email: 'adasds', clave: 'asdasd', idRol: null);
+    }
+  }
+
   Future<String> actualizarUsuarios(UsuarioModel usuarioRecibido) async {
     try {
       return await gestionUsuarios.actualizarUsuarios(usuarioRecibido);

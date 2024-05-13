@@ -15,9 +15,9 @@ class ProyectoController extends GetxController {
     }
   }
 
-  Future<List<ProyectoModel>> consultarProyectos() async {
+  Future<List<ProyectoModel>> consultarProyectos(int id_Usuario) async {
     try {
-      return await gestionProyectos.consultarProyecto();
+      return await gestionProyectos.consultarProyecto(id_Usuario);
     } catch (error) {
       // Manejar el error al consultar los proyectos
       print('Error al consultar los proyectos (Controllers): $error');
@@ -43,5 +43,10 @@ class ProyectoController extends GetxController {
       print('Error al eliminar el proyecto(Controllers): $error');
       return 'Error al eliminar el proyecto';
     }
+  }
+
+
+  void cambiarEstadoProyectosMemoriaPorLogin(){
+    gestionProyectos.cambiarEstadoPorLogin();
   }
 }

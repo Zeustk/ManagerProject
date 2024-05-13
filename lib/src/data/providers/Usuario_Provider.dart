@@ -36,6 +36,20 @@ class UsuarioProvider extends CrudProvider<UsuarioModel> {
     }
   }
 
+   Future<UsuarioModel> getUsuarioId(UsuarioModel usuarioRecibido) async {
+    try {
+      Map<String, dynamic> usuarioVeri =
+          await busquedaPersonalizada(usuarioRecibido, 'getUsuarioConId');
+
+      UsuarioModel usuario = UsuarioModel.fromJson(usuarioVeri);
+
+      return usuario;
+    } catch (e) {
+      print(' el error es  $e');
+      return UsuarioModel(idUsuario: 0, email: 'adasds', clave: 'asdasd', idRol: null);
+    }
+  }
+
   Future<String> actualizarUsuarios(UsuarioModel usuarioRecibido) async {
     try {
       return await actualizar(usuarioRecibido, 'UpdateUsuarios');

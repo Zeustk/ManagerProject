@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/controllers/TareasController.dart';
+import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/Tareas_model.dart';
+import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/detalleTarea.dart';
 import 'package:manager_proyect/src/widgets/BotonProyecto.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
@@ -16,6 +18,9 @@ class Ver_Tareas extends StatefulWidget {
 
 class _Ver_TareasState extends State<Ver_Tareas> {
   TareasController gestionTareas = TareasController();
+  AuthController gestionAuth=AuthController();
+  int id_Proyecto = Get.arguments;
+  
 
   List<TareasModel> tareas = [];
 
@@ -27,7 +32,8 @@ class _Ver_TareasState extends State<Ver_Tareas> {
 
   Future<void> cargarTareas() async {
     try {
-      List<TareasModel> tareasList = await gestionTareas.consultarTareas();
+      UsuarioModel usuarioActual=await gestionAuth.obtenerDatosDeStorage();
+      List<TareasModel> tareasList = await gestionTareas.consultarTareas(id_Proyecto,usuarioActual.idUsuario);
       setState(() {
         tareas = tareasList;
       });

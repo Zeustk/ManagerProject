@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/data/providers/auth_Provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
 import 'package:manager_proyect/src/ui/auth/LoginScreen.dart';
 
@@ -34,11 +35,11 @@ class AuthController extends GetxController {
     }
   }
 
-  void guardarInfoSesionStorage(String email, String clave){
+  void guardarInfoSesionStorage(String email, String clave,int id_Usuario){
 
     try{
 
-      _authService.guardarInformacionUsuarioStorage(email, clave);
+      _authService.guardarInformacionUsuarioStorage(email, clave,id_Usuario);
       
     }catch(error){
 
@@ -66,7 +67,10 @@ class AuthController extends GetxController {
 
   }
 
-  
+  Future<UsuarioModel> obtenerDatosDeStorage(){
+
+    return _authService.ObtenerDatosStorage();
+  }
 
 
 }

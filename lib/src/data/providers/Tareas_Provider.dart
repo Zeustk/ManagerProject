@@ -10,9 +10,9 @@ class TareasProvider extends CrudProvider<TareasModel> {
     }
   }
 
-  Future<List<TareasModel>> consultaTareas() async {
+  Future<List<TareasModel>> consultaTareas(int id_Proyecto,int id_Usuario) async {
     try {
-      List<Map<String, dynamic>> tareasMapa = await consultar('getTarea');
+      List<Map<String, dynamic>> tareasMapa = await consultar('getTarea/$id_Proyecto/$id_Usuario');
 
       List<TareasModel> listaTareas =
           tareasMapa.map((map) => TareasModel.fromJson(map)).toList();
