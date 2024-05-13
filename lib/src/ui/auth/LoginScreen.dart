@@ -6,7 +6,6 @@ import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
 import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
-import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
 import 'package:manager_proyect/src/ui/auth/Registrarse.dart';
 
 class Login extends StatelessWidget {

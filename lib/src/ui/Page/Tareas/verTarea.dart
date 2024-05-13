@@ -75,7 +75,7 @@ class _Ver_TareasState extends State<Ver_Tareas> {
               children: tareas.map((tarea) {
                 return GestureDetector(
                   onTap: () {
-                    // Acción al tocar una tarea (puede navegar a la pantalla de detalles)
+                    
                     
                   },
                   child: Column(

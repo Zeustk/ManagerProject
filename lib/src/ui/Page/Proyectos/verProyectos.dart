@@ -120,6 +120,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                           print('Tapped on project: ${proyecto.nombre}');
                         },
                         child: Container(
+                          color: Colors.red,
                           alignment: Alignment.topCenter,
                           height: 170,
                           child: Progresos_Proyectos(
