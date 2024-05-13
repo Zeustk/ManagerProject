@@ -57,15 +57,15 @@ class _Ver_TareasState extends State<Ver_Tareas> {
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 4, left: 2),
+                  padding: const EdgeInsets.only(right: 4, left: 2, bottom: 40),
                   child: Boton_next(texto: 'Todos'),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 4),
+                  padding: const EdgeInsets.only(right: 4, bottom: 40),
                   child: Boton_next(texto: 'Proceso'),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 0),
+                  padding: const EdgeInsets.only(right: 0, bottom: 40),
                   child: Boton_next(texto: 'Completados'),
                 ),
               ],
@@ -76,7 +76,7 @@ class _Ver_TareasState extends State<Ver_Tareas> {
                 return GestureDetector(
                   onTap: () {
                     // Acción al tocar una tarea (puede navegar a la pantalla de detalles)
-                    Get.to(DetalleTarea(),arguments: tarea);
+                    Get.to(DetalleTarea(), arguments: tarea);
                   },
                   child: Column(
                     children: [

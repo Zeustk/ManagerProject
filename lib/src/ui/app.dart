@@ -6,7 +6,6 @@ import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
 
 import 'package:manager_proyect/src/constante/constantes.dart';
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -17,7 +16,6 @@ class MyApp extends StatelessWidget {
       title: 'Login Page',
       home: Principal(),
       getPages: [
-  
         GetPage(name: '/profile', page: () => Perfil_Usuario()),
       ],
       theme: ThemeData(

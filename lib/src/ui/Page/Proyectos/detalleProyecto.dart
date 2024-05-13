@@ -11,9 +11,14 @@ class DetalleProyectoPage extends StatelessWidget {
         ),
         backgroundColor: Colors.blueGrey[900],
       ),
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: _DetalleProyecto(),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Padding(
+            padding: EdgeInsets.all(20.0),
+            child: _DetalleProyecto(),
+          ),
+        ),
       ),
     );
   }
@@ -31,65 +36,94 @@ class _DetalleProyecto extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Líder del Proyecto:',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Líder del Proyecto:',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 8),
+                TextField(
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    color: Colors.white,
+                  ),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    fillColor: Colors.white,
+                    filled: true,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Nombre del Proyecto:',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 8),
+                TextField(
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    color: Colors.white,
+                  ),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    fillColor: Colors.white,
+                    filled: true,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Fecha de Inicio:',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 8),
+                TextField(
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    color: Colors.white,
+                  ),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    fillColor: Colors.white,
+                    filled: true,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Fecha de Finalización:',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 8),
+                TextField(
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    color: Colors.white,
+                  ),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    fillColor: Colors.white,
+                    filled: true,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 8),
-            Text(
-              'Nombre del Proyecto:',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Fecha de Inicio:',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Fecha de Finalización:',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Integrantes:',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-        
-            SizedBox(height: 8),
-            Text(
-              '- Integrante 1',
-              style: TextStyle(fontSize: 16, color: Colors.white),
-            ),
-            Text(
-              '- Integrante 2',
-              style: TextStyle(fontSize: 16, color: Colors.white),
-            ),
-            Text(
-              '- Integrante 3',
-              style: TextStyle(fontSize: 16, color: Colors.white),
-            ),
-            // Agrega más integrantes si es necesario
           ],
         ),
       ),
