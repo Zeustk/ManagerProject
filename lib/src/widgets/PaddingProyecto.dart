@@ -8,14 +8,14 @@ class Progresos_Proyectos extends StatelessWidget {
   final String nombre_proyecto;
   final String descripcion;
 
-  const Progresos_Proyectos(
-      {super.key,
-      required this.porcentaje,
-      required this.color,
-      required this.texto,
-      required this.nombre_proyecto,
-      required this.descripcion,
-      });
+  const Progresos_Proyectos({
+    super.key,
+    required this.porcentaje,
+    required this.color,
+    required this.texto,
+    required this.nombre_proyecto,
+    required this.descripcion,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +25,10 @@ class Progresos_Proyectos extends StatelessWidget {
         scrollDirection: Axis.vertical,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(30),
             color: Colors.white,
           ),
-          height: 120,
+          height: 130,
           width: 300,
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -37,7 +37,7 @@ class Progresos_Proyectos extends StatelessWidget {
                 Progess_custom(
                     alto: 20, ancho: 300, progress: porcentaje, color: color),
                 Padding(
-                  padding: const EdgeInsets.only(right: 200),
+                  padding: const EdgeInsets.only(right: 10),
                   child: Text(
                     texto,
                     style: TextStyle(color: color, fontWeight: FontWeight.bold),
@@ -45,7 +45,7 @@ class Progresos_Proyectos extends StatelessWidget {
                 ),
                 Divider(),
                 Padding(
-                  padding: const EdgeInsets.only(right: 140),
+                  padding: const EdgeInsets.only(right: 10),
                   child: Text(
                     '${nombre_proyecto}',
                     style: TextStyle(
@@ -54,7 +54,7 @@ class Progresos_Proyectos extends StatelessWidget {
                 ),
                 Divider(),
                 Padding(
-                  padding: const EdgeInsets.only(right: 200),
+                  padding: const EdgeInsets.only(right: 10),
                   child: Text(
                     '$descripcion',
                     style: TextStyle(
