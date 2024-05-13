@@ -1,7 +1,6 @@
 import 'package:manager_proyect/src/data/providers/Crud_Provider.dart';
 import 'package:manager_proyect/src/domain/models/Tareas_model.dart';
 
-
 class TareasProvider extends CrudProvider<TareasModel> {
   Future<String> registrarTarea(TareasModel tareaRecibida) async {
     try {
@@ -26,22 +25,20 @@ class TareasProvider extends CrudProvider<TareasModel> {
   }
 
   Future<String> actualizarTarea(TareasModel tarea) async {
-  try {
-    return await actualizar(tarea, 'UpdateTarea');
-  } catch (error) {
-    
-    print('Error al actualizar la Tarea: $error');
-    return 'Error al actualizar la Tarea';
+    try {
+      return await actualizar(tarea, 'UpdateTarea');
+    } catch (error) {
+      print('Error al actualizar la Tarea: $error');
+      return 'Error al actualizar la Tarea';
+    }
   }
-}
 
-Future<String> eliminarTareas(int id) async {
-  try {
-    return await eliminar(id, 'DeleteTareas');
-  } catch (error) {
-    
-    print('Error al eliminar la Tarea');
-    return 'Error al eliminar la Tarea';
+  Future<String> eliminarTareas(int id) async {
+    try {
+      return await eliminar(id, 'DeleteTareas');
+    } catch (error) {
+      print('Error al eliminar la Tarea');
+      return 'Error al eliminar la Tarea';
+    }
   }
-}
 }

@@ -51,7 +51,7 @@ class _Ver_TareasState extends State<Ver_Tareas> {
       drawer: Draweer(),
       bottomNavigationBar: BotonNavi(),
       body: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
+        scrollDirection: Axis.vertical,
         child: Column(
           children: [
             Row(
@@ -84,7 +84,8 @@ class _Ver_TareasState extends State<Ver_Tareas> {
                         nombreTarea: tarea.nombre,
                         descripcion: tarea.descripcion,
                         texto: 'EN PROCESO',
-                        color: Colors.blue, // Puedes ajustar el color según lo desees
+                        color: Colors
+                            .blue, // Puedes ajustar el color según lo desees
                       ),
                       SizedBox(height: 12),
                     ],
