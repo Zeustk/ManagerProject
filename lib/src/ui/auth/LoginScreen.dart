@@ -6,7 +6,6 @@ import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
 import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
-import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
 import 'package:manager_proyect/src/ui/auth/Registrarse.dart';
 
 class Login extends StatelessWidget {
@@ -191,6 +190,7 @@ class Login extends StatelessWidget {
                               ),
                             ]),
                             onPressed: () {
+                              print(_controllerEmail.text);
                               UsuarioModel usuarioVeri = UsuarioModel(
                                   idUsuario: 0,
                                   email: _controllerEmail.text,
@@ -203,7 +203,7 @@ class Login extends StatelessWidget {
                                 print('El valor del resultado es : $resultado');
                                 if (resultado){
                                   Get.to(Perfil_Usuario());
-                                  _controllerAuth.guardarInfoSesionStorage(controllerEmail.text, controllerClave.text);
+                                  _controllerAuth.guardarInfoSesionStorage(_controllerEmail.text, _controllerClave.text);
                                 }
                                 else{
                                   Get.snackbar(
