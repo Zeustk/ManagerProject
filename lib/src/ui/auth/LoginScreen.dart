@@ -190,6 +190,7 @@ class Login extends StatelessWidget {
                               ),
                             ]),
                             onPressed: () {
+                              print(_controllerEmail.text);
                               UsuarioModel usuarioVeri = UsuarioModel(
                                   idUsuario: 0,
                                   email: _controllerEmail.text,
@@ -202,8 +203,9 @@ class Login extends StatelessWidget {
                                 print('El valor del resultado es : $resultado');
                                 if (resultado) {
                                   Get.to(Perfil_Usuario());
-                                    _controllerAuth.guardarInfoSesionStorage(_controllerEmail.text, _controllerClave.text); 
-                                } else {
+                                  _controllerAuth.guardarInfoSesionStorage(_controllerEmail.text, _controllerClave.text);
+                                }
+                                else{
                                   Get.snackbar(
                                     "Verifice su correo y contraseña",
                                     "Datos incorrectos",
