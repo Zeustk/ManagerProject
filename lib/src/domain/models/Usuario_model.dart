@@ -35,4 +35,12 @@ class UsuarioModel {
         "Clave": clave,
         "Id_rol": idRol,
       };
+
+
+      
+     @override
+  String toString() {
+    return 'UsuarioModel{idUsuario: $idUsuario, }';
+  }
+
 }

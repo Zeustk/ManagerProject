@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
+import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
+import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
+import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
@@ -23,8 +26,10 @@ class Ver_Proyectos extends StatefulWidget {
 }
 
 class _Ver_ProyectosState extends State<Ver_Proyectos> {
-  final ProyectoController gestionProyectos = ProyectoController();
+
+  final AuthController gestionAuth = AuthController();
   List<ProyectoModel> proyectos = [];
+  final ProyectoController gestionProyectos=ProyectoController();
 
   @override
   void initState() {
@@ -34,8 +39,12 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
 
   Future<void> cargarProyectos() async {
     try {
+
+      UsuarioModel usuarioActual=await gestionAuth.obtenerDatosDeStorage();
+
+
       List<ProyectoModel> proyectosList =
-          await gestionProyectos.consultarProyectos();
+          await gestionProyectos.consultarProyectos(usuarioActual.idUsuario);
       setState(() {
         proyectos = proyectosList;
       });
@@ -122,10 +131,11 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                         onTap: () {
                           /* if (tipo[0] == 'M') {
                             Get.to(DetalleProyectoPage());
-                          } else {
-                            Get.to(Ver_Tareas());
-                          } */
-
+                          }
+                          else{
+                            Get.to(Ver_Tareas(),arguments: proyecto.idProyecto);
+                          }
+                          
                           print('Tapped on project: ${proyecto.nombre}');
                         },
                         child: Container(

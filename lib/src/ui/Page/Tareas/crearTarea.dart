@@ -5,7 +5,7 @@ import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/controllers/TareasController.dart';
 import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
-import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
+import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/Tareas_model.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
@@ -13,6 +13,7 @@ import 'package:manager_proyect/src/widgets/Drawer.dart';
 
 ProyectoController gestionProyectos = ProyectoController();
 UsuariosController gestionUsuarios = UsuariosController();
+AuthController gestionAuth = AuthController();
 
 class Crear_Tareas extends StatefulWidget {
   @override
@@ -26,11 +27,19 @@ class _Crear_tareasState extends State<Crear_Tareas> {
   @override
   void initState() {
     super.initState();
-    gestionProyectos.consultarProyectos().then((listaProyectos) {
-      setState(() {
-        proyectos = listaProyectos.map((proyecto) => proyecto.nombre).toList();
+
+    gestionAuth.obtenerDatosDeStorage().then((value) {
+      gestionProyectos
+          .consultarProyectos(value.idUsuario)
+          .then((listaProyectos) {
+        setState(() {
+          proyectos =
+              listaProyectos.map((proyecto) => proyecto.nombre).toList();
+        });
       });
     });
+
+
 
     gestionUsuarios.consultarUsuario().then((listaUsuarios) {
       setState(() {
@@ -425,13 +434,16 @@ class _LabelsTareasState extends State<LabelsTareas> {
     }
   }
 
-  Future<int> verificarProyecto() {
+  Future<int> verificarProyecto() async {
     print(_controllerNombreProyecto.text);
 
-    return gestionProyectos.consultarProyectos().then((listaProyectos) {
+    UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
+
+    return gestionProyectos
+        .consultarProyectos(usuarioActual.idUsuario)
+        .then((listaProyectos) {
       for (var proyecto in listaProyectos) {
         if (proyecto.nombre == _controllerNombreProyecto.text) {
-          print('hola');
           return proyecto
               .idProyecto; // Devolver el ID del proyecto si se encuentra
         }

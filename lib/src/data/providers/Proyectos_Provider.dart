@@ -27,22 +27,30 @@ class ProyectosProvider extends CrudProvider<ProyectoModel>{
   }
 }
 
-Future<List<ProyectoModel>> consultarProyecto() async {
+void cambiarEstadoPorLogin(){
+      _proyectosMemoriaActualizado=false;
+    }
+
+Future<List<ProyectoModel>> consultarProyecto(int id_Usuario) async {
 
   try {
 
-    print(_proyectosMemoriaActualizado);
-
+   
     if (!_proyectosMemoriaActualizado){
 
       _proyectosMemoriaActualizado=true;
 
-      List<Map<String, dynamic>> listaMapas = await consultar('getProyecto');
+      List<Map<String, dynamic>> listaMapas = await consultar('getProyecto/$id_Usuario');
 
       _proyectosMemoria = listaMapas.map((map) => ProyectoModel.fromJson(map)).toList();
 
+      if (_proyectosMemoria.isEmpty){
+        _proyectosMemoriaActualizado=false;
+      }
+
       
     }     
+
     
     // Convertir cada mapa a un objeto ProyectoModel usando el método fromJson
 
@@ -54,6 +62,8 @@ Future<List<ProyectoModel>> consultarProyecto() async {
     print('Error al consultar los proyectos: $error');
     return [];
   }
+
+  
 }
 
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
 import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
@@ -10,7 +11,10 @@ import 'package:manager_proyect/src/ui/auth/Registrarse.dart';
 
 class Login extends StatelessWidget {
   final AuthController _controllerAuth = Get.find();
+  final UsuariosController gestionUsuarios = UsuariosController();
   final UsuariosController _gestionUsuarioDb = UsuariosController();
+  final ProyectoController gestionProyectos = ProyectoController();
+
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerClave = TextEditingController();
 
@@ -169,67 +173,69 @@ class Login extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               left: 110, top: 20, right: 90),
                           child: MaterialButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            height: 40,
-                            color: Colors.white,
-                            child: Row(children: [
-                              Text(
-                                'Iniciar Sesion',
-                                style: TextStyle(
-                                    color: Colors.blue,
-                                    fontSize: 15,
-                                    fontFamily: AutofillHints.addressCity),
-                              ),
-                              SizedBox(
-                                width: 6,
-                              ),
-                              Icon(
-                                Icons.arrow_forward,
-                                color: Colors.blue,
-                              ),
-                            ]),
-                            onPressed: () {
-                              print(_controllerEmail.text);
-                              UsuarioModel usuarioVeri = UsuarioModel(
-                                  idUsuario: 0,
-                                  email: _controllerEmail.text,
-                                  clave: _controllerClave.text,
-                                  idRol: null);
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                              height: 40,
+                              color: Colors.white,
+                              child: Row(children: [
+                                Text(
+                                  'Iniciar Sesion',
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontSize: 15,
+                                      fontFamily: AutofillHints.addressCity),
+                                ),
+                                SizedBox(
+                                  width: 6,
+                                ),
+                                Icon(
+                                  Icons.arrow_forward,
+                                  color: Colors.blue,
+                                ),
+                              ]),
+                              onPressed: () async {
+                                print(_controllerEmail.text);
+                                UsuarioModel usuarioVeri = UsuarioModel(
+                                    idUsuario: 0,
+                                    email: _controllerEmail.text,
+                                    clave: _controllerClave.text,
+                                    idRol: null);
 
-                              _gestionUsuarioDb
-                                  .verificarUsuario(usuarioVeri)
-                                  .then((resultado) {
-                                print('El valor del resultado es : $resultado');
-                                if (resultado) {
-                                  Get.to(Perfil_Usuario());
-                                  _controllerAuth.guardarInfoSesionStorage(_controllerEmail.text, _controllerClave.text);
+                                try {
+                                  bool resultado = await _gestionUsuarioDb
+                                      .verificarUsuario(usuarioVeri);
+                                  print(
+                                      'El valor del resultado es : $resultado');
+
+                                  if (resultado) {
+                                    Get.to(Perfil_Usuario());
+                                    UsuarioModel UsuarioConId =
+                                        await gestionUsuarios
+                                            .getUsuarioPorId(usuarioVeri);
+                                    print(UsuarioConId);
+                                    gestionProyectos.cambiarEstadoProyectosMemoriaPorLogin();
+                                    _controllerAuth.guardarInfoSesionStorage(
+                                        _controllerEmail.text,
+                                        _controllerClave.text,
+                                        UsuarioConId.idUsuario);
+                                  } else {
+                                    Get.snackbar(
+                                      "Verifique su correo y contraseña",
+                                      "Datos incorrectos",
+                                      snackPosition: SnackPosition.TOP,
+                                      duration: Duration(seconds: 3),
+                                      backgroundColor: Colors.white,
+                                      colorText: Colors.blue,
+                                      borderRadius: 10.0,
+                                      margin:
+                                          EdgeInsets.symmetric(vertical: 200.0),
+                                    );
+                                  }
+                                } catch (error) {
+                                  print(
+                                      'Ocurrió un error al consultar el usuario: $error');
                                 }
-                                else{
-                                  Get.snackbar(
-                                    "Verifice su correo y contraseña",
-                                    "Datos incorrectos",
-                                    snackPosition: SnackPosition
-                                        .TOP, // Posición del Snackbar en la pantalla
-                                    duration: Duration(
-                                        seconds: 3), // Duración del Snackbar
-                                    backgroundColor: Colors
-                                        .white, // Color de fondo del Snackbar
-                                    colorText: Colors
-                                        .blue, // Color del texto del Snackbar
-                                    borderRadius:
-                                        10.0, // Radio de borde del Snackbar
-                                    margin: EdgeInsets.symmetric(
-                                        vertical:
-                                            200.0), // Margen vertical del Snackbar
-                                  );
-                                }
-                              }).catchError((error) {
-                                print(
-                                    'Ocurrió un error de consultar el usuario: $error');
-                              });
-                            },
-                          ),
+                              }),
                         )
                       ],
                     ),

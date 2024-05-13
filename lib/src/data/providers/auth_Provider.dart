@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
+import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 
@@ -110,14 +112,15 @@ class AuthService {
     }
   }
 
-  void guardarInformacionUsuarioStorage(String email, String clave) async {
+  void guardarInformacionUsuarioStorage(String email, String clave,int id_Usuario) async {
     
     await _storage.write(key: 'email', value: email);
     await _storage.write(key: 'clave', value: clave);
+    await _storage.write(key: 'id_Usuario', value: id_Usuario.toString());
 
 // Obtener todos los valores del almacenamiento seguro
-    // Map<String, String> allValues = await storage.readAll();
-    //print('Contenido del almacenamiento seguro: $allValues');
+     Map<String, String> allValues = await _storage.readAll();
+    print('Contenido del almacenamiento seguro: $allValues');
   }
 
   Future<bool> verificarSesionUsuarioStorage() async {
@@ -135,5 +138,19 @@ class AuthService {
   Future<void> CerrarSesionUsuarioStorage() async {
     // Elimina todos los datos guardados en el almacenamiento seguro
     await _storage.deleteAll();
+  }
+
+   Future<UsuarioModel> ObtenerDatosStorage() async {
+
+    String? email = await _storage.read(key: 'email');
+    String? clave = await _storage.read(key: 'clave');
+    String? id_Usuario = await _storage.read(key: 'id_Usuario');
+
+    if (email != null && clave != null && id_Usuario !=null) {
+
+     return UsuarioModel(idUsuario:int.parse(id_Usuario) , email: email, clave: clave, idRol: null);
+    } else {
+      return UsuarioModel(idUsuario: 0, email: 'asdad', clave: 'asdasda', idRol: null);
+    }
   }
 }

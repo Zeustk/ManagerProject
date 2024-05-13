@@ -13,9 +13,9 @@ class TareasController extends GetxController {
     }
   }
 
-  Future<List<TareasModel>> consultarTareas() async {
+  Future<List<TareasModel>> consultarTareas(int id_Proyecto,int id_Usuario) async {
     try {
-      return await gestionTareas.consultaTareas();
+      return await gestionTareas.consultaTareas(id_Proyecto,id_Usuario);
     } catch (error) {
       return [];
     }
