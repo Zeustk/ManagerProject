@@ -142,14 +142,49 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                         },
                         child: Container(
                           alignment: Alignment.topCenter,
-                          height: 170,
-                          child: Progresos_Proyectos(
-                            porcentaje: 0.50,
-                            color: Colors.blue,
-                            texto: 'En proceso',
-                            nombre_proyecto: proyecto.nombre,
-                            descripcion: proyecto.descripcion,
-                          ),
+                          height: 150,
+                          child: Row(children: [
+                            Progresos_Proyectos(
+                              porcentaje: 0.50,
+                              color: Colors.blue,
+                              texto: 'En proceso',
+                              nombre_proyecto: proyecto.nombre,
+                              descripcion: proyecto.descripcion,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.only(left: 10, right: 10),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white,
+                                  ),
+                                  child: IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.delete_rounded,
+                                        color: Colors.red,
+                                      )),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white,
+                                  ),
+                                  child: IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.update,
+                                        color: Colors.green,
+                                      )),
+                                )
+                              ],
+                            )
+                          ]),
                         ),
                       ),
                     );
