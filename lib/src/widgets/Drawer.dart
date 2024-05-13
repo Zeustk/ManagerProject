@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/crearTarea.dart';
@@ -65,6 +66,8 @@ class Draweer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    AuthController _controllerAuth = Get.find();
     return Drawer(
       backgroundColor: Colors.white,
       child: Column(
@@ -95,6 +98,7 @@ class Draweer extends StatelessWidget {
                     MaterialStateProperty.all<Color>(kSecondaryColor),
               ),
               onPressed: () {
+                _controllerAuth.CerrarSesionStorage();
                 Get.to(Principal());
               },
               child: const Text(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
@@ -12,6 +13,8 @@ class AuthService {
   final String redirectUri =
       'https://projectmanager-dd4d0.firebaseapp.com/__/auth/handler';
   final String clientSecret = '4ad1f1b5fa9d641afc429707434470c4b2929b4';
+
+  final FlutterSecureStorage _storage = FlutterSecureStorage();
 
   Future<void> signOut() async {
     await _auth.signOut();
@@ -105,5 +108,32 @@ class AuthService {
       print("Error al iniciar sesión con GitHub: $error");
       return null;
     }
+  }
+
+  void guardarInformacionUsuarioStorage(String email, String clave) async {
+    
+    await _storage.write(key: 'email', value: email);
+    await _storage.write(key: 'clave', value: clave);
+
+// Obtener todos los valores del almacenamiento seguro
+    // Map<String, String> allValues = await storage.readAll();
+    //print('Contenido del almacenamiento seguro: $allValues');
+  }
+
+  Future<bool> verificarSesionUsuarioStorage() async {
+
+    String? email = await _storage.read(key: 'email');
+    String? clave = await _storage.read(key: 'clave');
+
+    if (email != null && clave != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<void> CerrarSesionUsuarioStorage() async {
+    // Elimina todos los datos guardados en el almacenamiento seguro
+    await _storage.deleteAll();
   }
 }

@@ -201,9 +201,12 @@ class Login extends StatelessWidget {
                                   .verificarUsuario(usuarioVeri)
                                   .then((resultado) {
                                 print('El valor del resultado es : $resultado');
-                                (resultado)
-                                    ? Get.to(Perfil_Usuario())
-                                    : Get.snackbar(
+                                if (resultado){
+                                  Get.to(Perfil_Usuario());
+                                  _controllerAuth.guardarInfoSesionStorage(controllerEmail.text, controllerClave.text);
+                                }
+                                else{
+                                  Get.snackbar(
                                         "Verifice su correo y contraseña",
                                         "Datos incorrectos",
                                         snackPosition: SnackPosition
@@ -221,7 +224,9 @@ class Login extends StatelessWidget {
                                             vertical:
                                                 200.0), // Margen vertical del Snackbar
                                       );
-                                ;
+
+                                }
+                                
                               }).catchError((error) {
                                 print(
                                     'Ocurrió un error de consultar el usuario: $error');
@@ -247,8 +252,10 @@ class Login extends StatelessWidget {
     switch (auntenticacion.toUpperCase()) {
       case "GOOGLE":
         esCorrecta = await _controllerAuth.signIn('GOOGLE');
+        break;
       case "GITHUB":
         esCorrecta = await _controllerAuth.signIn('GITHUB');
+        break;
     }
 
     print(esCorrecta);

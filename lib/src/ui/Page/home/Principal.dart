@@ -1,7 +1,11 @@
+import 'dart:ffi';
+
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/domain/controllers/authController.dart';
+import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
 import 'package:manager_proyect/src/ui/auth/LoginScreen.dart';
 import 'package:manager_proyect/src/widgets/AnimacionIconosPrincipal.dart';
 
@@ -30,6 +34,10 @@ class _JumpingButtonState extends State<JumpingButton>
 
   @override
   Widget build(BuildContext context) {
+
+    
+    
+
     return TweenAnimationBuilder<double>(
       tween: Tween(begin: 2.0, end: 20.0),
       duration: const Duration(milliseconds: 1000),
@@ -75,6 +83,8 @@ class _JumpingButtonState extends State<JumpingButton>
 }
 
 class Principal extends StatelessWidget {
+
+  AuthController _controllerAuth = AuthController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,7 +156,7 @@ class Principal extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 35),
                     child: JumpingButton(
                       onPressed: () {
-                        Get.to(Login());
+                        InicioSesionPorStorage();
                       },
                     ),
                   ),
@@ -157,5 +167,16 @@ class Principal extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void InicioSesionPorStorage() async {
+
+    if (await _controllerAuth.verificarSesionStorage()){
+      Get.to(Perfil_Usuario());
+
+    }
+    else{
+      Get.to(Login());
+    }
   }
 }
