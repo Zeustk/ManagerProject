@@ -12,8 +12,8 @@ import 'package:manager_proyect/src/ui/auth/Registrarse.dart';
 class Login extends StatelessWidget {
   final AuthController _controllerAuth = Get.find();
   final UsuariosController _gestionUsuarioDb = UsuariosController();
-  TextEditingController controllerEmail = TextEditingController();
-  TextEditingController controllerClave = TextEditingController();
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerClave = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -193,8 +193,8 @@ class Login extends StatelessWidget {
                             onPressed: () {
                               UsuarioModel usuarioVeri = UsuarioModel(
                                   idUsuario: 0,
-                                  email: controllerEmail.text,
-                                  clave: controllerClave.text,
+                                  email: _controllerEmail.text,
+                                  clave: _controllerClave.text,
                                   idRol: null);
 
                               _gestionUsuarioDb
@@ -276,7 +276,7 @@ class Login extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: hintText,
               ),
-              controller: controllerEmail,
+              controller: _controllerEmail,
             ),
           ),
         ],
@@ -302,7 +302,7 @@ class Login extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: hintText,
               ),
-              controller: controllerClave,
+              controller: _controllerClave,
             ),
           ),
         ],

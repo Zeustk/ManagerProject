@@ -88,6 +88,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
       child: SafeArea(
         child: Column(
           children: [
@@ -104,7 +105,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                       Icons.account_circle,
                       color: kSecondaryColor,
                     ),
-                    labelStyle: TextStyle(color: Colors.black),
+                    labelStyle: TextStyle(color: Colors.blue),
                     border: UnderlineInputBorder(
                       borderRadius: BorderRadius.circular(40),
                     )),
@@ -119,7 +120,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                     labelText: 'Fecha De Inicio',
                     filled: true,
                     fillColor: Colors.white,
-                    labelStyle: selecionarColor,
+                    labelStyle: TextStyle(color: Colors.blue),
                     prefixIcon: Icon(
                       Icons.calendar_today,
                       color: kSecondaryColor,
@@ -140,7 +141,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                 decoration: InputDecoration(
                     labelText: 'Fecha de Finalización',
                     filled: true,
-                    labelStyle: selecionarColor,
+                    labelStyle: TextStyle(color: Colors.blue),
                     fillColor: Colors.white,
                     prefixIcon: Icon(
                       Icons.calendar_today,
@@ -166,7 +167,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                   decoration: InputDecoration(
                     labelText: 'Descripción',
                     filled: true,
-                    labelStyle: selecionarColor,
+                    labelStyle: TextStyle(color: Colors.blue),
                     fillColor: Colors.white,
                     prefixIcon: Icon(
                       Icons.comment,
@@ -182,7 +183,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(30.0),
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 40),
               child: Autocomplete<String>(
                 optionsBuilder: (TextEditingValue textEditingValue) {
                   if (textEditingValue.text.isEmpty) {
@@ -207,8 +208,10 @@ class _LabelsTareasState extends State<LabelsTareas> {
                   return TextField(
                     controller: textEditingController,
                     focusNode: focusNode,
-                    decoration:
-                        InputDecoration(labelText: 'Nombre Del Proyecto'),
+                    decoration: InputDecoration(
+                      labelStyle: TextStyle(color: Colors.white),
+                      labelText: 'Nombre Del Proyecto',
+                    ),
                   );
                 },
                 optionsViewBuilder: (BuildContext context,
@@ -219,11 +222,13 @@ class _LabelsTareasState extends State<LabelsTareas> {
                   return Align(
                     alignment: Alignment.topLeft,
                     child: Material(
+                      color: Colors.white70,
                       elevation: 4.0,
                       child: SizedBox(
+                        width: 200,
                         height: listViewHeight,
                         child: ListView.builder(
-                          padding: EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(10.0),
                           itemCount: options.length,
                           itemBuilder: (BuildContext context, int index) {
                             final String option = options.elementAt(index);
@@ -232,7 +237,8 @@ class _LabelsTareasState extends State<LabelsTareas> {
                                 onSelected(option);
                               },
                               child: ListTile(
-                                title: Text(option),
+                                title: Text(option,
+                                    style: TextStyle(color: Colors.blue)),
                               ),
                             );
                           },
@@ -243,8 +249,27 @@ class _LabelsTareasState extends State<LabelsTareas> {
                 },
               ),
             ),
-            SizedBox(height: 25),
-            Divider(color: Colors.grey),
+            CupertinoButton(
+              onPressed: () {},
+              color: Colors.white,
+              padding: EdgeInsets.all(16),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Subir Documento',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  Icon(
+                    Icons.file_upload,
+                    color: Colors.blue,
+                  )
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
+            Divider(color: Colors.white),
             Text(
               'Integrantes : ',
               style: TextStyle(
@@ -252,8 +277,11 @@ class _LabelsTareasState extends State<LabelsTareas> {
                   fontSize: 25,
                   fontFamily: AutofillHints.addressCity),
             ),
+            Stack(
+              children: [],
+            ),
             Padding(
-              padding: const EdgeInsets.all(40.0),
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 40),
               child: Autocomplete<String>(
                 optionsBuilder: (TextEditingValue textEditingValue) {
                   if (textEditingValue.text.isEmpty) {
@@ -290,7 +318,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                         Icons.search,
                         color: kSecondaryColor,
                       ),
-                      labelStyle: TextStyle(color: Colors.black),
+                      labelStyle: TextStyle(color: Colors.blue),
                       border: UnderlineInputBorder(
                         borderRadius: BorderRadius.circular(40),
                       ),
@@ -330,15 +358,20 @@ class _LabelsTareasState extends State<LabelsTareas> {
                 },
               ),
             ),
-            CupertinoButton(
-              onPressed: () {
-                registrarTarea();
-              },
-              alignment: Alignment.bottomCenter,
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(40),
-              child: const Text('Crear'),
-            )
+            Container(
+              padding: EdgeInsets.only(left: 20, right: 20, bottom: 50),
+              child: CupertinoButton(
+                onPressed: () {
+                  registrarTarea();
+                },
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(40),
+                child: const Text(
+                  'Crear',
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ),
+            ),
           ],
         ),
       ),
