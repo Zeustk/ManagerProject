@@ -20,7 +20,7 @@ class Progresos_Proyectos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 20, left: 30),
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
