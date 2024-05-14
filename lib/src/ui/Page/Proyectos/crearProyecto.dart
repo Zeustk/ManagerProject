@@ -102,7 +102,7 @@ class _LabelsState extends State<Labels> {
             Padding(
               padding: EdgeInsets.only(left: 30, right: 30),
               child: TextField(
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Colors.black),
                 controller: _controllerFechaInicio,
                 decoration: InputDecoration(
                   labelText: 'Fecha De Inicio',
@@ -127,7 +127,7 @@ class _LabelsState extends State<Labels> {
             Padding(
               padding: EdgeInsets.only(top: 30, left: 30, right: 30),
               child: TextField(
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Colors.black),
                 controller: __controllerFechaFinalizacion,
                 decoration: InputDecoration(
                   labelText: 'Fecha Fin',
@@ -152,7 +152,7 @@ class _LabelsState extends State<Labels> {
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: TextField(
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Colors.black),
                 controller: __controllerDescripcion,
                 decoration: InputDecoration(
                   labelText: 'Descripcion',

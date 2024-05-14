@@ -280,7 +280,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
             SizedBox(height: 20),
             Divider(color: Colors.white),
             Text(
-              'Integrantes : ',
+              'Integrante',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
@@ -316,6 +316,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                     FocusNode focusNode,
                     VoidCallback onFieldSubmitted) {
                   return TextField(
+                    style: TextStyle(color: Colors.black),
                     controller: textEditingController,
                     focusNode: focusNode,
                     decoration: InputDecoration(
