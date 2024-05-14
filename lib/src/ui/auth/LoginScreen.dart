@@ -213,7 +213,8 @@ class Login extends StatelessWidget {
                                         await gestionUsuarios
                                             .getUsuarioPorId(usuarioVeri);
                                     print(UsuarioConId);
-                                    gestionProyectos.cambiarEstadoProyectosMemoriaPorLogin();
+                                    gestionProyectos
+                                        .cambiarEstadoProyectosMemoriaPorLogin();
                                     _controllerAuth.guardarInfoSesionStorage(
                                         _controllerEmail.text,
                                         _controllerClave.text,

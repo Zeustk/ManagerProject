@@ -63,7 +63,7 @@ class _LabelsState extends State<Labels> {
   ProyectoController gestionProyectos = ProyectoController();
   UsuariosController gestionUsuarios = UsuariosController();
   DetallesController gestionProyectoUsuarios = DetallesController();
-  AuthController gestionAuth =AuthController();
+  AuthController gestionAuth = AuthController();
 
   @override
   void initState() {

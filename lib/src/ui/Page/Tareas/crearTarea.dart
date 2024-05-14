@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -10,6 +12,8 @@ import 'package:manager_proyect/src/domain/models/Tareas_model.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
 import 'package:manager_proyect/src/widgets/Drawer.dart';
+
+import 'package:flutter/services.dart';
 
 ProyectoController gestionProyectos = ProyectoController();
 UsuariosController gestionUsuarios = UsuariosController();
@@ -38,8 +42,6 @@ class _Crear_tareasState extends State<Crear_Tareas> {
         });
       });
     });
-
-
 
     gestionUsuarios.consultarUsuario().then((listaUsuarios) {
       setState(() {
@@ -401,16 +403,16 @@ class _LabelsTareasState extends State<LabelsTareas> {
           return;
         }
 
-        // Aquí va el código para registrar la tarea utilizando los IDs obtenidos
         TareasModel tarea = TareasModel(
-          nombre: _controllerNombre.text,
-          fechaInicio: DateTime.parse(_controllerFechaInicio.text),
-          fechaFinalizacion: DateTime.parse(_controllerFechaFinalizacion.text),
-          descripcion: _controllerDescripcion.text,
-          porcentajeTarea: 6.7,
-          idProyecto: idProyecto,
-          idUsuario: idUsuario,
-        );
+            nombre: _controllerNombre.text,
+            fechaInicio: DateTime.parse(_controllerFechaInicio.text),
+            fechaFinalizacion:
+                DateTime.parse(_controllerFechaFinalizacion.text),
+            descripcion: _controllerDescripcion.text,
+            porcentajeTarea: 6.7,
+            idProyecto: idProyecto,
+            idUsuario: idUsuario,
+            urlpdf: 'hola');
 
         gestionTareas.registrarTareas(tarea).then((resultado) {
           print('El resultado de registrar la tarea es: $resultado');
@@ -460,8 +462,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
       for (var usuario in listaUsuarios) {
         if (usuario.email == _controllerIntegrante.text) {
           print('hola');
-          return usuario
-              .idUsuario; // Devolver el ID del proyecto si se encuentra
+          return usuario.idUsuario;
         }
       }
       return -1; // Devolver -1 si el proyecto no se encuentra

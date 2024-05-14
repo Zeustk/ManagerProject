@@ -26,10 +26,9 @@ class Ver_Proyectos extends StatefulWidget {
 }
 
 class _Ver_ProyectosState extends State<Ver_Proyectos> {
-
   final AuthController gestionAuth = AuthController();
   List<ProyectoModel> proyectos = [];
-  final ProyectoController gestionProyectos=ProyectoController();
+  final ProyectoController gestionProyectos = ProyectoController();
 
   @override
   void initState() {
@@ -39,9 +38,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
 
   Future<void> cargarProyectos() async {
     try {
-
-      UsuarioModel usuarioActual=await gestionAuth.obtenerDatosDeStorage();
-
+      UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
 
       List<ProyectoModel> proyectosList =
           await gestionProyectos.consultarProyectos(usuarioActual.idUsuario);
@@ -56,8 +53,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
 
   @override
   Widget build(BuildContext context) {
-
-    String tipo= Get.arguments as String; 
+    /* String tipo = Get.arguments as String; */
 
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
@@ -120,7 +116,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                     ],
                   ),
                 ),
-                ListView.builder(
+                /* ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: proyectos.length,
@@ -130,14 +126,13 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: GestureDetector(
                         onTap: () {
-
-                          if (tipo[0]=='M'){
+                           if (tipo[0] == 'M') {
                             Get.to(DetalleProyectoPage());
                           }
                           else{
                             Get.to(Ver_Tareas(),arguments: proyecto.idProyecto);
-                          }
-                          
+                          } 
+
                           print('Tapped on project: ${proyecto.nombre}');
                         },
                         child: Container(
@@ -205,7 +200,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                       Get.to(Crear_proyectos());
                     },
                   ),
-                )
+                ) */
               ],
             ),
           ),
