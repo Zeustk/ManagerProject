@@ -13,10 +13,7 @@ class Perfil_Usuario extends StatelessWidget {
       drawer: Draweer(),
       appBar: AppBar(
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.more_vert, size: 40, color: Colors.white),
-          ),
+          
         ],
         title: Center(
             child: Text(

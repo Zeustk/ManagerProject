@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:ffi';
+
 
 TareasModel mensajesresponseFromJson(String str) =>
     TareasModel.fromJson(json.decode(str));
@@ -15,7 +15,8 @@ class TareasModel {
   double porcentajeTarea;
   int? idProyecto;
   int? idUsuario;
-  String urlpdf;
+  String urlPdf;
+
 
   TareasModel(
       {this.idTarea = 1,
@@ -26,7 +27,8 @@ class TareasModel {
       required this.porcentajeTarea,
       required this.idProyecto,
       required this.idUsuario,
-      required this.urlpdf});
+      required this.urlPdf,
+      });
 
   factory TareasModel.fromJson(Map<String, dynamic> json) => TareasModel(
         idTarea: json["Id_Tarea"],
@@ -39,7 +41,7 @@ class TareasModel {
             : 0.0,
         idProyecto: json["Id_Proyecto"],
         idUsuario: json["Id_Usuario"],
-        urlpdf: json["urlpdf"],
+        urlPdf: json["urlPdf"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -53,6 +55,6 @@ class TareasModel {
         "PorcentajeTarea": porcentajeTarea,
         "Id_Proyecto": idProyecto,
         "Id_Usuario": idUsuario,
-        "urlpdf": urlpdf,
+        "urlPdf":urlPdf,
       };
 }

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/controllers/TareasController.dart';
@@ -412,10 +413,17 @@ class _LabelsTareasState extends State<LabelsTareas> {
             porcentajeTarea: 6.7,
             idProyecto: idProyecto,
             idUsuario: idUsuario,
-            urlpdf: 'hola');
+            urlPdf: 'Hola',
+            );
 
         gestionTareas.registrarTareas(tarea).then((resultado) {
           print('El resultado de registrar la tarea es: $resultado');
+          Get.snackbar(
+            'Tarea Creada',
+            'Tarea Creada Exitosamente',
+            backgroundColor: Colors.white,
+            colorText: Colors.black,
+          );
         }).catchError((error) {
           print('Ocurrió un error al registrar la tarea: $error');
         });

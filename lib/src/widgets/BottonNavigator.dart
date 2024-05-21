@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
+import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
 
 class BotonNavi extends StatelessWidget {
   void _cargarArchivo(BuildContext context) {
@@ -9,11 +12,12 @@ class BotonNavi extends StatelessWidget {
 
   void _verUsuario(BuildContext context) {
     // Lógica para ver usuario
-    print('Ver usuario');
+    Get.to(Perfil_Usuario());
   }
 
   void _editar(BuildContext context) {
     // Lógica para editar
+    Get.to(Crear_proyectos());
     print('Editar');
   }
 
@@ -26,28 +30,22 @@ class BotonNavi extends StatelessWidget {
       onTap: (int index) {
         switch (index) {
           case 0:
-            _cargarArchivo(context);
-            break;
-          case 1:
             _verUsuario(context);
             break;
-          case 2:
+          case 1:
             _editar(context);
             break;
         }
       },
       items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.upload_file_rounded, color: kSecondaryColor),
-          label: 'Cargar Archivo',
-        ),
+        
         BottomNavigationBarItem(
           icon: Icon(Icons.manage_accounts_rounded, color: kSecondaryColor),
           label: 'Usuario',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.edit, color: kSecondaryColor),
-          label: 'Editar',
+          label: 'Crear',
         ),
       ],
     );

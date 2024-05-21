@@ -53,7 +53,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
 
   @override
   Widget build(BuildContext context) {
-    /* String tipo = Get.arguments as String; */
+    String tipo = Get.arguments as String; 
 
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
@@ -67,15 +67,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
               color: Colors.white,
             ),
           ),
-          Container(
-            padding: const EdgeInsets.only(right: 10),
-            width: 50,
-            child: const Icon(
-              Icons.add,
-              size: 35,
-              color: Colors.white,
-            ),
-          ),
+          
         ],
         backgroundColor: kSecondaryColor,
         title: Text(
@@ -116,7 +108,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                     ],
                   ),
                 ),
-                /* ListView.builder(
+                 ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: proyectos.length,
@@ -200,7 +192,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                       Get.to(Crear_proyectos());
                     },
                   ),
-                ) */
+                ) 
               ],
             ),
           ),

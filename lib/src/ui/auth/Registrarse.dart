@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
@@ -112,6 +113,7 @@ class Registro extends StatelessWidget {
                             decoration: InputDecoration(
                               hintText: "Confirmar Contraseña",
                             ),
+                            controller: __controllerClave,
                           )),
                         ],
                       ),
@@ -141,17 +143,23 @@ class Registro extends StatelessWidget {
                           ]),
                           onPressed: () {
                             UsuarioModel usuario = UsuarioModel(
-                                idUsuario: 0,
-                                email: _controllerCorreo.text,
-                                clave: __controllerClave.text,
-                                idRol: null,
-                                );
+                              idUsuario: 0,
+                              email: _controllerCorreo.text,
+                              clave: __controllerClave.text,
+                              idRol: null,
+                            );
 
                             gestionUsuarios
                                 .registrarUsuarios(usuario)
                                 .then((resultado) {
                               print(
                                   'El resultado de registrar el usuario es: $resultado');
+                              Get.snackbar(
+                                'Usuario Creado',
+                                'Usuario Creado Exitosamente',
+                                backgroundColor: Colors.white,
+                                colorText: Colors.black,
+                              );
                             }).catchError((error) {
                               print(
                                   'Ocurrió un error al registrar el usuarios: $error');
