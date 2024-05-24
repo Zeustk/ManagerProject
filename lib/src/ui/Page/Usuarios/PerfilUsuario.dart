@@ -12,9 +12,7 @@ class Perfil_Usuario extends StatelessWidget {
       bottomNavigationBar: BotonNavi(),
       drawer: Draweer(),
       appBar: AppBar(
-        actions: [
-          
-        ],
+        actions: [],
         title: Center(
             child: Text(
           'Mi Perfil',
@@ -38,7 +36,7 @@ class Perfil_Usuario extends StatelessWidget {
               ),
             ),
             SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+              scrollDirection: Axis.vertical,
               child: Container(
                 height: 40,
                 width: 105,
@@ -134,26 +132,34 @@ class Perfil_Usuario extends StatelessWidget {
             SizedBox(
               height: 15,
             ),
-            Container(
-                margin: EdgeInsets.only(left: 20),
-                alignment: Alignment.topLeft,
-                child: Text(
-                  'Mis Proyectos',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                )),
-            Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
-            Row(
+            Column(
               children: [
-                SizedBox(width: 30),
-                Text('Proyecto', style: TextStyle(fontWeight: FontWeight.bold)),
-                SizedBox(
-                  width: 24,
+                Container(
+                    margin: EdgeInsets.only(left: 20),
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'Mis Proyectos',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    )),
+                Divider(),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      SizedBox(width: 10),
+                      Text('Proyecto',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      SizedBox(
+                        width: 24,
+                      ),
+                      Text('Implementación de Sistemas Informáticos',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                    ],
+                  ),
                 ),
-                Text('Implementación de Sistemas Informáticos',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
               ],
-            ),
-            Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
+            )
           ],
         ),
       ),
