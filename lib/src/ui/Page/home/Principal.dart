@@ -34,10 +34,6 @@ class _JumpingButtonState extends State<JumpingButton>
 
   @override
   Widget build(BuildContext context) {
-
-    
-    
-
     return TweenAnimationBuilder<double>(
       tween: Tween(begin: 2.0, end: 20.0),
       duration: const Duration(milliseconds: 1000),
@@ -83,7 +79,6 @@ class _JumpingButtonState extends State<JumpingButton>
 }
 
 class Principal extends StatelessWidget {
-
   AuthController _controllerAuth = AuthController();
   @override
   Widget build(BuildContext context) {
@@ -118,13 +113,25 @@ class Principal extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                RichText(
-                  text: TextSpan(children: [
-                    TextSpan(
-                      text: 'Bienvenido a Gestor De Proyecto',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  ]),
+                Center(
+                  child: TweenAnimationBuilder(
+                    tween: Tween<double>(begin: 0.0, end: 1.0),
+                    duration: Duration(seconds: 2),
+                    builder: (context, double opacity, child) {
+                      return Opacity(
+                        opacity: opacity,
+                        child: RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                              text: 'Bienvenido a Gestor De Proyecto',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                          ]),
+                        ),
+                      );
+                    },
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -170,12 +177,9 @@ class Principal extends StatelessWidget {
   }
 
   void InicioSesionPorStorage() async {
-
-    if (await _controllerAuth.verificarSesionStorage()){
+    if (await _controllerAuth.verificarSesionStorage()) {
       Get.to(Perfil_Usuario());
-
-    }
-    else{
+    } else {
       Get.to(Login());
     }
   }
