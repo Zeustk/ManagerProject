@@ -1,9 +1,13 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:path/path.dart' as path;
+
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/controllers/TareasController.dart';
@@ -93,7 +97,10 @@ class _LabelsTareasState extends State<LabelsTareas> {
   TextEditingController _controllerDescripcion = TextEditingController();
   TextEditingController _controllerIntegrante = TextEditingController();
   TextEditingController _controllerNombreProyecto = TextEditingController();
+  TextEditingController _controllerPdfPath = TextEditingController();
   TareasController gestionTareas = TareasController();
+
+  String? pdfPath; //Va a contener el pdf
 
   String? _selectedProject;
 
@@ -262,7 +269,28 @@ class _LabelsTareasState extends State<LabelsTareas> {
               ),
             ),
             CupertinoButton(
-              onPressed: () {},
+              onPressed: () async {
+                FilePickerResult? result = await FilePicker.platform.pickFiles(
+                  type: FileType.custom,
+                  allowedExtensions: ['pdf'],
+                );
+
+                if (result != null) {
+                  pdfPath = result.files.single.path;
+                  // Aquí puedes hacer lo que necesites con el archivo PDF seleccionado
+                  // Por ejemplo, puedes mostrar el nombre del archivo o guardar la ruta en una variable para su posterior uso
+                  print('Archivo PDF seleccionado: $pdfPath');
+
+                  if (pdfPath != null) {
+                    String fileName = path.basename(pdfPath!);
+                    setState(() {
+                      _controllerPdfPath.text = fileName;
+                    });
+                  }
+                } else {
+                  // El usuario no seleccionó ningún archivo
+                }
+              },
               color: Colors.white,
               padding: EdgeInsets.all(16),
               child: Row(
@@ -280,6 +308,11 @@ class _LabelsTareasState extends State<LabelsTareas> {
                 ],
               ),
             ),
+            if (_controllerPdfPath.text.isNotEmpty)
+              Text(
+                _controllerPdfPath.text,
+                style: TextStyle(fontSize: 16),
+              ),
             SizedBox(height: 20),
             Divider(color: Colors.white),
             Text(
@@ -391,12 +424,23 @@ class _LabelsTareasState extends State<LabelsTareas> {
     );
   }
 
-  void registrarTarea() {
-    verificarUsuario().then((idUsuario) {
+  void registrarTarea()  {
+    verificarUsuario().then((idUsuario) async {
       if (idUsuario == -1) {
         print('Usuario no encontrado');
         return;
       }
+
+      if (pdfPath == null) {
+        print('No se ha seleccionado ningún archivo PDF');
+        return;
+      }
+
+       File file = File(pdfPath!);
+       List<int> bytes = await file.readAsBytes();
+
+      String base64Data = base64Encode(bytes);
+
 
       verificarProyecto().then((idProyecto) {
         if (idProyecto == -1) {
@@ -404,17 +448,18 @@ class _LabelsTareasState extends State<LabelsTareas> {
           return;
         }
 
+        
+
         TareasModel tarea = TareasModel(
-            nombre: _controllerNombre.text,
-            fechaInicio: DateTime.parse(_controllerFechaInicio.text),
-            fechaFinalizacion:
-                DateTime.parse(_controllerFechaFinalizacion.text),
-            descripcion: _controllerDescripcion.text,
-            porcentajeTarea: 6.7,
-            idProyecto: idProyecto,
-            idUsuario: idUsuario,
-            urlPdf: 'Hola',
-            );
+          nombre: _controllerNombre.text,
+          fechaInicio: DateTime.parse(_controllerFechaInicio.text),
+          fechaFinalizacion: DateTime.parse(_controllerFechaFinalizacion.text),
+          descripcion: _controllerDescripcion.text,
+          porcentajeTarea: 6.7,
+          idProyecto: idProyecto,
+          idUsuario: idUsuario,
+          urlPdf: base64Data,
+        );
 
         gestionTareas.registrarTareas(tarea).then((resultado) {
           print('El resultado de registrar la tarea es: $resultado');
