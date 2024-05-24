@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:manager_proyect/src/data/providers/Detalles_Provider.dart';
 import 'package:manager_proyect/src/domain/models/DetalleProyecto_model.dart';
 
-import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
+
 
 class DetallesController extends GetxController {
   DetallesProvider gestionDetalles = DetallesProvider();

@@ -380,6 +380,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                   return Align(
                     alignment: Alignment.topLeft,
                     child: Material(
+                      color: Colors.white,
                       elevation: 4.0,
                       child: SizedBox(
                         height: listViewHeight,
@@ -393,7 +394,8 @@ class _LabelsTareasState extends State<LabelsTareas> {
                                 onSelected(option);
                               },
                               child: ListTile(
-                                title: Text(option),
+                                title: Text(option,
+                                    style: TextStyle(color: Colors.black)),
                               ),
                             );
                           },
@@ -424,7 +426,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
     );
   }
 
-  void registrarTarea()  {
+  void registrarTarea() {
     verificarUsuario().then((idUsuario) async {
       if (idUsuario == -1) {
         print('Usuario no encontrado');
@@ -436,19 +438,16 @@ class _LabelsTareasState extends State<LabelsTareas> {
         return;
       }
 
-       File file = File(pdfPath!);
-       List<int> bytes = await file.readAsBytes();
+      File file = File(pdfPath!);
+      List<int> bytes = await file.readAsBytes();
 
       String base64Data = base64Encode(bytes);
-
 
       verificarProyecto().then((idProyecto) {
         if (idProyecto == -1) {
           print('Proyecto no encontrado');
           return;
         }
-
-        
 
         TareasModel tarea = TareasModel(
           nombre: _controllerNombre.text,

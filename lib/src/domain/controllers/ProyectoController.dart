@@ -39,7 +39,7 @@ class ProyectoController extends GetxController {
     try {
       return await gestionProyectos.eliminarProyecto(idProyecto);
     } catch (error) {
-      // Manejar el error al eliminar el proyecto
+      
       print('Error al eliminar el proyecto(Controllers): $error');
       return 'Error al eliminar el proyecto';
     }

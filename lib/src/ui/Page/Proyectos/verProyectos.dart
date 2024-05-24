@@ -51,9 +51,47 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
     }
   }
 
+  void _showConfirmationDialog(BuildContext context, int idProyecto) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: kSecondaryColor,
+          title: Text('Confirmar Eliminación'),
+          content: Text('¿Estás seguro de que deseas eliminar este Proyecto?',
+              style: TextStyle(color: Colors.white)),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancelar', style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Eliminar', style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _eliminarProyecto(context, idProyecto);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _eliminarProyecto(BuildContext context, int idProyecto) {
+    setState(() {
+      gestionProyectos.eliminarProyecto(idProyecto);
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Contenido eliminado')),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    String tipo = Get.arguments as String;
+    /*  String tipo = Get.arguments as String; */
 
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
@@ -116,7 +154,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: GestureDetector(
-                        onTap: () {
+                        /* onTap: () {
                           if (tipo[0] == 'M') {
                             Get.to(DetalleProyectoPage());
                           } else {
@@ -125,7 +163,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                           }
 
                           print('Tapped on project: ${proyecto.nombre}');
-                        },
+                        }, */
                         child: Container(
                           alignment: Alignment.topCenter,
                           height: 150,
@@ -141,33 +179,26 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  padding: EdgeInsets.only(left: 10, right: 10),
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
-                                  ),
-                                  child: IconButton(
-                                      onPressed: () {},
+                                    margin: EdgeInsets.only(top: 50),
+                                    padding:
+                                        EdgeInsets.only(left: 10, right: 10),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.white,
+                                    ),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        _showConfirmationDialog(
+                                            context, proyecto.idProyecto);
+                                      },
                                       icon: Icon(
                                         Icons.delete_rounded,
                                         color: Colors.red,
-                                      )),
-                                ),
+                                      ),
+                                    )),
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
-                                  ),
-                                  child: IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.update,
-                                        color: Colors.green,
-                                      )),
-                                )
                               ],
                             )
                           ]),

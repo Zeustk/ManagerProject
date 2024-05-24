@@ -74,7 +74,7 @@ class Login extends StatelessWidget {
                                 Get.to(Registro());
                               },
                               child: Container(
-                                margin: EdgeInsets.only(left: 40, top: 160),
+                                margin: EdgeInsets.only(left: 40, top: 100),
                                 padding: EdgeInsets.only(left: 3, top: 3),
                                 height: 42,
                                 width: 90,
@@ -171,7 +171,7 @@ class Login extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              left: 110, top: 20, right: 90),
+                              left: 110, top: 20, right: 110),
                           child: MaterialButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)),
@@ -219,8 +219,6 @@ class Login extends StatelessWidget {
                                         _controllerEmail.text,
                                         _controllerClave.text,
                                         UsuarioConId.idUsuario);
-
-                                        
                                   } else {
                                     Get.snackbar(
                                       "Verifique su correo y contraseña",
