@@ -210,7 +210,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                   } else {
                     return widget.proyectos.where((String option) {
                       return option
-                          .contains(textEditingValue.text.toLowerCase());
+                          .contains(textEditingValue.text.trim().toUpperCase());
                     });
                   }
                 },
@@ -498,7 +498,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
         .consultarProyectos(usuarioActual.idUsuario)
         .then((listaProyectos) {
       for (var proyecto in listaProyectos) {
-        if (proyecto.nombre == _controllerNombreProyecto.text) {
+        if (proyecto.nombre.trim().toUpperCase() == _controllerNombreProyecto.text.trim().toUpperCase()) {
           return proyecto
               .idProyecto; // Devolver el ID del proyecto si se encuentra
         }

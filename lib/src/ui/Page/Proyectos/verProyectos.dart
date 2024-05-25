@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
-import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
 import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
-import 'package:manager_proyect/src/ui/Page/Tareas/detalleTarea.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/verTarea.dart';
 import 'package:manager_proyect/src/widgets/BotonProyecto.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';

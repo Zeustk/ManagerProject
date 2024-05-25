@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/domain/models/Tareas_model.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/subirTarea.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart'; // Para abrir URLs en el navegador
+import 'package:file_picker/file_picker.dart';
 
 import '../../../constante/constantes.dart';
 
@@ -9,6 +14,42 @@ class DetalleTarea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TareasModel tarea = Get.arguments as TareasModel;
+
+    Future<void> _launchURL(String url) async {
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('No se pudo abrir el PDF')),
+        );
+      }
+    }
+
+    Future<void> _downloadPDF(String pdfBase64Content) async {
+      try {
+        Directory? downloadsDirectory = await getDownloadsDirectory();
+        if (downloadsDirectory != null) {
+          String uniqueFilename =
+              '${DateTime.now().millisecondsSinceEpoch}_tarea.pdf';
+          String filePath =
+              '${downloadsDirectory.path}/$uniqueFilename';
+          File file = File(filePath);
+          await file.writeAsBytes(pdfBase64Content.codeUnits);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('PDF descargado en Descargas')),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('No se pudo acceder al directorio de Descargas')),
+          );
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error al descargar el PDF')),
+        );
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kSecondaryColor,
@@ -35,17 +76,22 @@ class DetalleTarea extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10.0),
-            Container(
-              width: 150.0,
-              height: 150.0,
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Icon(
-                Icons.file_open_rounded,
-                size: 60.0,
-                color: Colors.grey[600],
+            InkWell(
+              onTap: () {
+                _downloadPDF(tarea.urlPdf);
+              },
+              child: Container(
+                width: 150.0,
+                height: 150.0,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Icon(
+                  Icons.file_download,
+                  size: 60.0,
+                  color: Colors.grey[600],
+                ),
               ),
             ),
             SizedBox(height: 30.0),

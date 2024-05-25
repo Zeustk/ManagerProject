@@ -214,7 +214,7 @@ class _LabelsState extends State<Labels> {
       fechaFinalizacion: DateTime.parse(__controllerFechaFinalizacion.text),
       fechaInicio: DateTime.parse(_controllerFechaInicio.text),
       liderProyecto: "JESUS",
-      nombre: __controllerNombre.text.trim(),
+      nombre: __controllerNombre.text.trim().toUpperCase(),
       descripcion: __controllerDescripcion.text.trim(),
     );
 
