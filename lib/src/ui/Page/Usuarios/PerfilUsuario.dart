@@ -39,15 +39,25 @@ class Perfil_Usuario extends StatelessWidget {
               scrollDirection: Axis.vertical,
               child: Container(
                 height: 40,
-                width: 105,
+                width: 142,
                 child: Row(
                   children: [
                     Text('Editar',
                         style: TextStyle(fontSize: 20, color: Colors.white)),
-                    IconButton(
+                    MaterialButton(
                       onPressed: () {},
-                      icon: Icon(Icons.photo_camera,
-                          size: 25, color: Colors.white),
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 4, vertical: 4),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(40)),
+                        child: Image.asset(
+                          'assets/editarusu.png',
+                        ),
+                      ),
                     ),
                   ],
                 ),

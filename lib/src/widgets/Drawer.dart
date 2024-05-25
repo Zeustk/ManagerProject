@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/domain/controllers/authController.dart';
@@ -9,64 +8,59 @@ import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
 import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
 
-
 class Draweer extends StatelessWidget {
   final List<Map<String, dynamic>> drawerItems = [
     {
       'title': 'Perfil',
-      'icon': Icons.account_box_rounded,
+      'image': 'assets/usuario.png',
       'onTap': () {
         Get.to(Perfil_Usuario());
       },
     },
     {
-      'title': 'Tareas',
-      'icon': Icons.account_balance_wallet_rounded,
-      'onTap': () {
-        
-      },
-    },
-    {
-      'title': 'Ver Tareas',
-      'icon': Icons.arrow_forward_sharp,
-      'onTap': () {
-        Get.offAll(Ver_Proyectos(), arguments: 'Seleccione Un Proyecto');
-   
-      },
-    },
-    {
-      'title': 'Crear Tareas',
-      'icon': Icons.arrow_forward_sharp,
-      'onTap': () {
-        Get.to(Crear_Tareas());
-      },
-    },
-    {
       'title': 'Proyectos',
-      'icon': Icons.account_balance_wallet_rounded,
-      'onTap': () {
-        
-      },
+      'image': 'assets/proyecto.png',
+      'children': [
+        {
+          'title': 'Ver Proyectos',
+          'image': 'assets/verproyecto.png',
+          'onTap': () {
+            Get.offAll(Ver_Proyectos(), arguments: 'Mis Proyectos');
+          },
+        },
+        {
+          'title': 'Crear Proyecto',
+          'image': 'assets/crearproyecto.png',
+          'onTap': () {
+            Get.to(Crear_proyectos());
+          },
+        },
+      ],
     },
     {
-      'title': 'Crear Proyecto',
-      'icon': Icons.arrow_forward_sharp,
-      'onTap': () {
-        Get.to(Crear_proyectos());
-      },
-    },
-    {
-      'title': 'Ver Proyectos',
-      'icon': Icons.arrow_forward_sharp,
-      'onTap': () {
-        Get.offAll(Ver_Proyectos(), arguments: 'Mis Proyectos');
-      },
+      'title': 'Tareas',
+      'image': 'assets/tarea.png',
+      'children': [
+        {
+          'title': 'Ver Tareas',
+          'image': 'assets/buscartarea.png',
+          'onTap': () {
+            Get.offAll(Ver_Proyectos(), arguments: 'Seleccione Un Proyecto');
+          },
+        },
+        {
+          'title': 'Crear Tareas',
+          'image': 'assets/creartarea.png',
+          'onTap': () {
+            Get.to(Crear_Tareas());
+          },
+        },
+      ],
     },
   ];
 
   @override
   Widget build(BuildContext context) {
-
     AuthController _controllerAuth = Get.find();
     return Drawer(
       backgroundColor: Colors.white,
@@ -76,22 +70,56 @@ class Draweer extends StatelessWidget {
             child: ListView.builder(
               itemCount: drawerItems.length,
               itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  leading: Icon(
-                    drawerItems[index]['icon'],
-                    color: Colors.blue,
-                  ),
-                  title: Text(
-                    drawerItems[index]['title'],
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onTap: drawerItems[index]['onTap'],
-                );
+                final item = drawerItems[index];
+                if (item.containsKey('children')) {
+                  // Si el ítem tiene hijos, usa un ExpansionTile
+                  return ExpansionTile(
+                    leading: Image.asset(
+                      item['image'],
+                      width: 35,
+                      height: 35,
+                    ),
+                    title: Text(
+                      item['title'],
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    children: List<Widget>.from(
+                      item['children'].map<Widget>((child) {
+                        return ListTile(
+                          leading: Image.asset(
+                            child['image'],
+                            width: 24.0,
+                            height: 24.0,
+                          ),
+                          title: Text(
+                            child['title'],
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          onTap: child['onTap'],
+                        );
+                      }).toList(),
+                    ),
+                  );
+                } else {
+                  // Si el ítem no tiene hijos, usa un ListTile normal
+                  return ListTile(
+                    leading: Image.asset(
+                      item['image'],
+                      width: 24.0,
+                      height: 24.0,
+                    ),
+                    title: Text(
+                      item['title'],
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    onTap: item['onTap'],
+                  );
+                }
               },
             ),
           ),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 16.0),
+            margin: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
             child: ElevatedButton(
               style: ButtonStyle(
                 backgroundColor:
@@ -101,9 +129,18 @@ class Draweer extends StatelessWidget {
                 _controllerAuth.CerrarSesionStorage();
                 Get.to(Principal());
               },
-              child: const Text(
-                'Cerrar Sesión',
-                style: TextStyle(color: Colors.white),
+              child: Row(
+                children: [
+                  Image.asset('assets/cerrar-sesion.png',
+                      width: 30, height: 30),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Cerrar Sesión',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
               ),
             ),
           ),

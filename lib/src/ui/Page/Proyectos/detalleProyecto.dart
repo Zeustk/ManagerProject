@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 
@@ -79,12 +80,10 @@ class DetalleProyectoPage extends StatelessWidget {
 }
 
 class _DetalleProyecto extends StatelessWidget {
-
   ProyectoModel proyecto = Get.arguments as ProyectoModel;
 
   @override
   Widget build(BuildContext context) {
-
     DateFormat dateFormat = DateFormat('yyyy-MM-dd');
 
     return Container(
@@ -320,9 +319,13 @@ class _DetalleProyecto extends StatelessWidget {
                         children: [
                           Text('Integrante $index'),
                           SizedBox(
-                            width: 10,
+                            width: 15,
                           ),
-                          Text('hola')
+                          Image.asset(
+                            'assets/eliminarinte.png',
+                            width: 40,
+                            height: 40,
+                          ),
                         ],
                       ),
                     ),

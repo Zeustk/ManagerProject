@@ -40,7 +40,15 @@ class _Crear_proyectosState extends State<Crear_proyectos> {
         child: Draweer(),
       ),
       body: SingleChildScrollView(
-        child: Labels(),
+        child: Container(
+            margin: EdgeInsets.only(top: 5, left: 10),
+            width: 390,
+            height: 600,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Color.fromARGB(128, 0, 0, 0),
+            ),
+            child: Labels()),
       ),
     );
   }
@@ -76,8 +84,6 @@ class _LabelsState extends State<Labels> {
       child: SafeArea(
         child: Column(
           children: [
-            // Text fields for project details...
-
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: Container(
@@ -85,7 +91,9 @@ class _LabelsState extends State<Labels> {
                 height: 60,
                 child: TextField(
                   controller: __controllerNombre,
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
                   decoration: InputDecoration(
                     labelText: 'Nombre',
                     fillColor: Colors.white,
@@ -93,12 +101,13 @@ class _LabelsState extends State<Labels> {
                     prefixIcon: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Image.asset(
-                        'assets/usuario.png',
+                        'assets/proyecto2.png',
                         width: 10,
                         height: 10,
                       ),
                     ),
-                    labelStyle: TextStyle(color: Colors.blue),
+                    labelStyle: TextStyle(
+                        color: Colors.blue, fontWeight: FontWeight.bold),
                     border: UnderlineInputBorder(
                       borderRadius: BorderRadius.circular(40),
                     ),
@@ -120,7 +129,6 @@ class _LabelsState extends State<Labels> {
                 ),
               ),
             ),
-
             Padding(
               padding: EdgeInsets.only(left: 30, right: 30),
               child: TextField(
@@ -130,7 +138,8 @@ class _LabelsState extends State<Labels> {
                   labelText: 'Fecha De Inicio',
                   filled: true,
                   fillColor: Colors.white,
-                  labelStyle: TextStyle(color: Colors.blue),
+                  labelStyle: TextStyle(
+                      color: Colors.blue, fontWeight: FontWeight.bold),
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Image.asset(
@@ -156,7 +165,6 @@ class _LabelsState extends State<Labels> {
                 },
               ),
             ),
-
             Padding(
               padding: EdgeInsets.only(top: 30, left: 30, right: 30),
               child: TextField(
@@ -166,7 +174,8 @@ class _LabelsState extends State<Labels> {
                   labelText: 'Fecha Fin',
                   filled: true,
                   fillColor: Colors.white,
-                  labelStyle: TextStyle(color: Colors.blue),
+                  labelStyle: TextStyle(
+                      color: Colors.blue, fontWeight: FontWeight.bold),
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Image.asset(
@@ -190,7 +199,6 @@ class _LabelsState extends State<Labels> {
                 },
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: TextField(
@@ -200,7 +208,8 @@ class _LabelsState extends State<Labels> {
                   labelText: 'Descripción',
                   filled: true,
                   fillColor: Colors.white,
-                  labelStyle: TextStyle(color: Colors.blue),
+                  labelStyle: TextStyle(
+                      color: Colors.blue, fontWeight: FontWeight.bold),
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Image.asset(
@@ -220,48 +229,69 @@ class _LabelsState extends State<Labels> {
                 ),
               ),
             ),
-
-            SizedBox(height: 25),
-            Divider(color: Colors.white),
-
-            ElevatedButton(
-              onPressed: () async {
-                usuariosSeleccionados = (await Get.to<List<UsuarioModel>?>(
-                        AdicionarUsuariosPage())) ??
-                    [];
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(40),
+            SizedBox(height: 15),
+            Divider(color: Colors.white, height: 50),
+            Container(
+              width: 230,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () async {
+                  usuariosSeleccionados = (await Get.to<List<UsuarioModel>?>(
+                          AdicionarUsuariosPage())) ??
+                      [];
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
                 ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(left: 10),
-                child: Row(
-                  children: [
-                    Text(
-                      'Adicionar Integrantes',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                    Image.asset(
-                      'assets/despcri.png',
-                      width: 20,
-                      height: 20,
-                    )
-                  ],
+                child: Padding(
+                  padding: EdgeInsets.only(left: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Adicionar Integrantes',
+                        style: TextStyle(
+                            color: Colors.blue, fontWeight: FontWeight.bold),
+                      ),
+                      Image.asset(
+                        'assets/buscar.png',
+                        width: 35,
+                        height: 35,
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 15),
             CupertinoButton(
+              padding: EdgeInsets.only(left: 40, right: 10, bottom: 10),
               onPressed: () {
                 RegistrarProyecto();
               },
               alignment: Alignment.bottomCenter,
               color: Colors.white,
               borderRadius: BorderRadius.circular(40),
-              child: const Text('Crear', style: TextStyle(color: Colors.blue)),
+              child: Container(
+                width: 100,
+                height: 20,
+                child: Row(
+                  children: [
+                    Text(
+                      'Crear',
+                      style: TextStyle(
+                          color: Colors.blue, fontWeight: FontWeight.bold),
+                    ),
+                    Image.asset(
+                      width: 40,
+                      'assets/crearproyecto.png',
+                    )
+                  ],
+                ),
+              ),
             )
           ],
         ),

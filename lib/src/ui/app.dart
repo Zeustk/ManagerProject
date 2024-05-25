@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
 /* import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart'; */
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Login Page',
-      home: Principal(),
+      home: Crear_proyectos(),
       getPages: [
         GetPage(name: '/profile', page: () => Perfil_Usuario()),
       ],

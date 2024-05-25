@@ -11,14 +11,11 @@ class BotonNavi extends StatelessWidget {
   }
 
   void _verUsuario(BuildContext context) {
-    // Lógica para ver usuario
     Get.to(Perfil_Usuario());
   }
 
   void _editar(BuildContext context) {
-    // Lógica para editar
     Get.to(Crear_proyectos());
-    print('Editar');
   }
 
   @override
@@ -38,13 +35,20 @@ class BotonNavi extends StatelessWidget {
         }
       },
       items: [
-        
         BottomNavigationBarItem(
-          icon: Icon(Icons.manage_accounts_rounded, color: kSecondaryColor),
+          icon: Image.asset(
+            'assets/usuario.png',
+            width: 24,
+            height: 24,
+          ),
           label: 'Usuario',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.edit, color: kSecondaryColor),
+          icon: Image.asset(
+            'assets/proyecto.png',
+            width: 24,
+            height: 24,
+          ),
           label: 'Crear',
         ),
       ],

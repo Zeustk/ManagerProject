@@ -70,9 +70,18 @@ class _Crear_tareasState extends State<Crear_Tareas> {
         child: Draweer(),
       ),
       body: SingleChildScrollView(
-        child: LabelsTareas(
-          proyectos: proyectos,
-          usuarios: usuarios,
+        child: Container(
+          margin: EdgeInsets.only(top: 5, left: 10),
+          width: 390,
+          height: 600,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: Color.fromARGB(128, 0, 0, 0),
+          ),
+          child: LabelsTareas(
+            proyectos: proyectos,
+            usuarios: usuarios,
+          ),
         ),
       ),
     );
@@ -113,21 +122,45 @@ class _LabelsTareasState extends State<LabelsTareas> {
           children: [
             Padding(
               padding: const EdgeInsets.all(30.0),
-              child: TextField(
-                style: TextStyle(color: Colors.black),
-                controller: _controllerNombre,
-                decoration: InputDecoration(
+              child: Container(
+                width: 450,
+                height: 60,
+                child: TextField(
+                  controller: _controllerNombre,
+                  style: TextStyle(color: Colors.black),
+                  decoration: InputDecoration(
                     labelText: 'Nombre',
                     fillColor: Colors.white,
                     filled: true,
-                    prefixIcon: Icon(
-                      Icons.account_circle,
-                      color: kSecondaryColor,
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        'assets/tarea.png',
+                        width: 10,
+                        height: 10,
+                      ),
                     ),
-                    labelStyle: TextStyle(color: Colors.blue),
+                    labelStyle: TextStyle(
+                        color: Colors.blue, fontWeight: FontWeight.bold),
                     border: UnderlineInputBorder(
                       borderRadius: BorderRadius.circular(40),
-                    )),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderRadius: BorderRadius.circular(40),
+                      borderSide: BorderSide(
+                        color: Colors
+                            .blue, // Color del borde cuando está deshabilitado
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderRadius: BorderRadius.circular(40),
+                      borderSide: BorderSide(
+                        color:
+                            Colors.blue, // Color del borde cuando está enfocado
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
             Padding(
@@ -136,16 +169,28 @@ class _LabelsTareasState extends State<LabelsTareas> {
                 style: TextStyle(color: Colors.black),
                 controller: _controllerFechaInicio,
                 decoration: InputDecoration(
-                    labelText: 'Fecha De Inicio',
-                    filled: true,
-                    fillColor: Colors.white,
-                    labelStyle: TextStyle(color: Colors.blue),
-                    prefixIcon: Icon(
-                      Icons.calendar_today,
-                      color: kSecondaryColor,
+                  labelText: 'Fecha De Inicio',
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelStyle: TextStyle(
+                      color: Colors.blue, fontWeight: FontWeight.bold),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/fechainicio.png',
+                      width: 10,
+                      height: 10,
                     ),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue))),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(40),
+                    borderSide: BorderSide(color: Colors.blue),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(40),
+                    borderSide: BorderSide(color: Colors.blue),
+                  ),
+                ),
                 readOnly: true,
                 onTap: () {
                   _seleccionFecha(context);
@@ -158,16 +203,28 @@ class _LabelsTareasState extends State<LabelsTareas> {
                 style: TextStyle(color: Colors.black),
                 controller: _controllerFechaFinalizacion,
                 decoration: InputDecoration(
-                    labelText: 'Fecha de Finalización',
-                    filled: true,
-                    labelStyle: TextStyle(color: Colors.blue),
-                    fillColor: Colors.white,
-                    prefixIcon: Icon(
-                      Icons.calendar_today,
-                      color: kSecondaryColor,
+                  labelText: 'Fecha Fin',
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelStyle: TextStyle(
+                      color: Colors.blue, fontWeight: FontWeight.bold),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/fechafin.png',
+                      width: 10,
+                      height: 10,
                     ),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue))),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(40),
+                    borderSide: BorderSide(color: Colors.blue),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(40),
+                    borderSide: BorderSide(color: Colors.blue),
+                  ),
+                ),
                 readOnly: true,
                 onTap: () {
                   _seleccionFecha2(context);
@@ -175,34 +232,37 @@ class _LabelsTareasState extends State<LabelsTareas> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 30, left: 30, right: 30),
-              child: GestureDetector(
-                onTap: () {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                },
-                child: TextField(
-                  style: TextStyle(color: Colors.black),
-                  controller: _controllerDescripcion,
-                  decoration: InputDecoration(
-                    labelText: 'Descripción',
-                    filled: true,
-                    labelStyle: TextStyle(color: Colors.blue),
-                    fillColor: Colors.white,
-                    prefixIcon: Icon(
-                      Icons.comment,
-                      color: kSecondaryColor,
+              padding: const EdgeInsets.all(30.0),
+              child: TextField(
+                style: TextStyle(color: Colors.black),
+                controller: _controllerDescripcion,
+                decoration: InputDecoration(
+                  labelText: 'Descripción',
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelStyle: TextStyle(
+                      color: Colors.blue, fontWeight: FontWeight.bold),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/despcri.png',
+                      width: 10,
+                      height: 10,
                     ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                    ),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(40),
+                    borderSide: BorderSide(color: Colors.blue),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(40),
+                    borderSide: BorderSide(color: Colors.blue),
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 40),
+              padding: const EdgeInsets.only(left: 32, right: 30, bottom: 40),
               child: Autocomplete<String>(
                 optionsBuilder: (TextEditingValue textEditingValue) {
                   if (textEditingValue.text.isEmpty) {
@@ -228,8 +288,27 @@ class _LabelsTareasState extends State<LabelsTareas> {
                     controller: textEditingController,
                     focusNode: focusNode,
                     decoration: InputDecoration(
-                      labelStyle: TextStyle(color: Colors.white),
-                      labelText: 'Nombre Del Proyecto',
+                      labelText: 'Nombre del Proyecto',
+                      filled: true,
+                      fillColor: Colors.white,
+                      labelStyle: TextStyle(
+                          color: Colors.blue, fontWeight: FontWeight.bold),
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          'assets/proyecto.png',
+                          width: 10,
+                          height: 10,
+                        ),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderRadius: BorderRadius.circular(40),
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderRadius: BorderRadius.circular(40),
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
                     ),
                   );
                 },
@@ -299,11 +378,15 @@ class _LabelsTareasState extends State<LabelsTareas> {
                 children: [
                   Text(
                     'Subir Documento',
-                    style: TextStyle(color: Colors.blue),
+                    style: TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.bold),
                   ),
-                  Icon(
-                    Icons.file_upload,
-                    color: Colors.blue,
+                  Image.asset(
+                    'assets/subir.png',
+                    width: 30,
+                    height: 30,
                   )
                 ],
               ),
@@ -316,17 +399,16 @@ class _LabelsTareasState extends State<LabelsTareas> {
             SizedBox(height: 20),
             Divider(color: Colors.white),
             Text(
-              'Integrante',
+              'Integrantes',
               style: TextStyle(
                   color: Colors.white,
+                  fontWeight: FontWeight.bold,
                   fontSize: 25,
                   fontFamily: AutofillHints.addressCity),
             ),
-            Stack(
-              children: [],
-            ),
+            SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 40),
+              padding: const EdgeInsets.only(left: 30, right: 20, bottom: 40),
               child: Autocomplete<String>(
                 optionsBuilder: (TextEditingValue textEditingValue) {
                   if (textEditingValue.text.isEmpty) {
@@ -356,17 +438,30 @@ class _LabelsTareasState extends State<LabelsTareas> {
                     controller: textEditingController,
                     focusNode: focusNode,
                     decoration: InputDecoration(
-                      hintText: 'Buscar...',
-                      labelText: 'Buscar...',
+                      hintText: 'Buscar',
+                      labelText: 'Buscar',
                       fillColor: Colors.white,
                       filled: true,
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: kSecondaryColor,
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          'assets/lupa.png',
+                          width: 24,
+                          height: 24,
+                        ),
                       ),
                       labelStyle: TextStyle(color: Colors.blue),
                       border: UnderlineInputBorder(
                         borderRadius: BorderRadius.circular(40),
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderRadius: BorderRadius.circular(40),
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderRadius: BorderRadius.circular(40),
+                        borderSide: BorderSide(color: Colors.blue),
                       ),
                     ),
                   );
@@ -407,16 +502,30 @@ class _LabelsTareasState extends State<LabelsTareas> {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(left: 20, right: 20, bottom: 50),
+              padding: EdgeInsets.only(left: 20, right: 20, bottom: 100),
               child: CupertinoButton(
+                padding: EdgeInsets.only(left: 40, right: 10, bottom: 10),
                 onPressed: () {
                   registrarTarea();
                 },
+                alignment: Alignment.bottomCenter,
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(40),
-                child: const Text(
-                  'Crear',
-                  style: TextStyle(color: Colors.blue),
+                child: Container(
+                  width: 100,
+                  height: 20,
+                  child: Row(
+                    children: [
+                      Text(
+                        'Crear',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      Image.asset(
+                        width: 50,
+                        'assets/tarea.png',
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -498,7 +607,8 @@ class _LabelsTareasState extends State<LabelsTareas> {
         .consultarProyectos(usuarioActual.idUsuario)
         .then((listaProyectos) {
       for (var proyecto in listaProyectos) {
-        if (proyecto.nombre.trim().toUpperCase() == _controllerNombreProyecto.text.trim().toUpperCase()) {
+        if (proyecto.nombre.trim().toUpperCase() ==
+            _controllerNombreProyecto.text.trim().toUpperCase()) {
           return proyecto
               .idProyecto; // Devolver el ID del proyecto si se encuentra
         }
