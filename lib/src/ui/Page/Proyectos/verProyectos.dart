@@ -91,7 +91,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
 
   @override
   Widget build(BuildContext context) {
-    /* String tipo = Get.arguments as String; */
+    String tipo = Get.arguments as String;
 
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
@@ -155,14 +155,14 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: GestureDetector(
                         onTap: () {
-                          /* if (tipo[0] == 'M') {
+                          if (tipo[0] == 'M') {
                             Get.to(DetalleProyectoPage());
                           } else {
                             Get.to(Ver_Tareas(),
                                 arguments: proyecto.idProyecto);
                           }
 
-                          print('Tapped on project: ${proyecto.nombre}'); */
+                          print('Tapped on project: ${proyecto.nombre}');
                         },
                         child: Container(
                           alignment: Alignment.topCenter,

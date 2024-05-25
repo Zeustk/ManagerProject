@@ -7,6 +7,7 @@ class ProyectoController extends GetxController {
 
   Future<String> registrarProyecto(ProyectoModel proyecto) async {
     try {
+      
       return await gestionProyectos.registrarProyecto(proyecto);
     } catch (error) {
       // Manejar el error al registrar el proyecto

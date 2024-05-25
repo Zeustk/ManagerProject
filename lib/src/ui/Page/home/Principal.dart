@@ -142,8 +142,11 @@ class Principal extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(40),
                           color: Colors.white),
-                      child: BlinkingIcon(
-                          iconData: EvaIcons.twitter, color: Colors.blue[500]!),
+                      child: Image.asset(
+                        'assets/facebook.png',
+                        width: 50,
+                        height: 50,
+                      ),
                     ),
                     SizedBox(width: 10),
                     Container(
@@ -152,9 +155,24 @@ class Principal extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(40)),
-                      child: BlinkingIcon(
-                          iconData: EvaIcons.facebook,
-                          color: Colors.blue[500]!),
+                      child: Image.asset(
+                        'assets/x.png',
+                        width: 100,
+                        height: 100,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(40)),
+                      child: Image.asset(
+                        'assets/instagram.png',
+                        width: 100,
+                        height: 100,
+                      ),
                     ),
                   ],
                 ),
