@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 
 class DetalleProyectoPage extends StatelessWidget {
   @override
@@ -76,8 +79,14 @@ class DetalleProyectoPage extends StatelessWidget {
 }
 
 class _DetalleProyecto extends StatelessWidget {
+
+  ProyectoModel proyecto = Get.arguments as ProyectoModel;
+
   @override
   Widget build(BuildContext context) {
+
+    DateFormat dateFormat = DateFormat('yyyy-MM-dd');
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
@@ -178,7 +187,7 @@ class _DetalleProyecto extends StatelessWidget {
                         width: 50,
                       ),
                       Text(
-                        'Implementacion',
+                        '${proyecto.nombre}',
                         style: TextStyle(color: Colors.black),
                       )
                     ],
@@ -228,7 +237,7 @@ class _DetalleProyecto extends StatelessWidget {
                         width: 50,
                       ),
                       Text(
-                        '24/05/2024',
+                        '${dateFormat.format(proyecto.fechaInicio)}',
                         style: TextStyle(color: Colors.black),
                       )
                     ],
@@ -278,7 +287,7 @@ class _DetalleProyecto extends StatelessWidget {
                         width: 50,
                       ),
                       Text(
-                        '24/05/2024',
+                        '${dateFormat.format(proyecto.fechaFinalizacion)}',
                         style: TextStyle(color: Colors.black),
                       )
                     ],

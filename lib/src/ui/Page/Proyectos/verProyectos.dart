@@ -154,7 +154,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                       child: GestureDetector(
                         onTap: () {
                           if (tipo[0] == 'M') {
-                            Get.to(DetalleProyectoPage());
+                            Get.to(DetalleProyectoPage(),arguments: proyecto);
                           } else {
                             Get.to(Ver_Tareas(),
                                 arguments: proyecto.idProyecto);

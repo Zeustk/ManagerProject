@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -15,26 +16,23 @@ class DetalleTarea extends StatelessWidget {
   Widget build(BuildContext context) {
     TareasModel tarea = Get.arguments as TareasModel;
 
-    Future<void> _launchURL(String url) async {
-      if (await canLaunch(url)) {
-        await launch(url);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('No se pudo abrir el PDF')),
-        );
-      }
-    }
-
     Future<void> _downloadPDF(String pdfBase64Content) async {
       try {
-        Directory? downloadsDirectory = await getDownloadsDirectory();
-        if (downloadsDirectory != null) {
-          String uniqueFilename =
-              '${DateTime.now().millisecondsSinceEpoch}_tarea.pdf';
-          String filePath =
-              '${downloadsDirectory.path}/$uniqueFilename';
+        // Obtener la ruta del directorio de Descargas
+        Directory downloadsDirectory = Directory('/storage/emulated/0/Download');
+
+        if (downloadsDirectory.existsSync()) {
+          // Crear el archivo PDF con un nombre único
+          String uniqueFilename = '${DateTime.now().millisecondsSinceEpoch}_tarea.pdf';
+          String filePath = '${downloadsDirectory.path}/$uniqueFilename';
+
+          // Decodificar el contenido base64
+          List<int> pdfBytes = base64Decode(pdfBase64Content);
+
+          // Guardar el archivo en la ubicación especificada
           File file = File(filePath);
-          await file.writeAsBytes(pdfBase64Content.codeUnits);
+          await file.writeAsBytes(pdfBytes);
+
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('PDF descargado en Descargas')),
           );
@@ -45,7 +43,7 @@ class DetalleTarea extends StatelessWidget {
         }
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error al descargar el PDF')),
+          SnackBar(content: Text('Error al descargar el PDF: $e')),
         );
       }
     }
