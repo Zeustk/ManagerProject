@@ -79,21 +79,43 @@ class _LabelsState extends State<Labels> {
             // Text fields for project details...
 
             Padding(
-              padding: const EdgeInsets.all(40.0),
-              child: TextField(
-                controller: __controllerNombre,
-                style: TextStyle(color: Colors.black),
-                decoration: InputDecoration(
-                  labelText: 'Nombre',
-                  fillColor: Colors.white,
-                  filled: true,
-                  prefixIcon: Icon(
-                    Icons.account_circle,
-                    color: kSecondaryColor,
-                  ),
-                  labelStyle: TextStyle(color: Colors.blue),
-                  border: UnderlineInputBorder(
-                    borderRadius: BorderRadius.circular(40),
+              padding: const EdgeInsets.all(30.0),
+              child: Container(
+                width: 450,
+                height: 60,
+                child: TextField(
+                  controller: __controllerNombre,
+                  style: TextStyle(color: Colors.black),
+                  decoration: InputDecoration(
+                    labelText: 'Nombre',
+                    fillColor: Colors.white,
+                    filled: true,
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        'assets/usuario.png',
+                        width: 10,
+                        height: 10,
+                      ),
+                    ),
+                    labelStyle: TextStyle(color: Colors.blue),
+                    border: UnderlineInputBorder(
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderRadius: BorderRadius.circular(40),
+                      borderSide: BorderSide(
+                        color: Colors
+                            .blue, // Color del borde cuando está deshabilitado
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderRadius: BorderRadius.circular(40),
+                      borderSide: BorderSide(
+                        color:
+                            Colors.blue, // Color del borde cuando está enfocado
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -109,11 +131,22 @@ class _LabelsState extends State<Labels> {
                   filled: true,
                   fillColor: Colors.white,
                   labelStyle: TextStyle(color: Colors.blue),
-                  prefixIcon: Icon(
-                    Icons.calendar_today,
-                    color: kSecondaryColor,
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/fechainicio.png',
+                      width: 10,
+                      height: 10,
+                    ),
                   ),
                   enabledBorder: UnderlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(40), // Bordes redondeados
+                    borderSide: BorderSide(color: Colors.blue),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderRadius:
+                        BorderRadius.circular(40), // Bordes redondeados
                     borderSide: BorderSide(color: Colors.blue),
                   ),
                 ),
@@ -132,13 +165,22 @@ class _LabelsState extends State<Labels> {
                 decoration: InputDecoration(
                   labelText: 'Fecha Fin',
                   filled: true,
-                  labelStyle: TextStyle(color: Colors.blue),
                   fillColor: Colors.white,
-                  prefixIcon: Icon(
-                    Icons.calendar_today,
-                    color: kSecondaryColor,
+                  labelStyle: TextStyle(color: Colors.blue),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/fechafin.png',
+                      width: 10,
+                      height: 10,
+                    ),
                   ),
                   enabledBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(40),
+                    borderSide: BorderSide(color: Colors.blue),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(40),
                     borderSide: BorderSide(color: Colors.blue),
                   ),
                 ),
@@ -155,16 +197,25 @@ class _LabelsState extends State<Labels> {
                 style: TextStyle(color: Colors.black),
                 controller: __controllerDescripcion,
                 decoration: InputDecoration(
-                  labelText: 'Descripcion',
-                  fillColor: Colors.white,
+                  labelText: 'Descripción',
                   filled: true,
-                  prefixIcon: Icon(
-                    Icons.description,
-                    color: kSecondaryColor,
-                  ),
+                  fillColor: Colors.white,
                   labelStyle: TextStyle(color: Colors.blue),
-                  border: UnderlineInputBorder(
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/despcri.png',
+                      width: 10,
+                      height: 10,
+                    ),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
                     borderRadius: BorderRadius.circular(40),
+                    borderSide: BorderSide(color: Colors.blue),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(40),
+                    borderSide: BorderSide(color: Colors.blue),
                   ),
                 ),
               ),
@@ -186,14 +237,23 @@ class _LabelsState extends State<Labels> {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                child: Text(
-                  'Adicionar Integrantes',
-                  style: TextStyle(color: Colors.blue),
+                padding: EdgeInsets.only(left: 10),
+                child: Row(
+                  children: [
+                    Text(
+                      'Adicionar Integrantes',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                    Image.asset(
+                      'assets/despcri.png',
+                      width: 20,
+                      height: 20,
+                    )
+                  ],
                 ),
               ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 10),
             CupertinoButton(
               onPressed: () {
                 RegistrarProyecto();
@@ -224,6 +284,15 @@ class _LabelsState extends State<Labels> {
 
     gestionProyectos.registrarProyecto(proyecto).then((resultado) {
       print('El resultado de registrar el proyecto es: $resultado');
+      Get.snackbar(
+        '',
+        '$resultado',
+        backgroundColor: Colors.white,
+        colorText: Colors.black,
+        onTap: (snack) {
+          Get.to(Ver_Proyectos(), arguments: 'Mis Proyectos');
+        },
+      );
     }).catchError((error) {
       print('Ocurrió un error al registrar el proyecto: $error');
       return;
@@ -249,16 +318,6 @@ class _LabelsState extends State<Labels> {
         return;
       });
     }
-
-    Get.snackbar(
-      'Proyecto Creado',
-      'Proyecto Creado Exitosamente',
-      backgroundColor: Colors.white,
-      colorText: Colors.black,
-      onTap: (snack) {
-        Get.to(Ver_Proyectos(), arguments: 'Mis Proyectos');
-      },
-    );
   }
 
   Future<void> _seleccionFecha(BuildContext context) async {

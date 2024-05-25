@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
+/* import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart'; */
 
 import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
 
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
+/* import 'package:manager_proyect/src/ui/Page/home/Principal.dart'; */
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
