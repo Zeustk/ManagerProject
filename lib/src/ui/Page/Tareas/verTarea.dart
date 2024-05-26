@@ -18,9 +18,8 @@ class Ver_Tareas extends StatefulWidget {
 
 class _Ver_TareasState extends State<Ver_Tareas> {
   TareasController gestionTareas = TareasController();
-  AuthController gestionAuth=AuthController();
+  AuthController gestionAuth = AuthController();
   int id_Proyecto = Get.arguments;
-  
 
   List<TareasModel> tareas = [];
 
@@ -32,8 +31,9 @@ class _Ver_TareasState extends State<Ver_Tareas> {
 
   Future<void> cargarTareas() async {
     try {
-      UsuarioModel usuarioActual=await gestionAuth.obtenerDatosDeStorage();
-      List<TareasModel> tareasList = await gestionTareas.consultarTareas(id_Proyecto,usuarioActual.idUsuario);
+      UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
+      List<TareasModel> tareasList = await gestionTareas.consultarTareas(
+          id_Proyecto, usuarioActual.idUsuario);
       setState(() {
         tareas = tareasList;
       });
@@ -47,6 +47,7 @@ class _Ver_TareasState extends State<Ver_Tareas> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         backgroundColor: kSecondaryColor,
         title: Text(
           'Mis Tareas',

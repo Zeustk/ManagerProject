@@ -33,6 +33,7 @@ class _Crear_proyectosState extends State<Crear_proyectos> {
       bottomNavigationBar: BotonNavi(),
       backgroundColor: kSecondaryColor,
       appBar: AppBar(
+        foregroundColor: Colors.white,
         backgroundColor: kSecondaryColor,
         title: Text('Crear Proyecto', style: TextStyle(color: Colors.white)),
       ),

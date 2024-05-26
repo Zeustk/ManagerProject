@@ -12,6 +12,7 @@ class Perfil_Usuario extends StatelessWidget {
       bottomNavigationBar: BotonNavi(),
       drawer: Draweer(),
       appBar: AppBar(
+        foregroundColor: Colors.white,
         actions: [],
         title: Padding(
           padding: const EdgeInsets.only(right: 50),

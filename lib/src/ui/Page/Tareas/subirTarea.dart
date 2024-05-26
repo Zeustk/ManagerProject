@@ -10,6 +10,7 @@ class SubirTareas extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         backgroundColor: kSecondaryColor,
         title: Text('Subir Tareas'),
         centerTitle: true,

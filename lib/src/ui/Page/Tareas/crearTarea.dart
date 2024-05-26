@@ -63,6 +63,7 @@ class _Crear_tareasState extends State<Crear_Tareas> {
       bottomNavigationBar: BotonNavi(),
       backgroundColor: kSecondaryColor,
       appBar: AppBar(
+        foregroundColor: Colors.white,
         backgroundColor: kSecondaryColor,
         title: Text('Crear Tarea', style: TextStyle(color: Colors.white)),
       ),

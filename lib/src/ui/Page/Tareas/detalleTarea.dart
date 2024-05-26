@@ -19,11 +19,13 @@ class DetalleTarea extends StatelessWidget {
     Future<void> _downloadPDF(String pdfBase64Content) async {
       try {
         // Obtener la ruta del directorio de Descargas
-        Directory downloadsDirectory = Directory('/storage/emulated/0/Download');
+        Directory downloadsDirectory =
+            Directory('/storage/emulated/0/Download');
 
         if (downloadsDirectory.existsSync()) {
           // Crear el archivo PDF con un nombre único
-          String uniqueFilename = '${DateTime.now().millisecondsSinceEpoch}_tarea.pdf';
+          String uniqueFilename =
+              '${DateTime.now().millisecondsSinceEpoch}_tarea.pdf';
           String filePath = '${downloadsDirectory.path}/$uniqueFilename';
 
           // Decodificar el contenido base64
@@ -38,7 +40,8 @@ class DetalleTarea extends StatelessWidget {
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('No se pudo acceder al directorio de Descargas')),
+            SnackBar(
+                content: Text('No se pudo acceder al directorio de Descargas')),
           );
         }
       } catch (e) {
@@ -50,6 +53,7 @@ class DetalleTarea extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         backgroundColor: kSecondaryColor,
         title: Text('${tarea.nombre}'),
         centerTitle: true,

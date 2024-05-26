@@ -50,6 +50,7 @@ class _AdicionarUsuariosPageState extends State<AdicionarUsuariosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         backgroundColor: kSecondaryColor,
         title: Text('Adicionar Integrantes',
             style: TextStyle(color: Colors.white)),
@@ -84,7 +85,6 @@ class _AdicionarUsuariosPageState extends State<AdicionarUsuariosPage> {
                 final usuario = listaIntegrantesFiltrados[index];
                 final isSelected = integrantesSeleccionados.contains(usuario);
                 return ListTile(
-                  
                   leading: CircleAvatar(backgroundColor: Colors.white),
                   title: Text(usuario.email,
                       style: TextStyle(color: Colors.white)),

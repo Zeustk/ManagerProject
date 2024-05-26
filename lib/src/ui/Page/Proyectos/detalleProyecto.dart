@@ -10,6 +10,7 @@ class DetalleProyectoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         actions: [
           Container(
             width: 40,

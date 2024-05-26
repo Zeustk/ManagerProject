@@ -94,6 +94,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
       appBar: AppBar(
+        foregroundColor: Colors.white,
         actions: [
           const SizedBox(
             width: 50,

@@ -22,6 +22,7 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         backgroundColor: kSecondaryColor,
       ),
       body: AnimatedSize(
@@ -63,11 +64,12 @@ class Login extends StatelessWidget {
                                 Get.to(Registro());
                               },
                               child: Container(
-                                margin: EdgeInsets.only(left: 40, top: 100),
-                                padding: EdgeInsets.only(left: 3, top: 3),
+                                margin: EdgeInsets.only(left: 40, top: 90),
+                                padding: EdgeInsets.only(left: 3, top: 1),
                                 height: 42,
                                 width: 90,
                                 decoration: BoxDecoration(
+                                  color: Colors.white,
                                   border: Border.all(
                                       color: Colors.white,
                                       width: 1), // Borde blanco delgado
@@ -79,7 +81,7 @@ class Login extends StatelessWidget {
                                   child: const Center(
                                     child: Text(
                                       "Registrarse",
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: kSecondaryColor),
                                     ),
                                   ),
                                 ),
@@ -109,17 +111,14 @@ class Login extends StatelessWidget {
                                 child: Container(
                                   decoration: BoxDecoration(
                                       border: Border.all(color: Colors.blue),
-                                      borderRadius: BorderRadius.circular(20),
+                                      borderRadius: BorderRadius.circular(10),
                                       color: Colors.white),
-                                  height: 35,
-                                  width: 35,
-                                  child: Image.asset(
-                                    'assets/git.png',
-                                  ),
+                                  child: Image.asset('assets/github.gif',
+                                      width: 20, height: 30),
                                 ),
                               ),
                             ),
-                            SizedBox(height: 70),
+                            SizedBox(height: 110),
                             SizedBox(
                               width: 20,
                             ),
@@ -131,15 +130,13 @@ class Login extends StatelessWidget {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
+                                    borderRadius: BorderRadius.circular(10),
                                     border: Border.all(color: Colors.blue),
                                     color: Colors.white,
                                   ),
-                                  height: 30,
-                                  width: 30, // O cualquier otro tamaño deseado
-                                  child: Image.asset(
-                                    'assets/google.png',
-                                  ),
+                                  // O cualquier otro tamaño deseado
+                                  child: Image.asset('assets/google.gif',
+                                      width: 20, height: 30),
                                 ),
                               ),
                             )
@@ -147,7 +144,7 @@ class Login extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              left: 110, top: 20, right: 110),
+                              left: 100, top: 20, right: 105),
                           child: MaterialButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)),
@@ -162,9 +159,9 @@ class Login extends StatelessWidget {
                                       fontFamily: AutofillHints.addressCity),
                                 ),
                                 Image.asset(
-                                  'assets/proximo.png',
-                                  width: 37,
-                                  height: 37,
+                                  'assets/siguiente.gif',
+                                  height: 32,
+                                  width: 32,
                                 ),
                               ]),
                               onPressed: () async {

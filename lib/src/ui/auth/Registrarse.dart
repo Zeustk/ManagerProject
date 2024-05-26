@@ -14,18 +14,8 @@ class Registro extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         backgroundColor: kSecondaryColor,
-        actions: [
-          Container(
-            padding: EdgeInsets.only(right: 15),
-            alignment: Alignment.centerRight,
-            child: Icon(
-              Icons.help,
-              color: Colors.white,
-              size: 33,
-            ),
-          )
-        ],
       ),
       body: Column(
         children: [
@@ -36,7 +26,7 @@ class Registro extends StatelessWidget {
                 height: double.infinity,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/Login.png"),
+                    image: AssetImage("assets/fondoregistrar.png"),
                     fit: BoxFit.contain,
                     alignment: Alignment.bottomLeft,
                   ),
@@ -66,11 +56,17 @@ class Registro extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(right: 16),
-                              child: Icon(
-                                Icons.alternate_email,
-                              ),
-                            ),
+                                padding: EdgeInsets.only(right: 16),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Image.asset(
+                                    'assets/nose.gif',
+                                    width: 34,
+                                    height: 34,
+                                  ),
+                                )),
                             Expanded(
                                 child: TextField(
                               decoration: InputDecoration(
@@ -85,8 +81,15 @@ class Registro extends StatelessWidget {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(bottom: 10, right: 16),
-                            child: Icon(
-                              Icons.lock,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Image.asset(
+                                'assets/clave.gif',
+                                width: 34,
+                                height: 34,
+                              ),
                             ),
                           ),
                           Expanded(
@@ -104,8 +107,15 @@ class Registro extends StatelessWidget {
                           Padding(
                             padding:
                                 EdgeInsets.only(right: 16, bottom: 20, top: 20),
-                            child: Icon(
-                              Icons.password,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Image.asset(
+                                'assets/contrasenaregi.gif',
+                                width: 34,
+                                height: 34,
+                              ),
                             ),
                           ),
                           Expanded(
@@ -119,7 +129,7 @@ class Registro extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 100, top: 40, right: 110),
+                            left: 100, top: 40, right: 100),
                         child: MaterialButton(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30)),
@@ -131,14 +141,16 @@ class Registro extends StatelessWidget {
                               style: TextStyle(
                                   color: Colors.blue,
                                   fontSize: 15,
-                                  fontFamily: AutofillHints.addressCity),
+                                  fontFamily: AutofillHints.addressCity,
+                                  fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
-                              width: 6,
+                              width: 10,
                             ),
-                            Icon(
-                              Icons.arrow_forward,
-                              color: Colors.blue,
+                            Image.asset(
+                              'assets/siguiente.gif',
+                              height: 32,
+                              width: 32,
                             ),
                           ]),
                           onPressed: () {
