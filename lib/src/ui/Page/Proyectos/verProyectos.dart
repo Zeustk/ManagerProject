@@ -190,9 +190,10 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                                         _showConfirmationDialog(
                                             context, proyecto.idProyecto);
                                       },
-                                      icon: Icon(
-                                        Icons.delete_rounded,
-                                        color: Colors.red,
+                                      icon: Image.asset(
+                                        'assets/eliminar.gif',
+                                        width: 30,
+                                        height: 30,
                                       ),
                                     )),
                                 SizedBox(

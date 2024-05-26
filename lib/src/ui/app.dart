@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Login Page',
-      home: Perfil_Usuario(),
+      home: Principal(),
       getPages: [
         GetPage(name: '/profile', page: () => Perfil_Usuario()),
       ],

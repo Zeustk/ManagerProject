@@ -64,7 +64,7 @@ class Login extends StatelessWidget {
                                 Get.to(Registro());
                               },
                               child: Container(
-                                margin: EdgeInsets.only(left: 40, top: 90),
+                                margin: EdgeInsets.only(left: 40, top: 70),
                                 padding: EdgeInsets.only(left: 3, top: 1),
                                 height: 42,
                                 width: 90,
@@ -90,7 +90,7 @@ class Login extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 7,
                         ),
                         _buildEmailField(
                           context,
@@ -118,7 +118,7 @@ class Login extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 110),
+                            SizedBox(height: 90),
                             SizedBox(
                               width: 20,
                             ),
@@ -144,7 +144,7 @@ class Login extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              left: 100, top: 20, right: 105),
+                              left: 100, top: 20, right: 120),
                           child: MaterialButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)),
