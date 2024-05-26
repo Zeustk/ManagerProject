@@ -83,7 +83,7 @@ class DetalleProyectoPage extends StatelessWidget {
 }
 
 class _DetalleProyecto extends StatelessWidget {
-  /*  ProyectoModel proyecto = Get.arguments as ProyectoModel; */
+  ProyectoModel proyecto = Get.arguments as ProyectoModel;
 
   @override
   Widget build(BuildContext context) {
@@ -188,10 +188,10 @@ class _DetalleProyecto extends StatelessWidget {
                       SizedBox(
                         width: 50,
                       ),
-                      /* Text(
+                      Text(
                         '${proyecto.nombre}',
                         style: TextStyle(color: Colors.black),
-                      ) */
+                      )
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -238,10 +238,10 @@ class _DetalleProyecto extends StatelessWidget {
                       SizedBox(
                         width: 50,
                       ),
-                      /* Text(
+                      Text(
                         '${dateFormat.format(proyecto.fechaInicio)}',
                         style: TextStyle(color: Colors.black),
-                      ) */
+                      )
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -288,10 +288,10 @@ class _DetalleProyecto extends StatelessWidget {
                       SizedBox(
                         width: 50,
                       ),
-                      /* Text(
+                      Text(
                         '${dateFormat.format(proyecto.fechaFinalizacion)}',
                         style: TextStyle(color: Colors.black),
-                      ) */
+                      )
                     ],
                   ),
                   decoration: BoxDecoration(

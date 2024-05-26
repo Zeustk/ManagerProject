@@ -12,25 +12,25 @@ class Draweer extends StatelessWidget {
   final List<Map<String, dynamic>> drawerItems = [
     {
       'title': 'Perfil',
-      'image': 'assets/usuario.png',
+      'image': 'assets/perfil.gif',
       'onTap': () {
         Get.to(Perfil_Usuario());
       },
     },
     {
       'title': 'Proyectos',
-      'image': 'assets/proyecto.png',
+      'image': 'assets/proyectos.gif',
       'children': [
         {
           'title': 'Ver Proyectos',
-          'image': 'assets/verproyecto.png',
+          'image': 'assets/verpro.gif',
           'onTap': () {
             Get.offAll(Ver_Proyectos(), arguments: 'Mis Proyectos');
           },
         },
         {
           'title': 'Crear Proyecto',
-          'image': 'assets/crearproyecto.png',
+          'image': 'assets/agregarproyecto.gif',
           'onTap': () {
             Get.to(Crear_proyectos());
           },
@@ -74,6 +74,8 @@ class Draweer extends StatelessWidget {
                 if (item.containsKey('children')) {
                   // Si el ítem tiene hijos, usa un ExpansionTile
                   return ExpansionTile(
+                    iconColor: Colors.blue,
+                    collapsedIconColor: Colors.blue,
                     leading: Image.asset(
                       item['image'],
                       width: 35,
@@ -101,7 +103,6 @@ class Draweer extends StatelessWidget {
                     ),
                   );
                 } else {
-                  // Si el ítem no tiene hijos, usa un ListTile normal
                   return ListTile(
                     leading: Image.asset(
                       item['image'],
