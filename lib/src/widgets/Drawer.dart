@@ -39,18 +39,18 @@ class Draweer extends StatelessWidget {
     },
     {
       'title': 'Tareas',
-      'image': 'assets/tarea.png',
+      'image': 'assets/lista.gif',
       'children': [
         {
           'title': 'Ver Tareas',
-          'image': 'assets/buscartarea.png',
+          'image': 'assets/vertareas.gif',
           'onTap': () {
             Get.offAll(Ver_Proyectos(), arguments: 'Seleccione Un Proyecto');
           },
         },
         {
           'title': 'Crear Tareas',
-          'image': 'assets/creartarea.png',
+          'image': 'assets/creartareas.gif',
           'onTap': () {
             Get.to(Crear_Tareas());
           },

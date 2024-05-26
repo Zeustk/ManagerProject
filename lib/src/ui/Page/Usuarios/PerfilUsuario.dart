@@ -13,11 +13,14 @@ class Perfil_Usuario extends StatelessWidget {
       drawer: Draweer(),
       appBar: AppBar(
         actions: [],
-        title: Center(
-            child: Text(
-          'Mi Perfil',
-          style: TextStyle(color: Colors.white),
-        )),
+        title: Padding(
+          padding: const EdgeInsets.only(right: 50),
+          child: Center(
+              child: Text(
+            'Mi Perfil',
+            style: TextStyle(color: Colors.white),
+          )),
+        ),
         backgroundColor: kSecondaryColor,
       ),
       body: Center(
@@ -28,10 +31,19 @@ class Perfil_Usuario extends StatelessWidget {
               height: 200,
               child: Align(
                 alignment: Alignment.center,
-                child: CircleAvatar(
-                  radius: 50,
-                  backgroundImage: AssetImage(
-                      'assets/perfil.jpg'), // Ajusta la ruta de la imagen según sea necesario
+                child: Center(
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage('assets/perfil2.gif'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -69,18 +81,24 @@ class Perfil_Usuario extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: Text(
                   'Mi Perfil',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 )),
             Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
             Row(
               children: [
                 SizedBox(width: 30),
-                Text('Nombre', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('Nombre',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white)),
                 SizedBox(
                   width: 70,
                 ),
                 Text('Armando Paredes',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white)),
               ],
             ),
             Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
@@ -89,12 +107,15 @@ class Perfil_Usuario extends StatelessWidget {
               child: Row(
                 children: [
                   SizedBox(width: 30),
-                  Text('Correo', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text('Correo',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white)),
                   SizedBox(
                     width: 78,
                   ),
                   Text('ArmandoParedes141@Gmail.com',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white)),
                 ],
               ),
             ),
@@ -107,21 +128,27 @@ class Perfil_Usuario extends StatelessWidget {
                 SizedBox(
                   width: 35,
                 ),
-                Text('15', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('15',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white)),
               ],
             ),
             Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
             Row(
               children: [
                 SizedBox(width: 30),
-                Text('Estado', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('Estado',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white)),
                 SizedBox(
                   width: 77,
                 ),
                 Text(
                   'Conectado',
                   style: TextStyle(
-                      color: Colors.green, fontWeight: FontWeight.bold),
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
@@ -129,13 +156,15 @@ class Perfil_Usuario extends StatelessWidget {
             Row(
               children: [
                 SizedBox(width: 30),
-                Text('Pin', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('Pin',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white)),
                 SizedBox(
                   width: 100,
                 ),
                 Text(
                   '*********',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.white),
                 ),
               ],
             ),
@@ -149,8 +178,10 @@ class Perfil_Usuario extends StatelessWidget {
                     alignment: Alignment.topLeft,
                     child: Text(
                       'Mis Proyectos',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     )),
                 Divider(),
                 SingleChildScrollView(
@@ -159,12 +190,16 @@ class Perfil_Usuario extends StatelessWidget {
                     children: [
                       SizedBox(width: 10),
                       Text('Proyecto',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
                       SizedBox(
                         width: 24,
                       ),
                       Text('Implementación de Sistemas Informáticos',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
                     ],
                   ),
                 ),

@@ -62,9 +62,9 @@ class _JumpingButtonState extends State<JumpingButton>
             ),
             SizedBox(width: 5),
             Image.asset(
-              'assets/proximo.png',
-              height: 37,
-              width: 37,
+              'assets/siguiente.gif',
+              height: 32,
+              width: 32,
             )
           ],
         ),
@@ -144,23 +144,23 @@ class Principal extends StatelessWidget {
                         height: 30,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(40),
-                            border: Border.all(color: Colors.blue[800]!),
+                            border: Border.all(color: Colors.blue!),
                             color: Colors.white),
                         child: Container(
                           child: Row(
                             children: [
                               SizedBox(width: 0),
                               Image.asset(
-                                'assets/facebook.png',
+                                'assets/icons8-facebook.gif',
                               ),
                               SizedBox(
-                                width: 10,
+                                width: 5,
                               ),
                               Text(
                                 'Facebook',
                                 style: TextStyle(
                                     fontSize: 20,
-                                    color: Colors.blue[800],
+                                    color: Colors.blue,
                                     fontWeight: FontWeight.w500),
                               )
                             ],
@@ -181,11 +181,21 @@ class Principal extends StatelessWidget {
                         child: Container(
                           child: Row(
                             children: [
-                              Image.asset(
-                                'assets/x.png',
+                              Container(
+                                margin: EdgeInsets.only(
+                                    left: 3, top: 3, bottom: 3, right: 3),
+                                width: 30,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Image.asset(
+                                  'assets/X.gif',
+                                ),
                               ),
                               SizedBox(
-                                width: 14,
+                                width: 10,
                               ),
                               Text(
                                 'X',
@@ -205,7 +215,7 @@ class Principal extends StatelessWidget {
                       child: InkWell(
                         onTap: () {},
                         child: Container(
-                          width: 145,
+                          width: 135,
                           height: 30,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(40),
@@ -215,12 +225,17 @@ class Principal extends StatelessWidget {
                           ),
                           child: Row(
                             children: [
-                              SizedBox(width: 0),
-                              Image.asset(
-                                'assets/instagram.png',
+                              Container(
+                                width: 30,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(80),
+                                    color: Colors.white),
+                                child: Image.asset(
+                                  'assets/insta.gif',
+                                ),
                               ),
                               SizedBox(
-                                width: 10,
+                                width: 2,
                               ),
                               Text(
                                 'Instagram',
