@@ -23,17 +23,6 @@ class Login extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kSecondaryColor,
-        actions: [
-          Container(
-            padding: EdgeInsets.only(right: 15),
-            alignment: Alignment.centerRight,
-            child: Icon(
-              Icons.help,
-              color: Colors.white,
-              size: 33,
-            ),
-          )
-        ],
       ),
       body: AnimatedSize(
         duration: Duration(seconds: 1),
@@ -101,16 +90,12 @@ class Login extends StatelessWidget {
                         SizedBox(
                           height: 5,
                         ),
-                        _buildAnimatedIconJump(
+                        _buildEmailField(
                           context,
-                          Icons.alternate_email,
-                          "Correo Electrónico",
                         ),
                         const SizedBox(height: 10),
-                        _buildAnimatedIconJumpp(
+                        _buildPasswordField(
                           context,
-                          Icons.lock,
-                          "Contraseña",
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -122,32 +107,19 @@ class Login extends StatelessWidget {
                                   Autenticar('GITHUB');
                                 },
                                 child: Container(
-                                  height: 40,
-                                  width: 40, // O cualquier otro tamaño deseado
-                                  child: Icon(
-                                    FontAwesomeIcons.github,
-                                    color: Colors.white, // Color del icono
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.blue),
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.white),
+                                  height: 35,
+                                  width: 35,
+                                  child: Image.asset(
+                                    'assets/git.png',
                                   ),
                                 ),
                               ),
                             ),
-                            SizedBox(height: 70, width: 20),
-                            SizedBox(
-                              width: 60, //
-                              child: InkWell(
-                                onTap: () {
-                                  // Acción al presionar el botón
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: 40, // O cualquier otro tamaño deseado
-                                  child: Icon(
-                                    FontAwesomeIcons.facebook,
-                                    color: Colors.white, // Color del icono
-                                  ),
-                                ),
-                              ),
-                            ),
+                            SizedBox(height: 70),
                             SizedBox(
                               width: 20,
                             ),
@@ -158,11 +130,15 @@ class Login extends StatelessWidget {
                                   Autenticar('GOOGLE');
                                 },
                                 child: Container(
-                                  height: 40,
-                                  width: 40, // O cualquier otro tamaño deseado
-                                  child: Icon(
-                                    FontAwesomeIcons.google,
-                                    color: Colors.white, // Color del icono
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    border: Border.all(color: Colors.blue),
+                                    color: Colors.white,
+                                  ),
+                                  height: 30,
+                                  width: 30, // O cualquier otro tamaño deseado
+                                  child: Image.asset(
+                                    'assets/google.png',
                                   ),
                                 ),
                               ),
@@ -179,18 +155,16 @@ class Login extends StatelessWidget {
                               color: Colors.white,
                               child: Row(children: [
                                 Text(
-                                  'Iniciar Sesion',
+                                  'Iniciar Sesión',
                                   style: TextStyle(
                                       color: Colors.blue,
                                       fontSize: 15,
                                       fontFamily: AutofillHints.addressCity),
                                 ),
-                                SizedBox(
-                                  width: 6,
-                                ),
-                                Icon(
-                                  Icons.arrow_forward,
-                                  color: Colors.blue,
+                                Image.asset(
+                                  'assets/proximo.png',
+                                  width: 37,
+                                  height: 37,
                                 ),
                               ]),
                               onPressed: () async {
@@ -269,8 +243,8 @@ class Login extends StatelessWidget {
     }
   }
 
-  Widget _buildAnimatedIconJump(
-      BuildContext context, IconData icon, String hintText) {
+  Widget _buildAnimatedImageJump(BuildContext context, String imagePath,
+      String hintText, TextEditingController controller) {
     return Padding(
       padding: const EdgeInsets.only(),
       child: Row(
@@ -278,8 +252,14 @@ class Login extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(right: 14),
-            child: AnimatedIconJump(
-              icon: icon,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
+              child: Image.asset(
+                imagePath,
+                width: 34,
+                height: 34,
+              ),
             ),
           ),
           Expanded(
@@ -287,7 +267,7 @@ class Login extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: hintText,
               ),
-              controller: _controllerEmail,
+              controller: controller,
             ),
           ),
         ],
@@ -295,29 +275,21 @@ class Login extends StatelessWidget {
     );
   }
 
-  Widget _buildAnimatedIconJumpp(
-      BuildContext context, IconData icon, String hintText) {
-    return Padding(
-      padding: const EdgeInsets.only(),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(right: 14),
-            child: AnimatedIconJump(
-              icon: icon,
-            ),
-          ),
-          Expanded(
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: hintText,
-              ),
-              controller: _controllerClave,
-            ),
-          ),
-        ],
-      ),
+  Widget _buildEmailField(BuildContext context) {
+    return _buildAnimatedImageJump(
+      context,
+      'assets/nose.gif',
+      'Correo Electronico',
+      _controllerEmail,
+    );
+  }
+
+  Widget _buildPasswordField(BuildContext context) {
+    return _buildAnimatedImageJump(
+      context,
+      'assets/clave.gif',
+      'Contraseña',
+      _controllerClave,
     );
   }
 }

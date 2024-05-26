@@ -41,9 +41,9 @@ class _Crear_proyectosState extends State<Crear_proyectos> {
       ),
       body: SingleChildScrollView(
         child: Container(
-            margin: EdgeInsets.only(top: 5, left: 10),
+            margin: EdgeInsets.only(top: 5, left: 5, right: 5),
             width: 390,
-            height: 600,
+            height: 650,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: Color.fromARGB(128, 0, 0, 0),
@@ -101,7 +101,7 @@ class _LabelsState extends State<Labels> {
                     prefixIcon: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Image.asset(
-                        'assets/proyecto2.png',
+                        'assets/contrato.gif',
                         width: 10,
                         height: 10,
                       ),
@@ -143,7 +143,7 @@ class _LabelsState extends State<Labels> {
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Image.asset(
-                      'assets/fechainicio.png',
+                      'assets/calendario.gif',
                       width: 10,
                       height: 10,
                     ),
@@ -179,7 +179,7 @@ class _LabelsState extends State<Labels> {
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Image.asset(
-                      'assets/fechafin.png',
+                      'assets/calendario21.gif',
                       width: 10,
                       height: 10,
                     ),
@@ -213,7 +213,7 @@ class _LabelsState extends State<Labels> {
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Image.asset(
-                      'assets/despcri.png',
+                      'assets/buscare.gif',
                       width: 10,
                       height: 10,
                     ),
@@ -257,7 +257,7 @@ class _LabelsState extends State<Labels> {
                             color: Colors.blue, fontWeight: FontWeight.bold),
                       ),
                       Image.asset(
-                        'assets/buscar.png',
+                        'assets/buscar.gif',
                         width: 35,
                         height: 35,
                       )
@@ -287,7 +287,7 @@ class _LabelsState extends State<Labels> {
                     ),
                     Image.asset(
                       width: 40,
-                      'assets/crearproyecto.png',
+                      'assets/carpeta.gif',
                     )
                   ],
                 ),

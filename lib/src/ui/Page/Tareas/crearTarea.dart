@@ -73,7 +73,7 @@ class _Crear_tareasState extends State<Crear_Tareas> {
         child: Container(
           margin: EdgeInsets.only(top: 5, left: 10),
           width: 390,
-          height: 600,
+          height: 660,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
             color: Color.fromARGB(128, 0, 0, 0),
@@ -135,7 +135,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                     prefixIcon: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Image.asset(
-                        'assets/tarea.png',
+                        'assets/tarea.gif',
                         width: 10,
                         height: 10,
                       ),
@@ -177,7 +177,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Image.asset(
-                      'assets/fechainicio.png',
+                      'assets/calendario3.gif',
                       width: 10,
                       height: 10,
                     ),
@@ -211,7 +211,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Image.asset(
-                      'assets/fechafin.png',
+                      'assets/proximo.gif',
                       width: 10,
                       height: 10,
                     ),
@@ -245,7 +245,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Image.asset(
-                      'assets/despcri.png',
+                      'assets/investigacion.gif',
                       width: 10,
                       height: 10,
                     ),
@@ -296,7 +296,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                       prefixIcon: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Image.asset(
-                          'assets/proyecto.png',
+                          'assets/documento.gif',
                           width: 10,
                           height: 10,
                         ),
@@ -384,7 +384,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                         fontWeight: FontWeight.bold),
                   ),
                   Image.asset(
-                    'assets/subir.png',
+                    'assets/subir.gif',
                     width: 30,
                     height: 30,
                   )
@@ -445,7 +445,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                       prefixIcon: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Image.asset(
-                          'assets/lupa.png',
+                          'assets/consultoria-de-gestion.gif',
                           width: 24,
                           height: 24,
                         ),
@@ -522,7 +522,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                       ),
                       Image.asset(
                         width: 50,
-                        'assets/tarea.png',
+                        'assets/planificacion.gif',
                       )
                     ],
                   ),

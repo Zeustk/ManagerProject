@@ -52,19 +52,20 @@ class _JumpingButtonState extends State<JumpingButton>
         onPressed: widget.onPressed,
         color: Colors.white,
         child: Row(
-          children: const [
+          children: [
             Text(
               'Comencemos',
               style: TextStyle(
-                color: Colors.blue,
-                fontSize: 16,
-              ),
+                  color: Colors.blue,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
             ),
             SizedBox(width: 5),
-            Icon(
-              Icons.arrow_forward,
-              color: Colors.blue,
-            ),
+            Image.asset(
+              'assets/proximo.png',
+              height: 37,
+              width: 37,
+            )
           ],
         ),
       ),
@@ -136,42 +137,103 @@ class Principal extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(40),
-                          color: Colors.white),
-                      child: Image.asset(
-                        'assets/facebook.png',
-                        width: 50,
-                        height: 50,
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        width: 145,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(40),
+                            border: Border.all(color: Colors.blue[800]!),
+                            color: Colors.white),
+                        child: Container(
+                          child: Row(
+                            children: [
+                              SizedBox(width: 0),
+                              Image.asset(
+                                'assets/facebook.png',
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'Facebook',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.blue[800],
+                                    fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        width: 90,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(40),
+                            border: Border.all(color: Colors.black),
+                            color: Colors.white),
+                        child: Container(
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'assets/x.png',
+                              ),
+                              SizedBox(
+                                width: 14,
+                              ),
+                              Text(
+                                'X',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(width: 10),
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(40)),
-                      child: Image.asset(
-                        'assets/x.png',
-                        width: 100,
-                        height: 100,
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(40)),
-                      child: Image.asset(
-                        'assets/instagram.png',
-                        width: 100,
-                        height: 100,
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: InkWell(
+                        onTap: () {},
+                        child: Container(
+                          width: 145,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(40),
+                            border: Border.all(
+                                color: Color(0xFFE4405F)), // Color de Instagram
+                            color: Colors.white,
+                          ),
+                          child: Row(
+                            children: [
+                              SizedBox(width: 0),
+                              Image.asset(
+                                'assets/instagram.png',
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'Instagram',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color:
+                                      Color(0xFFE4405F), // Color de Instagram
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ],

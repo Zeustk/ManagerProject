@@ -20,9 +20,10 @@ class DetalleProyectoPage extends StatelessWidget {
             ),
             child: IconButton(
                 onPressed: () {},
-                icon: Icon(
-                  Icons.library_add,
-                  color: Colors.green,
+                icon: Image.asset(
+                  'assets/agregar.gif',
+                  width: 50,
+                  height: 50,
                 )),
           ),
           Container(
@@ -35,9 +36,10 @@ class DetalleProyectoPage extends StatelessWidget {
             ),
             child: IconButton(
                 onPressed: () {},
-                icon: Icon(
-                  Icons.update,
-                  color: Colors.amber,
+                icon: Image.asset(
+                  'assets/cargando.gif',
+                  width: 50,
+                  height: 50,
                 )),
           ),
           Container(
@@ -50,9 +52,10 @@ class DetalleProyectoPage extends StatelessWidget {
             ),
             child: IconButton(
                 onPressed: () {},
-                icon: Icon(
-                  Icons.delete_forever_rounded,
-                  color: Colors.red,
+                icon: Image.asset(
+                  'assets/eliminar.gif',
+                  width: 50,
+                  height: 50,
                 )),
           )
         ],
@@ -80,7 +83,7 @@ class DetalleProyectoPage extends StatelessWidget {
 }
 
 class _DetalleProyecto extends StatelessWidget {
-  ProyectoModel proyecto = Get.arguments as ProyectoModel;
+  /*  ProyectoModel proyecto = Get.arguments as ProyectoModel; */
 
   @override
   Widget build(BuildContext context) {
@@ -91,9 +94,9 @@ class _DetalleProyecto extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Container(
-        margin: EdgeInsets.only(top: 10),
+        margin: EdgeInsets.only(top: 10, right: 5),
         width: 390,
-        height: 600,
+        height: 720,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: Color.fromARGB(128, 0, 0, 0),
@@ -116,11 +119,11 @@ class _DetalleProyecto extends StatelessWidget {
                     width: 60,
                     height: 60,
                     decoration: BoxDecoration(
-                      color: Colors.white30,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Image.asset(
-                      'assets/hombre.png',
+                      'assets/lider.gif',
                       width: 50,
                       height: 50,
                     ),
@@ -166,11 +169,11 @@ class _DetalleProyecto extends StatelessWidget {
                     width: 60,
                     height: 60,
                     decoration: BoxDecoration(
-                      color: Colors.white30,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Image.asset(
-                      'assets/proyecto.png',
+                      'assets/contrato1.gif',
                       width: 50,
                       height: 50,
                     ),
@@ -185,10 +188,10 @@ class _DetalleProyecto extends StatelessWidget {
                       SizedBox(
                         width: 50,
                       ),
-                      Text(
+                      /* Text(
                         '${proyecto.nombre}',
                         style: TextStyle(color: Colors.black),
-                      )
+                      ) */
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -216,11 +219,11 @@ class _DetalleProyecto extends StatelessWidget {
                     width: 60,
                     height: 60,
                     decoration: BoxDecoration(
-                      color: Colors.white30,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Image.asset(
-                      'assets/calendario.png',
+                      'assets/calendario5.gif',
                       width: 50,
                       height: 50,
                     ),
@@ -235,10 +238,10 @@ class _DetalleProyecto extends StatelessWidget {
                       SizedBox(
                         width: 50,
                       ),
-                      Text(
+                      /* Text(
                         '${dateFormat.format(proyecto.fechaInicio)}',
                         style: TextStyle(color: Colors.black),
-                      )
+                      ) */
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -266,11 +269,11 @@ class _DetalleProyecto extends StatelessWidget {
                     width: 60,
                     height: 60,
                     decoration: BoxDecoration(
-                      color: Colors.white30,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Image.asset(
-                      'assets/calendario2.png',
+                      'assets/calendario6.gif',
                       width: 50,
                       height: 50,
                     ),
@@ -285,10 +288,10 @@ class _DetalleProyecto extends StatelessWidget {
                       SizedBox(
                         width: 50,
                       ),
-                      Text(
+                      /* Text(
                         '${dateFormat.format(proyecto.fechaFinalizacion)}',
                         style: TextStyle(color: Colors.black),
-                      )
+                      ) */
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -301,6 +304,7 @@ class _DetalleProyecto extends StatelessWidget {
             SizedBox(
               height: 50,
             ),
+            Divider(),
             Text(
               'Integrates',
               style: TextStyle(
@@ -314,17 +318,23 @@ class _DetalleProyecto extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 100),
+                      padding: const EdgeInsets.symmetric(horizontal: 80),
                       child: Row(
                         children: [
                           Text('Integrante $index'),
                           SizedBox(
                             width: 15,
                           ),
-                          Image.asset(
-                            'assets/eliminarinte.png',
-                            width: 40,
-                            height: 40,
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white70,
+                                border: Border.all(color: Colors.white),
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Image.asset(
+                              'assets/eliminar-usuario.gif',
+                              width: 60,
+                              height: 60,
+                            ),
                           ),
                         ],
                       ),
