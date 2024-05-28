@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
+import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 
 class DetalleProyectoPage extends StatelessWidget {
   @override
@@ -326,15 +327,20 @@ class _DetalleProyecto extends StatelessWidget {
                           SizedBox(
                             width: 15,
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white70,
-                                border: Border.all(color: Colors.white),
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Image.asset(
-                              'assets/eliminar-usuario.gif',
-                              width: 60,
-                              height: 60,
+                          InkWell(
+                            onTap: () {
+                              Get.to(Crear_proyectos());
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white70,
+                                  border: Border.all(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Image.asset(
+                                'assets/eliminar-usuario.gif',
+                                width: 60,
+                                height: 60,
+                              ),
                             ),
                           ),
                         ],

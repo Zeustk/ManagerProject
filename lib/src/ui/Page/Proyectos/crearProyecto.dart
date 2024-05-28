@@ -31,26 +31,29 @@ class _Crear_proyectosState extends State<Crear_proyectos> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
-      backgroundColor: kSecondaryColor,
-      appBar: AppBar(
-        foregroundColor: Colors.white,
-        backgroundColor: kSecondaryColor,
-        title: Text('Crear Proyecto', style: TextStyle(color: Colors.white)),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(56.0),
+        child: AppBarWithBackgroundImage(),
       ),
       drawer: SafeArea(
         child: Draweer(),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-            margin: EdgeInsets.only(top: 5, left: 5, right: 5),
-            width: 390,
-            height: 650,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Color.fromARGB(128, 0, 0, 0),
-            ),
-            child: Labels()),
-      ),
+      body: Stack(children: [
+        Positioned.fill(
+          child: Image.asset(
+            'assets/fondoproyecto.jpg',
+            fit: BoxFit.cover,
+          ),
+        ),
+        SingleChildScrollView(
+          child: Container(
+              margin: EdgeInsets.only(top: 5, left: 5, right: 5),
+              width: 500,
+              height: 650,
+              decoration: BoxDecoration(),
+              child: Labels()),
+        ),
+      ]),
     );
   }
 }
@@ -377,5 +380,32 @@ class _LabelsState extends State<Labels> {
         __controllerFechaFinalizacion.text = _fecha.toString().split(" ")[0];
       });
     }
+  }
+}
+
+class AppBarWithBackgroundImage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image:
+                  AssetImage('assets/fondoproyecto.jpg'), // Ruta de la imagen
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+        ),
+        AppBar(
+          backgroundColor: Colors.transparent, // Hace el AppBar transparente
+          elevation: 0,
+          title: Text(
+            'Crear Proyecto',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ],
+    );
   }
 }

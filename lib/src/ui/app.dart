@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
+import 'package:manager_proyect/src/ui/Page/Tareas/detalleTarea.dart';
+import 'package:manager_proyect/src/ui/Page/Tareas/subirTarea.dart';
 /* import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart'; */
 
 import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';

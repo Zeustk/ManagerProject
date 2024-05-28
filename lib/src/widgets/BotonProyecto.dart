@@ -30,9 +30,10 @@ class Boton_next extends StatelessWidget {
                 SizedBox(
                   width: 2,
                 ),
-                const Icon(
-                  Icons.cancel,
-                  color: Colors.blue,
+                Image.asset(
+                  'assets/cancelarpro.gif',
+                  width: 25,
+                  height: 25,
                 ),
               ],
             )),

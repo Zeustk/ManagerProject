@@ -25,8 +25,6 @@ class _SubirTareasState extends State<SubirTareas> {
 
   @override
   Widget build(BuildContext context) {
-    
-
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
@@ -34,127 +32,258 @@ class _SubirTareasState extends State<SubirTareas> {
         title: Text('Subir Tareas'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              '${tarea.nombre}',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 40.0),
-            Text(
-              '${tarea.descripcion}',
-              style: TextStyle(
-                fontSize: 16.0,
-              ),
-            ),
-            SizedBox(height: 30.0),
-            Text(
-              'Informe',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10.0),
-            TextField(
-              controller: _controllerInforme,
-              maxLines: 5,
-              decoration: InputDecoration(
-                hintText: 'Informe de la tarea',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 30.0),
-            Text(
-              'Documento',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10.0),
-            ElevatedButton(
-              onPressed: () async {
-                FilePickerResult? result = await FilePicker.platform.pickFiles(
-                  type: FileType.custom,
-                  allowedExtensions: ['pdf'],
-                );
+      body: Container(
+        margin: EdgeInsets.only(top: 10, right: 11, left: 12),
+        width: 550,
+        height: 620,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Color.fromARGB(128, 0, 0, 0)),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(top: 5, left: 7),
+                    width: 450,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                            color: Colors.blue,
+                            style: BorderStyle.solid,
+                            width: 1.5)),
+                    child: SizedBox(
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            'assets/Dtarea.png',
+                            width: 25,
+                            height: 25,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            'Nombre Tarea:  ${tarea.nombre}',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 40.0),
+                  Container(
+                    padding: EdgeInsets.only(top: 5),
+                    width: 380,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                            color: Colors.blue,
+                            style: BorderStyle.solid,
+                            width: 1.5)),
+                    child: Row(
+                      children: [
+                        Image.asset('assets/creartarea.png'),
+                        Text(
+                          'Descripcion: ${tarea.descripcion}',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 30.0),
+                  Container(
+                    padding: EdgeInsets.only(left: 7),
+                    width: 80,
+                    height: 32,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white),
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Text(
+                      'Informe',
+                      style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  TextField(
+                    controller: _controllerInforme,
+                    maxLines: 5,
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      hintText: 'Informe de la tarea',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 30.0),
+                  Text(
+                    'Documento',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  ElevatedButton(
+                    onPressed: () async {
+                      FilePickerResult? result =
+                          await FilePicker.platform.pickFiles(
+                        type: FileType.custom,
+                        allowedExtensions: ['pdf'],
+                      );
 
-                if (result != null) {
-                  pdfPath = result.files.single.path;
-                  print('Archivo PDF seleccionado: $pdfPath');
+                      if (result != null) {
+                        pdfPath = result.files.single.path;
+                        print('Archivo PDF seleccionado: $pdfPath');
 
-                  if (pdfPath != null) {
-                    String fileName = path.basename(pdfPath!);
-                    setState(() {
-                      _controllerPdfPath.text = fileName;
-                    });
-                  }
-                } else {
-                  // El usuario no seleccionó ningún archivo
-                }
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        if (pdfPath != null) {
+                          String fileName = path.basename(pdfPath!);
+                          setState(() {
+                            _controllerPdfPath.text = fileName;
+                          });
+                        }
+                      } else {
+                        // El usuario no seleccionó ningún archivo
+                      }
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.blue),
+                    ),
+                    child: SizedBox(
+                      width: 175,
+                      child: Row(
+                        children: [
+                          Text('Adjuntar Documento',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Image.asset(
+                            'assets/adjunto.gif',
+                            width: 35,
+                            height: 35,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  if (_controllerPdfPath.text.isNotEmpty)
+                    Container(
+                      padding: EdgeInsets.only(left: 10),
+                      width: 260,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                            style: BorderStyle.solid, color: Colors.blue),
+                        color: Colors.white,
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            _controllerPdfPath.text,
+                            style: TextStyle(fontSize: 16, color: Colors.blue),
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Image.asset(
+                            'assets/archivo.png',
+                            width: 30,
+                          )
+                        ],
+                      ),
+                    ),
+                  SizedBox(height: 30.0),
+                  ElevatedButton(
+                    onPressed: () async {
+                      if (pdfPath != null) {
+                        registrarEntrega();
+
+                        // Aquí puedes implementar la lógica para enviar los datos a tu backend o hacer lo que necesites con el informe y el PDF
+                      } else {
+                        // Mostrar un mensaje de error o manejar el caso cuando no se ha seleccionado un archivo PDF
+                      }
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.blue),
+                    ),
+                    child: SizedBox(
+                      width: 90,
+                      child: Row(
+                        children: [
+                          Text(
+                            'Entregar',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(width: 5),
+                          Image.asset(
+                            'assets/enviartarea.gif',
+                            width: 30,
+                            height: 30,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              child: Text('Adjuntar Documento'),
             ),
-            if (_controllerPdfPath.text.isNotEmpty)
-              Text(
-                _controllerPdfPath.text,
-                style: TextStyle(fontSize: 16),
-              ),
-            SizedBox(height: 50.0),
-            ElevatedButton(
-              onPressed: () async {
-                if (pdfPath != null) {
-                 
-                 registrarEntrega();
-                  
-                  // Aquí puedes implementar la lógica para enviar los datos a tu backend o hacer lo que necesites con el informe y el PDF
-                } else {
-                  // Mostrar un mensaje de error o manejar el caso cuando no se ha seleccionado un archivo PDF
-                }
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-              ),
-              child: Text('Entregar'),
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
+
   void registrarEntrega() async {
+    File file = File(pdfPath!);
+    List<int> bytes = await file.readAsBytes();
 
-      File file = File(pdfPath!);
-      List<int> bytes = await file.readAsBytes();
+    String base64Data = base64Encode(bytes);
 
-      String base64Data = base64Encode(bytes);
+    EntregasModel entrega = EntregasModel(
+        informe: _controllerInforme.text,
+        urlPdfEntrega: base64Data,
+        idTarea: tarea.idTarea);
 
-      EntregasModel entrega=EntregasModel(informe: _controllerInforme.text, urlPdfEntrega: base64Data, idTarea: tarea.idTarea);
-
-      gestionEntregas.registrarEntregas(entrega).then((resultado) {
-          print('El resultado de subir la tarea es: $resultado');
-          Get.snackbar(
-            'Desarrollo Cargado',
-            'Exitosamente',
-            backgroundColor: Colors.white,
-            colorText: Colors.black,
-          );
-        }).catchError((error) {
-          print('Ocurrió un error al registrar la tarea: $error');
-        });
-
-
+    gestionEntregas.registrarEntregas(entrega).then((resultado) {
+      print('El resultado de subir la tarea es: $resultado');
+      Get.snackbar(
+        'Desarrollo Cargado',
+        'Exitosamente',
+        backgroundColor: Colors.white,
+        colorText: Colors.black,
+      );
+    }).catchError((error) {
+      print('Ocurrió un error al registrar la tarea: $error');
+    });
   }
 }

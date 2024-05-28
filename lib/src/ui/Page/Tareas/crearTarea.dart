@@ -399,13 +399,22 @@ class _LabelsTareasState extends State<LabelsTareas> {
               ),
             SizedBox(height: 20),
             Divider(color: Colors.white),
-            Text(
-              'Integrantes',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  fontFamily: AutofillHints.addressCity),
+            Container(
+              padding: EdgeInsets.only(left: 7, bottom: 7),
+              width: 150,
+              height: 40,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white),
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(10)),
+              child: Text(
+                'Integrantes',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                    fontFamily: AutofillHints.addressCity),
+              ),
             ),
             SizedBox(height: 10),
             Padding(

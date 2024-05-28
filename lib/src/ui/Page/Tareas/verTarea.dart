@@ -57,50 +57,62 @@ class _Ver_TareasState extends State<Ver_Tareas> {
       ),
       drawer: Draweer(),
       bottomNavigationBar: BotonNavi(),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 4, left: 2, bottom: 40),
-                  child: Boton_next(texto: 'Todos'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 4, bottom: 40),
-                  child: Boton_next(texto: 'Proceso'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 0, bottom: 40),
-                  child: Boton_next(texto: 'Completados'),
-                ),
-              ],
-            ),
-            // Construye dinámicamente los contenedores de tareas basados en la lista
-            Column(
-              children: tareas.map((tarea) {
-                return GestureDetector(
-                  onTap: () {
-                    // Acción al tocar una tarea (puede navegar a la pantalla de detalles)
-                    Get.to(DetalleTarea(), arguments: tarea);
-                  },
-                  child: Column(
-                    children: [
-                      Container_Mistareas(
-                        nombreTarea: tarea.nombre,
-                        descripcion: tarea.descripcion,
-                        texto: 'EN PROCESO',
-                        color: Colors
-                            .blue, // Puedes ajustar el color según lo desees
-                      ),
-                      SizedBox(height: 12),
-                    ],
+      body: Container(
+        margin: EdgeInsets.only(top: 10, right: 11, left: 12),
+        padding: EdgeInsets.only(top: 30),
+        width: double.infinity,
+        height: 720,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Color.fromARGB(128, 0, 0, 0),
+        ),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 6, left: 6),
+                    child: Boton_next(texto: 'Todos'),
                   ),
-                );
-              }).toList(),
-            ),
-          ],
+                  Padding(
+                    padding: const EdgeInsets.only(right: 3.5),
+                    child: Boton_next(texto: 'Proceso'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 0),
+                    child: Boton_next(texto: 'Completado'),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Column(
+                children: tareas.map((tarea) {
+                  return GestureDetector(
+                    onTap: () {
+                      // Acción al tocar una tarea (puede navegar a la pantalla de detalles)
+                      Get.to(DetalleTarea(), arguments: tarea);
+                    },
+                    child: Column(
+                      children: [
+                        Container_Mistareas(
+                          nombreTarea: tarea.nombre,
+                          descripcion: tarea.descripcion,
+                          texto: 'EN PROCESO',
+                          color: Colors
+                              .blue, // Puedes ajustar el color según lo desees
+                        ),
+                        SizedBox(height: 12),
+                      ],
+                    ),
+                  );
+                }).toList(),
+              ),
+            ],
+          ),
         ),
       ),
     );

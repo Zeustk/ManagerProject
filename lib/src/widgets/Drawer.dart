@@ -57,95 +57,110 @@ class Draweer extends StatelessWidget {
         },
       ],
     },
+    {
+      'title': 'Informes',
+      'image': 'assets/informes.gif',
+      'onTap': () {
+        Get.to(Perfil_Usuario());
+      },
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
     AuthController _controllerAuth = Get.find();
     return Drawer(
-      backgroundColor: Colors.white,
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: drawerItems.length,
-              itemBuilder: (BuildContext context, int index) {
-                final item = drawerItems[index];
-                if (item.containsKey('children')) {
-                  // Si el ítem tiene hijos, usa un ExpansionTile
-                  return ExpansionTile(
-                    iconColor: Colors.blue,
-                    collapsedIconColor: Colors.blue,
-                    leading: Image.asset(
-                      item['image'],
-                      width: 35,
-                      height: 35,
-                    ),
-                    title: Text(
-                      item['title'],
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    children: List<Widget>.from(
-                      item['children'].map<Widget>((child) {
-                        return ListTile(
-                          leading: Image.asset(
-                            child['image'],
-                            width: 24.0,
-                            height: 24.0,
-                          ),
-                          title: Text(
-                            child['title'],
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          onTap: child['onTap'],
-                        );
-                      }).toList(),
-                    ),
-                  );
-                } else {
-                  return ListTile(
-                    leading: Image.asset(
-                      item['image'],
-                      width: 24.0,
-                      height: 24.0,
-                    ),
-                    title: Text(
-                      item['title'],
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    onTap: item['onTap'],
-                  );
-                }
-              },
-            ),
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/fondoproyecto.jpg"),
+            fit: BoxFit.cover,
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
-            child: ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(kSecondaryColor),
-              ),
-              onPressed: () {
-                _controllerAuth.CerrarSesionStorage();
-                Get.to(Principal());
-              },
-              child: Row(
-                children: [
-                  Image.asset('assets/cerrar-sesion.png',
-                      width: 30, height: 30),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Cerrar Sesión',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: drawerItems.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final item = drawerItems[index];
+                  if (item.containsKey('children')) {
+                    // Si el ítem tiene hijos, usa un ExpansionTile
+                    return ExpansionTile(
+                      iconColor: Colors.white,
+                      collapsedIconColor: Colors.white,
+                      leading: Image.asset(
+                        item['image'],
+                        width: 35,
+                        height: 35,
+                      ),
+                      title: Text(
+                        item['title'],
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      children: List<Widget>.from(
+                        item['children'].map<Widget>((child) {
+                          return ListTile(
+                            leading: Image.asset(
+                              child['image'],
+                              width: 24.0,
+                              height: 24.0,
+                            ),
+                            title: Text(
+                              child['title'],
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            onTap: child['onTap'],
+                          );
+                        }).toList(),
+                      ),
+                    );
+                  } else {
+                    return ListTile(
+                      leading: Image.asset(
+                        item['image'],
+                        width: 35,
+                        height: 35,
+                      ),
+                      title: Text(
+                        item['title'],
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onTap: item['onTap'],
+                    );
+                  }
+                },
               ),
             ),
-          ),
-        ],
+            Container(
+              margin:
+                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                ),
+                onPressed: () {
+                  _controllerAuth.CerrarSesionStorage();
+                  Get.to(Principal());
+                },
+                child: Row(
+                  children: [
+                    Image.asset('assets/cerrar-sesion.png',
+                        width: 30, height: 30),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Cerrar Sesión',
+                      style: TextStyle(color: kSecondaryColor),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
