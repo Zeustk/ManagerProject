@@ -89,10 +89,16 @@ class Draweer extends StatelessWidget {
                     return ExpansionTile(
                       iconColor: Colors.white,
                       collapsedIconColor: Colors.white,
-                      leading: Image.asset(
-                        item['image'],
-                        width: 35,
-                        height: 35,
+                      leading: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Image.asset(
+                          item['image'],
+                          width: 35,
+                          height: 35,
+                        ),
                       ),
                       title: Text(
                         item['title'],
@@ -101,10 +107,16 @@ class Draweer extends StatelessWidget {
                       children: List<Widget>.from(
                         item['children'].map<Widget>((child) {
                           return ListTile(
-                            leading: Image.asset(
-                              child['image'],
-                              width: 24.0,
-                              height: 24.0,
+                            leading: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Image.asset(
+                                child['image'],
+                                width: 32.0,
+                                height: 32.0,
+                              ),
                             ),
                             title: Text(
                               child['title'],
