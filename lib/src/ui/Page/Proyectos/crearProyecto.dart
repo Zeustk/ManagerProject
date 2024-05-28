@@ -13,6 +13,7 @@ import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart';
 import 'package:manager_proyect/src/ui/Page/Usuarios/AdicionarUsuarios.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
+import 'package:manager_proyect/src/widgets/FondoApp.dart';
 
 import '../../../widgets/Drawer.dart';
 
@@ -33,7 +34,7 @@ class _Crear_proyectosState extends State<Crear_proyectos> {
       bottomNavigationBar: BotonNavi(),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(56.0),
-        child: AppBarWithBackgroundImage(),
+        child: FondoAppImage(),
       ),
       drawer: SafeArea(
         child: Draweer(),
@@ -383,29 +384,4 @@ class _LabelsState extends State<Labels> {
   }
 }
 
-class AppBarWithBackgroundImage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image:
-                  AssetImage('assets/fondoproyecto.jpg'), // Ruta de la imagen
-              fit: BoxFit.fitWidth,
-            ),
-          ),
-        ),
-        AppBar(
-          backgroundColor: Colors.transparent, // Hace el AppBar transparente
-          elevation: 0,
-          title: Text(
-            'Crear Proyecto',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-      ],
-    );
-  }
-}
+

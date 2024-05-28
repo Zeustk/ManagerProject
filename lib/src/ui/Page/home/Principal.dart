@@ -84,190 +84,190 @@ class Principal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: kSecondaryColor,
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-              transform: Matrix4.translationValues(0.0, -10.0, 0.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/Gestor.png"),
-                    fit: BoxFit.contain,
-                  ),
+      body: Stack(children: [
+        Container(
+          child: Stack(children: [
+            Column(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Stack(children: [
+                    Positioned.fill(
+                      child: Image.asset(
+                        'assets/fondoproyecto.jpg',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Container(
+                      transform: Matrix4.translationValues(0.0, -10.0, 0.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/Gestor.png"),
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
                 ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Center(
-                  child: TweenAnimationBuilder(
-                    tween: Tween<double>(begin: 0.0, end: 1.0),
-                    duration: Duration(seconds: 2),
-                    builder: (context, double opacity, child) {
-                      return Opacity(
-                        opacity: opacity,
-                        child: RichText(
-                          text: TextSpan(children: [
-                            TextSpan(
-                              text: 'Bienvenido a Gestor De Proyecto',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
+                        child: Image.asset(
+                          'assets/fondoproyecto.jpg',
+                          fit: BoxFit.scaleDown,
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  width: 145,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(40),
+                                      border: Border.all(color: Colors.blue),
+                                      color: Colors.white),
+                                  child: Container(
+                                    child: Row(
+                                      children: [
+                                        SizedBox(width: 0),
+                                        Image.asset(
+                                          'assets/icons8-facebook.gif',
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          'Facebook',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.blue,
+                                              fontWeight: FontWeight.w500),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 5),
+                              InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  width: 90,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(40),
+                                      border: Border.all(color: Colors.black),
+                                      color: Colors.white),
+                                  child: Container(
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              left: 3,
+                                              top: 3,
+                                              bottom: 3,
+                                              right: 3),
+                                          width: 30,
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                            color: Colors.black,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Image.asset(
+                                            'assets/X.gif',
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          'X',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w500),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    width: 135,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(40),
+                                      border: Border.all(
+                                          color: Color(
+                                              0xFFE4405F)), // Color de Instagram
+                                      color: Colors.white,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(80),
+                                              color: Colors.white),
+                                          child: Image.asset(
+                                            'assets/insta.gif',
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 2,
+                                        ),
+                                        Text(
+                                          'Instagram',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color: Color(
+                                                0xFFE4405F), // Color de Instagram
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          FittedBox(
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 35),
+                              child: JumpingButton(
+                                onPressed: () {
+                                  InicioSesionPorStorage();
+                                },
+                              ),
                             ),
-                          ]),
-                        ),
-                      );
-                    },
+                          )
+                        ],
+                      )
+                    ],
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        width: 145,
-                        height: 30,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(40),
-                            border: Border.all(color: Colors.blue!),
-                            color: Colors.white),
-                        child: Container(
-                          child: Row(
-                            children: [
-                              SizedBox(width: 0),
-                              Image.asset(
-                                'assets/icons8-facebook.gif',
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                'Facebook',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.blue,
-                                    fontWeight: FontWeight.w500),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        width: 90,
-                        height: 30,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(40),
-                            border: Border.all(color: Colors.black),
-                            color: Colors.white),
-                        child: Container(
-                          child: Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(
-                                    left: 3, top: 3, bottom: 3, right: 3),
-                                width: 30,
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Image.asset(
-                                  'assets/X.gif',
-                                ),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'X',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: InkWell(
-                        onTap: () {},
-                        child: Container(
-                          width: 135,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(40),
-                            border: Border.all(
-                                color: Color(0xFFE4405F)), // Color de Instagram
-                            color: Colors.white,
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 30,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(80),
-                                    color: Colors.white),
-                                child: Image.asset(
-                                  'assets/insta.gif',
-                                ),
-                              ),
-                              SizedBox(
-                                width: 2,
-                              ),
-                              Text(
-                                'Instagram',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color:
-                                      Color(0xFFE4405F), // Color de Instagram
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                FittedBox(
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 35),
-                    child: JumpingButton(
-                      onPressed: () {
-                        InicioSesionPorStorage();
-                      },
-                    ),
-                  ),
-                )
               ],
             ),
-          )
-        ],
-      ),
+          ]),
+        ),
+      ]),
     );
   }
 
