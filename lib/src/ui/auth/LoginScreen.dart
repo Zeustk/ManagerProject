@@ -7,6 +7,7 @@ import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
 import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
+import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
 import 'package:manager_proyect/src/ui/auth/Registrarse.dart';
 
 class Login extends StatelessWidget {
@@ -22,11 +23,6 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [
-        Container(
-          color: Colors.red,
-          width: 500,
-          child: Image.asset('assets/back.gif'),
-        ),
         Positioned.fill(
           child: Image.asset(
             'assets/fondomo.gif',
@@ -37,14 +33,22 @@ class Login extends StatelessWidget {
           duration: Duration(seconds: 1),
           curve: Curves.easeOut,
           child: Container(
-            height: double.infinity,
             child: Column(
               children: [
+                Container(
+                  margin: EdgeInsets.only(
+                    right: 320,
+                    top: 40,
+                  ),
+                  child: MaterialButton(
+                      onPressed: () {
+                        Get.to(Principal());
+                      },
+                      child: Image.asset('assets/back.gif')),
+                ),
                 Expanded(
                   child: Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage("assets/Login.png"),
                         fit: BoxFit.contain,
@@ -90,8 +94,9 @@ class Login extends StatelessWidget {
                                     child: const Center(
                                       child: Text(
                                         "Registrarse",
-                                        style:
-                                            TextStyle(color: kSecondaryColor),
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 13, 71, 161)),
                                       ),
                                     ),
                                   ),
@@ -128,7 +133,7 @@ class Login extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 90),
+                              SizedBox(height: 70),
                               SizedBox(
                                 width: 20,
                               ),
@@ -153,8 +158,8 @@ class Login extends StatelessWidget {
                             ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(
-                                left: 100, top: 20, right: 120),
+                            padding:
+                                EdgeInsets.only(left: 100, top: 20, right: 120),
                             child: MaterialButton(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30)),

@@ -64,26 +64,34 @@ class _Crear_tareasState extends State<Crear_Tareas> {
       backgroundColor: kSecondaryColor,
       appBar: AppBar(
         foregroundColor: Colors.white,
-        backgroundColor: kSecondaryColor,
-        title: Text('Crear Tarea', style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.black,
+        title: Text('Crear Tarea',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
       ),
       drawer: SafeArea(
         child: Draweer(),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.only(top: 5, left: 10),
-          width: 390,
-          height: 660,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: Color.fromARGB(128, 0, 0, 0),
+        child: Stack(children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/fondoproyecto.jpg',
+              fit: BoxFit.cover,
+            ),
           ),
-          child: LabelsTareas(
-            proyectos: proyectos,
-            usuarios: usuarios,
+          Container(
+            margin: EdgeInsets.only(top: 5, left: 15),
+            width: 410,
+            height: 660,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: LabelsTareas(
+              proyectos: proyectos,
+              usuarios: usuarios,
+            ),
           ),
-        ),
+        ]),
       ),
     );
   }

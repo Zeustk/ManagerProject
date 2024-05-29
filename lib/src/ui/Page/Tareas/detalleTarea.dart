@@ -53,115 +53,126 @@ class DetalleTarea extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
-        backgroundColor: kSecondaryColor,
-        title: Text('Tarea:  ${tarea.nombre}',
-            style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.black,
+        title: Text('${tarea.nombre}', style: TextStyle(color: Colors.white)),
         centerTitle: true,
       ),
-      body: Container(
-        margin: EdgeInsets.only(top: 10, right: 11, left: 12),
-        width: 550,
-        height: 620,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Color.fromARGB(128, 0, 0, 0)),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    'Descripcion Tarea:  ${tarea.descripcion}',
-                    style: TextStyle(fontSize: 16.0, color: Colors.white),
-                  ),
-                  SizedBox(height: 30.0),
-                  Text(
-                    'Documento',
-                    style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                  SizedBox(height: 10.0),
-                  InkWell(
-                    onTap: () {
-                      _downloadPDF(tarea.urlPdf);
-                    },
-                    child: Container(
-                      width: 100.0,
-                      height: 100.0,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0),
+      body: Stack(children: [
+        Positioned.fill(
+          child: Image.asset(
+            'assets/fondoproyecto.jpg',
+            fit: BoxFit.fill,
+          ),
+        ),
+        SafeArea(
+          child: Container(
+            margin: EdgeInsets.only(top: 10, right: 11, left: 12),
+            width: 550,
+            height: 580,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.white, width: 5)),
+            child: SafeArea(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        '${tarea.descripcion}',
+                        style: TextStyle(fontSize: 16.0, color: Colors.white),
                       ),
-                      child: Image.asset('assets/descargardc.gif'),
-                    ),
-                  ),
-                  SizedBox(height: 30.0),
-                  Text(
-                    'Estado: No iniciado',
-                    style: TextStyle(fontSize: 16.0, color: Colors.white),
-                  ),
-                  SizedBox(height: 10.0),
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'En proceso',
-                          style: TextStyle(fontSize: 16.0, color: Colors.white),
+                      SizedBox(height: 30.0),
+                      Text(
+                        'Documento',
+                        style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      SizedBox(height: 10.0),
+                      InkWell(
+                        onTap: () {
+                          _downloadPDF(tarea.urlPdf);
+                        },
+                        child: Container(
+                          width: 100.0,
+                          height: 100.0,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Image.asset('assets/descargardc.gif'),
                         ),
-                        Checkbox(
-                          value: false,
-                          onChanged: (newValue) {
-                            // Aquí puedes agregar la lógica para cambiar el estado del checkbox
+                      ),
+                      SizedBox(height: 30.0),
+                      Text(
+                        'Estado: No iniciado',
+                        style: TextStyle(fontSize: 16.0, color: Colors.white),
+                      ),
+                      SizedBox(height: 10.0),
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'En proceso',
+                              style: TextStyle(
+                                  fontSize: 16.0, color: Colors.white),
+                            ),
+                            Checkbox(
+                              value: false,
+                              onChanged: (newValue) {
+                                // Aquí puedes agregar la lógica para cambiar el estado del checkbox
+                              },
+                            ),
+                            SizedBox(width: 10.0),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 10.0),
+                      SizedBox(
+                        width: 170,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                            foregroundColor: MaterialStateProperty.all<Color>(
+                                kSecondaryColor),
+                          ),
+                          onPressed: () {
+                            Get.to(SubirTareas(), arguments: tarea);
                           },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Subir Tarea',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                  width:
+                                      8), // Espacio entre el texto y la imagen
+                              Image.asset(
+                                'assets/subirtarea.gif',
+                                width: 32,
+                                height: 32,
+                              ),
+                            ],
+                          ),
                         ),
-                        SizedBox(width: 10.0),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 10.0),
-                  SizedBox(
-                    width: 170,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(kSecondaryColor),
                       ),
-                      onPressed: () {
-                        Get.to(SubirTareas(), arguments: tarea);
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Subir Tarea',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                              width: 8), // Espacio entre el texto y la imagen
-                          Image.asset(
-                            'assets/subirtarea.gif',
-                            width: 32,
-                            height: 32,
-                          ),
-                        ],
-                      ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
         ),
-      ),
+      ]),
     );
   }
 }
