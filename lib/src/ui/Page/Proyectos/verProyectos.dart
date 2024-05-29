@@ -27,6 +27,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
   final AuthController gestionAuth = AuthController();
   List<ProyectoModel> proyectos = [];
   final ProyectoController gestionProyectos = ProyectoController();
+   String tipo = Get.arguments as String;
 
   @override
   void initState() {
@@ -89,7 +90,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
 
   @override
   Widget build(BuildContext context) {
-    String tipo = Get.arguments as String;
+   
 
     return Scaffold(
       bottomNavigationBar: BotonNavi(),

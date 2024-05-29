@@ -52,7 +52,7 @@ class CrudProvider<T> {
     return response.body;
   }
 
-  Future<dynamic> busquedaPersonalizada(T body, String endpoint) async {
+  Future<dynamic> busquedaPersonalizada(dynamic body, String endpoint) async {
     final url = '$baseUrl/$endpoint';
     try {
       final response = await http.post(Uri.parse(url),

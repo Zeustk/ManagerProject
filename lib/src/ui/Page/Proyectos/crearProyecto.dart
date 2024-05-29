@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/controllers/DetallesController.dart';
+import 'package:manager_proyect/src/domain/controllers/Perfiles_Controller.dart';
 import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
 import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/DetalleProyecto_model.dart';
+import 'package:manager_proyect/src/domain/models/Perfiles_model.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
-import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart';
 import 'package:manager_proyect/src/ui/Page/Usuarios/AdicionarUsuarios.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
@@ -77,6 +77,7 @@ class _LabelsState extends State<Labels> {
   UsuariosController gestionUsuarios = UsuariosController();
   DetallesController gestionProyectoUsuarios = DetallesController();
   AuthController gestionAuth = AuthController();
+  PerfilesController gestionPerfiles = PerfilesController();
 
   @override
   void initState() {
@@ -275,7 +276,7 @@ class _LabelsState extends State<Labels> {
             CupertinoButton(
               padding: EdgeInsets.only(left: 40, right: 10, bottom: 10),
               onPressed: () {
-                RegistrarProyecto();
+                registrarProyecto();
               },
               alignment: Alignment.bottomCenter,
               color: Colors.white,
@@ -304,11 +305,16 @@ class _LabelsState extends State<Labels> {
     );
   }
 
-  void RegistrarProyecto() async {
+  void registrarProyecto() async {
+    UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
+
+    PerfilesModel perfilActual =
+        await gestionPerfiles.getUsuarioPorId(usuarioActual);
+
     ProyectoModel proyecto = ProyectoModel(
       fechaFinalizacion: DateTime.parse(__controllerFechaFinalizacion.text),
       fechaInicio: DateTime.parse(_controllerFechaInicio.text),
-      liderProyecto: "JESUS",
+      liderProyecto: perfilActual.nombreCompleto,
       nombre: __controllerNombre.text.trim().toUpperCase(),
       descripcion: __controllerDescripcion.text.trim(),
     );
@@ -333,19 +339,22 @@ class _LabelsState extends State<Labels> {
       return;
     });
 
-    UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
+    registrarProyectoDetalleUsuarios(usuarioActual);
+  }
 
+  void registrarProyectoDetalleUsuarios(UsuarioModel usuarioActual) {
     usuariosSeleccionados.add(usuarioActual);
 
     for (var usuario in usuariosSeleccionados) {
-      DetallesModel DetallesProyectoUsuario = DetallesModel(
+      DetallesModel detallesProyectoUsuario = DetallesModel(
           idDetalle: 0,
           idUsuario: usuario.idUsuario,
           idProyecto: 0,
-          porcentajeProyecto: 0.0);
+          porcentajeProyecto: 0.0,
+          idLiderProyecto: usuarioActual.idUsuario);
 
       gestionProyectoUsuarios
-          .registrarDetalles(DetallesProyectoUsuario)
+          .registrarDetalles(detallesProyectoUsuario)
           .then((resultado) {
         print('El resultado de registrar los integrantes es: $resultado');
       }).catchError((error) {
@@ -383,5 +392,3 @@ class _LabelsState extends State<Labels> {
     }
   }
 }
-
-

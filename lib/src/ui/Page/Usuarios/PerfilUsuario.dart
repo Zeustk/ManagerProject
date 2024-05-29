@@ -1,13 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/domain/controllers/Perfiles_Controller.dart';
+import 'package:manager_proyect/src/domain/controllers/authController.dart';
+import 'package:manager_proyect/src/domain/models/Perfiles_model.dart';
+import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
 import 'package:manager_proyect/src/widgets/Drawer.dart';
 
-class Perfil_Usuario extends StatelessWidget {
-  const Perfil_Usuario({super.key});
+class Perfil_Usuario extends StatefulWidget {
+
+
+  @override
+  State<Perfil_Usuario> createState() => _Perfil_UsuarioState();
+}
+
+class _Perfil_UsuarioState extends State<Perfil_Usuario> {
+  AuthController gestionAuth= AuthController();
+  PerfilesController gestionPerfil = PerfilesController();
+
+  UsuarioModel? usuarioActual;
+  PerfilesModel perfilActual =PerfilesModel();
+
+   @override
+  void initState() {
+    super.initState();
+    cargarPerfil();
+
+  }
+
+  Future<void> cargarPerfil() async {
+    try {
+      UsuarioModel usuario = await gestionAuth.obtenerDatosDeStorage();
+
+     PerfilesModel perfil=await gestionPerfil.getUsuarioPorId(usuarioActual!);
+      setState(() {
+        perfilActual=perfil;
+        usuarioActual = usuario;
+      });
+    } catch (error) {
+      // Manejar el error de la consulta de proyectos
+      print('Error al cargar proyectos: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+
+   
+
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
       drawer: Draweer(),
@@ -91,13 +132,13 @@ class Perfil_Usuario extends StatelessWidget {
             Row(
               children: [
                 SizedBox(width: 30),
-                Text('Nombre',
+                Text('${'Nombre'}',
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.white)),
                 SizedBox(
                   width: 70,
                 ),
-                Text('Armando Paredes',
+                Text(perfilActual.nombreCompleto,
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.white)),
               ],
@@ -114,7 +155,7 @@ class Perfil_Usuario extends StatelessWidget {
                   SizedBox(
                     width: 78,
                   ),
-                  Text('ArmandoParedes141@Gmail.com',
+                  Text('asdasdasds@',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white)),
                 ],

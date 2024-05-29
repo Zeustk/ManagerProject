@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;

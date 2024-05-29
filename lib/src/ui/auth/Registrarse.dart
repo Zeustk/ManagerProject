@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/domain/controllers/Perfiles_Controller.dart';
 import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
+import 'package:manager_proyect/src/domain/models/Perfiles_model.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 
 class Registro extends StatelessWidget {
   UsuariosController gestionUsuarios = UsuariosController();
+  PerfilesController gestionPerfiles=PerfilesController();
 
   TextEditingController _controllerCorreo = TextEditingController();
   TextEditingController __controllerClave = TextEditingController();
@@ -154,28 +157,7 @@ class Registro extends StatelessWidget {
                             ),
                           ]),
                           onPressed: () {
-                            UsuarioModel usuario = UsuarioModel(
-                              idUsuario: 0,
-                              email: _controllerCorreo.text,
-                              clave: __controllerClave.text,
-                              idRol: null,
-                            );
-
-                            gestionUsuarios
-                                .registrarUsuarios(usuario)
-                                .then((resultado) {
-                              print(
-                                  'El resultado de registrar el usuario es: $resultado');
-                              Get.snackbar(
-                                'Usuario Creado',
-                                'Usuario Creado Exitosamente',
-                                backgroundColor: Colors.white,
-                                colorText: Colors.black,
-                              );
-                            }).catchError((error) {
-                              print(
-                                  'Ocurrió un error al registrar el usuarios: $error');
-                            });
+                            registro();
                           },
                         ),
                       )
@@ -186,5 +168,38 @@ class Registro extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void registro() {
+    UsuarioModel usuario = UsuarioModel(
+      idUsuario: 0,
+      email: _controllerCorreo.text,
+      clave: __controllerClave.text,
+      idRol: null,
+    );
+
+    gestionUsuarios.registrarUsuarios(usuario).then((resultado) {
+      print('El resultado de registrar el usuario es: $resultado');
+
+      PerfilesModel perfil =  PerfilesModel();
+
+      gestionPerfiles.registrarPerfil(perfil).then((resultado) {
+
+        print(resultado);
+
+
+      }).catchError((error){
+        print('Error al registrar perfil $error');
+      });
+
+      Get.snackbar(
+        'Usuario Creado',
+        'Usuario Creado Exitosamente',
+        backgroundColor: Colors.white,
+        colorText: Colors.black,
+      );
+    }).catchError((error) {
+      print('Ocurrió un error al registrar el usuarios: $error');
+    });
   }
 }

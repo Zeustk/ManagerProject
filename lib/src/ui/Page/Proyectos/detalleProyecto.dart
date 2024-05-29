@@ -141,7 +141,7 @@ class _DetalleProyecto extends StatelessWidget {
                         width: 50,
                       ),
                       Text(
-                        'jose molina carlos',
+                        '${proyecto.liderProyecto}',
                         style: TextStyle(color: Colors.black),
                       )
                     ],
