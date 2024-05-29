@@ -87,17 +87,17 @@ class Principal extends StatelessWidget {
       body: Stack(children: [
         Container(
           child: Stack(children: [
+            Positioned.fill(
+              child: Image.asset(
+                'assets/fondoproyecto.jpg',
+                fit: BoxFit.fill,
+              ),
+            ),
             Column(
               children: [
                 Expanded(
                   flex: 2,
                   child: Stack(children: [
-                    Positioned.fill(
-                      child: Image.asset(
-                        'assets/fondoproyecto.jpg',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
                     Container(
                       transform: Matrix4.translationValues(0.0, -10.0, 0.0),
                       child: Container(
@@ -111,20 +111,30 @@ class Principal extends StatelessWidget {
                     ),
                   ]),
                 ),
+                Container(
+                  padding: EdgeInsets.only(left: 12),
+                  width: 350,
+                  transform: Matrix4.translationValues(0.0, 10.0, 0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Text(
+                    'Bienvenidos a Gestor Proyectos',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22),
+                  ),
+                ),
                 Expanded(
                   child: Stack(
                     children: [
-                      Positioned.fill(
-                        child: Image.asset(
-                          'assets/fondoproyecto.jpg',
-                          fit: BoxFit.scaleDown,
-                        ),
-                      ),
                       Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               InkWell(
                                 onTap: () {},
@@ -247,6 +257,9 @@ class Principal extends StatelessWidget {
                                 ),
                               ),
                             ],
+                          ),
+                          SizedBox(
+                            height: 55,
                           ),
                           FittedBox(
                             child: Padding(

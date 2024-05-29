@@ -21,203 +21,214 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        foregroundColor: Colors.white,
-        backgroundColor: kSecondaryColor,
-      ),
-      body: AnimatedSize(
-        duration: Duration(seconds: 1),
-        curve: Curves.easeOut,
-        child: Container(
-          height: double.infinity,
-          child: Column(
-            children: [
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/Login.png"),
-                      fit: BoxFit.contain,
-                      alignment: Alignment.center,
+      body: Stack(children: [
+        Container(
+          color: Colors.red,
+          width: 500,
+          child: Image.asset('assets/back.gif'),
+        ),
+        Positioned.fill(
+          child: Image.asset(
+            'assets/fondomo.gif',
+            fit: BoxFit.cover,
+          ),
+        ),
+        AnimatedSize(
+          duration: Duration(seconds: 1),
+          curve: Curves.easeOut,
+          child: Container(
+            height: double.infinity,
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/Login.png"),
+                        fit: BoxFit.contain,
+                        alignment: Alignment.center,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 2,
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "\n\nIniciar Sesión",
-                              style: Theme.of(context).textTheme.headlineMedium,
-                            ),
-                            MaterialButton(
-                              onPressed: () {
-                                Get.to(Registro());
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(left: 40, top: 70),
-                                padding: EdgeInsets.only(left: 3, top: 1),
-                                height: 42,
-                                width: 90,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Colors.white,
-                                      width: 1), // Borde blanco delgado
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
+                Expanded(
+                  flex: 2,
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "\n\nIniciar Sesión",
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
+                              ),
+                              MaterialButton(
+                                onPressed: () {
+                                  Get.to(Registro());
+                                },
                                 child: Container(
-                                  color:
-                                      Colors.transparent, // Fondo transparente
-                                  child: const Center(
-                                    child: Text(
-                                      "Registrarse",
-                                      style: TextStyle(color: kSecondaryColor),
+                                  margin: EdgeInsets.only(left: 40, top: 70),
+                                  padding: EdgeInsets.only(left: 3, top: 1),
+                                  height: 42,
+                                  width: 90,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(
+                                        color: Colors.white,
+                                        width: 1), // Borde blanco delgado
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Container(
+                                    color: Colors
+                                        .transparent, // Fondo transparente
+                                    child: const Center(
+                                      child: Text(
+                                        "Registrarse",
+                                        style:
+                                            TextStyle(color: kSecondaryColor),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 7,
-                        ),
-                        _buildEmailField(
-                          context,
-                        ),
-                        const SizedBox(height: 10),
-                        _buildPasswordField(
-                          context,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: 60, //
-                              child: InkWell(
-                                onTap: () {
-                                  Autenticar('GITHUB');
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.blue),
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.white),
-                                  child: Image.asset('assets/github.gif',
-                                      width: 20, height: 30),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 90),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            SizedBox(
-                              width: 60, //
-                              child: InkWell(
-                                onTap: () {
-                                  Autenticar('GOOGLE');
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(color: Colors.blue),
-                                    color: Colors.white,
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 7,
+                          ),
+                          _buildEmailField(
+                            context,
+                          ),
+                          const SizedBox(height: 10),
+                          _buildPasswordField(
+                            context,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 60, //
+                                child: InkWell(
+                                  onTap: () {
+                                    Autenticar('GITHUB');
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.blue),
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.white),
+                                    child: Image.asset('assets/github.gif',
+                                        width: 20, height: 30),
                                   ),
-                                  // O cualquier otro tamaño deseado
-                                  child: Image.asset('assets/google.gif',
-                                      width: 20, height: 30),
                                 ),
                               ),
-                            )
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 100, top: 20, right: 120),
-                          child: MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30)),
-                              height: 40,
-                              color: Colors.white,
-                              child: Row(children: [
-                                Text(
-                                  'Iniciar Sesión',
-                                  style: TextStyle(
-                                      color: Colors.blue,
-                                      fontSize: 15,
-                                      fontFamily: AutofillHints.addressCity),
+                              SizedBox(height: 90),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              SizedBox(
+                                width: 60, //
+                                child: InkWell(
+                                  onTap: () {
+                                    Autenticar('GOOGLE');
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(color: Colors.blue),
+                                      color: Colors.white,
+                                    ),
+                                    // O cualquier otro tamaño deseado
+                                    child: Image.asset('assets/google.gif',
+                                        width: 20, height: 30),
+                                  ),
                                 ),
-                                Image.asset(
-                                  'assets/siguiente.gif',
-                                  height: 32,
-                                  width: 32,
-                                ),
-                              ]),
-                              onPressed: () async {
-                                print(_controllerEmail.text);
-                                UsuarioModel usuarioVeri = UsuarioModel(
-                                    idUsuario: 0,
-                                    email: _controllerEmail.text,
-                                    clave: _controllerClave.text,
-                                    idRol: null);
+                              )
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 100, top: 20, right: 120),
+                            child: MaterialButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30)),
+                                height: 40,
+                                color: Colors.white,
+                                child: Row(children: [
+                                  Text(
+                                    'Iniciar Sesión',
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 15,
+                                        fontFamily: AutofillHints.addressCity),
+                                  ),
+                                  Image.asset(
+                                    'assets/siguiente.gif',
+                                    height: 32,
+                                    width: 32,
+                                  ),
+                                ]),
+                                onPressed: () async {
+                                  print(_controllerEmail.text);
+                                  UsuarioModel usuarioVeri = UsuarioModel(
+                                      idUsuario: 0,
+                                      email: _controllerEmail.text,
+                                      clave: _controllerClave.text,
+                                      idRol: null);
 
-                                try {
-                                  bool resultado = await _gestionUsuarioDb
-                                      .verificarUsuario(usuarioVeri);
-                                  print(
-                                      'El valor del resultado es : $resultado');
+                                  try {
+                                    bool resultado = await _gestionUsuarioDb
+                                        .verificarUsuario(usuarioVeri);
+                                    print(
+                                        'El valor del resultado es : $resultado');
 
-                                  if (resultado) {
-                                    Get.to(Perfil_Usuario());
-                                    UsuarioModel UsuarioConId =
-                                        await gestionUsuarios
-                                            .getUsuarioPorId(usuarioVeri);
-                                    print(UsuarioConId);
-                                    gestionProyectos
-                                        .cambiarEstadoProyectosMemoriaPorLogin();
-                                    _controllerAuth.guardarInfoSesionStorage(
-                                        _controllerEmail.text,
-                                        _controllerClave.text,
-                                        UsuarioConId.idUsuario);
-                                  } else {
-                                    Get.snackbar(
-                                      "Verifique su correo y contraseña",
-                                      "Datos incorrectos",
-                                      snackPosition: SnackPosition.TOP,
-                                      duration: Duration(seconds: 3),
-                                      backgroundColor: Colors.white,
-                                      colorText: Colors.blue,
-                                      borderRadius: 10.0,
-                                      margin:
-                                          EdgeInsets.symmetric(vertical: 200.0),
-                                    );
+                                    if (resultado) {
+                                      Get.to(Perfil_Usuario());
+                                      UsuarioModel UsuarioConId =
+                                          await gestionUsuarios
+                                              .getUsuarioPorId(usuarioVeri);
+                                      print(UsuarioConId);
+                                      gestionProyectos
+                                          .cambiarEstadoProyectosMemoriaPorLogin();
+                                      _controllerAuth.guardarInfoSesionStorage(
+                                          _controllerEmail.text,
+                                          _controllerClave.text,
+                                          UsuarioConId.idUsuario);
+                                    } else {
+                                      Get.snackbar(
+                                        "Verifique su correo y contraseña",
+                                        "Datos incorrectos",
+                                        snackPosition: SnackPosition.TOP,
+                                        duration: Duration(seconds: 3),
+                                        backgroundColor: Colors.white,
+                                        colorText: Colors.blue,
+                                        borderRadius: 10.0,
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: 200.0),
+                                      );
+                                    }
+                                  } catch (error) {
+                                    print(
+                                        'Ocurrió un error al consultar el usuario: $error');
                                   }
-                                } catch (error) {
-                                  print(
-                                      'Ocurrió un error al consultar el usuario: $error');
-                                }
-                              }),
-                        )
-                      ],
+                                }),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
-      ),
+      ]),
     );
   }
 
