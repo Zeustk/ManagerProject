@@ -6,22 +6,19 @@ class FondoAppImage extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image:
-                  AssetImage('assets/fondoproyecto.jpg'), // Ruta de la imagen
-              fit: BoxFit.fitWidth,
-            ),
-          ),
+          decoration: BoxDecoration(),
         ),
         AppBar(
-          backgroundColor: Colors.transparent, // Hace el AppBar transparente
-          elevation: 0,
-          title: Text(
-            'Crear Proyecto',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+            backgroundColor: Colors.black, // Hace el AppBar transparente
+            elevation: 0,
+            title: Padding(
+              padding: const EdgeInsets.only(left: 52),
+              child: Text(
+                'Crear Proyecto',
+                style: TextStyle(color: Colors.white),
+              ),
+            )),
+            
       ],
     );
   }

@@ -65,18 +65,26 @@ class DetalleProyectoPage extends StatelessWidget {
           'Información del Proyecto',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: kSecondaryColor,
+        backgroundColor: Colors.black,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Padding(
-            padding: EdgeInsets.only(left: 10),
-            child: Column(
-              children: [
-                _DetalleProyecto(),
-              ],
-            ),
+            padding: EdgeInsets.only(),
+            child: Stack(children: [
+              Positioned.fill(
+                child: Image.asset(
+                  'assets/fondoproyecto.jpg',
+                  fit: BoxFit.fill,
+                ),
+              ),
+              Column(
+                children: [
+                  _DetalleProyecto(),
+                ],
+              ),
+            ]),
           ),
         ),
       ),
@@ -97,11 +105,10 @@ class _DetalleProyecto extends StatelessWidget {
       ),
       child: Container(
         margin: EdgeInsets.only(top: 10, right: 5),
-        width: 390,
+        width: 420,
         height: 720,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: Color.fromARGB(128, 0, 0, 0),
         ),
         child: Column(
           children: [
