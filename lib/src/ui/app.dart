@@ -10,6 +10,7 @@ import 'package:manager_proyect/src/ui/Page/Usuarios/PerfilUsuario.dart';
 
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/ui/Page/home/Principal.dart';
+import 'package:manager_proyect/src/ui/auth/LoginScreen.dart';
 /* import 'package:manager_proyect/src/ui/Page/home/Principal.dart'; */
 
 class MyApp extends StatelessWidget {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Login Page',
-      home: Principal(),
+      home: Login(),
       getPages: [
         GetPage(name: '/profile', page: () => Perfil_Usuario()),
       ],

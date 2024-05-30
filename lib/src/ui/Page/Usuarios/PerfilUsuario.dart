@@ -9,33 +9,31 @@ import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
 import 'package:manager_proyect/src/widgets/Drawer.dart';
 
 class Perfil_Usuario extends StatefulWidget {
-
-
   @override
   State<Perfil_Usuario> createState() => _Perfil_UsuarioState();
 }
 
 class _Perfil_UsuarioState extends State<Perfil_Usuario> {
-  AuthController gestionAuth= AuthController();
+  AuthController gestionAuth = AuthController();
   PerfilesController gestionPerfil = PerfilesController();
 
   UsuarioModel? usuarioActual;
-  PerfilesModel perfilActual =PerfilesModel();
+  PerfilesModel perfilActual = PerfilesModel();
 
-   @override
+  @override
   void initState() {
     super.initState();
     cargarPerfil();
-
   }
 
   Future<void> cargarPerfil() async {
     try {
       UsuarioModel usuario = await gestionAuth.obtenerDatosDeStorage();
 
-     PerfilesModel perfil=await gestionPerfil.getUsuarioPorId(usuarioActual!);
+      PerfilesModel perfil =
+          await gestionPerfil.getUsuarioPorId(usuarioActual!);
       setState(() {
-        perfilActual=perfil;
+        perfilActual = perfil;
         usuarioActual = usuario;
       });
     } catch (error) {
@@ -46,9 +44,6 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
 
   @override
   Widget build(BuildContext context) {
-
-   
-
     return Scaffold(
         bottomNavigationBar: BotonNavi(),
         drawer: Draweer(),
@@ -64,7 +59,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
               style: TextStyle(color: Colors.white),
             )),
           ),
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.grey[850],
         ),
         body: Stack(children: [
           Positioned.fill(
@@ -145,7 +140,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                   SizedBox(
                     width: 70,
                   ),
-                  Text('Armando Paredes',
+                  Text(perfilActual.nombreCompleto,
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white)),
                 ],
@@ -162,7 +157,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                     SizedBox(
                       width: 78,
                     ),
-                    Text('ArmandoParedes141@Gmail.com',
+                    Text(usuarioActual!.email,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white)),
                   ],
@@ -177,7 +172,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                   SizedBox(
                     width: 35,
                   ),
-                  Text('15',
+                  Text(perfilActual.numeroDeProyecto.toString(),
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white)),
                 ],
@@ -193,7 +188,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                     width: 77,
                   ),
                   Text(
-                    'Conectado',
+                    perfilActual.estado.toString(),
                     style: TextStyle(
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
@@ -212,7 +207,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                     width: 100,
                   ),
                   Text(
-                    '*********',
+                    usuarioActual!.clave,
                     style: TextStyle(color: Colors.white),
                   ),
                 ],
