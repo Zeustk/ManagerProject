@@ -16,10 +16,10 @@ class UsuarioModel {
   int? idRol;
 
   UsuarioModel({
-    this.idUsuario = 1,
-    this.email = 'molina',
-    this.clave = '123',
-    this.idRol = null,
+    this.idUsuario=0,
+    this.email="No Disponible",
+    this.clave="-1",
+    this.idRol,
   });
 
   factory UsuarioModel.fromJson(Map<String, dynamic> json) => UsuarioModel(

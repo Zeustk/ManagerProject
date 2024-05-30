@@ -58,7 +58,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
               style: TextStyle(color: Colors.white),
             )),
           ),
-          backgroundColor: Color.fromARGB(164, 83, 80, 80),
+          backgroundColor: Color.fromARGB(165, 83, 80, 80),
         ),
         body: Stack(children: [
           Positioned.fill(
@@ -187,7 +187,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                     width: 77,
                   ),
                   Text(
-                    perfilActual.estado.toString(),
+                    perfilActual.estado ? 'Conectado' : 'Desconectado',
                     style: TextStyle(
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
