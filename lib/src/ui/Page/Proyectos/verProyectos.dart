@@ -96,18 +96,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
       appBar: AppBar(
           foregroundColor: Colors.white,
           backgroundColor: Color.fromARGB(164, 83, 80, 80),
-          title: Center(
-            child: Stack(
-              children: [
-                Text(
-                  'Mis Proyectos',
-                  style: TextStyle(color: Colors.white),
-                ),
-                Container(
-                    padding: EdgeInsets.only(left: 155), child: SearchIcon())
-              ],
-            ),
-          )),
+          title: TextoGhost()),
       drawer: SafeArea(child: Draweer()),
       body: Stack(children: [
         Positioned.fill(
@@ -266,5 +255,44 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
         ),
       ]),
     );
+  }
+}
+
+class TextoGhost extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<TextoGhost> {
+  bool _isSearchIconSelected = false;
+
+  void _toggleVisibility() {
+    setState(() {
+      _isSearchIconSelected = !_isSearchIconSelected;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Stack(
+        children: [
+          if (!_isSearchIconSelected)
+            Container(
+              child: GestureDetector(
+                onTap: _toggleVisibility,
+                child: SearchIcons(),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class SearchIcons extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Botonbuscar();
   }
 }
