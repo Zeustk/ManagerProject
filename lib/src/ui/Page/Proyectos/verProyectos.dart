@@ -94,18 +94,20 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
       appBar: AppBar(
-        foregroundColor: Colors.white,
-        actions: [
-          SizedBox(width: 50, child: SearchIcon()),
-        ],
-        backgroundColor: Color.fromARGB(164, 83, 80, 80),
-        title: Center(
-          child: Text(
-            'Mis Proyectos',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-      ),
+          foregroundColor: Colors.white,
+          backgroundColor: Color.fromARGB(164, 83, 80, 80),
+          title: Center(
+            child: Stack(
+              children: [
+                Text(
+                  'Mis Proyectos',
+                  style: TextStyle(color: Colors.white),
+                ),
+                Container(
+                    padding: EdgeInsets.only(left: 155), child: SearchIcon())
+              ],
+            ),
+          )),
       drawer: SafeArea(child: Draweer()),
       body: Stack(children: [
         Positioned.fill(
