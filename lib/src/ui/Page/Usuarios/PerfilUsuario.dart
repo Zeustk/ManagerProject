@@ -17,7 +17,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
   AuthController gestionAuth = AuthController();
   PerfilesController gestionPerfil = PerfilesController();
 
-  UsuarioModel? usuarioActual;
+  UsuarioModel usuarioActual = UsuarioModel();
   PerfilesModel perfilActual = PerfilesModel();
 
   @override
@@ -30,8 +30,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
     try {
       UsuarioModel usuario = await gestionAuth.obtenerDatosDeStorage();
 
-      PerfilesModel perfil =
-          await gestionPerfil.getUsuarioPorId(usuarioActual!);
+      PerfilesModel perfil = await gestionPerfil.getUsuarioPorId(usuarioActual);
       setState(() {
         perfilActual = perfil;
         usuarioActual = usuario;
@@ -59,7 +58,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
               style: TextStyle(color: Colors.white),
             )),
           ),
-          backgroundColor: Colors.grey[850],
+          backgroundColor: Color.fromARGB(164, 83, 80, 80),
         ),
         body: Stack(children: [
           Positioned.fill(
@@ -157,7 +156,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                     SizedBox(
                       width: 78,
                     ),
-                    Text(usuarioActual!.email,
+                    Text(usuarioActual.email,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white)),
                   ],
@@ -207,7 +206,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                     width: 100,
                   ),
                   Text(
-                    usuarioActual!.clave,
+                    usuarioActual.clave,
                     style: TextStyle(color: Colors.white),
                   ),
                 ],

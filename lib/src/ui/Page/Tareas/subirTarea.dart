@@ -28,7 +28,7 @@ class _SubirTareasState extends State<SubirTareas> {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(164, 83, 80, 80),
         title: Text('Subir Tareas'),
         centerTitle: true,
       ),

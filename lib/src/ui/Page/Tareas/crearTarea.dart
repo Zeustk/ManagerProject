@@ -64,7 +64,7 @@ class _Crear_tareasState extends State<Crear_Tareas> {
       backgroundColor: kSecondaryColor,
       appBar: AppBar(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(164, 83, 80, 80),
         title: Text('Crear Tarea',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
       ),

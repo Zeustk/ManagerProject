@@ -96,8 +96,8 @@ class Draweer extends StatelessWidget {
                         ),
                         child: Image.asset(
                           item['image'],
-                          width: 35,
-                          height: 35,
+                          width: 40,
+                          height: 40,
                         ),
                       ),
                       title: Text(
@@ -129,10 +129,16 @@ class Draweer extends StatelessWidget {
                     );
                   } else {
                     return ListTile(
-                      leading: Image.asset(
-                        item['image'],
-                        width: 35,
-                        height: 35,
+                      leading: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Image.asset(
+                          item['image'],
+                          width: 40,
+                          height: 40,
+                        ),
                       ),
                       title: Text(
                         item['title'],

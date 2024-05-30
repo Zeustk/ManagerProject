@@ -48,7 +48,7 @@ class _Ver_TareasState extends State<Ver_Tareas> {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(164, 83, 80, 80),
         title: Text(
           'Mis Tareas',
           style: TextStyle(color: Colors.white),

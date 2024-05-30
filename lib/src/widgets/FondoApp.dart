@@ -9,7 +9,7 @@ class FondoAppImage extends StatelessWidget {
           decoration: BoxDecoration(),
         ),
         AppBar(
-            backgroundColor: Colors.black, // Hace el AppBar transparente
+            backgroundColor: Color.fromARGB(164, 83, 80, 80),
             elevation: 0,
             title: Padding(
               padding: const EdgeInsets.only(left: 52),
@@ -18,7 +18,6 @@ class FondoAppImage extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
             )),
-            
       ],
     );
   }

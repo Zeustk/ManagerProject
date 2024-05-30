@@ -53,7 +53,7 @@ class DetalleTarea extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(164, 83, 80, 80),
         title: Text('${tarea.nombre}', style: TextStyle(color: Colors.white)),
         centerTitle: true,
       ),

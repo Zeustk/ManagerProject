@@ -12,6 +12,7 @@ import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/verTarea.dart';
 import 'package:manager_proyect/src/widgets/BotonProyecto.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
+import 'package:manager_proyect/src/widgets/Iconobuscar.dart';
 import 'package:manager_proyect/src/widgets/PaddingProyecto.dart';
 
 import '../../../widgets/Drawer.dart';
@@ -27,7 +28,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
   final AuthController gestionAuth = AuthController();
   List<ProyectoModel> proyectos = [];
   final ProyectoController gestionProyectos = ProyectoController();
-   String tipo = Get.arguments as String;
+  String tipo = Get.arguments as String;
 
   @override
   void initState() {
@@ -90,23 +91,14 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
 
   @override
   Widget build(BuildContext context) {
-   
-
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
       appBar: AppBar(
         foregroundColor: Colors.white,
         actions: [
-          const SizedBox(
-            width: 50,
-            child: Icon(
-              Icons.search,
-              size: 35,
-              color: Colors.white,
-            ),
-          ),
+          SizedBox(width: 50, child: SearchIcon()),
         ],
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(164, 83, 80, 80),
         title: Center(
           child: Text(
             'Mis Proyectos',
@@ -121,6 +113,17 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
             'assets/fondoproyecto.jpg',
             fit: BoxFit.fill,
           ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 10, right: 5, left: 5),
+          padding: EdgeInsets.only(top: 30),
+          width: double.infinity,
+          height: 530,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.white, width: 5)
+              /* color: Color.fromARGB(128, 0, 0, 0) contenedore alfondo  gris*/
+              ),
         ),
         Container(
           margin: EdgeInsets.only(top: 10, right: 11, left: 12),

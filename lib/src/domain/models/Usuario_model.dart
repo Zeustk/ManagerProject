@@ -16,10 +16,10 @@ class UsuarioModel {
   int? idRol;
 
   UsuarioModel({
-    required this.idUsuario,
-    required this.email,
-    required this.clave,
-    required this.idRol,
+    this.idUsuario = 1,
+    this.email = 'molina',
+    this.clave = '123',
+    this.idRol = null,
   });
 
   factory UsuarioModel.fromJson(Map<String, dynamic> json) => UsuarioModel(
@@ -36,11 +36,8 @@ class UsuarioModel {
         "Id_rol": idRol,
       };
 
-
-      
-     @override
+  @override
   String toString() {
     return 'UsuarioModel{idUsuario: $idUsuario, }';
   }
-
 }

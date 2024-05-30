@@ -21,7 +21,7 @@ class BotonNavi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromARGB(164, 83, 80, 80),
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.white,
       onTap: (int index) {

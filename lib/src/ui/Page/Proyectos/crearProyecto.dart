@@ -47,12 +47,27 @@ class _Crear_proyectosState extends State<Crear_proyectos> {
           ),
         ),
         SingleChildScrollView(
-          child: Container(
-              margin: EdgeInsets.only(top: 5, left: 5, right: 5),
-              width: 500,
-              height: 650,
-              decoration: BoxDecoration(),
-              child: Labels()),
+          child: Stack(
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 10, right: 11, left: 12),
+                padding: EdgeInsets.only(top: 30),
+                width: double.infinity,
+                height: 720,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.white, width: 5)
+                    /* color: Color.fromARGB(128, 0, 0, 0) contenedore alfondo  gris*/
+                    ),
+              ),
+              Container(
+                  margin: EdgeInsets.only(top: 5, left: 5, right: 5),
+                  width: 500,
+                  height: 650,
+                  decoration: BoxDecoration(),
+                  child: Labels()),
+            ],
+          ),
         ),
       ]),
     );
@@ -236,7 +251,8 @@ class _LabelsState extends State<Labels> {
               ),
             ),
             SizedBox(height: 15),
-            Divider(color: Colors.white, height: 50),
+            SizedBox(
+                child: Divider(color: Colors.white, height: 50), width: 350),
             Container(
               width: 230,
               height: 50,

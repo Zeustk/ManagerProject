@@ -65,29 +65,41 @@ class DetalleProyectoPage extends StatelessWidget {
           'Información del Proyecto',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(164, 83, 80, 80),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Padding(
-            padding: EdgeInsets.only(),
-            child: Stack(children: [
-              Positioned.fill(
-                child: Image.asset(
-                  'assets/fondoproyecto.jpg',
-                  fit: BoxFit.fill,
-                ),
-              ),
-              Column(
-                children: [
-                  _DetalleProyecto(),
-                ],
-              ),
-            ]),
+      body: Stack(children: [
+        Positioned.fill(
+          child: Image.asset(
+            'assets/fondoproyecto.jpg',
+            fit: BoxFit.cover,
           ),
         ),
-      ),
+        Container(
+          margin: EdgeInsets.only(top: 10, right: 11, left: 12),
+          padding: EdgeInsets.only(top: 30),
+          width: double.infinity,
+          height: 620,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.white, width: 5)
+              /* color: Color.fromARGB(128, 0, 0, 0) contenedore alfondo  gris*/
+              ),
+        ),
+        Stack(children: [
+          SafeArea(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Stack(children: [
+                Column(
+                  children: [
+                    _DetalleProyecto(),
+                  ],
+                ),
+              ]),
+            ),
+          ),
+        ]),
+      ]),
     );
   }
 }
@@ -313,7 +325,11 @@ class _DetalleProyecto extends StatelessWidget {
             SizedBox(
               height: 50,
             ),
-            Divider(),
+            SizedBox(
+                width: 340,
+                child: Divider(
+                  color: Colors.white,
+                )),
             Text(
               'Integrates',
               style: TextStyle(
@@ -330,7 +346,8 @@ class _DetalleProyecto extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 80),
                       child: Row(
                         children: [
-                          Text('Integrante $index'),
+                          Text('Integrante $index',
+                              style: TextStyle(color: Colors.white)),
                           SizedBox(
                             width: 15,
                           ),
