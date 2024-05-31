@@ -194,7 +194,6 @@ class Login extends StatelessWidget {
                                         'El valor del resultado es : $resultado');
 
                                     if (resultado) {
-                                      Get.to(Perfil_Usuario());
                                       UsuarioModel UsuarioConId =
                                           await gestionUsuarios
                                               .getUsuarioPorId(usuarioVeri);
@@ -204,7 +203,9 @@ class Login extends StatelessWidget {
                                       _controllerAuth.guardarInfoSesionStorage(
                                           _controllerEmail.text,
                                           _controllerClave.text,
-                                          UsuarioConId.idUsuario);
+                                          UsuarioConId.idUsuario
+                                          );
+                                          Get.to(Perfil_Usuario());
                                     } else {
                                       Get.snackbar(
                                         "Verifique su correo y contraseña",

@@ -40,7 +40,7 @@ class PerfilesController extends GetxController {
     }
   }
 
-   Future<PerfilesModel> getUsuarioPorId(UsuarioModel usuarioRecibido) async {
+   Future<PerfilesModel> getPerfilPorId(UsuarioModel usuarioRecibido) async {
     try {
 
       return gestionPerfil.getPerfilPorIdUsuario(usuarioRecibido);

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/controllers/Perfiles_Controller.dart';
+import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/Perfiles_model.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
+import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
 import 'package:manager_proyect/src/widgets/Drawer.dart';
 
@@ -16,9 +16,11 @@ class Perfil_Usuario extends StatefulWidget {
 class _Perfil_UsuarioState extends State<Perfil_Usuario> {
   AuthController gestionAuth = AuthController();
   PerfilesController gestionPerfil = PerfilesController();
+  ProyectoController gestionProyectos = ProyectoController();
 
   UsuarioModel usuarioActual = UsuarioModel();
   PerfilesModel perfilActual = PerfilesModel();
+  List<ProyectoModel> proyectos = [];
 
   @override
   void initState() {
@@ -29,38 +31,44 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
   Future<void> cargarPerfil() async {
     try {
       UsuarioModel usuario = await gestionAuth.obtenerDatosDeStorage();
+      PerfilesModel perfil = await gestionPerfil.getPerfilPorId(usuario);
+      List<ProyectoModel> proyectosList = await gestionProyectos.consultarProyectos(usuario.idUsuario);
 
-      PerfilesModel perfil = await gestionPerfil.getUsuarioPorId(usuarioActual);
+      print(proyectosList);
+
       setState(() {
         perfilActual = perfil;
         usuarioActual = usuario;
+        proyectos = proyectosList;
       });
     } catch (error) {
-      // Manejar el error de la consulta de proyectos
-      print('Error al cargar proyectos: $error');
+      print('Error al cargar perfil y proyectos: $error');
     }
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-        bottomNavigationBar: BotonNavi(),
-        drawer: Draweer(),
-        appBar: AppBar(
-          surfaceTintColor: Colors.black,
-          foregroundColor: Colors.white,
-          actions: [],
-          title: Padding(
-            padding: const EdgeInsets.only(right: 50),
-            child: Center(
-                child: Text(
+      bottomNavigationBar: BotonNavi(),
+      drawer: Draweer(),
+      appBar: AppBar(
+        surfaceTintColor: Colors.black,
+        foregroundColor: Colors.white,
+        actions: [],
+        title: Padding(
+          padding: const EdgeInsets.only(right: 50),
+          child: Center(
+            child: Text(
               'Mi Perfil',
               style: TextStyle(color: Colors.white),
-            )),
+            ),
           ),
-          backgroundColor: Color.fromARGB(165, 83, 80, 80),
         ),
-        body: Stack(children: [
+        backgroundColor: Colors.grey[850],
+      ),
+      body: Stack(
+        children: [
           Positioned.fill(
             child: Image.asset(
               'assets/fondoproyecto.jpg',
@@ -120,15 +128,16 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
               ),
               SizedBox(height: 12),
               Container(
-                  margin: EdgeInsets.only(left: 20),
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Mi Perfil',
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  )),
+                margin: EdgeInsets.only(left: 20),
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Mi Perfil',
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+              ),
               Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
               Row(
                 children: [
@@ -139,7 +148,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                   SizedBox(
                     width: 70,
                   ),
-                  Text(perfilActual.nombreCompleto,
+                  Text(perfilActual.nombreCompleto ?? '',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white)),
                 ],
@@ -156,7 +165,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                     SizedBox(
                       width: 78,
                     ),
-                    Text(usuarioActual.email,
+                    Text(usuarioActual.email ?? '',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white)),
                   ],
@@ -171,7 +180,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                   SizedBox(
                     width: 35,
                   ),
-                  Text(perfilActual.numeroDeProyecto.toString(),
+                  Text(proyectos.length.toString(),
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white)),
                 ],
@@ -206,7 +215,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                     width: 100,
                   ),
                   Text(
-                    usuarioActual.clave,
+                    usuarioActual.clave ?? '',
                     style: TextStyle(color: Colors.white),
                   ),
                 ],
@@ -214,42 +223,45 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
               SizedBox(
                 height: 15,
               ),
-              Column(
-                children: [
-                  Container(
-                      margin: EdgeInsets.only(left: 20),
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        'Mis Proyectos',
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      )),
-                  Divider(),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
+              Container(
+                margin: EdgeInsets.only(left: 20),
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Mis Proyectos',
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+              ),
+              Divider(),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: proyectos.length,
+                  itemBuilder: (context, index) {
+                    return Row(
                       children: [
-                        SizedBox(width: 10),
+                        SizedBox(width: 30),
                         Text('Proyecto',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white)),
-                        SizedBox(
-                          width: 24,
+                        SizedBox(width: 20),
+                        Expanded(
+                          child: Text(proyectos[index].nombre,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
                         ),
-                        Text('Implementación de Sistemas Informáticos',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white)),
                       ],
-                    ),
-                  ),
-                ],
-              )
+                    );
+                  },
+                ),
+              ),
             ],
           ),
-        ]));
+        ],
+      ),
+    );
   }
 }

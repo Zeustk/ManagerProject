@@ -325,7 +325,7 @@ class _LabelsState extends State<Labels> {
     UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
 
     PerfilesModel perfilActual =
-        await gestionPerfiles.getUsuarioPorId(usuarioActual);
+        await gestionPerfiles.getPerfilPorId(usuarioActual);
 
     ProyectoModel proyecto = ProyectoModel(
       fechaFinalizacion: DateTime.parse(__controllerFechaFinalizacion.text),
