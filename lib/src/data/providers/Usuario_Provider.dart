@@ -65,4 +65,19 @@ class UsuarioProvider extends CrudProvider<UsuarioModel> {
       return 'Error al eliminar los Usuarios';
     }
   }
+
+
+  Future<List<UsuarioModel>> consultaUsuariosPorIdProyecto(int idProyecto) async {
+    try {
+      List<Map<String, dynamic>> usuariosMapa = await consultar('getUsuariosPorIdProyecto/$idProyecto');
+
+      List<UsuarioModel> listaUsuario =
+          usuariosMapa.map((map) => UsuarioModel.fromJson(map)).toList();
+
+      return listaUsuario;
+    } catch (e) {
+      print('Error al consultar los usuarios por idProyecto $e');
+      return [];
+    }
+  }
 }

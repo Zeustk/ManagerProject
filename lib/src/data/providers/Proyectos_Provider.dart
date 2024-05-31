@@ -37,6 +37,7 @@ class ProyectosProvider extends CrudProvider<ProyectoModel> {
         List<Map<String, dynamic>> listaMapas =
             await consultar('getProyecto/$id_Usuario');
 
+          
         _proyectosMemoria =
             listaMapas.map((map) => ProyectoModel.fromJson(map)).toList();
 

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 import 'package:path/path.dart' as path;
 
 import 'package:manager_proyect/src/constante/constantes.dart';
@@ -36,7 +37,10 @@ class _Crear_tareasState extends State<Crear_Tareas> {
   @override
   void initState() {
     super.initState();
+    cargarProyectos();
+  }
 
+  Future<void> cargarProyectos() async {
     gestionAuth.obtenerDatosDeStorage().then((value) {
       gestionProyectos
           .consultarProyectos(value.idUsuario)
@@ -45,12 +49,6 @@ class _Crear_tareasState extends State<Crear_Tareas> {
           proyectos =
               listaProyectos.map((proyecto) => proyecto.nombre).toList();
         });
-      });
-    });
-
-    gestionUsuarios.consultarUsuario().then((listaUsuarios) {
-      setState(() {
-        usuarios = listaUsuarios.map((Usuario) => Usuario.email).toList();
       });
     });
   }
@@ -121,6 +119,26 @@ class _LabelsTareasState extends State<LabelsTareas> {
   String? pdfPath; //Va a contener el pdf
 
   String? _selectedProject;
+
+  List<String> usuarios = [];
+
+  Future<void> cargarUsuarios(String nombreProyecto) async {
+    UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
+
+    List<ProyectoModel> proyectos =
+        await gestionProyectos.consultarProyectos(usuarioActual.idUsuario);
+
+    ProyectoModel? proyectoSeleccionado = proyectos
+        .firstWhereOrNull((proyecto) => proyecto.nombre == nombreProyecto);
+
+    if (proyectoSeleccionado != null) {
+      List<UsuarioModel> listaUsuarios = await gestionUsuarios
+          .consultarUsuariosPorProyecto(proyectoSeleccionado.idProyecto);
+      setState(() {
+        usuarios = listaUsuarios.map((usuario) => usuario.email).toList();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -286,6 +304,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                 onSelected: (String selectedProject) {
                   setState(() {
                     _selectedProject = selectedProject;
+                    cargarUsuarios(selectedProject);
                   });
                 },
                 fieldViewBuilder: (BuildContext context,
@@ -433,7 +452,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
                     return []; // Devuelve una lista vacía cuando el campo de búsqueda está vacío
                   } else {
                     // Filtra las opciones basadas en lo que el usuario está escribiendo en el campo de búsqueda
-                    return widget.usuarios
+                    return usuarios
                         .where((String option) => option
                             .toLowerCase()
                             .startsWith(textEditingValue.text.toLowerCase()))

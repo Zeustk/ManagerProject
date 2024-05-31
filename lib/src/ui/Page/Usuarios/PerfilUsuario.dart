@@ -32,9 +32,10 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
     try {
       UsuarioModel usuario = await gestionAuth.obtenerDatosDeStorage();
       PerfilesModel perfil = await gestionPerfil.getPerfilPorId(usuario);
-      List<ProyectoModel> proyectosList = await gestionProyectos.consultarProyectos(usuario.idUsuario);
+      List<ProyectoModel> proyectosList =
+          await gestionProyectos.consultarProyectos(usuario.idUsuario);
 
-      print(proyectosList);
+    
 
       setState(() {
         perfilActual = perfil;
@@ -48,7 +49,6 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       bottomNavigationBar: BotonNavi(),
       drawer: Draweer(),
@@ -237,7 +237,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
               Divider(),
               Expanded(
                 child: ListView.builder(
-                  itemCount: proyectos.length,
+                  itemCount: proyectos.length > 6 ? 6 : proyectos.length,
                   itemBuilder: (context, index) {
                     return Row(
                       children: [

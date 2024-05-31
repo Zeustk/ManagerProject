@@ -58,4 +58,17 @@ class UsuariosController extends GetxController {
       return 'Error al eliminar el Usuario';
     }
   }
+
+  Future<List<UsuarioModel>> consultarUsuariosPorProyecto(int idProyecto) async {
+
+     try {
+
+      return gestionUsuarios.consultaUsuariosPorIdProyecto(idProyecto);
+      
+    } catch (e) {
+      print(' el error es  $e');
+      return [];
+    }
+
+  }
 }

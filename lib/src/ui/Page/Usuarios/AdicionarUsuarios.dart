@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
+import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:manager_proyect/src/widgets/Drawer.dart';
 
@@ -12,6 +13,7 @@ class AdicionarUsuariosPage extends StatefulWidget {
 
 class _AdicionarUsuariosPageState extends State<AdicionarUsuariosPage> {
   UsuariosController gestionUsuarios = UsuariosController();
+  AuthController gestionAuth= AuthController();
   List<UsuarioModel> listaIntegrantes = [];
   List<UsuarioModel> listaIntegrantesFiltrados = [];
   List<UsuarioModel> integrantesSeleccionados = [];
@@ -19,12 +21,22 @@ class _AdicionarUsuariosPageState extends State<AdicionarUsuariosPage> {
   @override
   void initState() {
     super.initState();
+    cargarUsuarios();
+   
+  }
+
+
+  Future<void> cargarUsuarios() async {
+
+     UsuarioModel usuarioActual= await gestionAuth.obtenerDatosDeStorage();
+
     gestionUsuarios.consultarUsuario().then((data) {
       setState(() {
-        listaIntegrantes = data;
+        listaIntegrantes = data.where((usuario) => usuario.email != usuarioActual.email).toList();
         listaIntegrantesFiltrados = listaIntegrantes.take(4).toList();
       });
     });
+
   }
 
   void filtrarIntegrantes(String query) {
