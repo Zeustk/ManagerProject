@@ -12,8 +12,10 @@ class Boton_next extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(),
         child: MaterialButton(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+            shape: RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Color.fromARGB(255, 61, 163, 247), width: 4),
+                borderRadius: BorderRadius.circular(30)),
             height: 40,
             onPressed: () {},
             color: Colors.white,

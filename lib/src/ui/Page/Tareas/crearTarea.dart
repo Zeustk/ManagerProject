@@ -80,10 +80,11 @@ class _Crear_tareasState extends State<Crear_Tareas> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 5, left: 15),
+            margin: EdgeInsets.only(top: 5, left: 10, right: 10),
             width: 410,
             height: 660,
             decoration: BoxDecoration(
+              border: Border.all(color: Colors.white, width: 5),
               borderRadius: BorderRadius.circular(30),
             ),
             child: LabelsTareas(
@@ -520,7 +521,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(left: 20, right: 20, bottom: 100),
+              padding: EdgeInsets.only(left: 20, right: 20, bottom: 130),
               child: CupertinoButton(
                 padding: EdgeInsets.only(left: 40, right: 10, bottom: 10),
                 onPressed: () {
@@ -593,7 +594,7 @@ class _LabelsTareasState extends State<LabelsTareas> {
             'Tarea Creada',
             'Tarea Creada Exitosamente',
             backgroundColor: Colors.white,
-            colorText: Colors.black,
+            colorText: Colors.blue,
           );
         }).catchError((error) {
           print('Ocurrió un error al registrar la tarea: $error');

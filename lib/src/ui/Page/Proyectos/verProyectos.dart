@@ -105,17 +105,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
             fit: BoxFit.fill,
           ),
         ),
-        Container(
-          margin: EdgeInsets.only(top: 10, right: 5, left: 5),
-          padding: EdgeInsets.only(top: 30),
-          width: double.infinity,
-          height: 530,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.white, width: 5)
-              /* color: Color.fromARGB(128, 0, 0, 0) contenedore alfondo  gris*/
-              ),
-        ),
+        Container(),
         Container(
           margin: EdgeInsets.only(top: 10, right: 11, left: 12),
           width: 550,
@@ -156,74 +146,87 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                             ],
                           ),
                         ),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: proyectos.length,
-                          itemBuilder: (context, index) {
-                            final proyecto = proyectos[index];
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 16.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  if (tipo[0] == 'M') {
-                                    Get.to(DetalleProyectoPage(),
-                                        arguments: proyecto);
-                                  } else {
-                                    Get.to(Ver_Tareas(),
-                                        arguments: proyecto.idProyecto);
-                                  }
-
-                                  print(
-                                      'Tapped on project: ${proyecto.nombre}');
-                                },
-                                child: Container(
-                                  alignment: Alignment.topCenter,
-                                  height: 150,
-                                  child: Row(children: [
-                                    Progresos_Proyectos(
-                                      porcentaje: 0.50,
-                                      color: Colors.blue,
-                                      texto: 'En proceso',
-                                      nombre_proyecto: proyecto.nombre,
-                                      descripcion: proyecto.descripcion,
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                            margin: EdgeInsets.only(
-                                              top: 30,
-                                            ),
-                                            padding: EdgeInsets.only(
-                                                left: 10, right: 10),
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Colors.white,
-                                            ),
-                                            child: IconButton(
-                                              onPressed: () {
-                                                _showConfirmationDialog(context,
-                                                    proyecto.idProyecto);
-                                              },
-                                              icon: Image.asset(
-                                                'assets/eliminar.gif',
-                                                width: 30,
-                                                height: 30,
-                                              ),
-                                            )),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                      ],
-                                    )
-                                  ]),
-                                ),
+                        Container(
+                          margin: EdgeInsets.only(top: 10, right: 1, left: 1),
+                          padding: EdgeInsets.only(top: 30),
+                          width: double.infinity,
+                          height: 530,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.white, width: 5)
+                              /* color: Color.fromARGB(128, 0, 0, 0) contenedore alfondo  gris*/
                               ),
-                            );
-                          },
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: proyectos.length,
+                              itemBuilder: (context, index) {
+                                final proyecto = proyectos[index];
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 16.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      if (tipo[0] == 'M') {
+                                        Get.to(DetalleProyectoPage(),
+                                            arguments: proyecto);
+                                      } else {
+                                        Get.to(Ver_Tareas(),
+                                            arguments: proyecto.idProyecto);
+                                      }
+
+                                      print(
+                                          'Tapped on project: ${proyecto.nombre}');
+                                    },
+                                    child: Container(
+                                      //agregar aqui las lineas blancas"
+
+                                      alignment: Alignment.topCenter,
+                                      child: Row(children: [
+                                        Progresos_Proyectos(
+                                          porcentaje: 0.50,
+                                          color: Colors.blue,
+                                          texto: 'En proceso',
+                                          nombre_proyecto: proyecto.nombre,
+                                          descripcion: proyecto.descripcion,
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                                padding: EdgeInsets.only(
+                                                    left: 7, right: 2),
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Colors.white,
+                                                ),
+                                                child: IconButton(
+                                                  onPressed: () {
+                                                    _showConfirmationDialog(
+                                                        context,
+                                                        proyecto.idProyecto);
+                                                  },
+                                                  icon: Image.asset(
+                                                    'assets/eliminar.gif',
+                                                    width: 30,
+                                                    height: 30,
+                                                  ),
+                                                )),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                          ],
+                                        ),
+                                      ]),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 10),

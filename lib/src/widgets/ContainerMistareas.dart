@@ -21,7 +21,10 @@ class Container_Mistareas extends StatelessWidget {
         width: 340,
         height: 120,
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(20)),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            border:
+                Border.all(color: Color.fromARGB(255, 61, 163, 247), width: 2)),
         child: Column(
           children: [
             Padding_Mistareas(color: color, texto: texto, valor_move: 5),

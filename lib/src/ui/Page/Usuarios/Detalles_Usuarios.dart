@@ -6,7 +6,7 @@ import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 
-class DetalleProyectoPage extends StatelessWidget {
+class DetallesUsuario extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +62,7 @@ class DetalleProyectoPage extends StatelessWidget {
           )
         ],
         title: Text(
-          'Información del Proyecto',
+          'Informe Tarea',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Color.fromARGB(164, 83, 80, 80),
@@ -91,7 +91,7 @@ class DetalleProyectoPage extends StatelessWidget {
                 child: Stack(children: [
                   Column(
                     children: [
-                      _DetalleProyecto(),
+                      DetalleUsuarioTarea(),
                     ],
                   ),
                 ]),
@@ -104,7 +104,7 @@ class DetalleProyectoPage extends StatelessWidget {
   }
 }
 
-class _DetalleProyecto extends StatelessWidget {
+class DetalleUsuarioTarea extends StatelessWidget {
   ProyectoModel proyecto = Get.arguments as ProyectoModel;
 
   @override
@@ -126,7 +126,7 @@ class _DetalleProyecto extends StatelessWidget {
           children: [
             SizedBox(height: 10),
             Text(
-              'Lider del proyecto',
+              'Tareas Completadas',
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -175,7 +175,7 @@ class _DetalleProyecto extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Text(
-                'Nombre del Proyecto',
+                'Tareas En curso',
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -225,7 +225,7 @@ class _DetalleProyecto extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 30),
               child: Text(
-                'Fecha de Inicio',
+                ' Tareas No Iniciadas',
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -275,7 +275,7 @@ class _DetalleProyecto extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 30),
               child: Text(
-                'Fecha de Finalizacion',
+                'Porcentaje de proyecto completaado',
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -337,7 +337,7 @@ class _DetalleProyecto extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
-            Expanded(
+            /* Expanded(
               child: ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) {
@@ -376,7 +376,7 @@ class _DetalleProyecto extends StatelessWidget {
                   );
                 },
               ),
-            ),
+            ),*/
           ],
         ),
       ),

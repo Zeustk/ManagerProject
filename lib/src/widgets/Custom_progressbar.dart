@@ -20,7 +20,8 @@ class Progess_custom extends StatelessWidget {
         width: ancho,
         height: alto,
         decoration: BoxDecoration(
-            color: Colors.grey[300], borderRadius: BorderRadius.circular(10)),
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.all(Radius.elliptical(32, 32))),
         child: Stack(
           children: [
             Container(
