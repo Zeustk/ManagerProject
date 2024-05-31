@@ -65,7 +65,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
             ),
           ),
         ),
-        backgroundColor: Colors.grey[850],
+        backgroundColor: Color.fromARGB(164, 83, 80, 80),
       ),
       body: Stack(
         children: [
@@ -116,7 +116,10 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                               horizontal: 4, vertical: 4),
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(40)),
+                              borderRadius: BorderRadius.circular(40),
+                              border: Border.all(
+                                  color: Color.fromARGB(255, 58, 164, 190),
+                                  width: 2.5)),
                           child: Image.asset(
                             'assets/editarusu.png',
                           ),

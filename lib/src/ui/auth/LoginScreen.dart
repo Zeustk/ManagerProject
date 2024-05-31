@@ -84,8 +84,8 @@ class Login extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     border: Border.all(
-                                        color: Colors.white,
-                                        width: 1), // Borde blanco delgado
+                                        color: Colors.blue,
+                                        width: 3.0), // Borde blanco delgado
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: Container(
@@ -94,9 +94,10 @@ class Login extends StatelessWidget {
                                     child: const Center(
                                       child: Text(
                                         "Registrarse",
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 13, 71, 161)),
+                                        style: TextStyle(color: Colors.blue
+                                            /* color: Color.fromARGB(
+                                                255, 13, 71, 161) */
+                                            ),
                                       ),
                                     ),
                                   ),
@@ -125,7 +126,8 @@ class Login extends StatelessWidget {
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.blue),
+                                        border: Border.all(
+                                            color: Colors.blue, width: 3.5),
                                         borderRadius: BorderRadius.circular(10),
                                         color: Colors.white),
                                     child: Image.asset('assets/github.gif',
@@ -146,7 +148,8 @@ class Login extends StatelessWidget {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(color: Colors.blue),
+                                      border: Border.all(
+                                          color: Colors.blue, width: 3.5),
                                       color: Colors.white,
                                     ),
                                     // O cualquier otro tamaño deseado
@@ -162,6 +165,8 @@ class Login extends StatelessWidget {
                                 EdgeInsets.only(left: 100, top: 20, right: 120),
                             child: MaterialButton(
                                 shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: Colors.blue, width: 2.5),
                                     borderRadius: BorderRadius.circular(30)),
                                 height: 40,
                                 color: Colors.white,
@@ -203,9 +208,8 @@ class Login extends StatelessWidget {
                                       _controllerAuth.guardarInfoSesionStorage(
                                           _controllerEmail.text,
                                           _controllerClave.text,
-                                          UsuarioConId.idUsuario
-                                          );
-                                          Get.to(Perfil_Usuario());
+                                          UsuarioConId.idUsuario);
+                                      Get.to(Perfil_Usuario());
                                     } else {
                                       Get.snackbar(
                                         "Verifique su correo y contraseña",

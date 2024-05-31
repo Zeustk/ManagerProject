@@ -60,9 +60,22 @@ class Draweer extends StatelessWidget {
     {
       'title': 'Informes',
       'image': 'assets/informes.gif',
-      'onTap': () {
-        Get.to(Perfil_Usuario());
-      },
+      'children': [
+        {
+          'title': 'Informes ',
+          'image': 'assets/informeusu.gif',
+          'onTap': () {
+            Get.offAll(Ver_Proyectos(), arguments: 'Mis Proyectos');
+          },
+        },
+        {
+          'title': 'Informes',
+          'image': 'assets/informegene.gif',
+          'onTap': () {
+            Get.to(Crear_Tareas());
+          },
+        },
+      ],
     },
   ];
 

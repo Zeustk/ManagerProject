@@ -46,6 +46,7 @@ class _JumpingButtonState extends State<JumpingButton>
       },
       child: MaterialButton(
         shape: RoundedRectangleBorder(
+          side: BorderSide(width: 3, color: kSecondaryColor),
           borderRadius: BorderRadius.circular(30),
         ),
         height: 50,
@@ -116,7 +117,7 @@ class Principal extends StatelessWidget {
                   width: 350,
                   transform: Matrix4.translationValues(0.0, 10.0, 0),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
+                    border: Border.all(color: Colors.white, width: 3.5),
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: Text(
@@ -143,7 +144,8 @@ class Principal extends StatelessWidget {
                                   height: 30,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(40),
-                                      border: Border.all(color: Colors.blue),
+                                      border: Border.all(
+                                          color: Colors.blue, width: 1.5),
                                       color: Colors.white),
                                   child: Container(
                                     child: Row(
@@ -175,7 +177,8 @@ class Principal extends StatelessWidget {
                                   height: 30,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(40),
-                                      border: Border.all(color: Colors.black),
+                                      border: Border.all(
+                                          color: Colors.black, width: 1.5),
                                       color: Colors.white),
                                   child: Container(
                                     child: Row(
@@ -224,12 +227,15 @@ class Principal extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(40),
                                       border: Border.all(
                                           color: Color(
-                                              0xFFE4405F)), // Color de Instagram
+                                            0xFFE4405F,
+                                          ),
+                                          width: 2.5), // Color de Instagram
                                       color: Colors.white,
                                     ),
                                     child: Row(
                                       children: [
                                         Container(
+                                          margin: EdgeInsets.only(),
                                           width: 30,
                                           decoration: BoxDecoration(
                                               borderRadius:
