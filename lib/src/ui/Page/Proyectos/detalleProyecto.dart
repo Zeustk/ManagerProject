@@ -2,41 +2,67 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/controllers/DetallesController.dart';
 import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
+import 'package:manager_proyect/src/domain/controllers/authController.dart';
+import 'package:manager_proyect/src/domain/models/DetalleProyecto_model.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
-import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Usuarios/AdicionarUsuarios.dart';
 
-  UsuariosController gestionUsuarios = UsuariosController();
-  List<UsuarioModel> usuariosFiltrados = [];
-  DetallesController gestionDetalles= DetallesController();
+UsuariosController gestionUsuarios = UsuariosController();
+List<UsuarioModel> usuariosFiltrados = [];
+DetallesController gestionDetalles = DetallesController();
+ProyectoModel proyecto = Get.arguments as ProyectoModel;
 
-class DetalleProyectoPage extends StatelessWidget {
+class DetalleProyectoPage extends StatefulWidget {
+  @override
+  State<DetalleProyectoPage> createState() => _DetalleProyectoPageState();
+}
 
+class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
+  AuthController gestionAuth = AuthController();
 
- Future<void> AdicionarUsuarios() async {
+   Future<void> cargarUsuarios() async {
+    List<UsuarioModel> usuarios =
+        await gestionUsuarios.consultarUsuariosPorProyecto(proyecto.idProyecto);
 
-   List<UsuarioModel> usuariosSeleccionados = (await Get.to<List<UsuarioModel>?>(
-                          AdicionarUsuariosPage())) ??
-                      [];
+    if (mounted) {
+      setState(() {
+        usuariosFiltrados = usuarios;
+      });
+    }
+  }
 
-   if (usuariosSeleccionados.isNotEmpty){
+  Future<void> AdicionarUsuarios() async {
+    List<UsuarioModel> usuariosSeleccionados =
+        (await Get.to<List<UsuarioModel>?>(AdicionarUsuariosPage())) ?? [];
 
-    // Filtrar los usuarios que no están en usuariosFiltrados
-    List<UsuarioModel> nuevosUsuarios = usuariosSeleccionados.where((usuario) {
-      return !usuariosFiltrados.contains(usuario);
-    }).toList();
+    if (usuariosSeleccionados.isNotEmpty) {
+      // Filtrar los usuarios que no están en usuariosFiltrados
+      List<UsuarioModel> nuevosUsuarios =
+          usuariosSeleccionados.where((usuario) {
+        return !usuariosFiltrados.contains(usuario);
+      }).toList();
 
-    // Añadir los nuevos usuarios a usuariosFiltrados
-    usuariosFiltrados.addAll(nuevosUsuarios);
+      UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
 
-   }                   
+      for (var usuario in nuevosUsuarios) {
+        DetallesModel detalleProyectoUsuario = DetallesModel(
+            idDetalle: 0,
+            idUsuario: usuario.idUsuario,
+            idProyecto: proyecto.idProyecto,
+            porcentajeProyecto: 0,
+            idLiderProyecto: usuarioActual.idUsuario);
 
+        String resp =
+            await gestionDetalles.registrarDetalles(detalleProyectoUsuario);
 
- }
+        print(resp);
+        cargarUsuarios();
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +78,8 @@ class DetalleProyectoPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(40),
             ),
             child: IconButton(
-                onPressed: ()  {
-                  
+                onPressed: () {
+                  AdicionarUsuarios();
                 },
                 icon: Image.asset(
                   'assets/agregar.gif',
@@ -143,9 +169,6 @@ class _DetalleProyecto extends StatefulWidget {
 }
 
 class _DetalleProyectoState extends State<_DetalleProyecto> {
-  ProyectoModel proyecto = Get.arguments as ProyectoModel;
-  
-
   @override
   void initState() {
     // TODO: implement initState
@@ -157,9 +180,11 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
     List<UsuarioModel> usuarios =
         await gestionUsuarios.consultarUsuariosPorProyecto(proyecto.idProyecto);
 
-    setState(() {
-      usuariosFiltrados = usuarios;
-    });
+    if (mounted) {
+      setState(() {
+        usuariosFiltrados = usuarios;
+      });
+    }
   }
 
   @override
@@ -403,14 +428,17 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
-                            Text( usuariosFiltrados[index].email, // Mostrar el nombre del usuario,
+                            Text(
+                                usuariosFiltrados[index]
+                                    .email, // Mostrar el nombre del usuario,
                                 style: TextStyle(color: Colors.white)),
                             SizedBox(
                               width: 10,
                             ),
                             InkWell(
                               onTap: () {
-                                gestionDetalles.eliminarUsuarioDeProyecto(usuariosFiltrados[index].idUsuario);
+                                gestionDetalles.eliminarUsuarioDeProyecto(
+                                    usuariosFiltrados[index].idUsuario);
                                 cargarUsuarios();
                               },
                               child: Container(
