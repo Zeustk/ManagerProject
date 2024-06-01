@@ -13,7 +13,7 @@ import 'package:manager_proyect/src/ui/Page/Usuarios/AdicionarUsuarios.dart';
 UsuariosController gestionUsuarios = UsuariosController();
 List<UsuarioModel> usuariosFiltrados = [];
 DetallesController gestionDetalles = DetallesController();
-ProyectoModel proyecto = Get.arguments as ProyectoModel;
+
 
 class DetalleProyectoPage extends StatefulWidget {
   @override
@@ -22,14 +22,20 @@ class DetalleProyectoPage extends StatefulWidget {
 
 class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
   AuthController gestionAuth = AuthController();
+  ProyectoModel proyecto = Get.arguments as ProyectoModel;
+
+ 
 
    Future<void> cargarUsuarios() async {
     List<UsuarioModel> usuarios =
-        await gestionUsuarios.consultarUsuariosPorProyecto(proyecto.idProyecto);
+        await gestionUsuarios.consultarUsuariosPorProyecto(proyecto!.idProyecto);
+
+  
 
     if (mounted) {
       setState(() {
         usuariosFiltrados = usuarios;
+        proyecto=proyecto;
       });
     }
   }
@@ -51,7 +57,7 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
         DetallesModel detalleProyectoUsuario = DetallesModel(
             idDetalle: 0,
             idUsuario: usuario.idUsuario,
-            idProyecto: proyecto.idProyecto,
+            idProyecto: proyecto!.idProyecto,
             porcentajeProyecto: 0,
             idLiderProyecto: usuarioActual.idUsuario);
 
@@ -150,7 +156,7 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
                 child: Stack(children: [
                   Column(
                     children: [
-                      _DetalleProyecto(),
+                      _DetalleProyecto(proyecto:proyecto),
                     ],
                   ),
                 ]),
@@ -164,6 +170,11 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
 }
 
 class _DetalleProyecto extends StatefulWidget {
+
+  final ProyectoModel proyecto;
+
+  const _DetalleProyecto({required this.proyecto});
+
   @override
   State<_DetalleProyecto> createState() => _DetalleProyectoState();
 }
@@ -178,7 +189,7 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
 
   Future<void> cargarUsuarios() async {
     List<UsuarioModel> usuarios =
-        await gestionUsuarios.consultarUsuariosPorProyecto(proyecto.idProyecto);
+        await gestionUsuarios.consultarUsuariosPorProyecto(widget.proyecto.idProyecto);
 
     if (mounted) {
       setState(() {
@@ -240,7 +251,7 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                         width: 50,
                       ),
                       Text(
-                        '${proyecto.liderProyecto}',
+                        '${widget.proyecto.liderProyecto}',
                         style: TextStyle(color: Colors.black),
                       )
                     ],
@@ -290,7 +301,7 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                         width: 50,
                       ),
                       Text(
-                        '${proyecto.nombre}',
+                        '${widget.proyecto.nombre}',
                         style: TextStyle(color: Colors.black),
                       )
                     ],
@@ -340,7 +351,7 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                         width: 50,
                       ),
                       Text(
-                        '${dateFormat.format(proyecto.fechaInicio)}',
+                        '${dateFormat.format(widget.proyecto.fechaInicio)}',
                         style: TextStyle(color: Colors.black),
                       )
                     ],
@@ -390,7 +401,7 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                         width: 50,
                       ),
                       Text(
-                        '${dateFormat.format(proyecto.fechaFinalizacion)}',
+                        '${dateFormat.format(widget.proyecto.fechaFinalizacion)}',
                         style: TextStyle(color: Colors.black),
                       )
                     ],

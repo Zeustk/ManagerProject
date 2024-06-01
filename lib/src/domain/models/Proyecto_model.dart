@@ -19,7 +19,7 @@ class ProyectoModel {
     
 
     ProyectoModel({
-        this.idProyecto=1,
+        this.idProyecto=-1,
         required this.liderProyecto,
         required this.nombre,
         required this.fechaInicio,
