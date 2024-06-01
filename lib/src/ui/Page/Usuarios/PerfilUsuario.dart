@@ -35,13 +35,13 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
       List<ProyectoModel> proyectosList =
           await gestionProyectos.consultarProyectos(usuario.idUsuario);
 
-    
-
-      setState(() {
-        perfilActual = perfil;
-        usuarioActual = usuario;
-        proyectos = proyectosList;
-      });
+      if (mounted) {
+        setState(() {
+          perfilActual = perfil;
+          usuarioActual = usuario;
+          proyectos = proyectosList;
+        });
+      }
     } catch (error) {
       print('Error al cargar perfil y proyectos: $error');
     }

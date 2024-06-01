@@ -36,11 +36,10 @@ class DetallesProvider extends CrudProvider<DetallesModel>{
   }
 }
 
-Future<String> eliminarDetalle(int id) async {
+Future<String> eliminarUsuarioDelProyecto(int idUsuario) async {
   try {
-    return await eliminar(id, 'DeleteDetalle');
+    return await eliminar(idUsuario, 'DeleteUsuarioDeproyecto');
   } catch (error) {
-    
     
     return 'Error al eliminar los detalles del proyecto';
   }

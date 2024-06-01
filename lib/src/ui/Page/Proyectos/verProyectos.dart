@@ -72,6 +72,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
               onPressed: () {
                 Navigator.of(context).pop();
                 _eliminarProyecto(context, idProyecto);
+                cargarProyectos();
               },
             ),
           ],

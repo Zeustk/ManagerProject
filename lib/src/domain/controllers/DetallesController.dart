@@ -31,9 +31,9 @@ class DetallesController extends GetxController {
     }
   }
 
-  Future<String> eliminarUsuarios(int idDetalles) async {
+  Future<String> eliminarUsuarioDeProyecto(int idUsuario) async {
     try {
-      return await gestionDetalles.eliminarDetalle(idDetalles);
+      return await gestionDetalles.eliminarUsuarioDelProyecto(idUsuario);
     } catch (error) {
       return 'Error al eliminar los detalles del proyecto';
     }
