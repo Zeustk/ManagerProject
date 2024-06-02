@@ -218,7 +218,9 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                     width: 100,
                   ),
                   Text(
-                    usuarioActual.clave ?? '',
+                    usuarioActual.clave != null
+                        ? '•' * usuarioActual.clave.length
+                        : '',
                     style: TextStyle(color: Colors.white),
                   ),
                 ],
