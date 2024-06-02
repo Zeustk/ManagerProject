@@ -82,9 +82,9 @@ class _Crear_tareasState extends State<Crear_Tareas> {
             width: 410,
             height: 660,
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.white, width: 5),
-              borderRadius: BorderRadius.circular(30),
-            ),
+                border: Border.all(color: Colors.white, width: 5),
+                borderRadius: BorderRadius.circular(30),
+                color: Color.fromARGB(128, 0, 0, 0)),
             child: LabelsTareas(
               proyectos: proyectos,
               usuarios: usuarios,
@@ -428,19 +428,19 @@ class _LabelsTareasState extends State<LabelsTareas> {
             SizedBox(height: 20),
             Divider(color: Colors.white),
             Container(
-              padding: EdgeInsets.only(left: 7, bottom: 7),
+              padding: EdgeInsets.only(left: 30, top: 4.8),
               width: 150,
               height: 40,
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white),
-                  color: Colors.grey,
+                  border: Border.all(color: Colors.blue, width: 3),
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(10)),
               child: Text(
                 'Integrantes',
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.blue,
                     fontWeight: FontWeight.bold,
-                    fontSize: 25,
+                    fontSize: 15,
                     fontFamily: AutofillHints.addressCity),
               ),
             ),

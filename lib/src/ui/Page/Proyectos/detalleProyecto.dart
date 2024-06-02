@@ -14,7 +14,6 @@ UsuariosController gestionUsuarios = UsuariosController();
 List<UsuarioModel> usuariosFiltrados = [];
 DetallesController gestionDetalles = DetallesController();
 
-
 class DetalleProyectoPage extends StatefulWidget {
   @override
   State<DetalleProyectoPage> createState() => _DetalleProyectoPageState();
@@ -35,7 +34,7 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
     if (mounted) {
       setState(() {
         usuariosFiltrados = usuarios;
-        proyecto=proyecto;
+        proyecto = proyecto;
       });
     }
   }
@@ -156,7 +155,7 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
                 child: Stack(children: [
                   Column(
                     children: [
-                      _DetalleProyecto(proyecto:proyecto),
+                      _DetalleProyecto(proyecto: proyecto),
                     ],
                   ),
                 ]),
@@ -170,7 +169,6 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
 }
 
 class _DetalleProyecto extends StatefulWidget {
-
   final ProyectoModel proyecto;
 
   const _DetalleProyecto({required this.proyecto});
@@ -188,8 +186,8 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
   }
 
   Future<void> cargarUsuarios() async {
-    List<UsuarioModel> usuarios =
-        await gestionUsuarios.consultarUsuariosPorProyecto(widget.proyecto.idProyecto);
+    List<UsuarioModel> usuarios = await gestionUsuarios
+        .consultarUsuariosPorProyecto(widget.proyecto.idProyecto);
 
     if (mounted) {
       setState(() {

@@ -71,7 +71,8 @@ class DetalleTarea extends StatelessWidget {
             height: 580,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.white, width: 5)),
+                border: Border.all(color: Colors.white, width: 5),
+                color: Color.fromARGB(128, 0, 0, 0)),
             child: SafeArea(
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
