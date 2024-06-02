@@ -11,59 +11,19 @@ class DetallesUsuario extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.white,
         actions: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(40),
-            ),
-            child: IconButton(
-                onPressed: () {},
-                icon: Image.asset(
-                  'assets/agregar.gif',
-                  width: 50,
-                  height: 50,
-                )),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 10),
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(40),
-            ),
-            child: IconButton(
-                onPressed: () {},
-                icon: Image.asset(
-                  'assets/cargando.gif',
-                  width: 50,
-                  height: 50,
-                )),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 8, right: 7),
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(40),
-            ),
-            child: IconButton(
-                onPressed: () {},
-                icon: Image.asset(
-                  'assets/eliminar.gif',
-                  width: 50,
-                  height: 50,
-                )),
+          Image.asset(
+            'assets/LogoApp.png',
+            width: 80,
+            fit: BoxFit.cover,
           )
         ],
-        title: Text(
-          'Informe Tarea',
-          style: TextStyle(color: Colors.white),
+        foregroundColor: Colors.white,
+        title: Center(
+          child: Text(
+            'Informe Proyecto',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
         backgroundColor: Color.fromARGB(164, 83, 80, 80),
       ),
@@ -80,22 +40,19 @@ class DetallesUsuario extends StatelessWidget {
           width: double.infinity,
           height: 620,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.white, width: 5)
-              /* color: Color.fromARGB(128, 0, 0, 0) contenedore alfondo  gris*/
-              ),
+            borderRadius: BorderRadius.circular(10),
+            color: Color.fromARGB(128, 0, 0, 0),
+            border: Border.all(color: Colors.white, width: 5),
+          ),
           child: Stack(children: [
             SafeArea(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Stack(children: [
-                  Column(
-                    children: [
-                      DetalleUsuarioTarea(),
-                    ],
-                  ),
-                ]),
-              ),
+              child: Stack(children: [
+                Column(
+                  children: [
+                    DetalleUsuarioTarea(),
+                  ],
+                ),
+              ]),
             ),
           ]),
         ),
@@ -105,11 +62,11 @@ class DetallesUsuario extends StatelessWidget {
 }
 
 class DetalleUsuarioTarea extends StatelessWidget {
-  ProyectoModel proyecto = Get.arguments as ProyectoModel;
-
+  /* ProyectoModel proyecto = Get.arguments as ProyectoModel;
+ */
   @override
   Widget build(BuildContext context) {
-    DateFormat dateFormat = DateFormat('yyyy-MM-dd');
+    /* DateFormat dateFormat = DateFormat('yyyy-MM-dd'); */
 
     return Container(
       decoration: BoxDecoration(
@@ -118,51 +75,54 @@ class DetalleUsuarioTarea extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.only(top: 10, right: 5),
         width: 420,
-        height: 720,
+        height: 520,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
           children: [
-            SizedBox(height: 10),
-            Text(
-              'Tareas Completadas',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
+            SizedBox(height: 2),
+            Padding(
+              padding: const EdgeInsets.only(right: 14),
+              child: Text(
+                'Tareas Completadas',
+                style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
             ),
             Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 30, top: 5),
                   child: Container(
-                    width: 60,
-                    height: 60,
+                    width: 50,
+                    height: 50,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Image.asset(
-                      'assets/lider.gif',
-                      width: 50,
-                      height: 50,
+                      'assets/tareasT.gif',
+                      width: 20,
+                      height: 20,
                     ),
                   ),
                 ),
                 SizedBox(width: 15),
                 Container(
                   height: 40,
-                  width: 230,
+                  width: 115,
                   child: Row(
                     children: [
                       SizedBox(
                         width: 50,
                       ),
-                      Text(
+                      /* Text(
                         '${proyecto.liderProyecto}',
                         style: TextStyle(color: Colors.black),
-                      )
+                      ) */
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -173,11 +133,11 @@ class DetalleUsuarioTarea extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(right: 50),
               child: Text(
                 'Tareas En curso',
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 17,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),
@@ -187,14 +147,14 @@ class DetalleUsuarioTarea extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 30, top: 5),
                   child: Container(
-                    width: 60,
-                    height: 60,
+                    width: 50,
+                    height: 50,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Image.asset(
-                      'assets/contrato1.gif',
+                      'assets/tareasT2.gif',
                       width: 50,
                       height: 50,
                     ),
@@ -203,16 +163,16 @@ class DetalleUsuarioTarea extends StatelessWidget {
                 SizedBox(width: 15),
                 Container(
                   height: 40,
-                  width: 230,
+                  width: 115,
                   child: Row(
                     children: [
                       SizedBox(
                         width: 50,
                       ),
-                      Text(
+                      /* Text(
                         '${proyecto.nombre}',
                         style: TextStyle(color: Colors.black),
-                      )
+                      ) */
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -223,11 +183,11 @@ class DetalleUsuarioTarea extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 30),
+              padding: const EdgeInsets.only(right: 24),
               child: Text(
                 ' Tareas No Iniciadas',
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 17,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),
@@ -237,14 +197,14 @@ class DetalleUsuarioTarea extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 30, top: 5),
                   child: Container(
-                    width: 60,
-                    height: 60,
+                    width: 50,
+                    height: 50,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Image.asset(
-                      'assets/calendario5.gif',
+                      'assets/tareasT3.gif',
                       width: 50,
                       height: 50,
                     ),
@@ -253,16 +213,16 @@ class DetalleUsuarioTarea extends StatelessWidget {
                 SizedBox(width: 15),
                 Container(
                   height: 40,
-                  width: 230,
+                  width: 115,
                   child: Row(
                     children: [
                       SizedBox(
                         width: 50,
                       ),
-                      Text(
+                      /* Text(
                         '${dateFormat.format(proyecto.fechaInicio)}',
                         style: TextStyle(color: Colors.black),
-                      )
+                      ) */
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -273,11 +233,11 @@ class DetalleUsuarioTarea extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30),
+              padding: const EdgeInsets.only(left: 14),
               child: Text(
-                'Porcentaje de proyecto completaado',
+                'Porcentaje Completado',
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 17,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),
@@ -287,32 +247,32 @@ class DetalleUsuarioTarea extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 30, top: 5),
                   child: Container(
-                    width: 60,
-                    height: 60,
+                    width: 50,
+                    height: 50,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Image.asset(
-                      'assets/calendario6.gif',
-                      width: 50,
-                      height: 50,
+                      'assets/tareasT4.gif',
+                      width: 30,
+                      height: 30,
                     ),
                   ),
                 ),
                 SizedBox(width: 15),
                 Container(
                   height: 40,
-                  width: 230,
+                  width: 115,
                   child: Row(
                     children: [
                       SizedBox(
                         width: 50,
                       ),
-                      Text(
+                      /* Text(
                         '${dateFormat.format(proyecto.fechaFinalizacion)}',
                         style: TextStyle(color: Colors.black),
-                      )
+                      ) */
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -322,7 +282,7 @@ class DetalleUsuarioTarea extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            /* SizedBox(
               height: 50,
             ),
             SizedBox(
@@ -336,7 +296,7 @@ class DetalleUsuarioTarea extends StatelessWidget {
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
-            ),
+            ), */
             /* Expanded(
               child: ListView.builder(
                 itemCount: 10,

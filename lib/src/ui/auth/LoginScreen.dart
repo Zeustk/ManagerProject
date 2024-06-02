@@ -36,16 +36,25 @@ class Login extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(
-                    right: 320,
-                    top: 40,
-                  ),
-                  child: MaterialButton(
+                    width: 320,
+                    margin: EdgeInsets.only(
+                      right: 200,
+                      top: 40,
+                    ),
+                    child: MaterialButton(
                       onPressed: () {
                         Get.to(Principal());
                       },
-                      child: Image.asset('assets/back.gif')),
-                ),
+                      child: Row(
+                        children: [
+                          Image.asset('assets/back.gif'),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('Atras')
+                        ],
+                      ),
+                    )),
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
@@ -261,8 +270,12 @@ class Login extends StatelessWidget {
     }
   }
 
-  Widget _buildAnimatedImageJump(BuildContext context, String imagePath,
-      String hintText, TextEditingController controller) {
+  Widget _buildAnimatedImageJump(
+    BuildContext context,
+    String imagePath,
+    String hintText,
+    TextEditingController controller,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(),
       child: Row(
@@ -283,8 +296,8 @@ class Login extends StatelessWidget {
           Expanded(
             child: TextField(
               decoration: InputDecoration(
-                hintText: hintText,
-              ),
+                  hintText: hintText,
+                  hintStyle: TextStyle(color: Colors.white)),
               controller: controller,
             ),
           ),

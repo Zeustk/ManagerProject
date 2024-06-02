@@ -10,33 +10,26 @@ import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Usuarios/AdicionarUsuarios.dart';
 
-  UsuariosController gestionUsuarios = UsuariosController();
-  List<UsuarioModel> usuariosFiltrados = [];
-  DetallesController gestionDetalles= DetallesController();
+UsuariosController gestionUsuarios = UsuariosController();
+List<UsuarioModel> usuariosFiltrados = [];
+DetallesController gestionDetalles = DetallesController();
 
 class DetalleProyectoPage extends StatelessWidget {
+  Future<void> AdicionarUsuarios() async {
+    List<UsuarioModel> usuariosSeleccionados =
+        (await Get.to<List<UsuarioModel>?>(AdicionarUsuariosPage())) ?? [];
 
+    if (usuariosSeleccionados.isNotEmpty) {
+      // Filtrar los usuarios que no están en usuariosFiltrados
+      List<UsuarioModel> nuevosUsuarios =
+          usuariosSeleccionados.where((usuario) {
+        return !usuariosFiltrados.contains(usuario);
+      }).toList();
 
- Future<void> AdicionarUsuarios() async {
-
-   List<UsuarioModel> usuariosSeleccionados = (await Get.to<List<UsuarioModel>?>(
-                          AdicionarUsuariosPage())) ??
-                      [];
-
-   if (usuariosSeleccionados.isNotEmpty){
-
-    // Filtrar los usuarios que no están en usuariosFiltrados
-    List<UsuarioModel> nuevosUsuarios = usuariosSeleccionados.where((usuario) {
-      return !usuariosFiltrados.contains(usuario);
-    }).toList();
-
-    // Añadir los nuevos usuarios a usuariosFiltrados
-    usuariosFiltrados.addAll(nuevosUsuarios);
-
-   }                   
-
-
- }
+      // Añadir los nuevos usuarios a usuariosFiltrados
+      usuariosFiltrados.addAll(nuevosUsuarios);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +45,7 @@ class DetalleProyectoPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(40),
             ),
             child: IconButton(
-                onPressed: ()  {
-                  
-                },
+                onPressed: () {},
                 icon: Image.asset(
                   'assets/agregar.gif',
                   width: 50,
@@ -114,9 +105,8 @@ class DetalleProyectoPage extends StatelessWidget {
           height: 620,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.white, width: 5)
-              /* color: Color.fromARGB(128, 0, 0, 0) contenedore alfondo  gris*/
-              ),
+              border: Border.all(color: Colors.white, width: 5),
+              color: Color.fromARGB(128, 0, 0, 0)),
           child: Stack(children: [
             SafeArea(
               child: SingleChildScrollView(
@@ -144,7 +134,6 @@ class _DetalleProyecto extends StatefulWidget {
 
 class _DetalleProyectoState extends State<_DetalleProyecto> {
   ProyectoModel proyecto = Get.arguments as ProyectoModel;
-  
 
   @override
   void initState() {
@@ -403,14 +392,17 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
-                            Text( usuariosFiltrados[index].email, // Mostrar el nombre del usuario,
+                            Text(
+                                usuariosFiltrados[index]
+                                    .email, // Mostrar el nombre del usuario,
                                 style: TextStyle(color: Colors.white)),
                             SizedBox(
                               width: 10,
                             ),
                             InkWell(
                               onTap: () {
-                                gestionDetalles.eliminarUsuarioDeProyecto(usuariosFiltrados[index].idUsuario);
+                                gestionDetalles.eliminarUsuarioDeProyecto(
+                                    usuariosFiltrados[index].idUsuario);
                                 cargarUsuarios();
                               },
                               child: Container(

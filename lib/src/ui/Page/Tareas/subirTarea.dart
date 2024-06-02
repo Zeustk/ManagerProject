@@ -45,7 +45,8 @@ class _SubirTareasState extends State<SubirTareas> {
           height: 620,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.white, width: 5)),
+              border: Border.all(color: Colors.white, width: 5),
+              color: Color.fromARGB(128, 0, 0, 0)),
           child: SafeArea(
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -118,7 +119,6 @@ class _SubirTareasState extends State<SubirTareas> {
                       height: 32,
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.white),
-                          color: Colors.blue[400],
                           borderRadius: BorderRadius.circular(10)),
                       child: Text(
                         'Informe',
@@ -171,6 +171,8 @@ class _SubirTareasState extends State<SubirTareas> {
                         }
                       },
                       style: ButtonStyle(
+                        side: MaterialStateProperty.all(
+                            BorderSide(color: Colors.blue, width: 3)),
                         backgroundColor:
                             MaterialStateProperty.all<Color>(Colors.white),
                         foregroundColor:
@@ -202,21 +204,20 @@ class _SubirTareasState extends State<SubirTareas> {
                         padding: EdgeInsets.only(left: 10),
                         width: 260,
                         height: 50,
-                        decoration: BoxDecoration(
+                        /* decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
-                              style: BorderStyle.solid, color: Colors.blue),
-                          color: Colors.white,
-                        ),
+                              style: BorderStyle.solid, color: Colors.white),
+                        ), */
                         child: Row(
                           children: [
                             Text(
                               _controllerPdfPath.text,
                               style:
-                                  TextStyle(fontSize: 16, color: Colors.blue),
+                                  TextStyle(fontSize: 16, color: Colors.white),
                             ),
                             SizedBox(
-                              width: 15,
+                              width: 20,
                             ),
                             Image.asset(
                               'assets/archivo.png',

@@ -56,9 +56,8 @@ class _Crear_proyectosState extends State<Crear_proyectos> {
                 height: 720,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.white, width: 5)
-                    /* color: Color.fromARGB(128, 0, 0, 0) contenedore alfondo  gris*/
-                    ),
+                    border: Border.all(color: Colors.white, width: 5),
+                    color: Color.fromARGB(128, 0, 0, 0)),
               ),
               Container(
                   margin: EdgeInsets.only(top: 5, left: 5, right: 5),

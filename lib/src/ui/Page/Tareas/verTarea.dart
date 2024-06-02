@@ -72,9 +72,8 @@ class _Ver_TareasState extends State<Ver_Tareas> {
             height: 720,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.white, width: 5)
-                /* color: Color.fromARGB(128, 0, 0, 0) contenedore alfondo  gris*/
-                ),
+                border: Border.all(color: Colors.white, width: 5),
+                color: Color.fromARGB(128, 0, 0, 0)),
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(

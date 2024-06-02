@@ -153,6 +153,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                           width: double.infinity,
                           height: 530,
                           decoration: BoxDecoration(
+                              color: Color.fromARGB(128, 0, 0, 0),
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(color: Colors.white, width: 5)
                               /* color: Color.fromARGB(128, 0, 0, 0) contenedore alfondo  gris*/
