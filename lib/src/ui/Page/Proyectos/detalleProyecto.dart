@@ -56,7 +56,7 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
         DetallesModel detalleProyectoUsuario = DetallesModel(
             idDetalle: 0,
             idUsuario: usuario.idUsuario,
-            idProyecto: proyecto!.idProyecto,
+            idProyecto: proyecto.idProyecto,
             porcentajeProyecto: 0,
             idLiderProyecto: usuarioActual.idUsuario);
 

@@ -275,6 +275,7 @@ class Login extends StatelessWidget {
     String imagePath,
     String hintText,
     TextEditingController controller,
+    bool obscuretext,
   ) {
     return Padding(
       padding: const EdgeInsets.only(),
@@ -295,6 +296,7 @@ class Login extends StatelessWidget {
           ),
           Expanded(
             child: TextField(
+              obscureText: obscuretext,
               decoration: InputDecoration(
                   hintText: hintText,
                   hintStyle: TextStyle(color: Colors.white)),
@@ -307,21 +309,13 @@ class Login extends StatelessWidget {
   }
 
   Widget _buildEmailField(BuildContext context) {
-    return _buildAnimatedImageJump(
-      context,
-      'assets/nose.gif',
-      'Correo Electronico',
-      _controllerEmail,
-    );
+    return _buildAnimatedImageJump(context, 'assets/nose.gif',
+        'Correo Electronico', _controllerEmail, false);
   }
 
   Widget _buildPasswordField(BuildContext context) {
     return _buildAnimatedImageJump(
-      context,
-      'assets/clave.gif',
-      'Contraseña',
-      _controllerClave,
-    );
+        context, 'assets/clave.gif', 'Contraseña', _controllerClave, true);
   }
 }
 
