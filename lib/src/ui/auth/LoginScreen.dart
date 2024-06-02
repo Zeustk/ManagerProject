@@ -275,6 +275,7 @@ class Login extends StatelessWidget {
     String imagePath,
     String hintText,
     TextEditingController controller,
+    bool oscureText,
   ) {
     return Padding(
       padding: const EdgeInsets.only(),
@@ -298,7 +299,7 @@ class Login extends StatelessWidget {
               decoration: InputDecoration(
                   hintText: hintText,
                   hintStyle: TextStyle(color: Colors.white)),
-              controller: controller,
+                  controller: controller,
             ),
           ),
         ],
@@ -312,6 +313,8 @@ class Login extends StatelessWidget {
       'assets/nose.gif',
       'Correo Electronico',
       _controllerEmail,
+      false
+      
     );
   }
 
@@ -321,6 +324,9 @@ class Login extends StatelessWidget {
       'assets/clave.gif',
       'Contraseña',
       _controllerClave,
+      true,
+
+
     );
   }
 }
