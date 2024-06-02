@@ -22,7 +22,7 @@ class DetallesModel {
   DetallesModel({
     required this.idDetalle,
     required this.idUsuario,
-    required this.idProyecto,
+    this.idProyecto=-1,
     required this.porcentajeProyecto,
     required this.idLiderProyecto,
   });

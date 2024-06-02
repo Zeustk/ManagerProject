@@ -16,10 +16,12 @@ class TareasModel {
   int? idProyecto;
   int? idUsuario;
   String urlPdf;
+  int idEstado;
 
 
   TareasModel(
-      {this.idTarea = 1,
+      {
+      this.idTarea = 1,
       required this.nombre,
       required this.fechaInicio,
       required this.fechaFinalizacion,
@@ -28,6 +30,7 @@ class TareasModel {
       required this.idProyecto,
       required this.idUsuario,
       required this.urlPdf,
+      this.idEstado=1,
       });
 
   factory TareasModel.fromJson(Map<String, dynamic> json) => TareasModel(
@@ -42,6 +45,7 @@ class TareasModel {
         idProyecto: json["Id_Proyecto"],
         idUsuario: json["Id_Usuario"],
         urlPdf: json["urlPdf"],
+        idEstado: json["Id_Estado"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -56,5 +60,6 @@ class TareasModel {
         "Id_Proyecto": idProyecto,
         "Id_Usuario": idUsuario,
         "urlPdf":urlPdf,
+        "Id_Estado":idEstado,
       };
 }
