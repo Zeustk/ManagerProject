@@ -28,7 +28,7 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
 
    Future<void> cargarUsuarios() async {
     List<UsuarioModel> usuarios =
-        await gestionUsuarios.consultarUsuariosPorProyecto(proyecto!.idProyecto);
+        await gestionUsuarios.consultarUsuariosPorProyecto(proyecto.idProyecto);
 
   
 
