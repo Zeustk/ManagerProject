@@ -365,7 +365,6 @@ class _LabelsState extends State<Labels> {
       DetallesModel detallesProyectoUsuario = DetallesModel(
           idDetalle: 0,
           idUsuario: usuario.idUsuario,
-          idProyecto: 0,
           porcentajeProyecto: 0.0,
           idLiderProyecto: usuarioActual.idUsuario);
 
