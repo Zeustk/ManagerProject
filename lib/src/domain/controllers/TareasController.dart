@@ -36,4 +36,12 @@ class TareasController extends GetxController {
       return 'Error al eliminar la tarea';
     }
   }
+
+  Future<String> actualizarEstado(int idTarea,int nuevoEstado ) async {
+     try {
+      return await gestionTareas.actualizarEstadoTarea(idTarea,nuevoEstado);
+    } catch (error) {
+      return 'Error al actualizar la tarea';
+    }
+  }
 }

@@ -10,9 +10,11 @@ class TareasProvider extends CrudProvider<TareasModel> {
     }
   }
 
-  Future<List<TareasModel>> consultaTareas(int id_Proyecto,int id_Usuario) async {
+  Future<List<TareasModel>> consultaTareas(
+      int id_Proyecto, int id_Usuario) async {
     try {
-      List<Map<String, dynamic>> tareasMapa = await consultar('getTarea/$id_Proyecto/$id_Usuario');
+      List<Map<String, dynamic>> tareasMapa =
+          await consultar('getTarea/$id_Proyecto/$id_Usuario');
 
       List<TareasModel> listaTareas =
           tareasMapa.map((map) => TareasModel.fromJson(map)).toList();
@@ -39,6 +41,21 @@ class TareasProvider extends CrudProvider<TareasModel> {
     } catch (error) {
       print('Error al eliminar la Tarea');
       return 'Error al eliminar la Tarea';
+    }
+  }
+
+  Future<String> actualizarEstadoTarea(int idTarea, int nuevoEstado) async {
+    try {
+    
+      final nuevaInfo = {
+        "Id_Tarea": idTarea,
+        "Id_Estado": nuevoEstado,
+      };
+
+      return await actualizar(nuevaInfo, 'UpdateEstadoTarea');
+    } catch (error) {
+      print('Error al actualizar la Tarea: $error');
+      return 'Error al actualizar la Tarea';
     }
   }
 }

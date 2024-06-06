@@ -40,9 +40,14 @@ class CrudProvider<T> {
     }
   }
 
-  Future<String> actualizar(T body, String endpoint) async {
+  Future<String> actualizar(dynamic body, String endpoint) async {
     final url = '$baseUrl/$endpoint';
-    final response = await http.put(Uri.parse(url), body: jsonEncode(body));
+  
+   final response = await http.put(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(body),
+      );
     return response.body;
   }
 
