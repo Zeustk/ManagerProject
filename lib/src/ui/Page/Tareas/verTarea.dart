@@ -17,11 +17,10 @@ class Ver_Tareas extends StatefulWidget {
 }
 
 class _Ver_TareasState extends State<Ver_Tareas> {
-  TareasController gestionTareas = TareasController();
+  final TareasController gestionTareas = Get.put(TareasController());
   AuthController gestionAuth = AuthController();
   int id_Proyecto = Get.arguments;
 
-  List<TareasModel> tareas = [];
 
   @override
   void initState() {
@@ -32,10 +31,10 @@ class _Ver_TareasState extends State<Ver_Tareas> {
   Future<void> cargarTareas() async {
     try {
       UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
-      List<TareasModel> tareasList = await gestionTareas.consultarTareas(
+           await gestionTareas.consultarTareas(
           id_Proyecto, usuarioActual.idUsuario);
       setState(() {
-        tareas = tareasList;
+
       });
     } catch (error) {
       // Manejar el error de la consulta de proyectos
@@ -99,7 +98,7 @@ class _Ver_TareasState extends State<Ver_Tareas> {
                     height: 15,
                   ),
                   Column(
-                    children: tareas.map((tarea) {
+                    children: gestionTareas.tareas.map((tarea) {
                       return GestureDetector(
                         onTap: () {
                           // Acción al tocar una tarea (puede navegar a la pantalla de detalles)

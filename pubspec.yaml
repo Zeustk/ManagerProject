@@ -38,6 +38,7 @@ dependencies:
   url_launcher: ^6.0.9
   open_file: ^3.3.2
   intl: ^0.17.0
+  permission_handler: ^11.3.1 
   
 
 

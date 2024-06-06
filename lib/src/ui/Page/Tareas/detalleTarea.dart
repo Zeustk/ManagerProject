@@ -7,6 +7,7 @@ import 'package:manager_proyect/src/domain/controllers/TareasController.dart';
 import 'package:manager_proyect/src/domain/models/Tareas_model.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/subirTarea.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart'; // Para abrir URLs en el navegador
 import 'package:file_picker/file_picker.dart';
 
@@ -18,8 +19,7 @@ class DetalleTarea extends StatefulWidget {
 }
 
 class _DetalleTareaState extends State<DetalleTarea> {
-
-  TareasController gestionTareas=TareasController();
+  TareasController gestionTareas = Get.find();
 
   TareasModel tarea = Get.arguments as TareasModel;
   bool valorCheckbox = false;
@@ -31,58 +31,58 @@ class _DetalleTareaState extends State<DetalleTarea> {
     estadoInicial();
   }
 
-  void estadoInicial(){
-
+  void estadoInicial() {
     print(tarea.idEstado);
 
-   switch(tarea.idEstado){
-    case 1: valorCheckbox=false;print('hola');return;
-    case 2: valorCheckbox=true;return;
-   }
+    switch (tarea.idEstado) {
+      case 1:
+        valorCheckbox = false;
+        return;
+      case 2:
+        valorCheckbox = true;
+        return;
+    }
 
-   setState(() {
-     
-   });
-
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-  
-
     Future<void> _downloadPDF(String pdfBase64Content) async {
       try {
+        if (await Permission.storage.request().isGranted) {
+          Directory downloadsDirectory =
+              Directory('/storage/emulated/0/Download');
 
-       
-        Directory downloadsDirectory =
-            Directory('/storage/emulated/0/Download');
+          if (downloadsDirectory.existsSync()) {
+            // Crear el archivo PDF con un nombre único
+            String uniqueFilename =
+                '${DateTime.now().millisecondsSinceEpoch}_tarea.pdf';
+            String filePath = '${downloadsDirectory.path}/$uniqueFilename';
 
-        if (downloadsDirectory.existsSync()) {
-          // Crear el archivo PDF con un nombre único
-          String uniqueFilename =
-              '${DateTime.now().millisecondsSinceEpoch}_tarea.pdf';
-          String filePath = '${downloadsDirectory.path}/$uniqueFilename';
+            // Decodificar el contenido base64
+            List<int> pdfBytes = base64Decode(pdfBase64Content);
 
-          // Decodificar el contenido base64
-          List<int> pdfBytes = base64Decode(pdfBase64Content);
+            // Guardar el archivo en la ubicación especificada
+            File file = File(filePath);
+            await file.writeAsBytes(pdfBytes);
 
-          // Guardar el archivo en la ubicación especificada
-          File file = File(filePath);
-          await file.writeAsBytes(pdfBytes);
-
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('PDF descargado en Descargas')),
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: Text('No se pudo acceder al directorio de Descargas')),
-          );
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('PDF descargado en Descargas')),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                  content:
+                      Text('No se pudo acceder al directorio de Descargas')),
+            );
+          }
         }
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error al descargar el PDF: $e')),
         );
+        print(e);
       }
     }
 
@@ -162,15 +162,11 @@ class _DetalleTareaState extends State<DetalleTarea> {
                             Checkbox(
                               value: valorCheckbox,
                               onChanged: (newValue) {
+                                valorCheckbox = newValue!;
 
-                                 valorCheckbox=newValue!;
+                                CambiarEstado(valorCheckbox);
 
-                                 CambiarEstado(valorCheckbox);
-
-                                setState(() {
-           
-                                });
-                            
+                                setState(() {});
                               },
                             ),
                             SizedBox(width: 10.0),
@@ -222,14 +218,12 @@ class _DetalleTareaState extends State<DetalleTarea> {
   }
 
   void CambiarEstado(bool estaEnCurso) {
-
-    if (estaEnCurso){
-      gestionTareas.actualizarEstado(tarea.idTarea, 02); // 02 Es el estado en curso;
+    if (estaEnCurso) {
+      gestionTareas.actualizarEstado(
+          tarea.idTarea, 02); // 02 Es el estado en curso;
+    } else {
+      gestionTareas.actualizarEstado(
+          tarea.idTarea, 01); // 02 Es el estado en curso;
     }
-    else{
-       gestionTareas.actualizarEstado(tarea.idTarea, 01); // 02 Es el estado en curso;
-    }
-
-
   }
 }

@@ -131,14 +131,12 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                   width: 142,
                   child: Row(
                     children: [
-                      Text('Editar',
-                          style: TextStyle(fontSize: 20, color: Colors.white)),
                       MaterialButton(
                         onPressed: () {
                           _toggleEditing();
                         },
                         child: Container(
-                          width: 50,
+                          width: 110,
                           height: 50,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 4, vertical: 4),
@@ -148,8 +146,18 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                               border: Border.all(
                                   color: Color.fromARGB(255, 58, 164, 190),
                                   width: 2.5)),
-                          child: Image.asset(
-                            'assets/editarusu.png',
+                          child: Expanded(
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/editarusu.png',
+                                  width: 30,
+                                ),
+                                Text('Editar',
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.blue))
+                              ],
+                            ),
                           ),
                         ),
                       ),

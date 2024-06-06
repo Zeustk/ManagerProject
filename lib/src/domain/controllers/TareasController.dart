@@ -4,6 +4,7 @@ import 'package:manager_proyect/src/domain/models/Tareas_model.dart';
 
 class TareasController extends GetxController {
   TareasProvider gestionTareas = TareasProvider();
+  var tareas = <TareasModel>[].obs; // Lista reactiva
 
   Future<String> registrarTareas(TareasModel tareas) async {
     try {
@@ -13,11 +14,12 @@ class TareasController extends GetxController {
     }
   }
 
-  Future<List<TareasModel>> consultarTareas(int id_Proyecto,int id_Usuario) async {
+  Future<void> consultarTareas(int id_Proyecto, int id_Usuario) async {
     try {
-      return await gestionTareas.consultaTareas(id_Proyecto,id_Usuario);
+      List<TareasModel> tareasList = await gestionTareas.consultaTareas(id_Proyecto, id_Usuario);
+      tareas.assignAll(tareasList); // Actualiza la lista reactiva
     } catch (error) {
-      return [];
+      tareas.assignAll([]); // Asigna una lista vacía en caso de error
     }
   }
 
@@ -37,9 +39,15 @@ class TareasController extends GetxController {
     }
   }
 
-  Future<String> actualizarEstado(int idTarea,int nuevoEstado ) async {
-     try {
-      return await gestionTareas.actualizarEstadoTarea(idTarea,nuevoEstado);
+  Future<String> actualizarEstado(int idTarea, int nuevoEstado) async {
+    try {
+       String result = await gestionTareas.actualizarEstadoTarea(idTarea, nuevoEstado);
+        // Actualizar el estado localmente
+        TareasModel tarea = tareas.firstWhere((tarea) => tarea.idTarea == idTarea);
+        tarea.idEstado = nuevoEstado;
+        tareas.refresh(); // Notifica cambios
+
+      return result;
     } catch (error) {
       return 'Error al actualizar la tarea';
     }
