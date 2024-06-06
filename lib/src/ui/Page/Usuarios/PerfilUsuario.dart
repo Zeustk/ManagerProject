@@ -6,6 +6,7 @@ import 'package:manager_proyect/src/domain/models/Perfiles_model.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
+
 import 'package:manager_proyect/src/widgets/Drawer.dart';
 
 class Perfil_Usuario extends StatefulWidget {
@@ -21,11 +22,36 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
   UsuarioModel usuarioActual = UsuarioModel();
   PerfilesModel perfilActual = PerfilesModel();
   List<ProyectoModel> proyectos = [];
+  bool _isEditing = false;
+  TextEditingController _controlleNombre = TextEditingController();
+  TextEditingController _controlleCorreo = TextEditingController();
+  TextEditingController _controlleClave = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     cargarPerfil();
+    _controlleNombre = TextEditingController(
+      text: perfilActual.nombreCompleto ?? '',
+    );
+    _controlleCorreo = TextEditingController(text: usuarioActual.email ?? '');
+    _controlleClave = TextEditingController(
+      text: usuarioActual.clave = '•' * usuarioActual.clave.length,
+    );
+  }
+
+  @override
+  void dispose() {
+    _controlleNombre.dispose();
+    _controlleCorreo.dispose();
+    _controlleClave.dispose();
+    super.dispose();
+  }
+
+  void _toggleEditing() {
+    setState(() {
+      _isEditing = !_isEditing;
+    });
   }
 
   Future<void> cargarPerfil() async {
@@ -108,7 +134,9 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                       Text('Editar',
                           style: TextStyle(fontSize: 20, color: Colors.white)),
                       MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _toggleEditing();
+                        },
                         child: Container(
                           width: 50,
                           height: 50,
@@ -142,20 +170,28 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                 ),
               ),
               Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
-              Row(
-                children: [
-                  SizedBox(width: 30),
-                  Text('Nombre',
+              Row(children: [
+                SizedBox(width: 30),
+                Text('Nombre',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white)),
+                SizedBox(width: 70),
+                Container(
+                    margin: EdgeInsets.only(top: 20),
+                    height: 10,
+                    width: 100,
+                    child: TextField(
+                      controller: _controlleNombre,
+                      enabled: _isEditing,
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white)),
-                  SizedBox(
-                    width: 70,
-                  ),
-                  Text(perfilActual.nombreCompleto,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white)),
-                ],
-              ),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                      ),
+                    ))
+              ]),
               Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
@@ -166,11 +202,25 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white)),
                     SizedBox(
-                      width: 78,
+                      width: 10,
                     ),
-                    Text(usuarioActual.email ?? '',
+                    Container(
+                      padding: EdgeInsets.only(left: 41),
+                      margin: EdgeInsets.only(top: 10),
+                      width: 308,
+                      height: 20,
+                      child: TextField(
+                        controller: _controlleCorreo,
+                        enabled: _isEditing,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white)),
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -217,10 +267,21 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                   SizedBox(
                     width: 100,
                   ),
-                  Text(
-                         '•' * usuarioActual.clave.length,
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  Container(
+                      margin: EdgeInsets.only(top: 20),
+                      height: 10,
+                      width: 100,
+                      child: TextField(
+                        controller: _controlleClave,
+                        enabled: _isEditing,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                        ),
+                      )),
                 ],
               ),
               SizedBox(
