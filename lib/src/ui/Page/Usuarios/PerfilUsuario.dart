@@ -101,100 +101,124 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
               fit: BoxFit.cover,
             ),
           ),
-          SafeArea(
-            child: Column(
-              children: [
-                Expanded(
-                  child: Stack(children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 140),
-                      height: 60,
-                      width: 142,
-                      child: Row(
-                        children: [
-                          MaterialButton(
-                            onPressed: () {
-                              _toggleEditing();
-                            },
-                            child: Container(
-                              width: 110,
-                              height: 50,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 4, vertical: 4),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(40),
-                                  border: Border.all(
-                                      color: Color.fromARGB(255, 58, 164, 190),
-                                      width: 2.5)),
-                              child: Expanded(
-                                child: Row(
-                                  children: [
-                                    Image.asset(
-                                      'assets/editarusu.png',
-                                      width: 30,
-                                    ),
-                                    Text('Editar',
-                                        style: TextStyle(
-                                            fontSize: 20, color: Colors.blue))
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 15, left: 20),
-                      padding: EdgeInsets.only(top: 10),
-                      width: 100,
-                      height: 100,
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Center(
-                          child: Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
+          Column(
+            children: [
+              Stack(children: [
+                Container(
+                  margin: EdgeInsets.only(top: 140),
+                  height: 60,
+                  width: 142,
+                  child: Row(
+                    children: [
+                      MaterialButton(
+                        onPressed: () {
+                          _toggleEditing();
+                        },
+                        child: Container(
+                          width: 110,
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 4, vertical: 4),
+                          decoration: BoxDecoration(
                               color: Colors.white,
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: AssetImage('assets/perfil2.gif'),
-                                fit: BoxFit.cover,
+                              borderRadius: BorderRadius.circular(40),
+                              border: Border.all(
+                                  color: Color.fromARGB(255, 58, 164, 190),
+                                  width: 2.5)),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'assets/editarusu.png',
+                                width: 30,
                               ),
-                            ),
+                              Text('Editar',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.blue))
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 15, left: 20),
+                  padding: EdgeInsets.only(top: 10),
+                  width: 100,
+                  height: 100,
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Center(
+                      child: Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage('assets/perfil2.gif'),
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
                     ),
-                  ]),
-                ),
-                SizedBox(height: 12),
-                Container(
-                  margin: EdgeInsets.only(left: 20),
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Mi Perfil',
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
                   ),
                 ),
-                Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
-                Row(children: [
-                  SizedBox(width: 30),
-                  Text('Nombre',
+              ]),
+              SizedBox(height: 12),
+              Container(
+                margin: EdgeInsets.only(left: 20),
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Mi Perfil',
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+              ),
+              Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
+              Row(children: [
+                SizedBox(width: 30),
+                Text('Nombre',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white)),
+                SizedBox(width: 70),
+                Container(
+                    margin: EdgeInsets.only(top: 20),
+                    height: 10,
+                    width: 100,
+                    child: TextField(
+                      controller: _controlleNombre,
+                      enabled: _isEditing,
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white)),
-                  SizedBox(width: 70),
-                  Container(
-                      margin: EdgeInsets.only(top: 20),
-                      height: 10,
-                      width: 100,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                      ),
+                    ))
+              ]),
+              Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Row(
+                  children: [
+                    SizedBox(width: 30),
+                    Text('Correo',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white)),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 41),
+                      margin: EdgeInsets.only(top: 10),
+                      width: 308,
+                      height: 20,
                       child: TextField(
-                        controller: _controlleNombre,
+                        controller: _controlleCorreo,
                         enabled: _isEditing,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -203,141 +227,110 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                         decoration: InputDecoration(
                           border: InputBorder.none,
                         ),
-                      ))
-                ]),
-                Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Row(
-                    children: [
-                      SizedBox(width: 30),
-                      Text('Correo',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white)),
-                      SizedBox(
-                        width: 10,
                       ),
-                      Container(
-                        padding: EdgeInsets.only(left: 41),
-                        margin: EdgeInsets.only(top: 10),
-                        width: 308,
-                        height: 20,
-                        child: TextField(
-                          controller: _controlleCorreo,
-                          enabled: _isEditing,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
-                Row(
-                  children: [
-                    SizedBox(width: 30),
-                    Text('N# Proyectos',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    SizedBox(
-                      width: 35,
                     ),
-                    Text(proyectos.length.toString(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white)),
                   ],
                 ),
-                Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
-                Row(
-                  children: [
-                    SizedBox(width: 30),
-                    Text('Estado',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white)),
-                    SizedBox(
-                      width: 77,
-                    ),
-                    Text(
-                      perfilActual.estado ? 'Conectado' : 'Desconectado',
+              ),
+              Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
+              Row(
+                children: [
+                  SizedBox(width: 30),
+                  Text('N# Proyectos',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  SizedBox(
+                    width: 35,
+                  ),
+                  Text(proyectos.length.toString(),
                       style: TextStyle(
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
-                Row(
-                  children: [
-                    SizedBox(width: 30),
-                    Text('Pin',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white)),
-                    SizedBox(
-                      width: 100,
-                    ),
-                    Container(
-                        margin: EdgeInsets.only(top: 20),
-                        height: 10,
-                        width: 100,
-                        child: TextField(
-                          controller: _controlleClave,
-                          enabled: _isEditing,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                          ),
-                        )),
-                  ],
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20),
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Mis Proyectos',
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                          fontWeight: FontWeight.bold, color: Colors.white)),
+                ],
+              ),
+              Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
+              Row(
+                children: [
+                  SizedBox(width: 30),
+                  Text('Estado',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white)),
+                  SizedBox(
+                    width: 77,
                   ),
+                  Text(
+                    perfilActual.estado ? 'Conectado' : 'Desconectado',
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              Divider(color: Color.fromRGBO(0, 0, 0, 0.1)),
+              Row(
+                children: [
+                  SizedBox(width: 30),
+                  Text('Pin',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white)),
+                  SizedBox(
+                    width: 100,
+                  ),
+                  Container(
+                      margin: EdgeInsets.only(top: 20),
+                      height: 10,
+                      width: 100,
+                      child: TextField(
+                        controller: _controlleClave,
+                        enabled: _isEditing,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                        ),
+                      )),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 20),
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Mis Proyectos',
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
-                Divider(),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: proyectos.length > 6 ? 6 : proyectos.length,
-                    itemBuilder: (context, index) {
-                      return Row(
-                        children: [
-                          SizedBox(width: 30),
-                          Text('Proyecto',
+              ),
+              Divider(),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: proyectos.length > 6 ? 6 : proyectos.length,
+                  itemBuilder: (context, index) {
+                    return Row(
+                      children: [
+                        SizedBox(width: 30),
+                        Text('Proyecto',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
+                        SizedBox(width: 20),
+                        Expanded(
+                          child: Text(proyectos[index].nombre,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white)),
-                          SizedBox(width: 20),
-                          Expanded(
-                            child: Text(proyectos[index].nombre,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white)),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),
