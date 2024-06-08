@@ -29,7 +29,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
   final ProyectoController gestionProyectos = ProyectoController();
   String tipo = Get.arguments as String;
   int estado = 04; // Todos
-  int? botonPresionado; 
+  int? botonPresionado;
   String nombreTextBusqueda = '';
 
   @override

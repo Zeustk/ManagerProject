@@ -6,7 +6,7 @@ import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 
-class DetallesUsuario extends StatelessWidget {
+class Informes_Proyectos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
