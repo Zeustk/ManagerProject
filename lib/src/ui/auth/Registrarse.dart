@@ -238,7 +238,7 @@ class Registro extends StatelessWidget {
       );
     } else {
       gestionUsuarios.registrarUsuarios(usuario).then((resultado) {
-        print('El resultado de registrar el usuario es: $resultado');
+        print(resultado);
 
         PerfilesModel perfil = PerfilesModel();
 
