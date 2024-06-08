@@ -33,7 +33,7 @@ class Progess_custom extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: Text(
-                "${(progress * 100).toInt()}%",
+                "${progress}%",
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),

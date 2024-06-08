@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:manager_proyect/src/domain/controllers/EntregasController.dart';
+import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/models/Entregas_model.dart';
 import 'package:path/path.dart' as path;
 import 'package:manager_proyect/src/constante/constantes.dart';
@@ -20,6 +21,7 @@ class _SubirTareasState extends State<SubirTareas> {
   TextEditingController _controllerPdfPath = TextEditingController();
   TareasModel tarea = Get.arguments as TareasModel;
   EntregasController gestionEntregas = EntregasController();
+  ProyectoController gestionProyectos= ProyectoController();
 
   String? pdfPath;
 
@@ -290,6 +292,7 @@ class _SubirTareasState extends State<SubirTareas> {
         backgroundColor: Colors.white,
         colorText: Colors.black,
       );
+      gestionProyectos.cambiarEstadoProyectosMemoria();
     }).catchError((error) {
       print('Ocurrió un error al registrar la tarea: $error');
     });

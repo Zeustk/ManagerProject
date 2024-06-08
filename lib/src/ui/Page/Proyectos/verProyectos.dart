@@ -269,7 +269,7 @@ Widget build(BuildContext context) {
                                         alignment: Alignment.topCenter,
                                         child: Row(children: [
                                           Progresos_Proyectos(
-                                            porcentaje: 0.50,
+                                            porcentaje: proyecto.porcentajeProyecto,
                                             color: Colors.blue,
                                             estado: proyecto.idEstado,
                                             nombre_proyecto: proyecto.nombre,

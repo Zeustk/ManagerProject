@@ -16,14 +16,12 @@ class DetallesModel {
   int idDetalle;
   int idUsuario;
   int idProyecto;
-  double porcentajeProyecto;
   int idLiderProyecto;
 
   DetallesModel({
     required this.idDetalle,
     required this.idUsuario,
     this.idProyecto=-1,
-    required this.porcentajeProyecto,
     required this.idLiderProyecto,
   });
 
@@ -31,7 +29,6 @@ class DetallesModel {
         idDetalle: json["Id_Detalle"],
         idUsuario: json["Id_Usuario"],
         idProyecto: json["Id_Proyecto"],
-        porcentajeProyecto: json["PorcentajeProyecto"],
         idLiderProyecto: json["Id_LiderProyecto"],
       );
 
@@ -39,7 +36,6 @@ class DetallesModel {
         "Id_Detalle": idDetalle,
         "Id_Usuario": idUsuario,
         "Id_Proyecto": idProyecto,
-        "PorcentajeProyecto": porcentajeProyecto,
         "Id_LiderProyecto":idLiderProyecto,
       };
 }

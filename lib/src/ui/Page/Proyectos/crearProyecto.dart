@@ -332,6 +332,7 @@ class _LabelsState extends State<Labels> {
       liderProyecto: perfilActual.nombreCompleto,
       nombre: __controllerNombre.text.trim().toUpperCase(),
       descripcion: __controllerDescripcion.text.trim(),
+      porcentajeProyecto: 0.0,
     );
 
     if (usuariosSeleccionados.isEmpty) {
@@ -364,7 +365,6 @@ class _LabelsState extends State<Labels> {
       DetallesModel detallesProyectoUsuario = DetallesModel(
           idDetalle: 0,
           idUsuario: usuario.idUsuario,
-          porcentajeProyecto: 0.0,
           idLiderProyecto: usuarioActual.idUsuario);
 
       gestionProyectoUsuarios
