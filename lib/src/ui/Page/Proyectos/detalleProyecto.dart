@@ -146,6 +146,11 @@ class _DetalleProyecto extends StatefulWidget {
 }
 
 class _DetalleProyectoState extends State<_DetalleProyecto> {
+  TextEditingController _controllerNombreProyecto = TextEditingController();
+  TextEditingController _controllerNombreLiderProyecto =
+      TextEditingController();
+  TextEditingController _controllerFechaInicio = TextEditingController();
+  TextEditingController _controllerFechaFin = TextEditingController();
   bool _isEditing = false;
   bool _isEditing2 = false;
   bool _isEditing3 = false;
@@ -289,8 +294,7 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                       Expanded(
                         child: TextField(
                           enabled: _isEditing,
-                          controller: TextEditingController(
-                              text: '${widget.proyecto.nombre}'),
+                          controller: _controllerNombreProyecto,
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -365,9 +369,7 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                       Expanded(
                         child: TextField(
                           enabled: _isEditing2,
-                          controller: TextEditingController(
-                              text: dateFormat
-                                  .format(widget.proyecto.fechaInicio)),
+                          controller: _controllerFechaInicio,
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -440,13 +442,10 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                       Expanded(
                         child: TextField(
                           enabled: _isEditing3,
-                          controller: TextEditingController(
-                              text: dateFormat
-                                  .format(widget.proyecto.fechaFinalizacion)),
+                          controller: _controllerFechaFin,
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Ingrese la fecha de finalización',
                           ),
                           onChanged: (value) {},
                         ),
