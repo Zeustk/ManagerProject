@@ -61,6 +61,8 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
       List<ProyectoModel> proyectosList =
           await gestionProyectos.consultarProyectos(usuario.idUsuario);
 
+          print(proyectosList);
+
       if (mounted) {
         setState(() {
           perfilActual = perfil;

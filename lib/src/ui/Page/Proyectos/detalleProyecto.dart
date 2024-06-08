@@ -53,7 +53,6 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
             idDetalle: 0,
             idUsuario: usuario.idUsuario,
             idProyecto: proyecto.idProyecto,
-            porcentajeProyecto: 0,
             idLiderProyecto: usuarioActual.idUsuario);
 
         String resp =

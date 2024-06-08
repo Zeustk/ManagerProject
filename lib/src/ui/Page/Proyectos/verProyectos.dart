@@ -266,89 +266,89 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                                                 arguments: proyecto.idProyecto);
                                           }
 
-                                          print(
-                                              'Tapped on project: ${proyecto.nombre}');
-                                        },
-                                        child: Container(
-                                          width: 200,
-                                          child: Row(children: [
-                                            Expanded(
-                                              child: Progresos_Proyectos(
-                                                porcentaje: 0.50,
-                                                color: Colors.blue,
-                                                estado: proyecto.idEstado,
-                                                nombre_proyecto:
-                                                    proyecto.nombre,
-                                                descripcion:
-                                                    proyecto.descripcion,
-                                              ),
-                                            ),
-                                            Column(
-                                              children: [
-                                                Container(
-                                                    margin: EdgeInsets.only(
-                                                        left: 6, right: 6),
-                                                    width: 52,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      color: Colors.white,
+                                        print(
+                                            'Tapped on project: ${proyecto.nombre}');
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.topCenter,
+                                        child: Row(children: [
+                                          Progresos_Proyectos(
+                                            porcentaje: proyecto.porcentajeProyecto,
+                                            color: Colors.blue,
+                                            estado: proyecto.idEstado,
+                                            nombre_proyecto: proyecto.nombre,
+                                            descripcion: proyecto.descripcion,
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                  padding: EdgeInsets.only(
+                                                      left: 7, right: 2),
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Colors.white,
+                                                  ),
+                                                  child: IconButton(
+                                                    onPressed: () {
+                                                      _showConfirmationDialog(
+                                                          context,
+                                                          proyecto.idProyecto);
+                                                    },
+                                                    icon: Image.asset(
+                                                      'assets/eliminar.gif',
+                                                      width: 30,
+                                                      height: 30,
                                                     ),
-                                                    child: IconButton(
-                                                      onPressed: () {
-                                                        _showConfirmationDialog(
-                                                            context,
-                                                            proyecto
-                                                                .idProyecto);
-                                                      },
-                                                      icon: Image.asset(
-                                                        'assets/eliminar.gif',
-                                                        width: 30,
-                                                        height: 30,
-                                                      ),
-                                                    )),
-                                              ],
-                                            ),
-                                          ]),
-                                        ),
+                                                  )),
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                            ],
+                                          ),
+                                        ]),
                                       ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: ElevatedButton.icon(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                ),
-                                label: Text(
-                                  'Atras',
-                                  style: TextStyle(color: kSecondaryColor),
-                                ),
-                                icon: Image.asset(
-                                  'assets/flechaback.gif',
-                                  width: 35,
-                                  height: 35,
-                                ),
-                                onPressed: () {
-                                  Get.to(Crear_proyectos());
+                                    ),
+                                  );
                                 },
                               ),
-                            )
-                          ],
-                        ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: ElevatedButton.icon(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                              ),
+                              label: Text(
+                                'Atras',
+                                style: TextStyle(color: kSecondaryColor),
+                              ),
+                              icon: Image.asset(
+                                'assets/flechaback.gif',
+                                width: 35,
+                                height: 35,
+                              ),
+                              onPressed: () {
+                                Get.to(Crear_proyectos());
+                              },
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
+
 }
 
 class TextoGhost extends StatefulWidget {
