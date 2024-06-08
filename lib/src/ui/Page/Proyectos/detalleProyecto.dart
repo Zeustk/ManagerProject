@@ -176,6 +176,7 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
   void initState() {
     super.initState();
     cargarUsuarios();
+    cargarDatos();
   }
 
   Future<void> cargarUsuarios() async {
@@ -187,6 +188,19 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
         usuariosFiltrados = usuarios;
       });
     }
+  }
+
+  void cargarDatos() {
+    DateFormat dateFormat = DateFormat('yyyy-MM-dd');
+    String fechaFormateadainicio =
+        dateFormat.format(widget.proyecto.fechaInicio);
+    String fechaFormateadafin =
+        dateFormat.format(widget.proyecto.fechaFinalizacion);
+
+    _controllerNombreProyecto.text = widget.proyecto.nombre;
+    _controllerNombreLiderProyecto.text = widget.proyecto.liderProyecto;
+    _controllerFechaInicio.text = fechaFormateadainicio;
+    _controllerFechaFin.text = fechaFormateadafin;
   }
 
   @override
@@ -235,7 +249,7 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                 SizedBox(width: 15),
                 Container(
                   height: 40,
-                  width: 230,
+                  width: 200,
                   child: Row(
                     children: [
                       SizedBox(
@@ -496,14 +510,15 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 80),
+                      padding: EdgeInsets.symmetric(horizontal: 0),
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             // Texto con estilo
                             Container(
-                              width: 60,
+                              width: 260,
                               child: Text(
                                 usuariosFiltrados[index].email,
                                 style: TextStyle(color: Colors.white),
