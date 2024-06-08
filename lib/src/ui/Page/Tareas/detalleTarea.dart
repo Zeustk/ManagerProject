@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/controllers/TareasController.dart';
 import 'package:manager_proyect/src/domain/models/Tareas_model.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/subirTarea.dart';
@@ -20,6 +21,7 @@ class DetalleTarea extends StatefulWidget {
 
 class _DetalleTareaState extends State<DetalleTarea> {
   TareasController gestionTareas = Get.find();
+  ProyectoController gestionProyectos=ProyectoController();
 
   TareasModel tarea = Get.arguments as TareasModel;
   bool valorCheckbox = false;
@@ -164,7 +166,7 @@ class _DetalleTareaState extends State<DetalleTarea> {
                               onChanged: (newValue) {
                                 valorCheckbox = newValue!;
 
-                                CambiarEstado(valorCheckbox);
+                                cambiarEstado(valorCheckbox);
 
                                 setState(() {});
                               },
@@ -217,7 +219,7 @@ class _DetalleTareaState extends State<DetalleTarea> {
     );
   }
 
-  void CambiarEstado(bool estaEnCurso) {
+  void cambiarEstado(bool estaEnCurso) {
     if (estaEnCurso) {
       gestionTareas.actualizarEstado(
           tarea.idTarea, 02); // 02 Es el estado en curso;
@@ -225,5 +227,6 @@ class _DetalleTareaState extends State<DetalleTarea> {
       gestionTareas.actualizarEstado(
           tarea.idTarea, 01); // 02 Es el estado en curso;
     }
+    gestionProyectos.cambiarEstadoProyectosMemoria();
   }
 }

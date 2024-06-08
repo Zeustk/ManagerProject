@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:manager_proyect/src/widgets/PaddingMistareas.dart';
 
 class Container_Mistareas extends StatelessWidget {
-  final String texto;
+  final int estado;
   final String nombreTarea;
   final String descripcion;
   final Color? color;
 
   const Container_Mistareas(
       {super.key,
-      required this.texto,
+      required this.estado,
       this.color,
       required this.nombreTarea,
       required this.descripcion});
@@ -27,7 +27,16 @@ class Container_Mistareas extends StatelessWidget {
                 Border.all(color: Color.fromARGB(255, 61, 163, 247), width: 2)),
         child: Column(
           children: [
-            Padding_Mistareas(color: color, texto: texto, valor_move: 5),
+            Padding_Mistareas(
+              color: color,
+               texto:  estado == 01
+                          ? 'Pendiente'
+                          : estado == 02
+                              ? 'En Proceso'
+                              : estado== 03
+                              ? 'Completado'  : 'Desconocido',
+
+                valor_move: 5),
             Divider(
               color: Color.fromRGBO(0, 0, 0, 0.2),
             ),

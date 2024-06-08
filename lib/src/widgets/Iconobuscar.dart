@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
-
 class Botonbuscar extends StatefulWidget {
+  final Function(String) onTextChanged;
+
+  Botonbuscar({required this.onTextChanged});
+
   @override
-  _MyWidgetState createState() => _MyWidgetState();
+  _BotonbuscarState createState() => _BotonbuscarState();
 }
 
-class _MyWidgetState extends State<Botonbuscar> {
+class _BotonbuscarState extends State<Botonbuscar> {
   bool _showTextField = false;
   TextEditingController _controller = TextEditingController();
+  FocusNode _focusNode = FocusNode(); // Declara el FocusNode
+
+  @override
+  void dispose() {
+    _focusNode.dispose(); // Dispose del FocusNode
+    super.dispose();
+  }
 
   void _toggleSearch() {
     setState(() {
       _showTextField = !_showTextField;
-    });
-  }
-
-  void _performSearch(String value) {
-    // Implementa aquí la lógica de búsqueda
-    print('Buscando: $value');
-    // Ocultar el TextField después de buscar
-    setState(() {
-      _showTextField = false;
+      if (!_showTextField) {
+        // Si se oculta el campo de texto, quitar el foco
+        _focusNode.unfocus();
+      } else {
+        // Si se muestra el campo de texto, asignar el foco
+        FocusScope.of(context).requestFocus(_focusNode);
+      }
     });
   }
 
@@ -43,14 +50,17 @@ class _MyWidgetState extends State<Botonbuscar> {
                     width: 200,
                     child: TextField(
                       controller: _controller,
+                      focusNode: _focusNode, // Asigna el FocusNode al TextField
                       decoration: InputDecoration(
                         hintText: 'Escribe tu búsqueda aquí',
                         suffixIcon: IconButton(
                           icon: Icon(Icons.search),
-                          onPressed: () => _performSearch(_controller.text),
+                          onPressed: () {
+                            widget.onTextChanged(_controller.text);
+                          },
                         ),
                       ),
-                      onSubmitted: _performSearch,
+                      onChanged: widget.onTextChanged,
                     ),
                   )
                 : SearchIcon(onTap: _toggleSearch),

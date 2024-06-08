@@ -47,7 +47,7 @@ class ProyectoController extends GetxController {
   }
 
 
-  void cambiarEstadoProyectosMemoriaPorLogin(){
-    gestionProyectos.cambiarEstadoPorLogin();
+  void cambiarEstadoProyectosMemoria(){
+    gestionProyectos.cambiarEstado();
   }
 }

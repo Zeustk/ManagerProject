@@ -25,7 +25,7 @@ class ProyectosProvider extends CrudProvider<ProyectoModel> {
     }
   }
 
-  void cambiarEstadoPorLogin() {
+  void cambiarEstado() {
     _proyectosMemoriaActualizado = false;
   }
 

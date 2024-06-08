@@ -4,7 +4,7 @@ import 'package:manager_proyect/src/widgets/Custom_progressbar.dart';
 class Progresos_Proyectos extends StatelessWidget {
   final double porcentaje;
   final Color color;
-  final String texto;
+  final int estado;
   final String nombre_proyecto;
   final String descripcion;
 
@@ -12,7 +12,7 @@ class Progresos_Proyectos extends StatelessWidget {
     super.key,
     required this.porcentaje,
     required this.color,
-    required this.texto,
+    required this.estado,
     required this.nombre_proyecto,
     required this.descripcion,
   });
@@ -41,7 +41,12 @@ class Progresos_Proyectos extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: Text(
-                    texto,
+                     estado == 01
+                          ? 'Pendiente'
+                          : estado == 02
+                              ? 'En Proceso'
+                              : estado== 03
+                              ? 'Completado'  : 'Desconocido',
                     style: TextStyle(color: color, fontWeight: FontWeight.bold),
                   ),
                 ),

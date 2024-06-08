@@ -20,7 +20,9 @@ class _Ver_TareasState extends State<Ver_Tareas> {
   final TareasController gestionTareas = Get.put(TareasController());
   AuthController gestionAuth = AuthController();
   int id_Proyecto = Get.arguments;
-
+  int estado = 04; // Todos
+  int? botonPresionado; // Variable para rastrear el botón presionado
+  List<TareasModel> tareas = [];
 
   @override
   void initState() {
@@ -31,20 +33,40 @@ class _Ver_TareasState extends State<Ver_Tareas> {
   Future<void> cargarTareas() async {
     try {
       UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
-           await gestionTareas.consultarTareas(
-          id_Proyecto, usuarioActual.idUsuario);
-      setState(() {
+      await gestionTareas.consultarTareas(id_Proyecto, usuarioActual.idUsuario);
+      tareas = gestionTareas.tareas;
 
-      });
+      if ((estado == 2 || estado == 3 || estado == 1)) {
+        tareas =
+            tareas.where((proyecto) => proyecto.idEstado == estado).toList();
+      }
+      // Estado 02 (Proyectos en curso), Estado 03 (Proyectos completados)
+
+      setState(() {});
     } catch (error) {
       // Manejar el error de la consulta de proyectos
       print('Error al cargar proyectos: $error');
     }
   }
 
+  void _handleButtonTap(int buttonIndex) {
+    setState(() {
+      // Si el botón presionado es igual al actual, lo deseleccionamos
+      botonPresionado = botonPresionado == buttonIndex ? null : buttonIndex;
+
+      // Actualizamos el estado según el botón presionado
+      estado =
+          botonPresionado == 1 || botonPresionado == 2 || botonPresionado == 3
+              ? botonPresionado ?? 04
+              : 04;
+
+      print(estado);
+    });
+    cargarTareas();
+  }
+
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
@@ -82,15 +104,33 @@ class _Ver_TareasState extends State<Ver_Tareas> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(right: 6, left: 6),
-                        child: Boton_next(texto: 'Todos'),
+                        child: Boton_next(
+                          texto: 'Pendientes',
+                          onTap: () {
+                            _handleButtonTap(1);
+                          },
+                          isPressed: botonPresionado == 1,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 3.5),
-                        child: Boton_next(texto: 'Proceso'),
+                        child: Boton_next(
+                          texto: 'Proceso',
+                          onTap: () {
+                            _handleButtonTap(2);
+                          },
+                          isPressed: botonPresionado == 2,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 2),
-                        child: Boton_next(texto: 'Finalizado'),
+                        child: Boton_next(
+                          texto: 'Finalizado',
+                          onTap: () {
+                            _handleButtonTap(3);
+                          },
+                          isPressed: botonPresionado == 3,
+                        ),
                       ),
                     ],
                   ),
@@ -98,18 +138,24 @@ class _Ver_TareasState extends State<Ver_Tareas> {
                     height: 15,
                   ),
                   Column(
-                    children: gestionTareas.tareas.map((tarea) {
+                    children: tareas.map((tarea) {
                       return GestureDetector(
                         onTap: () {
                           // Acción al tocar una tarea (puede navegar a la pantalla de detalles)
                           Get.to(DetalleTarea(), arguments: tarea);
+
+                          if (botonPresionado!=null){
+                            _handleButtonTap(botonPresionado!);
+
+                          }
+                          
                         },
                         child: Column(
                           children: [
                             Container_Mistareas(
                               nombreTarea: tarea.nombre,
                               descripcion: tarea.descripcion,
-                              texto: 'EN PROCESO',
+                              estado:tarea.idEstado,
                               color: Colors
                                   .blue, // Puedes ajustar el color según lo desees
                             ),
