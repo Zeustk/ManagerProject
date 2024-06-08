@@ -415,9 +415,19 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                 ),
               ],
             ),
-            IconButton(
-              onPressed: _toggleEditing,
-              icon: Icon(_isEditing ? Icons.check : Icons.edit),
+            SizedBox(
+              height: 30,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(color: Colors.blue, width: 3.0)),
+              child: IconButton(
+                onPressed: _toggleEditing,
+                icon: Image.asset(
+                    _isEditing ? 'assets/sucess.gif' : 'assets/editalapiz.gif'),
+              ),
             ),
             SizedBox(
               height: 50,

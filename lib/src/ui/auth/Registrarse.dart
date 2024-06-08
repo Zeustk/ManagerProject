@@ -29,7 +29,7 @@ class Registro extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 310),
+                padding: const EdgeInsets.only(right: 280),
                 child: TextButton.icon(
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.transparent,
@@ -192,8 +192,8 @@ class Registro extends StatelessWidget {
                                 ),
                                 Image.asset(
                                   'assets/siguiente.gif',
-                                  height: 32,
-                                  width: 32,
+                                  height: 20,
+                                  width: 20,
                                 ),
                               ]),
                               onPressed: () {

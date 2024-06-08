@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final mensajesresponse = mensajesresponseFromJson(jsonString);
-
 import 'dart:ffi';
 
 import 'package:meta/meta.dart';
@@ -21,7 +17,7 @@ class DetallesModel {
   DetallesModel({
     required this.idDetalle,
     required this.idUsuario,
-    this.idProyecto=-1,
+    this.idProyecto = -1,
     required this.idLiderProyecto,
   });
 
@@ -36,6 +32,6 @@ class DetallesModel {
         "Id_Detalle": idDetalle,
         "Id_Usuario": idUsuario,
         "Id_Proyecto": idProyecto,
-        "Id_LiderProyecto":idLiderProyecto,
+        "Id_LiderProyecto": idLiderProyecto,
       };
 }
