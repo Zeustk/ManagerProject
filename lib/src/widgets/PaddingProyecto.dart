@@ -20,7 +20,7 @@ class Progresos_Proyectos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 10),
+      padding: const EdgeInsets.only(top: 20, left: 6),
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
@@ -37,16 +37,17 @@ class Progresos_Proyectos extends StatelessWidget {
             child: Column(
               children: [
                 Progess_custom(
-                    alto: 20, ancho: 280, progress: porcentaje, color: color),
+                    alto: 20, ancho: 260, progress: porcentaje, color: color),
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: Text(
-                     estado == 01
-                          ? 'Pendiente'
-                          : estado == 02
-                              ? 'En Proceso'
-                              : estado== 03
-                              ? 'Completado'  : 'Desconocido',
+                    estado == 01
+                        ? 'Pendiente'
+                        : estado == 02
+                            ? 'En Proceso'
+                            : estado == 03
+                                ? 'Completado'
+                                : 'Desconocido',
                     style: TextStyle(color: color, fontWeight: FontWeight.bold),
                   ),
                 ),

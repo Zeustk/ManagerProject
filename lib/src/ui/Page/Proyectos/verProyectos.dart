@@ -47,9 +47,7 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
 
       print('entro');
 
-     
-        proyectosList = listaFiltrada(proyectosList);
-   
+      proyectosList = listaFiltrada(proyectosList);
 
       setState(() {
         proyectos = proyectosList;
@@ -73,13 +71,19 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
       return listaTodos
           .where((proyecto) =>
               proyecto.idEstado == estado &&
-              proyecto.nombre.trim().toUpperCase().contains(nombreTextBusqueda.trim().toUpperCase()))
+              proyecto.nombre
+                  .trim()
+                  .toUpperCase()
+                  .contains(nombreTextBusqueda.trim().toUpperCase()))
           .toList();
     } // Estado 02 (Proyectos en curso), Estado 03 (Proyectos completados)
 
     if ((estado == 4) && (nombreTextBusqueda.isNotEmpty)) {
       return listaTodos
-          .where((proyecto) => proyecto.nombre.toUpperCase().trim().contains(nombreTextBusqueda.toUpperCase()))
+          .where((proyecto) => proyecto.nombre
+              .toUpperCase()
+              .trim()
+              .contains(nombreTextBusqueda.toUpperCase()))
           .toList();
     } // Estado 02 (Proyectos en c
 
@@ -150,117 +154,117 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
     });
   }
 
- @override
-Widget build(BuildContext context) {
-  return GestureDetector(
-    onTap: () {
-      // Quita el foco del campo de búsqueda cuando se toca fuera de él
-      FocusScope.of(context).unfocus();
-    },
-    child: Scaffold(
-      bottomNavigationBar: BotonNavi(),
-      appBar: AppBar(
-        foregroundColor: Colors.white,
-        backgroundColor: Color.fromARGB(164, 83, 80, 80),
-        title: TextoGhost(onTextChanged: _handleSearch),
-      ),
-      drawer: SafeArea(child: Draweer()),
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(
-              'assets/fondoproyecto.jpg',
-              fit: BoxFit.fill,
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        // Quita el foco del campo de búsqueda cuando se toca fuera de él
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        bottomNavigationBar: BotonNavi(),
+        appBar: AppBar(
+          foregroundColor: Colors.white,
+          backgroundColor: Color.fromARGB(164, 83, 80, 80),
+          title: TextoGhost(onTextChanged: _handleSearch),
+        ),
+        drawer: SafeArea(child: Draweer()),
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: Image.asset(
+                'assets/fondoproyecto.jpg',
+                fit: BoxFit.fill,
+              ),
             ),
-          ),
-          Container(),
-          Container(
-            margin: EdgeInsets.only(top: 10, right: 11, left: 12),
-            width: 550,
-            height: 720,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Stack(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Center(
-                    child: Container(
-                      width: 400,
-                      // Ancho fijo del contenedor
-                      padding: const EdgeInsets.symmetric(vertical: 40),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(right: 6, left: 6),
-                                  child: Boton_next(
-                                    texto: 'Pendientes',
-                                    onTap: () {
-                                      _handleButtonTap(1);
-                                    },
-                                    isPressed: botonPresionado == 1,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 6),
-                                  child: Boton_next(
-                                    texto: 'Proceso',
-                                    onTap: () {
-                                      _handleButtonTap(2);
-                                    },
-                                    isPressed: botonPresionado == 2,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 0),
-                                  child: Boton_next(
-                                    texto: 'Finalizado',
-                                    onTap: () {
-                                      _handleButtonTap(3);
-                                    },
-                                    isPressed: botonPresionado == 3,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 10, right: 1, left: 1),
-                            padding: EdgeInsets.only(top: 30),
-                            width: double.infinity,
-                            height: 530,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(128, 0, 0, 0),
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: Colors.white, width: 5),
-                            ),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: proyectos.length,
-                                itemBuilder: (context, index) {
-                                  final proyecto = proyectos[index];
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 16.0),
-                                    child: GestureDetector(
+            Container(
+              margin: EdgeInsets.only(top: 10, right: 11, left: 12),
+              width: 550,
+              height: 720,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Stack(
+                children: [
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Center(
+                      child: Container(
+                        width: 400,
+                        padding: const EdgeInsets.symmetric(vertical: 40),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 6, left: 6),
+                                    child: Boton_next(
+                                      texto: 'Pendientes',
                                       onTap: () {
-                                        if (tipo[0] == 'M') {
-                                          Get.to(DetalleProyectoPage(),
-                                              arguments: proyecto);
-                                        } else {
-                                          Get.to(Ver_Tareas(),
-                                              arguments: proyecto.idProyecto);
-                                        }
+                                        _handleButtonTap(1);
+                                      },
+                                      isPressed: botonPresionado == 1,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 6),
+                                    child: Boton_next(
+                                      texto: 'Proceso',
+                                      onTap: () {
+                                        _handleButtonTap(2);
+                                      },
+                                      isPressed: botonPresionado == 2,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 0),
+                                    child: Boton_next(
+                                      texto: 'Finalizado',
+                                      onTap: () {
+                                        _handleButtonTap(3);
+                                      },
+                                      isPressed: botonPresionado == 3,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              margin:
+                                  EdgeInsets.only(top: 10, right: 1, left: 0),
+                              padding: EdgeInsets.only(top: 30),
+                              width: double.infinity,
+                              height: 530,
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(128, 0, 0, 0),
+                                borderRadius: BorderRadius.circular(10),
+                                border:
+                                    Border.all(color: Colors.white, width: 5),
+                              ),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.vertical,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: proyectos.length,
+                                  itemBuilder: (context, index) {
+                                    final proyecto = proyectos[index];
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16.0),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          if (tipo[0] == 'M') {
+                                            Get.to(DetalleProyectoPage(),
+                                                arguments: proyecto);
+                                          } else {
+                                            Get.to(Ver_Tareas(),
+                                                arguments: proyecto.idProyecto);
+                                          }
 
                                         print(
                                             'Tapped on project: ${proyecto.nombre}');

@@ -171,7 +171,7 @@ class Login extends StatelessWidget {
                           ),
                           Padding(
                             padding:
-                                EdgeInsets.only(left: 100, top: 20, right: 120),
+                                EdgeInsets.only(left: 100, top: 20, right: 100),
                             child: MaterialButton(
                                 shape: RoundedRectangleBorder(
                                     side: BorderSide(
@@ -300,7 +300,7 @@ class Login extends StatelessWidget {
               decoration: InputDecoration(
                   hintText: hintText,
                   hintStyle: TextStyle(color: Colors.white)),
-                  controller: controller,
+              controller: controller,
             ),
           ),
         ],

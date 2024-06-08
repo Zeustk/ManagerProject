@@ -23,13 +23,9 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
   AuthController gestionAuth = AuthController();
   ProyectoModel proyecto = Get.arguments as ProyectoModel;
 
- 
-
-   Future<void> cargarUsuarios() async {
+  Future<void> cargarUsuarios() async {
     List<UsuarioModel> usuarios =
         await gestionUsuarios.consultarUsuariosPorProyecto(proyecto.idProyecto);
-
-  
 
     if (mounted) {
       setState(() {
@@ -431,33 +427,42 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 80),
+                      padding: EdgeInsets.symmetric(horizontal: 80),
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
-                            Text(
-                                usuariosFiltrados[index]
-                                    .email, // Mostrar el nombre del usuario,
-                                style: TextStyle(color: Colors.white)),
-                            SizedBox(
-                              width: 10,
+                            // Texto con estilo
+                            Container(
+                              width: 60,
+                              child: Text(
+                                usuariosFiltrados[index].email,
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
-                            InkWell(
-                              onTap: () {
-                                gestionDetalles.eliminarUsuarioDeProyecto(
-                                    usuariosFiltrados[index].idUsuario);
-                                cargarUsuarios();
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
+                            SizedBox(
+                                width: 10), // Espacio entre el texto y el botón
+                            // Contenedor del botón de eliminación
+                            Container(
+                              width: 60, // Ancho del contenedor del botón
+                              child: InkWell(
+                                onTap: () {
+                                  gestionDetalles.eliminarUsuarioDeProyecto(
+                                    usuariosFiltrados[index].idUsuario,
+                                  );
+                                  cargarUsuarios();
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
                                     color: Colors.white70,
                                     border: Border.all(color: Colors.white),
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Image.asset(
-                                  'assets/eliminar-usuario.gif',
-                                  width: 60,
-                                  height: 60,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Image.asset(
+                                    'assets/eliminar-usuario.gif',
+                                    width: 40, // Tamaño de la imagen del botón
+                                    height: 40, // Tamaño de la imagen del botón
+                                  ),
                                 ),
                               ),
                             ),
