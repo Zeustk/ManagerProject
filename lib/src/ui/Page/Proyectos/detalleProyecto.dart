@@ -35,7 +35,7 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
     }
   }
 
-  Future<void> AdicionarUsuarios() async {
+  Future<void> adicionarUsuarios() async {
     List<UsuarioModel> usuariosSeleccionados =
         (await Get.to<List<UsuarioModel>?>(AdicionarUsuariosPage())) ?? [];
 
@@ -79,30 +79,13 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
               borderRadius: BorderRadius.circular(40),
             ),
             child: IconButton(
-                onPressed: () {
-                  AdicionarUsuarios();
-                },
-                icon: Image.asset(
-                  'assets/agregar.gif',
-                  width: 50,
-                  height: 50,
-                )),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 10),
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(40),
+              onPressed: adicionarUsuarios,
+              icon: Image.asset(
+                'assets/agregar.gif',
+                width: 50,
+                height: 50,
+              ),
             ),
-            child: IconButton(
-                onPressed: () {},
-                icon: Image.asset(
-                  'assets/cargando.gif',
-                  width: 50,
-                  height: 50,
-                )),
           ),
           Container(
             margin: EdgeInsets.only(left: 8, right: 7),
@@ -113,12 +96,13 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
               borderRadius: BorderRadius.circular(40),
             ),
             child: IconButton(
-                onPressed: () {},
-                icon: Image.asset(
-                  'assets/eliminar.gif',
-                  width: 50,
-                  height: 50,
-                )),
+              onPressed: () {},
+              icon: Image.asset(
+                'assets/eliminar.gif',
+                width: 50,
+                height: 50,
+              ),
+            ),
           )
         ],
         title: Text(
@@ -134,31 +118,20 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
             fit: BoxFit.cover,
           ),
         ),
-        Container(
-          margin: EdgeInsets.only(top: 10, right: 11, left: 12),
-          padding: EdgeInsets.only(top: 30),
-          width: double.infinity,
-          height: 620,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.white, width: 5)
-              /* color: Color.fromARGB(128, 0, 0, 0) contenedore alfondo  gris*/
-              ),
-          child: Stack(children: [
-            SafeArea(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Stack(children: [
-                  Column(
-                    children: [
-                      _DetalleProyecto(proyecto: proyecto),
-                    ],
-                  ),
-                ]),
-              ),
+        Stack(children: [
+          SafeArea(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Stack(children: [
+                Column(
+                  children: [
+                    _DetalleProyecto(proyecto: proyecto),
+                  ],
+                ),
+              ]),
             ),
-          ]),
-        ),
+          ),
+        ]),
       ]),
     );
   }
@@ -174,9 +147,16 @@ class _DetalleProyecto extends StatefulWidget {
 }
 
 class _DetalleProyectoState extends State<_DetalleProyecto> {
+  bool _isEditing = false;
+
+  void _toggleEditing() {
+    setState(() {
+      _isEditing = !_isEditing;
+    });
+  }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     cargarUsuarios();
   }
@@ -288,16 +268,25 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                 SizedBox(width: 15),
                 Container(
                   height: 40,
-                  width: 230,
+                  width: 200,
                   child: Row(
                     children: [
                       SizedBox(
                         width: 50,
                       ),
-                      Text(
-                        '${widget.proyecto.nombre}',
-                        style: TextStyle(color: Colors.black),
-                      )
+                      Expanded(
+                        child: TextField(
+                          enabled: _isEditing,
+                          controller: TextEditingController(
+                              text: '${widget.proyecto.nombre}'),
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Ingrese el nombre',
+                          ),
+                          onChanged: (value) {},
+                        ),
+                      ),
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -344,10 +333,20 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                       SizedBox(
                         width: 50,
                       ),
-                      Text(
-                        '${dateFormat.format(widget.proyecto.fechaInicio)}',
-                        style: TextStyle(color: Colors.black),
-                      )
+                      Expanded(
+                        child: TextField(
+                          enabled: _isEditing,
+                          controller: TextEditingController(
+                              text: dateFormat
+                                  .format(widget.proyecto.fechaInicio)),
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Ingrese la fecha de inicio',
+                          ),
+                          onChanged: (value) {},
+                        ),
+                      ),
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -394,10 +393,20 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                       SizedBox(
                         width: 50,
                       ),
-                      Text(
-                        '${dateFormat.format(widget.proyecto.fechaFinalizacion)}',
-                        style: TextStyle(color: Colors.black),
-                      )
+                      Expanded(
+                        child: TextField(
+                          enabled: _isEditing,
+                          controller: TextEditingController(
+                              text: dateFormat
+                                  .format(widget.proyecto.fechaFinalizacion)),
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Ingrese la fecha de finalización',
+                          ),
+                          onChanged: (value) {},
+                        ),
+                      ),
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -407,14 +416,19 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                 ),
               ],
             ),
+            IconButton(
+              onPressed: _toggleEditing,
+              icon: Icon(_isEditing ? Icons.check : Icons.edit),
+            ),
             SizedBox(
               height: 50,
             ),
             SizedBox(
-                width: 340,
-                child: Divider(
-                  color: Colors.white,
-                )),
+              width: 340,
+              child: Divider(
+                color: Colors.white,
+              ),
+            ),
             Text(
               'Integrates',
               style: TextStyle(
@@ -461,8 +475,8 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                                   ),
                                   child: Image.asset(
                                     'assets/eliminar-usuario.gif',
-                                    width: 40, // Tamaño de la imagen del botón
-                                    height: 40, // Tamaño de la imagen del botón
+                                    width: 40,
+                                    height: 40,
                                   ),
                                 ),
                               ),
