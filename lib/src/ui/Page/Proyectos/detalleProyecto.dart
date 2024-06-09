@@ -146,7 +146,25 @@ class _DetalleProyecto extends StatefulWidget {
 }
 
 class _DetalleProyectoState extends State<_DetalleProyecto> {
+  TextEditingController _controllerNombreProyecto = TextEditingController();
+  TextEditingController _controllerNombreLiderProyecto =
+      TextEditingController();
+  TextEditingController _controllerFechaInicio = TextEditingController();
+  TextEditingController _controllerFechaFin = TextEditingController();
   bool _isEditing = false;
+  bool _isEditing2 = false;
+  bool _isEditing3 = false;
+  void _toggleEditing3() {
+    setState(() {
+      _isEditing3 = !_isEditing3;
+    });
+  }
+
+  void _toggleEditing2() {
+    setState(() {
+      _isEditing2 = !_isEditing2;
+    });
+  }
 
   void _toggleEditing() {
     setState(() {
@@ -158,6 +176,7 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
   void initState() {
     super.initState();
     cargarUsuarios();
+    cargarDatos();
   }
 
   Future<void> cargarUsuarios() async {
@@ -169,6 +188,19 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
         usuariosFiltrados = usuarios;
       });
     }
+  }
+
+  void cargarDatos() {
+    DateFormat dateFormat = DateFormat('yyyy-MM-dd');
+    String fechaFormateadainicio =
+        dateFormat.format(widget.proyecto.fechaInicio);
+    String fechaFormateadafin =
+        dateFormat.format(widget.proyecto.fechaFinalizacion);
+
+    _controllerNombreProyecto.text = widget.proyecto.nombre;
+    _controllerNombreLiderProyecto.text = widget.proyecto.liderProyecto;
+    _controllerFechaInicio.text = fechaFormateadainicio;
+    _controllerFechaFin.text = fechaFormateadafin;
   }
 
   @override
@@ -217,7 +249,7 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                 SizedBox(width: 15),
                 Container(
                   height: 40,
-                  width: 230,
+                  width: 200,
                   child: Row(
                     children: [
                       SizedBox(
@@ -276,8 +308,7 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                       Expanded(
                         child: TextField(
                           enabled: _isEditing,
-                          controller: TextEditingController(
-                              text: '${widget.proyecto.nombre}'),
+                          controller: _controllerNombreProyecto,
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -291,6 +322,23 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                   decoration: BoxDecoration(
                     color: Colors.white70,
                     borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: Colors.green, width: 2.0)),
+                  child: IconButton(
+                    onPressed: _toggleEditing,
+                    icon: Image.asset(_isEditing
+                        ? 'assets/sucess.gif'
+                        : 'assets/editalapiz.gif'),
                   ),
                 ),
               ],
@@ -326,7 +374,7 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                 SizedBox(width: 15),
                 Container(
                   height: 40,
-                  width: 230,
+                  width: 200,
                   child: Row(
                     children: [
                       SizedBox(
@@ -334,10 +382,8 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                       ),
                       Expanded(
                         child: TextField(
-                          enabled: _isEditing,
-                          controller: TextEditingController(
-                              text: dateFormat
-                                  .format(widget.proyecto.fechaInicio)),
+                          enabled: _isEditing2,
+                          controller: _controllerFechaInicio,
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -353,6 +399,21 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
+                SizedBox(width: 15),
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: Colors.green, width: 2.0)),
+                  child: IconButton(
+                    onPressed: _toggleEditing2,
+                    icon: Image.asset(_isEditing2
+                        ? 'assets/sucess.gif'
+                        : 'assets/editalapiz.gif'),
+                  ),
+                )
               ],
             ),
             Padding(
@@ -386,7 +447,7 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                 SizedBox(width: 15),
                 Container(
                   height: 40,
-                  width: 230,
+                  width: 200,
                   child: Row(
                     children: [
                       SizedBox(
@@ -394,14 +455,11 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                       ),
                       Expanded(
                         child: TextField(
-                          enabled: _isEditing,
-                          controller: TextEditingController(
-                              text: dateFormat
-                                  .format(widget.proyecto.fechaFinalizacion)),
+                          enabled: _isEditing3,
+                          controller: _controllerFechaFin,
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Ingrese la fecha de finalización',
                           ),
                           onChanged: (value) {},
                         ),
@@ -413,21 +471,22 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
+                SizedBox(width: 15),
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: Colors.green, width: 2.0)),
+                  child: IconButton(
+                    onPressed: _toggleEditing3,
+                    icon: Image.asset(_isEditing3
+                        ? 'assets/sucess.gif'
+                        : 'assets/editalapiz.gif'),
+                  ),
+                )
               ],
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: Colors.blue, width: 3.0)),
-              child: IconButton(
-                onPressed: _toggleEditing,
-                icon: Image.asset(
-                    _isEditing ? 'assets/sucess.gif' : 'assets/editalapiz.gif'),
-              ),
             ),
             SizedBox(
               height: 50,
@@ -451,14 +510,15 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 80),
+                      padding: EdgeInsets.symmetric(horizontal: 0),
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             // Texto con estilo
                             Container(
-                              width: 60,
+                              width: 260,
                               child: Text(
                                 usuariosFiltrados[index].email,
                                 style: TextStyle(color: Colors.white),

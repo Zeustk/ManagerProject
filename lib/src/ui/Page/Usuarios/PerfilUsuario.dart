@@ -26,25 +26,23 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
   TextEditingController _controlleNombre = TextEditingController();
   TextEditingController _controlleCorreo = TextEditingController();
   TextEditingController _controlleClave = TextEditingController();
-
+  TextEditingController _controlleNproyectos = TextEditingController();
+  TextEditingController _controlleEstado = TextEditingController();
   @override
   void initState() {
     super.initState();
     cargarPerfil();
-    _controlleNombre = TextEditingController(
+    /*  _controlleNombre = TextEditingController(
       text: perfilActual.nombreCompleto ?? '',
     );
     _controlleCorreo = TextEditingController(text: usuarioActual.email ?? '');
     _controlleClave = TextEditingController(
       text: usuarioActual.clave = '•' * usuarioActual.clave.length,
-    );
+    ); */
   }
 
   @override
   void dispose() {
-    _controlleNombre.dispose();
-    _controlleCorreo.dispose();
-    _controlleClave.dispose();
     super.dispose();
   }
 
@@ -54,6 +52,8 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
     });
   }
 
+  void cargarDatosPerfil() {}
+
   Future<void> cargarPerfil() async {
     try {
       UsuarioModel usuario = await gestionAuth.obtenerDatosDeStorage();
@@ -61,13 +61,17 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
       List<ProyectoModel> proyectosList =
           await gestionProyectos.consultarProyectos(usuario.idUsuario);
 
-          print(proyectosList);
+      print(proyectosList);
 
       if (mounted) {
         setState(() {
           perfilActual = perfil;
           usuarioActual = usuario;
           proyectos = proyectosList;
+          _controlleNombre.text = perfilActual.nombreCompleto;
+          _controlleCorreo.text = usuarioActual.email;
+          _controlleClave.text =
+              usuarioActual.clave = '•' * usuarioActual.clave.length;
         });
       }
     } catch (error) {
@@ -245,7 +249,8 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                   children: [
                     SizedBox(width: 30),
                     Text('N# Proyectos',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white)),
                     SizedBox(
                       width: 35,
                     ),
@@ -267,7 +272,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                     Text(
                       perfilActual.estado ? 'Conectado' : 'Desconectado',
                       style: TextStyle(
-                        color: Colors.green,
+                        color: perfilActual.estado ? Colors.green : Colors.red,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
