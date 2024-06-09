@@ -42,4 +42,17 @@ class EntregasProvider extends CrudProvider<EntregasModel> {
       return 'Error al eliminar la Tarea';
     }
   }
+
+  Future<bool> siTareaFueEntregada(int idTarea) async {
+
+    try{
+      return await consultarDinamico('getFueEntregada/$idTarea');
+      
+    }catch(error){
+      print('error al saber si la tarea fue entrega $error');
+      return false;
+    }
+
+
+  }
 }

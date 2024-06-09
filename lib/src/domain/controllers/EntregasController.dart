@@ -37,4 +37,12 @@ class EntregasController extends GetxController {
       return 'Error al eliminar la tarea';
     }
   }
+
+  Future<bool> tareaFueEntrega(int idTarea) async {
+     try {
+      return await gestionEntregas.siTareaFueEntregada(idTarea);
+    } catch (error) {
+      return false;
+    }
+  }
 }

@@ -69,4 +69,19 @@ class CrudProvider<T> {
       throw Exception('Error de conexión: $e');
     }
   }
+
+
+Future<dynamic> consultarDinamico(String endpoint) async {
+  final url = '$baseUrl/$endpoint';
+  final response = await http.get(Uri.parse(url));
+
+  if (response.statusCode == 200) {
+    final dynamic decodedData = jsonDecode(response.body);
+
+    return decodedData;
+  } else {
+    throw Exception('Error al consultar datos');
+  }
+}
+
 }
