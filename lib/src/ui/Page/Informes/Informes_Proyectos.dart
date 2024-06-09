@@ -3,10 +3,24 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 
-class Informes_Proyectos extends StatelessWidget {
+class Informes_Proyectos extends StatefulWidget {
+
+  
+
+
+  Informes_Proyectos({super.key});
+
+  @override
+  State<Informes_Proyectos> createState() => _Informes_ProyectosState();
+}
+
+class _Informes_ProyectosState extends State<Informes_Proyectos> {
+  ProyectoModel proyecto=Get.arguments as ProyectoModel;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +66,7 @@ class Informes_Proyectos extends StatelessWidget {
               child: Stack(children: [
                 Column(
                   children: [
-                    DetalleUsuarioTarea(),
+                    DetalleUsuarioTarea(proyecto:proyecto),
                   ],
                 ),
               ]),
@@ -64,7 +78,37 @@ class Informes_Proyectos extends StatelessWidget {
   }
 }
 
-class DetalleUsuarioTarea extends StatelessWidget {
+class DetalleUsuarioTarea extends StatefulWidget {
+   final ProyectoModel proyecto;
+
+  DetalleUsuarioTarea ({required this.proyecto});
+
+  @override
+  State<DetalleUsuarioTarea> createState() => _DetalleUsuarioTareaState();
+}
+
+class _DetalleUsuarioTareaState extends State<DetalleUsuarioTarea> {
+ ProyectoController gestionProyectos = ProyectoController();
+  Map<String,dynamic> informe = {};
+
+  
+  @override
+  void initState() {
+    super.initState();
+    cargarInforme();
+  }
+ 
+
+   Future<void> cargarInforme() async {
+
+     Map<String,dynamic> infoInforme = await gestionProyectos.getInformeProyectoById(widget.proyecto.idProyecto);
+     setState(() {
+       informe=infoInforme;
+       print(informe);
+     });
+
+   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -119,7 +163,7 @@ class DetalleUsuarioTarea extends StatelessWidget {
                         width: 20,
                       ),
                       Text(
-                        'datos base',
+                        '${informe["Tareas_Completadas"]}',//
                         style: TextStyle(color: Colors.white),
                       )
                     ],
@@ -169,7 +213,7 @@ class DetalleUsuarioTarea extends StatelessWidget {
                         width: 20,
                       ),
                       Text(
-                        'dato base',
+                        '${informe["Tareas_En_Curso"]}',
                         style: TextStyle(color: Colors.white),
                       )
                     ],
@@ -184,7 +228,7 @@ class DetalleUsuarioTarea extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Text(
-                'N# Tareas No Iniciadas',
+                'N# Tareas Pendientes',
                 style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
@@ -219,7 +263,7 @@ class DetalleUsuarioTarea extends StatelessWidget {
                         width: 20,
                       ),
                       Text(
-                        'datos base',
+                        '${informe["Tareas_Pendientes"]}',
                         style: TextStyle(color: Colors.white),
                       )
                     ],
@@ -269,7 +313,7 @@ class DetalleUsuarioTarea extends StatelessWidget {
                         width: 20,
                       ),
                       Text(
-                        'dato base',
+                        '${widget.proyecto.porcentajeProyecto}%',
                         style: TextStyle(color: Colors.white),
                       )
                     ],

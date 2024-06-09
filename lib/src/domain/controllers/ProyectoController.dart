@@ -44,6 +44,9 @@ class ProyectoController extends GetxController {
       print('Error al eliminar el proyecto(Controllers): $error');
       return 'Error al eliminar el proyecto';
     }
+
+
+
   }
 
     Future<List<ProyectoModel>> consultarProyectosPorLider(int idLiderProyecto) async {
@@ -53,6 +56,16 @@ class ProyectoController extends GetxController {
       // Manejar el error al consultar los proyectos
       print('Error al consultar los proyectos  by lider(Controllers): $error');
       return []; // Devuelve una lista vacía en caso de error
+    }
+  }
+
+  Future <Map<String,dynamic>> getInformeProyectoById(int idProyecto) async {
+    try {
+      return await gestionProyectos.getInformeById(idProyecto);
+    } catch (error) {
+      // Manejar el error al consultar los proyectos
+      print('Error al consultar los Informes (Controllers): $error');
+      return {}; // Devuelve una lista vacía en caso de error
     }
   }
 

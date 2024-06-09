@@ -335,7 +335,9 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                                               _navegarATareas(proyecto);
                                             }
                                             else{
-                                              Get.to(Informes_Proyectos(),arguments: proyecto.idProyecto);
+                                            
+                                
+                                              Get.to(Informes_Proyectos(),arguments: proyecto);
                                             }
                                           }
 
