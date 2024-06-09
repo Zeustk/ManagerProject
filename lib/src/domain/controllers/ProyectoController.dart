@@ -69,6 +69,16 @@ class ProyectoController extends GetxController {
     }
   }
 
+  Future <List<Map<String,dynamic>>> getInformeGeneral(int idLiderProyecto) async {
+    try {
+      return await gestionProyectos.getInformeGeneralByLider(idLiderProyecto);
+    } catch (error) {
+      // Manejar el error al consultar los proyectos
+      print('Error al consultar los Informes Generales (Controllers): $error');
+      return []; // Devuelve una lista vacía en caso de error
+    }
+  }
+
 
   void cambiarEstadoProyectosMemoria(){
     gestionProyectos.cambiarEstado();

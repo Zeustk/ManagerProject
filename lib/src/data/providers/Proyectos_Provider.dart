@@ -106,5 +106,18 @@ class ProyectosProvider extends CrudProvider<ProyectoModel> {
     }
   }
 
+  Future<List<Map<String,dynamic>>> getInformeGeneralByLider(int idLiderProyecto)async {
+    try {
+
+       List<Map<String,dynamic>> informeGeneral = await consultar('getInformeGeneral/$idLiderProyecto');
+
+
+      return informeGeneral;
+    } catch (e) {
+      print('Error al consultar los Informes Generales:  $e');
+      return [];
+    }
+  }
+
  
 }

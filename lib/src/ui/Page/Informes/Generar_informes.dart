@@ -1,6 +1,10 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
+import 'package:manager_proyect/src/domain/controllers/authController.dart';
+import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
+import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -19,20 +23,39 @@ class TaskData {
   });
 }
 
-void main() {
-  runApp(MyApp());
-}
+class PdfDemoPage extends StatefulWidget {
 
-class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: PdfDemoPage(),
-    );
-  }
+  State<PdfDemoPage> createState() => _PdfDemoPageState();
 }
 
-class PdfDemoPage extends StatelessWidget {
+class _PdfDemoPageState extends State<PdfDemoPage> {
+  ProyectoController gestionProyectos = ProyectoController();
+  List<Map<String, dynamic>> informes = [];
+  AuthController gestionAuth = AuthController();
+
+  @override
+  void initState() {
+    super.initState();
+    cargarInformeGeneral();
+  }
+
+
+  Future<void> cargarInformeGeneral() async {
+
+    UsuarioModel usuarioActual=await gestionAuth.obtenerDatosDeStorage();
+
+    List<Map<String,dynamic>> informesInfo= await gestionProyectos.getInformeGeneral(usuarioActual.idUsuario);
+    print(informesInfo);
+
+    setState(() {
+      informes=informesInfo;
+    });
+
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +65,8 @@ class PdfDemoPage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
-            final pdfData = await generatePdf(projectDataList);
+            cargarInformeGeneral();
+            final pdfData = await generatePdf(informes);
             await Printing.layoutPdf(
               onLayout: (PdfPageFormat format) async => pdfData,
             );
@@ -54,29 +78,7 @@ class PdfDemoPage extends StatelessWidget {
   }
 }
 
-List<Map<String, dynamic>> projectDataList = [
-  {
-    'Nombre del proyecto': 'H',
-    'Tareas completadas': 10,
-    'Tareas en curso': 5,
-    'Tareas pendientes': 3,
-    'Porcentaje Completado': 75.0,
-  },
-  {
-    'Nombre del proyecto': 'R',
-    'Tareas completadas': 8,
-    'Tareas en curso': 6,
-    'Tareas pendientes': 2,
-    'Porcentaje Completado': 60.0,
-  },
-  {
-    'Nombre del proyecto': 'I',
-    'Tareas completadas': 6,
-    'Tareas en curso': 3,
-    'Tareas pendientes': 1,
-    'Porcentaje Completado': 40.0,
-  },
-];
+
 
 Future<Uint8List> generatePdf(
     List<Map<String, dynamic>> projectDataList) async {
@@ -166,31 +168,31 @@ Future<Uint8List> generatePdf(
                       pw.Container(
                         color: PdfColors.grey100,
                         padding: pw.EdgeInsets.all(8),
-                        child: pw.Text('${project['Nombre del proyecto']}',
+                        child: pw.Text('${project['Nombre_Proyecto']}',
                             style: pw.TextStyle(fontSize: 14)),
                       ),
                       pw.Container(
                         color: PdfColors.grey100,
                         padding: pw.EdgeInsets.all(8),
-                        child: pw.Text('${project['Tareas completadas']}',
+                        child: pw.Text('${project['Tareas_Completadas']}',
                             style: pw.TextStyle(fontSize: 14)),
                       ),
                       pw.Container(
                         color: PdfColors.grey100,
                         padding: pw.EdgeInsets.all(8),
-                        child: pw.Text('${project['Tareas en curso']}',
+                        child: pw.Text('${project['Tareas_En_Curso']}',
                             style: pw.TextStyle(fontSize: 14)),
                       ),
                       pw.Container(
                         color: PdfColors.grey100,
                         padding: pw.EdgeInsets.all(8),
-                        child: pw.Text('${project['Tareas pendientes']}',
+                        child: pw.Text('${project['Tareas_Pendientes']}',
                             style: pw.TextStyle(fontSize: 14)),
                       ),
                       pw.Container(
                         color: PdfColors.grey100,
                         padding: pw.EdgeInsets.all(8),
-                        child: pw.Text('${project['Porcentaje Completado']}%',
+                        child: pw.Text('${project['Porcentaje_Proyecto']}%',
                             style: pw.TextStyle(fontSize: 14)),
                       ),
                     ],

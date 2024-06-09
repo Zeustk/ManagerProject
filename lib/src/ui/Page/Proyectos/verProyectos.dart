@@ -222,6 +222,23 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
     );
   }
 
+  void _navegarAInforme(ProyectoModel proyecto){
+
+    if (esLiderProyecto(proyecto.idProyecto)){
+
+      Get.to(Informes_Proyectos(),arguments: proyecto);
+
+    }
+    else{
+      Get.snackbar(
+        'Pemiso Denegado',
+        'Solo el Lider del Proyecto Puede Ver Esta Informacion',
+        backgroundColor: Colors.white,
+        colorText: Colors.black,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -336,8 +353,8 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                                             }
                                             else{
                                             
-                                
-                                              Get.to(Informes_Proyectos(),arguments: proyecto);
+                                               _navegarAInforme(proyecto);
+                                              
                                             }
                                           }
 
