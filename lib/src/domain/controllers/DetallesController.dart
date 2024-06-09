@@ -38,4 +38,13 @@ class DetallesController extends GetxController {
       return 'Error al eliminar los detalles del proyecto';
     }
   }
+
+  Future<List<Map<String,dynamic>>> obtenerProyectosLiderPorUsuario(int idUsuario) async {
+      try {
+      return await gestionDetalles.getProyectosLiderByUsuario(idUsuario);
+    } catch (error) {
+      return [];
+    }
+
+  } 
 }
