@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/constante/constantes.dart';
+import 'package:manager_proyect/src/domain/controllers/DetallesController.dart';
 import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
@@ -27,15 +28,39 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
   final AuthController gestionAuth = AuthController();
   List<ProyectoModel> proyectos = [];
   final ProyectoController gestionProyectos = ProyectoController();
+  final DetallesController gestionDetalles = DetallesController();
   String tipo = Get.arguments as String;
   int estado = 04; // Todos
   int? botonPresionado;
   String nombreTextBusqueda = '';
+  UsuarioModel usuarioActual = UsuarioModel();
+  List<Map<String, dynamic>> proyectosDeLiderActual = [];
 
   @override
   void initState() {
     super.initState();
     cargarProyectos();
+    cargarProyectosByUsuarioLiderActual();
+  }
+
+  Future<void> cargarProyectosByUsuarioLiderActual() async {
+    try {
+      UsuarioModel usuarioActualinfo =
+          await gestionAuth.obtenerDatosDeStorage();
+      List<Map<String, dynamic>> proyectosByLiderActual =
+          await gestionDetalles.obtenerProyectosLiderPorUsuario(
+              usuarioActualinfo.idUsuario);
+
+      print(proyectosByLiderActual);
+
+      setState(() {
+        proyectosDeLiderActual = proyectosByLiderActual;
+        usuarioActual = usuarioActualinfo;
+      });
+    } catch (error) {
+      // Manejar el error de la consulta de proyectos
+      print('Error al cargar proyectos: $error');
+    }
   }
 
   Future<void> cargarProyectos() async {
@@ -90,33 +115,51 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
   }
 
   void _showConfirmationDialog(BuildContext context, int idProyecto) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: kSecondaryColor,
-          title: Text('Confirmar Eliminación'),
-          content: Text('¿Estás seguro de que deseas eliminar este Proyecto?',
-              style: TextStyle(color: Colors.white)),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Cancelar', style: TextStyle(color: Colors.white)),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text('Eliminar', style: TextStyle(color: Colors.white)),
-              onPressed: () {
-                Navigator.of(context).pop();
-                _eliminarProyecto(context, idProyecto);
-                cargarProyectos();
-              },
-            ),
-          ],
+  
+
+    bool siUsuarioEsLider = proyectosDeLiderActual.any((proyecto) {
+        print(proyecto["Id_Proyecto"]);
+      return proyecto["Id_Proyecto"] == idProyecto;
+    });
+
+  
+
+    if (siUsuarioEsLider) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: kSecondaryColor,
+            title: Text('Confirmar Eliminación'),
+            content: Text('¿Estás seguro de que deseas eliminar este Proyecto?',
+                style: TextStyle(color: Colors.white)),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Cancelar', style: TextStyle(color: Colors.white)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: Text('Eliminar', style: TextStyle(color: Colors.white)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _eliminarProyecto(context, idProyecto);
+                  cargarProyectos();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+       Get.snackbar(
+          'Pemiso Denegado',
+          'Solo el Lider del Proyecto Puede Eliminar Proyectos',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
         );
-      },
-    );
+    }
   }
 
   void _eliminarProyecto(BuildContext context, int idProyecto) {
