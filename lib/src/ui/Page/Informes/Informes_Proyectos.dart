@@ -19,10 +19,13 @@ class Informes_Proyectos extends StatelessWidget {
           )
         ],
         foregroundColor: Colors.white,
-        title: Center(
-          child: Text(
-            'Informe Proyecto',
-            style: TextStyle(color: Colors.white),
+        title: Padding(
+          padding: const EdgeInsets.only(left: 63),
+          child: Center(
+            child: Text(
+              'Informe Proyecto',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
         backgroundColor: Color.fromARGB(164, 83, 80, 80),
@@ -62,12 +65,8 @@ class Informes_Proyectos extends StatelessWidget {
 }
 
 class DetalleUsuarioTarea extends StatelessWidget {
-  /* ProyectoModel proyecto = Get.arguments as ProyectoModel;
- */
   @override
   Widget build(BuildContext context) {
-    /* DateFormat dateFormat = DateFormat('yyyy-MM-dd'); */
-
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
@@ -83,9 +82,9 @@ class DetalleUsuarioTarea extends StatelessWidget {
           children: [
             SizedBox(height: 2),
             Padding(
-              padding: const EdgeInsets.only(right: 14),
+              padding: const EdgeInsets.only(left: 26),
               child: Text(
-                'Tareas Completadas',
+                'N# Tareas Completadas',
                 style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
@@ -117,12 +116,12 @@ class DetalleUsuarioTarea extends StatelessWidget {
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 50,
+                        width: 20,
                       ),
-                      /* Text(
-                        '${proyecto.liderProyecto}',
-                        style: TextStyle(color: Colors.black),
-                      ) */
+                      Text(
+                        'datos base',
+                        style: TextStyle(color: Colors.white),
+                      )
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -133,9 +132,9 @@ class DetalleUsuarioTarea extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 50),
+              padding: const EdgeInsets.only(right: 3),
               child: Text(
-                'Tareas En curso',
+                'N# Tareas En curso',
                 style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
@@ -167,12 +166,12 @@ class DetalleUsuarioTarea extends StatelessWidget {
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 50,
+                        width: 20,
                       ),
-                      /* Text(
-                        '${proyecto.nombre}',
-                        style: TextStyle(color: Colors.black),
-                      ) */
+                      Text(
+                        'dato base',
+                        style: TextStyle(color: Colors.white),
+                      )
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -183,9 +182,9 @@ class DetalleUsuarioTarea extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 24),
+              padding: const EdgeInsets.only(left: 20),
               child: Text(
-                ' Tareas No Iniciadas',
+                'N# Tareas No Iniciadas',
                 style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
@@ -217,12 +216,12 @@ class DetalleUsuarioTarea extends StatelessWidget {
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 50,
+                        width: 20,
                       ),
-                      /* Text(
-                        '${dateFormat.format(proyecto.fechaInicio)}',
-                        style: TextStyle(color: Colors.black),
-                      ) */
+                      Text(
+                        'datos base',
+                        style: TextStyle(color: Colors.white),
+                      )
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -233,7 +232,7 @@ class DetalleUsuarioTarea extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 14),
+              padding: const EdgeInsets.only(left: 24),
               child: Text(
                 'Porcentaje Completado',
                 style: TextStyle(
@@ -267,12 +266,12 @@ class DetalleUsuarioTarea extends StatelessWidget {
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 50,
+                        width: 20,
                       ),
-                      /* Text(
-                        '${dateFormat.format(proyecto.fechaFinalizacion)}',
-                        style: TextStyle(color: Colors.black),
-                      ) */
+                      Text(
+                        'dato base',
+                        style: TextStyle(color: Colors.white),
+                      )
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -282,61 +281,6 @@ class DetalleUsuarioTarea extends StatelessWidget {
                 ),
               ],
             ),
-            /* SizedBox(
-              height: 50,
-            ),
-            SizedBox(
-                width: 340,
-                child: Divider(
-                  color: Colors.white,
-                )),
-            Text(
-              'Integrates',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ), */
-            /* Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 80),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            Text('Integrante $index',
-                                style: TextStyle(color: Colors.white)),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Get.to(Crear_proyectos());
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.white70,
-                                    border: Border.all(color: Colors.white),
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Image.asset(
-                                  'assets/eliminar-usuario.gif',
-                                  width: 60,
-                                  height: 60,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),*/
           ],
         ),
       ),

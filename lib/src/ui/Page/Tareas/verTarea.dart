@@ -97,7 +97,7 @@ class _Ver_TareasState extends State<Ver_Tareas> {
                 border: Border.all(color: Colors.white, width: 5),
                 color: Color.fromARGB(128, 0, 0, 0)),
             child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
+              scrollDirection: Axis.horizontal,
               child: Column(
                 children: [
                   Row(
@@ -144,20 +144,18 @@ class _Ver_TareasState extends State<Ver_Tareas> {
                           // Acción al tocar una tarea (puede navegar a la pantalla de detalles)
                           Get.to(DetalleTarea(), arguments: tarea);
 
-                          if (botonPresionado!=null){
+                          if (botonPresionado != null) {
                             _handleButtonTap(botonPresionado!);
-
                           }
-                          
                         },
                         child: Column(
                           children: [
                             Container_Mistareas(
                               nombreTarea: tarea.nombre,
                               descripcion: tarea.descripcion,
-                              estado:tarea.idEstado,
-                              color: Colors
-                                  .blue, // Puedes ajustar el color según lo desees
+                              estado: tarea.idEstado,
+                              color: Colors.blue,
+                              idTareas: tarea.idTarea,
                             ),
                             SizedBox(height: 12),
                           ],
