@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:manager_proyect/src/constante/constantes.dart';
 
 import 'package:manager_proyect/src/domain/controllers/DetallesController.dart';
+import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/controllers/UsuarioController.dart';
 import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/DetalleProyecto_model.dart';
@@ -21,7 +23,95 @@ class DetalleProyectoPage extends StatefulWidget {
 
 class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
   AuthController gestionAuth = AuthController();
-  ProyectoModel proyecto = Get.arguments as ProyectoModel;
+  Map<String, dynamic> datos = Get.arguments;
+  ProyectoController gestionProyectos = ProyectoController();
+  ProyectoModel proyecto = ProyectoModel(
+      liderProyecto: "sddads",
+      nombre: "asdadsa",
+      fechaInicio: DateTime.now(),
+      fechaFinalizacion: DateTime.now(),
+      descripcion: "asdasd",
+      porcentajeProyecto: 30);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    cargarDatosProyecto();
+  }
+
+  void cargarDatosProyecto() {
+    ProyectoModel proyectoInfo = ProyectoModel(
+      liderProyecto: datos["Lider_Proyecto"],
+      nombre: datos["Nombre"],
+      fechaInicio: datos["Fecha_Inicio"],
+      fechaFinalizacion: datos["Fecha_Finalizacion"],
+      descripcion: datos["Descripcion"],
+      porcentajeProyecto: datos["Porcentaje_Proyecto"],
+      idProyecto: datos["Id_Proyecto"],
+      idEstado: datos["Id_Estado"],
+    );
+
+    setState(() {
+      proyecto = proyectoInfo;
+    });
+  }
+
+ void _showConfirmationDialog(BuildContext context, int idProyecto) {
+  
+
+    bool siUsuarioEsLider = datos["Id_LiderProyecto"];
+
+
+    if (siUsuarioEsLider) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: kSecondaryColor,
+            title: Text('Confirmar Eliminación'),
+            content: Text('¿Estás seguro de que deseas eliminar este Proyecto?',
+                style: TextStyle(color: Colors.white)),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Cancelar', style: TextStyle(color: Colors.white)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: Text('Eliminar', style: TextStyle(color: Colors.white)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _eliminarProyecto(context, idProyecto);
+
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+       Get.snackbar(
+          'Pemiso Denegado',
+          'Solo el Lider del Proyecto Puede Eliminar Proyectos',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
+    }
+  }
+
+  void _eliminarProyecto(BuildContext context, int idProyecto) {
+    setState(() {
+      gestionProyectos.eliminarProyecto(idProyecto);
+      gestionProyectos.cambiarEstadoProyectosMemoria();
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Contenido eliminado')),
+    );
+  }
+
+  //          "Id_LiderProyecto": esLiderProyecto(proyecto.idProyecto),
 
   Future<void> cargarUsuarios() async {
     List<UsuarioModel> usuarios =
@@ -36,31 +126,42 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
   }
 
   Future<void> adicionarUsuarios() async {
-    List<UsuarioModel> usuariosSeleccionados =
-        (await Get.to<List<UsuarioModel>?>(AdicionarUsuariosPage())) ?? [];
+    bool esLiderProyecto = datos["Id_LiderProyecto"];
 
-    if (usuariosSeleccionados.isNotEmpty) {
-      // Filtrar los usuarios que no están en usuariosFiltrados
-      List<UsuarioModel> nuevosUsuarios =
-          usuariosSeleccionados.where((usuario) {
-        return !usuariosFiltrados.contains(usuario);
-      }).toList();
+    if (esLiderProyecto) {
+      List<UsuarioModel> usuariosSeleccionados =
+          (await Get.to<List<UsuarioModel>?>(AdicionarUsuariosPage())) ?? [];
 
-      UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
+      if (usuariosSeleccionados.isNotEmpty) {
+        // Filtrar los usuarios que no están en usuariosFiltrados
+        List<UsuarioModel> nuevosUsuarios =
+            usuariosSeleccionados.where((usuario) {
+          return !usuariosFiltrados.contains(usuario);
+        }).toList();
 
-      for (var usuario in nuevosUsuarios) {
-        DetallesModel detalleProyectoUsuario = DetallesModel(
-            idDetalle: 0,
-            idUsuario: usuario.idUsuario,
-            idProyecto: proyecto.idProyecto,
-            idLiderProyecto: usuarioActual.idUsuario);
+        UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
 
-        String resp =
-            await gestionDetalles.registrarDetalles(detalleProyectoUsuario);
+        for (var usuario in nuevosUsuarios) {
+          DetallesModel detalleProyectoUsuario = DetallesModel(
+              idDetalle: 0,
+              idUsuario: usuario.idUsuario,
+              idProyecto: proyecto.idProyecto,
+              idLiderProyecto: usuarioActual.idUsuario);
 
-        print(resp);
-        cargarUsuarios();
+          String resp =
+              await gestionDetalles.registrarDetalles(detalleProyectoUsuario);
+
+          print(resp);
+          cargarUsuarios();
+        }
       }
+    } else {
+      Get.snackbar(
+        'Pemiso Denegado',
+        'Solo el Lider del Proyecto Puede Adicionar Usuarios',
+        backgroundColor: Colors.white,
+        colorText: Colors.black,
+      );
     }
   }
 
@@ -95,7 +196,9 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
               borderRadius: BorderRadius.circular(40),
             ),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                _showConfirmationDialog(context, proyecto.idProyecto);
+              },
               icon: Image.asset(
                 'assets/eliminar.gif',
                 width: 50,

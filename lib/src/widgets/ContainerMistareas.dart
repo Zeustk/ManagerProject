@@ -7,12 +7,15 @@ import 'package:manager_proyect/src/widgets/PaddingMistareas.dart';
 
 TareasController gestiontareas = TareasController();
 
+typedef OnTap = void Function(); // Define el alias de función
+
 class Container_Mistareas extends StatelessWidget {
   final int estado;
   final String nombreTarea;
   final String descripcion;
   final Color? color;
   final int idTareas;
+  final OnTap click;
 
   const Container_Mistareas({
     super.key,
@@ -21,6 +24,7 @@ class Container_Mistareas extends StatelessWidget {
     required this.nombreTarea,
     required this.descripcion,
     required this.idTareas,
+    required this.click,
   });
 
   @override
@@ -56,9 +60,7 @@ class Container_Mistareas extends StatelessWidget {
                   margin: EdgeInsets.only(left: 80),
                   child: InkWell(
                     child: Image.asset('assets/borrar.gif', width: 45),
-                    onTap: () {
-                      _showConfirmationDialog(context, idTareas);
-                    },
+                    onTap: click,
                   ),
                 )
               ],
@@ -81,40 +83,5 @@ class Container_Mistareas extends StatelessWidget {
     ]);
   }
 
-  void _showConfirmationDialog(BuildContext context, int idTareas) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: kSecondaryColor,
-          title: Text('Confirmar Eliminación'),
-          content: Text('¿Estás seguro de que deseas eliminar  la atarea',
-              style: TextStyle(color: Colors.white)),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Cancelar', style: TextStyle(color: Colors.white)),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text('Eliminar', style: TextStyle(color: Colors.white)),
-              onPressed: () {
-                Navigator.of(context).pop();
-                _eliminarTarea(context, idTareas);
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _eliminarTarea(BuildContext context, int idTareas) {
-    gestiontareas.eliminarTareas(idTareas);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Contenido eliminado')),
-    );
-  }
+  
 }

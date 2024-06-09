@@ -42,7 +42,9 @@ class _Ver_TareasState extends State<Ver_Tareas> {
       }
       // Estado 02 (Proyectos en curso), Estado 03 (Proyectos completados)
 
-      setState(() {});
+      setState(() {
+        
+      });
     } catch (error) {
       // Manejar el error de la consulta de proyectos
       print('Error al cargar proyectos: $error');
@@ -63,6 +65,44 @@ class _Ver_TareasState extends State<Ver_Tareas> {
       print(estado);
     });
     cargarTareas();
+  }
+
+  void _showConfirmationDialog(BuildContext context, int idTareas) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: kSecondaryColor,
+          title: Text('Confirmar Eliminación'),
+          content: Text('¿Estás seguro de que deseas eliminar  la atarea',
+              style: TextStyle(color: Colors.white)),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancelar', style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Eliminar', style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _eliminarTarea(context, idTareas);
+                cargarTareas();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _eliminarTarea(BuildContext context, int idTareas) {
+    gestiontareas.eliminarTareas(idTareas);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Contenido eliminado')),
+    );
   }
 
   @override
@@ -156,6 +196,7 @@ class _Ver_TareasState extends State<Ver_Tareas> {
                               estado: tarea.idEstado,
                               color: Colors.blue,
                               idTareas: tarea.idTarea,
+                              click: () => _showConfirmationDialog(context, tarea.idTarea),
                             ),
                             SizedBox(height: 12),
                           ],

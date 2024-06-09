@@ -117,12 +117,8 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
   void _showConfirmationDialog(BuildContext context, int idProyecto) {
   
 
-    bool siUsuarioEsLider = proyectosDeLiderActual.any((proyecto) {
-        print(proyecto["Id_Proyecto"]);
-      return proyecto["Id_Proyecto"] == idProyecto;
-    });
+    bool siUsuarioEsLider = esLiderProyecto(idProyecto);
 
-  
 
     if (siUsuarioEsLider) {
       showDialog(
@@ -193,6 +189,14 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
     setState(() {
       nombreTextBusqueda = text;
       cargarProyectos();
+    });
+  }
+
+  bool esLiderProyecto(int idProyecto){
+
+    return  proyectosDeLiderActual.any((proyecto) {
+        print(proyecto["Id_Proyecto"]);
+      return proyecto["Id_Proyecto"] == idProyecto;
     });
   }
 
@@ -302,7 +306,17 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                                         onTap: () {
                                           if (tipo[0] == 'M') {
                                             Get.to(DetalleProyectoPage(),
-                                                arguments: proyecto);
+                                                arguments:{
+                                                  "Lider_Proyecto":proyecto.liderProyecto,
+                                                  "Nombre":proyecto.nombre,
+                                                  "Fecha_Inicio":proyecto.fechaInicio,
+                                                  "Fecha_Finalizacion":proyecto.fechaFinalizacion,
+                                                  "Id_Proyecto":proyecto.idProyecto,
+                                                  "Id_Estado":proyecto.idEstado,
+                                                  "Porcentaje_Proyecto":proyecto.porcentajeProyecto,
+                                                  "Id_LiderProyecto": esLiderProyecto(proyecto.idProyecto),
+                                                  "Descripcion":proyecto.descripcion,
+                                                });
                                           } else {
                                             Get.to(Ver_Tareas(),
                                                 arguments: proyecto.idProyecto);
