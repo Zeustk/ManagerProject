@@ -77,7 +77,20 @@ class ProyectosProvider extends CrudProvider<ProyectoModel> {
     }
   }
 
-  // Future<String> buscarVehiculo(VehiculoModel vehiculoRecibido) async {
-  // return buscarUsuario(vehiculoRecibido, 'BuscarVehiculo');
-  //}
+   Future<List<ProyectoModel>> consultaProyectosByLider(idLiderProyecto) async {
+    try {
+      List<Map<String, dynamic>> proyectosMapa =
+          await consultar('getProyectoByLiderProyecto/$idLiderProyecto');
+
+      List<ProyectoModel> listaproyectos =
+          proyectosMapa.map((map) => ProyectoModel.fromJson(map)).toList();
+
+      return listaproyectos;
+    } catch (e) {
+      print('Error al sconsultar los proyectos by lider $e');
+      return [];
+    }
+  }
+
+ 
 }

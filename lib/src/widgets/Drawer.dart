@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/domain/controllers/authController.dart';
+import 'package:manager_proyect/src/ui/Page/Informes/Informes_Proyectos.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/verProyectos.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/crearTarea.dart';
@@ -65,7 +66,7 @@ class Draweer extends StatelessWidget {
           'title': 'Informes Proyectos ',
           'image': 'assets/informeusu.gif',
           'onTap': () {
-            Get.offAll(Ver_Proyectos(), arguments: 'Mis Proyectos');
+            Get.offAll(Ver_Proyectos(), arguments: 'Informe');
           },
         },
         {

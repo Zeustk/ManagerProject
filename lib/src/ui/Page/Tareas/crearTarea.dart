@@ -43,7 +43,7 @@ class _Crear_tareasState extends State<Crear_Tareas> {
   Future<void> cargarProyectos() async {
     gestionAuth.obtenerDatosDeStorage().then((value) {
       gestionProyectos
-          .consultarProyectos(value.idUsuario)
+          .consultarProyectosPorLider(value.idUsuario)
           .then((listaProyectos) {
         setState(() {
           proyectos =
@@ -127,7 +127,9 @@ class _LabelsTareasState extends State<LabelsTareas> {
     UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
 
     List<ProyectoModel> proyectos =
-        await gestionProyectos.consultarProyectos(usuarioActual.idUsuario);
+        await gestionProyectos.consultarProyectosPorLider(usuarioActual.idUsuario);
+
+      
 
     ProyectoModel? proyectoSeleccionado = proyectos
         .firstWhereOrNull((proyecto) => proyecto.nombre == nombreProyecto);

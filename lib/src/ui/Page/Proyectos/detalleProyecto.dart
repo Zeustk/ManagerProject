@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -250,25 +251,89 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
       TextEditingController();
   TextEditingController _controllerFechaInicio = TextEditingController();
   TextEditingController _controllerFechaFin = TextEditingController();
+  ProyectoController gestionProyectos = ProyectoController();
+  AuthController gestionAuth= AuthController();
+
   bool _isEditing = false;
   bool _isEditing2 = false;
   bool _isEditing3 = false;
   void _toggleEditing3() {
     setState(() {
       _isEditing3 = !_isEditing3;
+      actualizarProyecto();
     });
   }
 
   void _toggleEditing2() {
     setState(() {
       _isEditing2 = !_isEditing2;
+      actualizarProyecto();
     });
   }
 
   void _toggleEditing() {
     setState(() {
       _isEditing = !_isEditing;
+      actualizarProyecto();
     });
+  }
+
+  void actualizarProyecto() async {
+    if ((_isEditing==false) || (_isEditing2==false) || (_isEditing3==false)) {
+
+      if (sonDatosDiferentes()) {
+        print(_isEditing);
+        print(_isEditing2);
+        print(_isEditing3);
+        ProyectoModel proyectoActualizado = ProyectoModel(
+          liderProyecto: widget.proyecto.liderProyecto,
+          nombre: _controllerNombreProyecto.text,
+          fechaInicio: DateTime.parse(_controllerFechaInicio.text),
+          fechaFinalizacion: DateTime.parse(_controllerFechaFin.text),
+          descripcion: widget.proyecto.descripcion,
+          porcentajeProyecto: widget.proyecto.porcentajeProyecto,
+          idProyecto: widget.proyecto.idProyecto,
+        );
+
+        String msj =
+            await gestionProyectos.actualizarProyecto(proyectoActualizado);
+        
+        mensaje(msj);
+
+        widget.proyecto.nombre=_controllerNombreProyecto.text;
+        widget.proyecto.fechaInicio=DateTime.parse(_controllerFechaInicio.text);
+        widget.proyecto.fechaInicio=DateTime.parse(_controllerFechaFin.text);
+
+
+        
+      }
+    }
+  }
+
+  void mensaje (String msj){
+
+    Get.snackbar(
+        'Actualizacion',
+        msj,
+        backgroundColor: Colors.white,
+        colorText: Colors.black,
+      );
+
+  }
+
+  bool sonDatosDiferentes(){
+
+   
+
+     if ((widget.proyecto.nombre != _controllerNombreProyecto.text) ||
+          (DateTime.parse(_controllerFechaInicio.text) !=
+                DateTime.parse(widget.proyecto.fechaInicio.toString())) ||
+          (DateTime.parse(_controllerFechaFin.text)) !=
+             DateTime.parse(widget.proyecto.fechaFinalizacion.toString())){
+                return true;
+              }
+              return false;
+
   }
 
   @override

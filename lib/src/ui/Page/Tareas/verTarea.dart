@@ -19,7 +19,8 @@ class Ver_Tareas extends StatefulWidget {
 class _Ver_TareasState extends State<Ver_Tareas> {
   final TareasController gestionTareas = Get.put(TareasController());
   AuthController gestionAuth = AuthController();
-  int id_Proyecto = Get.arguments;
+  Map<String, dynamic> datos = Get.arguments;
+  int id_Proyecto = -1;
   int estado = 04; // Todos
   int? botonPresionado; // Variable para rastrear el botón presionado
   List<TareasModel> tareas = [];
@@ -27,7 +28,14 @@ class _Ver_TareasState extends State<Ver_Tareas> {
   @override
   void initState() {
     super.initState();
+    cargarDatosIniciales();
     cargarTareas();
+  }
+
+  void cargarDatosIniciales() {
+    setState(() {
+      id_Proyecto = datos["Id_Proyecto"];
+    });
   }
 
   Future<void> cargarTareas() async {
@@ -42,9 +50,7 @@ class _Ver_TareasState extends State<Ver_Tareas> {
       }
       // Estado 02 (Proyectos en curso), Estado 03 (Proyectos completados)
 
-      setState(() {
-        
-      });
+      setState(() {});
     } catch (error) {
       // Manejar el error de la consulta de proyectos
       print('Error al cargar proyectos: $error');
@@ -68,33 +74,46 @@ class _Ver_TareasState extends State<Ver_Tareas> {
   }
 
   void _showConfirmationDialog(BuildContext context, int idTareas) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: kSecondaryColor,
-          title: Text('Confirmar Eliminación'),
-          content: Text('¿Estás seguro de que deseas eliminar  la atarea',
-              style: TextStyle(color: Colors.white)),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Cancelar', style: TextStyle(color: Colors.white)),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text('Eliminar', style: TextStyle(color: Colors.white)),
-              onPressed: () {
-                Navigator.of(context).pop();
-                _eliminarTarea(context, idTareas);
-                cargarTareas();
-              },
-            ),
-          ],
+    bool siUsuarioEsLider = datos["Id_LiderProyecto"];
+
+    if (siUsuarioEsLider) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: kSecondaryColor,
+            title: Text('Confirmar Eliminación'),
+            content: Text('¿Estás seguro de que deseas eliminar  la atarea',
+                style: TextStyle(color: Colors.white)),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Cancelar', style: TextStyle(color: Colors.white)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: Text('Eliminar', style: TextStyle(color: Colors.white)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _eliminarTarea(context, idTareas);
+                  cargarTareas();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else{
+
+       Get.snackbar(
+          'Pemiso Denegado',
+          'Solo el Lider del Proyecto Puede Eliminar Tareas',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
         );
-      },
-    );
+
+    }
   }
 
   void _eliminarTarea(BuildContext context, int idTareas) {
@@ -196,7 +215,8 @@ class _Ver_TareasState extends State<Ver_Tareas> {
                               estado: tarea.idEstado,
                               color: Colors.blue,
                               idTareas: tarea.idTarea,
-                              click: () => _showConfirmationDialog(context, tarea.idTarea),
+                              click: () => _showConfirmationDialog(
+                                  context, tarea.idTarea),
                             ),
                             SizedBox(height: 12),
                           ],

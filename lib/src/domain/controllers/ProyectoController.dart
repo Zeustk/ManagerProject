@@ -46,6 +46,16 @@ class ProyectoController extends GetxController {
     }
   }
 
+    Future<List<ProyectoModel>> consultarProyectosPorLider(int idLiderProyecto) async {
+    try {
+      return await gestionProyectos.consultaProyectosByLider(idLiderProyecto);
+    } catch (error) {
+      // Manejar el error al consultar los proyectos
+      print('Error al consultar los proyectos  by lider(Controllers): $error');
+      return []; // Devuelve una lista vacía en caso de error
+    }
+  }
+
 
   void cambiarEstadoProyectosMemoria(){
     gestionProyectos.cambiarEstado();
