@@ -6,6 +6,7 @@ import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
+import 'package:manager_proyect/src/ui/Page/Informes/Informes_Proyectos.dart';
 
 import 'package:manager_proyect/src/ui/Page/Proyectos/crearProyecto.dart';
 import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
@@ -67,8 +68,6 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
       UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
       List<ProyectoModel> proyectosList =
           await gestionProyectos.consultarProyectos(usuarioActual.idUsuario);
-
-      print('entro');
 
       proyectosList = listaFiltrada(proyectosList);
 
@@ -195,6 +194,34 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
     });
   }
 
+  Future<void> _navigateToDetalleProyectoPage(ProyectoModel proyecto) async {
+    await Get.to(() => DetalleProyectoPage(), arguments: {
+      "Lider_Proyecto": proyecto.liderProyecto,
+      "Nombre": proyecto.nombre,
+      "Fecha_Inicio": proyecto.fechaInicio,
+      "Fecha_Finalizacion": proyecto.fechaFinalizacion,
+      "Id_Proyecto": proyecto.idProyecto,
+      "Id_Estado": proyecto.idEstado,
+      "Porcentaje_Proyecto": proyecto.porcentajeProyecto,
+      "Id_LiderProyecto": esLiderProyecto(proyecto.idProyecto),
+      "Descripcion": proyecto.descripcion,
+    });
+
+    // Actualiza la lista de proyectos cuando se regrese a esta pantalla
+    gestionProyectos.cambiarEstadoProyectosMemoria();
+    cargarProyectos();
+  }
+
+  void _navegarATareas(ProyectoModel proyecto) {
+    Get.to(
+      Ver_Tareas(),
+      arguments: {
+        "Id_Proyecto": proyecto.idProyecto,
+        "Id_LiderProyecto": esLiderProyecto(proyecto.idProyecto),
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -300,39 +327,16 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
                                       child: GestureDetector(
                                         onTap: () {
                                           if (tipo[0] == 'M') {
-                                            Get.to(DetalleProyectoPage(),
-                                                arguments: {
-                                                  "Lider_Proyecto":
-                                                      proyecto.liderProyecto,
-                                                  "Nombre": proyecto.nombre,
-                                                  "Fecha_Inicio":
-                                                      proyecto.fechaInicio,
-                                                  "Fecha_Finalizacion": proyecto
-                                                      .fechaFinalizacion,
-                                                  "Id_Proyecto":
-                                                      proyecto.idProyecto,
-                                                  "Id_Estado":
-                                                      proyecto.idEstado,
-                                                  "Porcentaje_Proyecto":
-                                                      proyecto
-                                                          .porcentajeProyecto,
-                                                  "Id_LiderProyecto":
-                                                      esLiderProyecto(
-                                                          proyecto.idProyecto),
-                                                  "Descripcion":
-                                                      proyecto.descripcion,
-                                                });
+                                            _navigateToDetalleProyectoPage(
+                                                proyecto);
                                           } else {
-                                            Get.to(
-                                              Ver_Tareas(),
-                                              arguments: {
-                                                "Id_Proyecto":
-                                                    proyecto.idProyecto,
-                                                "Id_LiderProyecto":
-                                                    esLiderProyecto(
-                                                        proyecto.idProyecto),
-                                              },
-                                            );
+
+                                            if (tipo[0]=='S'){
+                                              _navegarATareas(proyecto);
+                                            }
+                                            else{
+                                              Get.to(Informes_Proyectos(),arguments: proyecto.idProyecto);
+                                            }
                                           }
 
                                           print(
