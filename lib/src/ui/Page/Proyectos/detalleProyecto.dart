@@ -57,11 +57,8 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
     });
   }
 
- void _showConfirmationDialog(BuildContext context, int idProyecto) {
-  
-
+  void _showConfirmationDialog(BuildContext context, int idProyecto) {
     bool siUsuarioEsLider = datos["Id_LiderProyecto"];
-
 
     if (siUsuarioEsLider) {
       showDialog(
@@ -84,7 +81,6 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
                 onPressed: () {
                   Navigator.of(context).pop();
                   _eliminarProyecto(context, idProyecto);
-
                 },
               ),
             ],
@@ -92,12 +88,12 @@ class _DetalleProyectoPageState extends State<DetalleProyectoPage> {
         },
       );
     } else {
-       Get.snackbar(
-          'Pemiso Denegado',
-          'Solo el Lider del Proyecto Puede Eliminar Proyectos',
-          backgroundColor: Colors.white,
-          colorText: Colors.black,
-        );
+      Get.snackbar(
+        'Pemiso Denegado',
+        'Solo el Lider del Proyecto Puede Eliminar Proyectos',
+        backgroundColor: Colors.white,
+        colorText: Colors.black,
+      );
     }
   }
 
@@ -617,19 +613,17 @@ class _DetalleProyectoState extends State<_DetalleProyecto> {
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             // Texto con estilo
                             Container(
-                              width: 260,
+                              margin: EdgeInsets.only(left: 100),
+                              width: 80,
                               child: Text(
                                 usuariosFiltrados[index].email,
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
-                            SizedBox(
-                                width: 10), // Espacio entre el texto y el botón
-                            // Contenedor del botón de eliminación
+                            SizedBox(width: 10),
                             Container(
                               width: 60, // Ancho del contenedor del botón
                               child: InkWell(
