@@ -150,7 +150,7 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
                                 width: 110,
                                 height: 190,
                                 decoration: BoxDecoration(
-                                    color: Colors.red,
+                                    color: Colors.white,
                                     borderRadius: BorderRadius.circular(40),
                                     border: Border.all(
                                         color:

@@ -23,9 +23,9 @@ class _SubirTareasState extends State<SubirTareas> {
   EntregasController gestionEntregas = EntregasController();
   ProyectoController gestionProyectos = ProyectoController();
 
-
   String? pdfPath;
-  bool tareaEntregada = false; // Variable que representa si la tarea ha sido entregada o no
+  bool tareaEntregada =
+      false; // Variable que representa si la tarea ha sido entregada o no
 
   @override
   void initState() {
@@ -34,11 +34,10 @@ class _SubirTareasState extends State<SubirTareas> {
   }
 
   Future<void> tareaFueEntregada() async {
-
-    bool entregada=await gestionEntregas.tareaFueEntrega(tarea.idTarea);
+    bool entregada = await gestionEntregas.tareaFueEntrega(tarea.idTarea);
 
     setState(() {
-      tareaEntregada=entregada;
+      tareaEntregada = entregada;
     });
   }
 
@@ -197,10 +196,10 @@ class _SubirTareasState extends State<SubirTareas> {
                           style: ButtonStyle(
                             side: MaterialStateProperty.all(
                                 BorderSide(color: Colors.blue, width: 3)),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.white),
-                            foregroundColor: MaterialStateProperty.all<Color>(
-                                Colors.blue),
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.blue),
                           ),
                           child: SizedBox(
                             width: 175,
@@ -320,13 +319,17 @@ class _SubirTareasState extends State<SubirTareas> {
     gestionEntregas.registrarEntregas(entrega).then((resultado) {
       print('El resultado de subir la tarea es: $resultado');
       setState(() {
-        tareaEntregada = true; // Actualizar el estado de la tarea a entregada
+        tareaEntregada = true;
       });
       Get.snackbar(
+        icon: Icon(
+          Icons.check,
+          color: Colors.green,
+        ),
         'Desarrollo Cargado',
         'Exitosamente',
         backgroundColor: Colors.white,
-        colorText: Colors.black,
+        colorText: Colors.blue,
       );
       gestionProyectos.cambiarEstadoProyectosMemoria();
     }).catchError((error) {

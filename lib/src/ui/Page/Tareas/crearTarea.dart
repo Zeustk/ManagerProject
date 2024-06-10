@@ -126,10 +126,8 @@ class _LabelsTareasState extends State<LabelsTareas> {
   Future<void> cargarUsuarios(String nombreProyecto) async {
     UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
 
-    List<ProyectoModel> proyectos =
-        await gestionProyectos.consultarProyectosPorLider(usuarioActual.idUsuario);
-
-      
+    List<ProyectoModel> proyectos = await gestionProyectos
+        .consultarProyectosPorLider(usuarioActual.idUsuario);
 
     ProyectoModel? proyectoSeleccionado = proyectos
         .firstWhereOrNull((proyecto) => proyecto.nombre == nombreProyecto);
