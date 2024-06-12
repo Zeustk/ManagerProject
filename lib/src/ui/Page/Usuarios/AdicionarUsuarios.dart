@@ -82,7 +82,7 @@ class _AdicionarUsuariosPageState extends State<AdicionarUsuariosPage> {
                 filtrarIntegrantes(value);
               },
               decoration: InputDecoration(
-                hintText: 'Buscar integrantes...',
+                hintText: 'Buscar integrantes.',
                 prefixIcon: Icon(
                   Icons.search,
                   color: Colors.white,
