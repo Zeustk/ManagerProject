@@ -34,6 +34,7 @@ class _Ver_TareasState extends State<Ver_Tareas> {
 
   void cargarDatosIniciales() {
     setState(() {
+
       id_Proyecto = datos["Id_Proyecto"];
     });
   }
@@ -73,8 +74,10 @@ class _Ver_TareasState extends State<Ver_Tareas> {
     cargarTareas();
   }
 
+
+
   void _showConfirmationDialog(BuildContext context, int idTareas) {
-    bool siUsuarioEsLider = datos["Id_LiderProyecto"];
+    bool siUsuarioEsLider = datos["EsLiderProyecto"];
 
     if (siUsuarioEsLider) {
       showDialog(
@@ -128,7 +131,8 @@ class _Ver_TareasState extends State<Ver_Tareas> {
 
     Get.to(DetalleTarea(), arguments: {
       'Tarea':tarea,
-      "Id_LiderProyecto":datos["Id_LiderProyecto"],
+      "EsLiderProyecto":datos["EsLiderProyecto"],
+      "Id_UsuarioActual":datos["Id_UsuarioActual"],
     });
 
   }

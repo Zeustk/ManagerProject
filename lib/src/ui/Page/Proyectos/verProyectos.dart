@@ -217,7 +217,9 @@ class _Ver_ProyectosState extends State<Ver_Proyectos> {
       Ver_Tareas(),
       arguments: {
         "Id_Proyecto": proyecto.idProyecto,
-        "Id_LiderProyecto": esLiderProyecto(proyecto.idProyecto),
+        "EsLiderProyecto": esLiderProyecto(proyecto.idProyecto),
+        "Id_UsuarioActual":usuarioActual.idUsuario,
+
       },
     );
   }

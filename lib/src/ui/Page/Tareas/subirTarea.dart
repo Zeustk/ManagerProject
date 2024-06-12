@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:file_picker/file_picker.dart';
@@ -10,6 +9,7 @@ import 'package:manager_proyect/src/domain/models/Entregas_model.dart';
 import 'package:path/path.dart' as path;
 import 'package:manager_proyect/src/constante/constantes.dart';
 import 'package:manager_proyect/src/domain/models/Tareas_model.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class SubirTareas extends StatefulWidget {
   @override
@@ -24,40 +24,100 @@ class _SubirTareasState extends State<SubirTareas> {
   ProyectoController gestionProyectos = ProyectoController();
 
   String? pdfPath;
-  bool tareaEntregada =
-      false; // Variable que representa si la tarea ha sido entregada o no
-  bool esLiderProyecto =false;    
+  bool tareaEntregada = false; // Variable que representa si la tarea ha sido entregada o no
+  bool esLiderProyecto = false;    
+  bool esLiderTarea = false;
 
-   TareasModel tarea = TareasModel(
-      nombre: "asdasd",
-      fechaInicio: DateTime.now(),
-      fechaFinalizacion: DateTime.now(),
-      descripcion: "dsdas",
-      porcentajeTarea: 30.0,
-      idProyecto: 1,
-      idUsuario: 1,
-      urlPdf: "dsad");    
+  EntregasModel entrega= EntregasModel.empty();
+
+  TareasModel tarea = TareasModel(
+    nombre: "asdasd",
+    fechaInicio: DateTime.now(),
+    fechaFinalizacion: DateTime.now(),
+    descripcion: "dsdas",
+    porcentajeTarea: 30.0,
+    idProyecto: 1,
+    idUsuario: 1,
+    urlPdf: "dsad"
+  );    
 
   @override
   void initState() {
     super.initState();
     cargarDatosIniciales();
     tareaFueEntregada();
+    print(entrega.urlPdfEntrega);
+    print(entrega.idEntrega);
+    print(entrega.informe);
+    
+
   }
 
   void cargarDatosIniciales() {
     setState(() {
       tarea = datos["Tarea"];
-      esLiderProyecto = datos["Id_LiderProyecto"];
+      esLiderProyecto = datos["esLiderProyecto"];
+
+      if (datos["Id_UsuarioActual"] == tarea.idUsuario) {
+        esLiderTarea = true;
+      }
     });
   }
 
   Future<void> tareaFueEntregada() async {
-    bool entregada = await gestionEntregas.tareaFueEntrega(tarea.idTarea);
+    EntregasModel entregaInfo = await gestionEntregas.consultarEntrega(tarea.idTarea);
 
-    setState(() {
-      tareaEntregada = entregada;
+    print('Hola entrega');
+    print(entregaInfo);
+
+    if (mounted){
+
+
+      setState(() {
+      if (entregaInfo.idEntrega!=-1) {
+        tareaEntregada = true;
+      }
+      entrega=entregaInfo;
+
     });
+
+    }
+
+    
+  }
+
+  Future<void> _downloadPDF(String pdfBase64Content) async {
+    try {
+      if (await Permission.storage.request().isGranted) {
+        Directory downloadsDirectory = Directory('/storage/emulated/0/Download');
+
+        if (downloadsDirectory.existsSync()) {
+          // Crear el archivo PDF con un nombre único
+          String uniqueFilename = '${DateTime.now().millisecondsSinceEpoch}_tarea.pdf';
+          String filePath = '${downloadsDirectory.path}/$uniqueFilename';
+
+          // Decodificar el contenido base64
+          List<int> pdfBytes = base64Decode(pdfBase64Content);
+
+          // Guardar el archivo en la ubicación especificada
+          File file = File(filePath);
+          await file.writeAsBytes(pdfBytes);
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('PDF descargado en Descargas')),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('No se pudo acceder al directorio de Descargas')),
+          );
+        }
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al descargar el PDF: $e')),
+      );
+      print(e);
+    }
   }
 
   @override
@@ -101,9 +161,10 @@ class _SubirTareasState extends State<SubirTareas> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
-                              color: Colors.white,
-                              style: BorderStyle.solid,
-                              width: 1.5),
+                            color: Colors.white,
+                            style: BorderStyle.solid,
+                            width: 1.5
+                          ),
                         ),
                         child: SizedBox(
                           child: Row(
@@ -113,9 +174,7 @@ class _SubirTareasState extends State<SubirTareas> {
                                 width: 25,
                                 height: 25,
                               ),
-                              SizedBox(
-                                width: 5,
-                              ),
+                              SizedBox(width: 5),
                               Text(
                                 '${tarea.nombre}',
                                 style: TextStyle(
@@ -136,9 +195,10 @@ class _SubirTareasState extends State<SubirTareas> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
-                              color: Colors.white,
-                              style: BorderStyle.solid,
-                              width: 1.5),
+                            color: Colors.white,
+                            style: BorderStyle.solid,
+                            width: 1.5
+                          ),
                         ),
                         child: Row(
                           children: [
@@ -146,28 +206,32 @@ class _SubirTareasState extends State<SubirTareas> {
                             Text(
                               '${tarea.descripcion}',
                               style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                                fontSize: 16.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold
+                              ),
                             ),
                           ],
                         ),
                       ),
                       SizedBox(height: 30.0),
-                      if ((!tareaEntregada) && (!esLiderProyecto)) ...[
+                      if (!tareaEntregada && esLiderTarea) ...[
+                        
                         Container(
                           padding: EdgeInsets.only(left: 7),
                           width: 80,
                           height: 32,
                           decoration: BoxDecoration(
-                              border: Border.all(color: Colors.white),
-                              borderRadius: BorderRadius.circular(10)),
+                            border: Border.all(color: Colors.white),
+                            borderRadius: BorderRadius.circular(10)
+                          ),
                           child: Text(
                             'Informe',
                             style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white
+                            ),
                           ),
                         ),
                         SizedBox(height: 10.0),
@@ -192,8 +256,7 @@ class _SubirTareasState extends State<SubirTareas> {
                         SizedBox(height: 10.0),
                         ElevatedButton(
                           onPressed: () async {
-                            FilePickerResult? result =
-                                await FilePicker.platform.pickFiles(
+                            FilePickerResult? result = await FilePicker.platform.pickFiles(
                               type: FileType.custom,
                               allowedExtensions: ['pdf'],
                             );
@@ -214,22 +277,20 @@ class _SubirTareasState extends State<SubirTareas> {
                           },
                           style: ButtonStyle(
                             side: MaterialStateProperty.all(
-                                BorderSide(color: Colors.blue, width: 3)),
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.blue),
+                              BorderSide(color: Colors.blue, width: 3)
+                            ),
+                            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                            foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
                           ),
                           child: SizedBox(
                             width: 175,
                             child: Row(
                               children: [
-                                Text('Adjuntar Documento',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
-                                SizedBox(
-                                  width: 7,
+                                Text(
+                                  'Adjuntar Documento',
+                                  style: TextStyle(fontWeight: FontWeight.bold)
                                 ),
+                                SizedBox(width: 7),
                                 Image.asset(
                                   'assets/adjunto.gif',
                                   width: 35,
@@ -239,29 +300,22 @@ class _SubirTareasState extends State<SubirTareas> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
+                        SizedBox(height: 20),
                         if (_controllerPdfPath.text.isNotEmpty)
                           Container(
                             padding: EdgeInsets.only(left: 10),
                             width: 260,
                             height: 50,
-                            /* decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                                style: BorderStyle.solid, color: Colors.white),
-                            ), */
                             child: Row(
                               children: [
                                 Text(
                                   _controllerPdfPath.text,
                                   style: TextStyle(
-                                      fontSize: 16, color: Colors.white),
+                                    fontSize: 16, 
+                                    color: Colors.white
+                                  ),
                                 ),
-                                SizedBox(
-                                  width: 20,
-                                ),
+                                SizedBox(width: 20),
                                 Image.asset(
                                   'assets/archivo.png',
                                   width: 30,
@@ -280,10 +334,8 @@ class _SubirTareasState extends State<SubirTareas> {
                             }
                           },
                           style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.blue),
+                            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                            foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
                           ),
                           child: SizedBox(
                             width: 90,
@@ -304,7 +356,6 @@ class _SubirTareasState extends State<SubirTareas> {
                           ),
                         ),
                       ] else ...[
-                        
                         _cambiarDisenoSegunCondicion(),
                       ],
                     ],
@@ -318,20 +369,64 @@ class _SubirTareasState extends State<SubirTareas> {
     );
   }
 
+  Widget _cambiarDisenoSegunCondicion() {
+    if (tareaEntregada && esLiderTarea && !esLiderProyecto) {
+      return Text(
+        'Tarea entregada',
+        style: TextStyle(
+          fontSize: 18.0,
+          fontWeight: FontWeight.bold,
+          color: Colors.green
+        ),
+      );
+    }
 
-  Widget _cambiarDisenoSegunCondicion(){
+    if (tareaEntregada && esLiderProyecto && esLiderTarea) {
+     return cargarPdf();
+    }
 
-    if ((tareaEntregada) && (!esLiderProyecto)){
-       return Text(
+    return Container();
+  }
+
+
+  Column cargarPdf(){
+
+     return Column(
+        children: [
+          Text(
             'Tarea entregada',
             style: TextStyle(
-           fontSize: 18.0,
-           fontWeight: FontWeight.bold,
-          color: Colors.green),
-            );
-    };
-    return Text('hol');
-
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.green
+            ),
+          ),
+          SizedBox(height: 20.0),
+          ElevatedButton(
+            onPressed: () {
+              _downloadPDF(entrega.urlPdfEntrega);
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+            ),
+            child: SizedBox(
+              width: 150,
+              child: Row(
+                children: [
+                  Text(
+                    'Descargar PDF',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(width: 5),
+                  Icon(Icons.download, color: Colors.blue),
+                ],
+              ),
+            ),
+          ),
+        ],
+      );
+    
   }
 
   void registrarEntrega() async {
@@ -362,6 +457,7 @@ class _SubirTareasState extends State<SubirTareas> {
         colorText: Colors.blue,
       );
       gestionProyectos.cambiarEstadoProyectosMemoria();
+      tareaFueEntregada();
     }).catchError((error) {
       print('Ocurrió un error al registrar la tarea: $error');
     });

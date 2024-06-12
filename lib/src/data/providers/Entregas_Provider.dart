@@ -1,27 +1,12 @@
 import 'package:manager_proyect/src/data/providers/Crud_Provider.dart';
 import 'package:manager_proyect/src/domain/models/Entregas_model.dart';
 
-
 class EntregasProvider extends CrudProvider<EntregasModel> {
   Future<String> registrarEntrega(EntregasModel entregaRecibida) async {
     try {
       return await agregar(entregaRecibida, 'addEntrega');
     } catch (e) {
       return "Error al Registrar La Entrega";
-    }
-  }
-
-  Future<List<EntregasModel>> consultaEntregas(int id_Proyecto,int id_Usuario) async {
-    try {
-      List<Map<String, dynamic>> tareasMapa = await consultar('getTarea/$id_Proyecto/$id_Usuario');
-
-      List<EntregasModel> listaTareas =
-          tareasMapa.map((map) => EntregasModel.fromJson(map)).toList();
-
-      return listaTareas;
-    } catch (e) {
-      print('Error al sconsultar las tareas $e');
-      return [];
     }
   }
 
@@ -43,16 +28,26 @@ class EntregasProvider extends CrudProvider<EntregasModel> {
     }
   }
 
-  Future<bool> siTareaFueEntregada(int idTarea) async {
+  Future<EntregasModel> consultarEntrega(int idTarea) async {
+    try {
+      List<Map<String, dynamic>> entregas =
+          await consultar('getEntrega/$idTarea');
 
-    try{
-      return await consultarDinamico('getFueEntregada/$idTarea');
-      
-    }catch(error){
-      print('error al saber si la tarea fue entrega $error');
-      return false;
+      if (entregas.isNotEmpty) {
+
+        return EntregasModel.fromJson(entregas[0]);
+      } else {
+        print('vacio');
+        // Devuelve una instancia con valores por defecto si la lista está vacía
+        return EntregasModel.empty();
+      }
+    } catch (e) {
+      print('Error al consultar las tareas $e');
+      return EntregasModel(
+        informe: "Desconocido",
+        urlPdfEntrega: "Desconocido",
+        idTarea: -1,
+      );
     }
-
-
   }
 }

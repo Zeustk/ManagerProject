@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/controllers/TareasController.dart';
+import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/Tareas_model.dart';
+import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/subirTarea.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -20,6 +22,7 @@ class _DetalleTareaState extends State<DetalleTarea> {
   TareasController gestionTareas = Get.find();
   ProyectoController gestionProyectos = ProyectoController();
 
+
   final datos = Get.arguments;
   TareasModel tarea = TareasModel(
       nombre: "asdasd",
@@ -32,6 +35,7 @@ class _DetalleTareaState extends State<DetalleTarea> {
       urlPdf: "dsad");
   bool valorCheckbox = false;
   bool esLiderProyecto = false;
+  int idUsuarioActual=-1;
 
   @override
   void initState() {
@@ -41,10 +45,16 @@ class _DetalleTareaState extends State<DetalleTarea> {
     estadoInicial();
   }
 
-  void cargarDatosIniciales() {
+  void cargarDatosIniciales() async {
+   
+
+
     setState(() {
       tarea = datos["Tarea"];
-      esLiderProyecto = datos["Id_LiderProyecto"];
+      esLiderProyecto = datos["EsLiderProyecto"];
+      idUsuarioActual=datos["Id_UsuarioActual"];  
+      
+   
     });
   }
 
@@ -203,7 +213,10 @@ class _DetalleTareaState extends State<DetalleTarea> {
                           onPressed: () {
                             Get.to(SubirTareas(), arguments: {
                               "Tarea": tarea,
-                              "Id_LiderProyecto": esLiderProyecto,
+                              "esLiderProyecto": esLiderProyecto,
+                              "Id_LiderProyecto":datos["Id_LiderProyecto"],
+                              "Id_UsuarioActual":datos["Id_UsuarioActual"],
+
                             });
                           },
                           child: Row(

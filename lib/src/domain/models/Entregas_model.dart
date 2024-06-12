@@ -14,6 +14,13 @@ class EntregasModel {
     String urlPdfEntrega;
     int idTarea;
 
+    EntregasModel.empty()
+      : idEntrega = -1,
+        informe = '',
+        urlPdfEntrega = '',
+        idTarea = 0;
+
+
     EntregasModel({
         this.idEntrega=0,
         required this.informe,
@@ -34,4 +41,9 @@ class EntregasModel {
         "UrlPdfEntrega": urlPdfEntrega,
         "Id_Tarea": idTarea,
     };
+
+     @override
+  String toString() {
+    return 'UsuarioModel{idEntrega: $idEntrega, informe $informe, urlpdf: $urlPdfEntrega, idTarea: $idTarea }';
+  }
 }

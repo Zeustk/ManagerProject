@@ -43,7 +43,7 @@ class Container_Mistareas extends StatelessWidget {
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 140),
+                  padding: const EdgeInsets.only(left: 120), //tamaño contenedor
                   child: Padding_Mistareas(
                       color: color,
                       texto: estado == 01

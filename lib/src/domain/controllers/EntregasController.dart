@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:manager_proyect/src/data/providers/Entregas_Provider.dart';
 import 'package:manager_proyect/src/domain/models/Entregas_model.dart';
 
-
 class EntregasController extends GetxController {
   EntregasProvider gestionEntregas = EntregasProvider();
 
@@ -14,13 +13,6 @@ class EntregasController extends GetxController {
     }
   }
 
-  Future<List<EntregasModel>> consultarEntregas(int id_Proyecto,int id_Usuario) async {
-    try {
-      return await gestionEntregas.consultaEntregas(id_Proyecto,id_Usuario);
-    } catch (error) {
-      return [];
-    }
-  }
 
   Future<String> actualizarEntregas(EntregasModel tareas) async {
     try {
@@ -38,11 +30,13 @@ class EntregasController extends GetxController {
     }
   }
 
-  Future<bool> tareaFueEntrega(int idTarea) async {
-     try {
-      return await gestionEntregas.siTareaFueEntregada(idTarea);
+  Future<EntregasModel> consultarEntrega(int idTarea) async {
+    try {
+      print('hola controller');
+      return await gestionEntregas.consultarEntrega(idTarea);
     } catch (error) {
-      return false;
+      print(error);
+      return EntregasModel.empty();
     }
   }
 }
