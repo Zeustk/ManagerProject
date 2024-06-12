@@ -124,6 +124,15 @@ class _Ver_TareasState extends State<Ver_Tareas> {
     );
   }
 
+  void _deplazamientoToDetalle(TareasModel tarea){
+
+    Get.to(DetalleTarea(), arguments: {
+      'Tarea':tarea,
+      "Id_LiderProyecto":datos["Id_LiderProyecto"],
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -201,7 +210,7 @@ class _Ver_TareasState extends State<Ver_Tareas> {
                       return GestureDetector(
                         onTap: () {
                           // Acción al tocar una tarea (puede navegar a la pantalla de detalles)
-                          Get.to(DetalleTarea(), arguments: tarea);
+                          _deplazamientoToDetalle(tarea); //task
 
                           if (botonPresionado != null) {
                             _handleButtonTap(botonPresionado!);

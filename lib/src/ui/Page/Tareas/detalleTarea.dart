@@ -7,10 +7,7 @@ import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/controllers/TareasController.dart';
 import 'package:manager_proyect/src/domain/models/Tareas_model.dart';
 import 'package:manager_proyect/src/ui/Page/Tareas/subirTarea.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:url_launcher/url_launcher.dart'; // Para abrir URLs en el navegador
-import 'package:file_picker/file_picker.dart';
 
 import '../../../constante/constantes.dart';
 
@@ -21,16 +18,34 @@ class DetalleTarea extends StatefulWidget {
 
 class _DetalleTareaState extends State<DetalleTarea> {
   TareasController gestionTareas = Get.find();
-  ProyectoController gestionProyectos=ProyectoController();
+  ProyectoController gestionProyectos = ProyectoController();
 
-  TareasModel tarea = Get.arguments as TareasModel;
+  final datos = Get.arguments;
+  TareasModel tarea = TareasModel(
+      nombre: "asdasd",
+      fechaInicio: DateTime.now(),
+      fechaFinalizacion: DateTime.now(),
+      descripcion: "dsdas",
+      porcentajeTarea: 30.0,
+      idProyecto: 1,
+      idUsuario: 1,
+      urlPdf: "dsad");
   bool valorCheckbox = false;
+  bool esLiderProyecto = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    cargarDatosIniciales();
     estadoInicial();
+  }
+
+  void cargarDatosIniciales() {
+    setState(() {
+      tarea = datos["Tarea"];
+      esLiderProyecto = datos["Id_LiderProyecto"];
+    });
   }
 
   void estadoInicial() {
@@ -186,7 +201,10 @@ class _DetalleTareaState extends State<DetalleTarea> {
                                 kSecondaryColor),
                           ),
                           onPressed: () {
-                            Get.to(SubirTareas(), arguments: tarea);
+                            Get.to(SubirTareas(), arguments: {
+                              "Tarea": tarea,
+                              "Id_LiderProyecto": esLiderProyecto,
+                            });
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

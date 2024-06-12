@@ -19,18 +19,37 @@ class SubirTareas extends StatefulWidget {
 class _SubirTareasState extends State<SubirTareas> {
   TextEditingController _controllerInforme = TextEditingController();
   TextEditingController _controllerPdfPath = TextEditingController();
-  TareasModel tarea = Get.arguments as TareasModel;
+  final datos = Get.arguments;
   EntregasController gestionEntregas = EntregasController();
   ProyectoController gestionProyectos = ProyectoController();
 
   String? pdfPath;
   bool tareaEntregada =
       false; // Variable que representa si la tarea ha sido entregada o no
+  bool esLiderProyecto =false;    
+
+   TareasModel tarea = TareasModel(
+      nombre: "asdasd",
+      fechaInicio: DateTime.now(),
+      fechaFinalizacion: DateTime.now(),
+      descripcion: "dsdas",
+      porcentajeTarea: 30.0,
+      idProyecto: 1,
+      idUsuario: 1,
+      urlPdf: "dsad");    
 
   @override
   void initState() {
     super.initState();
+    cargarDatosIniciales();
     tareaFueEntregada();
+  }
+
+  void cargarDatosIniciales() {
+    setState(() {
+      tarea = datos["Tarea"];
+      esLiderProyecto = datos["Id_LiderProyecto"];
+    });
   }
 
   Future<void> tareaFueEntregada() async {
@@ -135,7 +154,7 @@ class _SubirTareasState extends State<SubirTareas> {
                         ),
                       ),
                       SizedBox(height: 30.0),
-                      if (!tareaEntregada) ...[
+                      if ((!tareaEntregada) && (!esLiderProyecto)) ...[
                         Container(
                           padding: EdgeInsets.only(left: 7),
                           width: 80,
@@ -285,13 +304,8 @@ class _SubirTareasState extends State<SubirTareas> {
                           ),
                         ),
                       ] else ...[
-                        Text(
-                          'Tarea entregada',
-                          style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.green),
-                        ),
+                        
+                        _cambiarDisenoSegunCondicion(),
                       ],
                     ],
                   ),
@@ -302,6 +316,22 @@ class _SubirTareasState extends State<SubirTareas> {
         ],
       ),
     );
+  }
+
+
+  Widget _cambiarDisenoSegunCondicion(){
+
+    if ((tareaEntregada) && (!esLiderProyecto)){
+       return Text(
+            'Tarea entregada',
+            style: TextStyle(
+           fontSize: 18.0,
+           fontWeight: FontWeight.bold,
+          color: Colors.green),
+            );
+    };
+    return Text('hol');
+
   }
 
   void registrarEntrega() async {
