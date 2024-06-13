@@ -13,7 +13,7 @@ class AdicionarUsuariosPage extends StatefulWidget {
 
 class _AdicionarUsuariosPageState extends State<AdicionarUsuariosPage> {
   UsuariosController gestionUsuarios = UsuariosController();
-  AuthController gestionAuth= AuthController();
+  AuthController gestionAuth = AuthController();
   List<UsuarioModel> listaIntegrantes = [];
   List<UsuarioModel> listaIntegrantesFiltrados = [];
   List<UsuarioModel> integrantesSeleccionados = [];
@@ -22,21 +22,19 @@ class _AdicionarUsuariosPageState extends State<AdicionarUsuariosPage> {
   void initState() {
     super.initState();
     cargarUsuarios();
-   
   }
 
-
   Future<void> cargarUsuarios() async {
-
-     UsuarioModel usuarioActual= await gestionAuth.obtenerDatosDeStorage();
+    UsuarioModel usuarioActual = await gestionAuth.obtenerDatosDeStorage();
 
     gestionUsuarios.consultarUsuario().then((data) {
       setState(() {
-        listaIntegrantes = data.where((usuario) => usuario.email != usuarioActual.email).toList();
+        listaIntegrantes = data
+            .where((usuario) => usuario.email != usuarioActual.email)
+            .toList();
         listaIntegrantesFiltrados = listaIntegrantes.take(4).toList();
       });
     });
-
   }
 
   void filtrarIntegrantes(String query) {
@@ -82,7 +80,7 @@ class _AdicionarUsuariosPageState extends State<AdicionarUsuariosPage> {
                 filtrarIntegrantes(value);
               },
               decoration: InputDecoration(
-                hintText: 'Buscar integrantes.',
+                hintText: 'Buscar integrantes....',
                 prefixIcon: Icon(
                   Icons.search,
                   color: Colors.white,
