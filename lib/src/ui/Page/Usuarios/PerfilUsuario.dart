@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:manager_proyect/src/domain/controllers/Perfiles_Controller.dart';
 import 'package:manager_proyect/src/domain/controllers/ProyectoController.dart';
 import 'package:manager_proyect/src/domain/controllers/authController.dart';
 import 'package:manager_proyect/src/domain/models/Perfiles_model.dart';
 import 'package:manager_proyect/src/domain/models/Usuario_model.dart';
 import 'package:manager_proyect/src/domain/models/Proyecto_model.dart';
+import 'package:manager_proyect/src/ui/Page/Proyectos/detalleProyecto.dart';
 import 'package:manager_proyect/src/widgets/BottonNavigator.dart';
 import 'package:manager_proyect/src/widgets/Drawer.dart';
 
@@ -53,20 +55,47 @@ class _Perfil_UsuarioState extends State<Perfil_Usuario> {
   void _toggleEditing() {
     setState(() {
       _isEditing = !_isEditing;
+      actualizarPerfil(_isEditing);
     });
   }
 
   Future<void> actualizarPerfil(bool noEstaActualizado) async {
 
 
-     PerfilesModel perfilActualizado=PerfilesModel();
 
+    if (noEstaActualizado==false){
 
-    if ((noEstaActualizado==false) && (_controlleNombre.text!=perfilActual.nombreCompleto)){
+      String msj='';
 
-      gestionPerfil.actualizarPerfiles(perfilRecibido)
+      if (_controlleNombre.text!=perfilActual.nombreCompleto){
+        PerfilesModel perfilActualizado= PerfilesModel(idPerfil: perfilActual.idPerfil,nombreCompleto: _controlleNombre.text);
+       msj=await gestionPerfil.actualizarPerfiles(perfilActualizado);
+       cargarPerfil();
+       gestionProyectos.cambiarEstadoProyectosMemoria();
 
+      }
 
+      if ((_controlleCorreo.text!=usuarioActual.email) || (_controlleClave.text!=usuarioActual.clave)){
+        UsuarioModel usuarioActualizado= UsuarioModel(idUsuario: usuarioActual.idUsuario,email: usuarioActual.email,clave: usuarioActual.clave);
+        msj=await gestionUsuarios.actualizarUsuarios(usuarioActualizado);
+        gestionAuth.CerrarSesionStorage();
+        gestionAuth.guardarInfoSesionStorage(usuarioActualizado.email,usuarioActualizado.clave,usuarioActualizado.idUsuario);
+        cargarPerfil();
+      }
+
+      if (msj.isNotEmpty){
+        
+         Get.snackbar(
+        'Actualizacion',
+        msj,
+        backgroundColor: Colors.white,
+        colorText: Colors.black,
+      );
+      }
+
+       
+
+       
     }
 
   }
