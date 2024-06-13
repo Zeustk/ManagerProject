@@ -22,7 +22,7 @@ class PerfilesModel {
     this.nombreCompleto = "XXX",
     this.numeroDeProyecto = 0,
     this.estado = false,
-    this.idUsuario = null,
+    this.idUsuario = -1,
   });
 
   factory PerfilesModel.fromJson(Map<String, dynamic> json) => PerfilesModel(
